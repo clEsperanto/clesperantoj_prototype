@@ -23,7 +23,7 @@ Download apache-maven, unzip it and make it part of PATH:
 C:\programs\apache-maven-3.8.4-bin\apache-maven-3.8.4\bin
 ```
 
-Open the Microsoft Visual Studio Command Prompt, navigate to the root directory of this project and run
+Open the x64 Native Tools Command Prompt for VS 2019 (64 bit!), navigate to the root directory of this project and run
 
 ```
 mvn

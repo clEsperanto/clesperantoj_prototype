@@ -7,18 +7,18 @@
  * ----------------------------------------------------------------------------- */
 
 
-public class SWIGTYPE_p_namespace {
+public class SWIGTYPE_p_cl_mem_object_type {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_namespace(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_cl_mem_object_type(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_namespace() {
+  protected SWIGTYPE_p_cl_mem_object_type() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_namespace obj) {
+  protected static long getCPtr(SWIGTYPE_p_cl_mem_object_type obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

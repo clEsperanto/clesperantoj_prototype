@@ -1,5 +1,17 @@
 %module clesperanto
 %{
+#ifndef __clesperanto_hpp
+#define __clesperanto_hpp
+
+#include "cleGPU.hpp"
+#include "cleObject.hpp"
+
+#include <type_traits>
+#include <iostream>
+
+namespace cle
+{
+
 class Clesperanto
 {
 private:
@@ -89,7 +101,22 @@ public:
         return this->m_gpu->Pull<T>(t_object);
     }
 
+} // namespace cle
+
+#endif //__clesperanto_hpp
 %}
+#ifndef __clesperanto_hpp
+#define __clesperanto_hpp
+
+#include "cleGPU.hpp"
+#include "cleObject.hpp"
+
+#include <type_traits>
+#include <iostream>
+
+namespace cle
+{
+
 class Clesperanto
 {
 private:
@@ -179,3 +206,6 @@ public:
         return this->m_gpu->Pull<T>(t_object);
     }
 
+} // namespace cle
+
+#endif //__clesperanto_hpp

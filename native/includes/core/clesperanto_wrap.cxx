@@ -232,6 +232,18 @@ static void SWIGUNUSED SWIG_JavaThrowException(JNIEnv *jenv, SWIG_JavaExceptionC
 #define SWIG_contract_assert(nullreturn, expr, msg) if (!(expr)) {SWIG_JavaThrowException(jenv, SWIG_JavaIllegalArgumentException, msg); return nullreturn; } else
 
 
+#ifndef __clesperanto_hpp
+#define __clesperanto_hpp
+
+#include "cleGPU.hpp"
+#include "cleObject.hpp"
+
+#include <type_traits>
+#include <iostream>
+
+namespace cle
+{
+
 class Clesperanto
 {
 private:
@@ -321,6 +333,9 @@ public:
         return this->m_gpu->Pull<T>(t_object);
     }
 
+} // namespace cle
+
+#endif //__clesperanto_hpp
 
 
 #ifdef __cplusplus
@@ -329,35 +344,35 @@ extern "C" {
 
 SWIGEXPORT jlong JNICALL Java_clesperantoJNI_new_1Clesperanto(JNIEnv *jenv, jclass jcls) {
   jlong jresult = 0 ;
-  Clesperanto *result = 0 ;
+  cle::Clesperanto *result = 0 ;
   
   (void)jenv;
   (void)jcls;
-  result = (Clesperanto *)new Clesperanto();
-  *(Clesperanto **)&jresult = result; 
+  result = (cle::Clesperanto *)new cle::Clesperanto();
+  *(cle::Clesperanto **)&jresult = result; 
   return jresult;
 }
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_delete_1Clesperanto(JNIEnv *jenv, jclass jcls, jlong jarg1) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   
   (void)jenv;
   (void)jcls;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   delete arg1;
 }
 
 
 SWIGEXPORT jlong JNICALL Java_clesperantoJNI_Clesperanto_1Ressources(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_) {
   jlong jresult = 0 ;
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   std::shared_ptr< GPU > result;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   result = (arg1)->Ressources();
   *(std::shared_ptr< GPU > **)&jresult = new std::shared_ptr< GPU >((const std::shared_ptr< GPU > &)result); 
   return jresult;
@@ -365,7 +380,7 @@ SWIGEXPORT jlong JNICALL Java_clesperantoJNI_Clesperanto_1Ressources(JNIEnv *jen
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImageAndScalar_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -373,7 +388,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImageAndScalar_1_1SW
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -390,14 +405,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImageAndScalar_1_1SW
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImageAndScalar_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -413,7 +428,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImageAndScalar_1_1SW
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jfloat jarg5, jfloat jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -423,7 +438,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SW
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -446,7 +461,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SW
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -455,7 +470,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SW
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -477,7 +492,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SW
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -485,7 +500,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SW
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -506,7 +521,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImagesWeighted_1_1SW
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImages(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -514,7 +529,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImages(JNIEnv *jenv,
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -535,7 +550,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1AddImages(JNIEnv *jenv,
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SubtractImages(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -543,7 +558,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SubtractImages(JNIEnv *
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -564,14 +579,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SubtractImages(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DilateSphere(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -587,14 +602,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DilateSphere(JNIEnv *je
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ErodeSphere(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -610,7 +625,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ErodeSphere(JNIEnv *jen
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Equal(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -618,7 +633,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Equal(JNIEnv *jenv, jcl
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -639,7 +654,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Equal(JNIEnv *jenv, jcl
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1EqualConstant_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -647,7 +662,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1EqualConstant_1_1SWIG_1
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -664,14 +679,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1EqualConstant_1_1SWIG_1
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1EqualConstant_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -687,7 +702,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1EqualConstant_1_1SWIG_1
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -697,7 +712,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_10
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -716,7 +731,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_10
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -725,7 +740,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_11
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -743,7 +758,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_11
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -751,7 +766,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_12
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -768,14 +783,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_12
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_13(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -791,7 +806,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GaussianBlur_1_1SWIG_13
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -801,7 +816,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_10(JNIE
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -820,7 +835,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_10(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -829,7 +844,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_11(JNIE
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -847,7 +862,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_11(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -855,7 +870,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_12(JNIE
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -872,14 +887,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_12(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_13(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -895,7 +910,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanBox_1_1SWIG_13(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -905,7 +920,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_10(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -924,7 +939,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_10(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -933,7 +948,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_11(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -951,7 +966,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_11(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -959,7 +974,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_12(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -976,14 +991,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_12(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_13(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -999,7 +1014,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumBox_1_1SWIG_13(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1009,7 +1024,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_10(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1028,7 +1043,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_10(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1037,7 +1052,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_11(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1055,7 +1070,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_11(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1063,7 +1078,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_12(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1080,14 +1095,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_12(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_13(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1103,7 +1118,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumBox_1_1SWIG_13(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Greater(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -1111,7 +1126,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Greater(JNIEnv *jenv, j
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1132,7 +1147,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Greater(JNIEnv *jenv, j
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqual(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -1140,7 +1155,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqual(JNIEnv *
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1161,7 +1176,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqual(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterConstant_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1169,7 +1184,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterConstant_1_1SWIG
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1186,14 +1201,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterConstant_1_1SWIG
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterConstant_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1209,7 +1224,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterConstant_1_1SWIG
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqualConstant_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1217,7 +1232,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqualConstant_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1234,14 +1249,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqualConstant_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqualConstant_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1257,14 +1272,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1GreaterOrEqualConstant_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumZProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1280,14 +1295,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumZProjection(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumYProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1303,14 +1318,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumYProjection(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumXProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1326,14 +1341,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumXProjection(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumOfAllPixels(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1349,14 +1364,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MaximumOfAllPixels(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumZProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1372,14 +1387,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumZProjection(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumYProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1395,14 +1410,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumYProjection(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumXProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1418,14 +1433,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumXProjection(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumOfAllPixels(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1441,7 +1456,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MinimumOfAllPixels(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jint jarg4, jint jarg5, jint jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   int arg4 ;
@@ -1451,7 +1466,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_10(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1470,7 +1485,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_10(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jint jarg4, jint jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   int arg4 ;
@@ -1479,7 +1494,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_11(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1497,7 +1512,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_11(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jint jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   int arg4 ;
@@ -1505,7 +1520,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_12(J
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1522,14 +1537,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_12(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_13(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1545,7 +1560,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1MeanSphere_1_1SWIG_13(J
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NonzeroMinimumBox(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -1553,7 +1568,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NonzeroMinimumBox(JNIEn
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1574,7 +1589,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NonzeroMinimumBox(JNIEn
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqual(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -1582,7 +1597,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqual(JNIEnv *jenv, 
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1603,7 +1618,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqual(JNIEnv *jenv, 
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqualConstant_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1611,7 +1626,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqualConstant_1_1SWI
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1628,14 +1643,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqualConstant_1_1SWI
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqualConstant_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1651,14 +1666,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1NotEqualConstant_1_1SWI
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Absolute(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1674,14 +1689,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Absolute(JNIEnv *jenv, 
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Sobel(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1697,14 +1712,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Sobel(JNIEnv *jenv, jcl
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Set_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jfloat jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   float arg3 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1716,13 +1731,13 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Set_1_1SWIG_10(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Set_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1733,14 +1748,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Set_1_1SWIG_11(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetNonzeroPixelsToPixelindex(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1756,7 +1771,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetNonzeroPixelsToPixel
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6, jfloat jarg7, jfloat jarg8, jfloat jarg9) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1769,7 +1784,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1791,7 +1806,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6, jfloat jarg7, jfloat jarg8) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1803,7 +1818,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1824,7 +1839,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6, jfloat jarg7) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1835,7 +1850,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1855,7 +1870,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_13(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5, jfloat jarg6) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1865,7 +1880,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1884,7 +1899,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_14(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1893,7 +1908,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1911,7 +1926,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_15(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -1919,7 +1934,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1936,14 +1951,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_1SWIG_16(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1959,7 +1974,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DifferenceOfGaussian_1_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Smaller(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -1967,7 +1982,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Smaller(JNIEnv *jenv, j
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -1988,7 +2003,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Smaller(JNIEnv *jenv, j
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqual(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -1996,7 +2011,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqual(JNIEnv *
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2017,7 +2032,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqual(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerConstant_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -2025,7 +2040,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerConstant_1_1SWIG
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2042,14 +2057,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerConstant_1_1SWIG
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerConstant_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2065,7 +2080,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerConstant_1_1SWIG
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqualConstant_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -2073,7 +2088,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqualConstant_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2090,14 +2105,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqualConstant_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqualConstant_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2113,14 +2128,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SmallerOrEqualConstant_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Copy(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2136,14 +2151,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1Copy(JNIEnv *jenv, jcla
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DetectMaximaBox(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2159,14 +2174,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1DetectMaximaBox(JNIEnv 
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumZProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2182,14 +2197,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumZProjection(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumYProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2205,14 +2220,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumYProjection(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumXProjection(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2228,14 +2243,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumXProjection(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumOfAllPixels(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2251,14 +2266,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumOfAllPixels(JNIEnv *
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ConnectedComponentLabellingBox(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2274,7 +2289,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ConnectedComponentLabel
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4, jfloat jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -2283,7 +2298,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWI
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2301,7 +2316,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWI
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   float arg4 ;
@@ -2309,7 +2324,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWI
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2326,14 +2341,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWI
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2349,7 +2364,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensity_1_1SWI
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensities(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -2357,7 +2372,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensities(JNIE
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2378,7 +2393,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1ReplaceIntensities(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jint jarg3, jfloat jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   int arg3 ;
   float arg4 ;
@@ -2386,7 +2401,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_10(JN
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2399,14 +2414,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_10(JN
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jint jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   int arg3 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2418,13 +2433,13 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_11(JN
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_12(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2435,7 +2450,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SetColumn_1_1SWIG_12(JN
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumReductionX_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jint jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   int arg4 ;
@@ -2443,7 +2458,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumReductionX_1_1SWIG_1
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2460,14 +2475,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumReductionX_1_1SWIG_1
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumReductionX_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2483,7 +2498,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1SumReductionX_1_1SWIG_1
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1BlockEnumerate_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4, jint jarg5) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -2492,7 +2507,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1BlockEnumerate_1_1SWIG_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2514,7 +2529,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1BlockEnumerate_1_1SWIG_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1BlockEnumerate_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jlong jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   Object *arg4 = 0 ;
@@ -2522,7 +2537,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1BlockEnumerate_1_1SWIG_
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2543,14 +2558,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1BlockEnumerate_1_1SWIG_
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1FlagExistingLabels(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2566,7 +2581,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1FlagExistingLabels(JNIE
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1CloseIndexGapsInLabelMap_1_1SWIG_10(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3, jint jarg4) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   int arg4 ;
@@ -2574,7 +2589,7 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1CloseIndexGapsInLabelMa
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");
@@ -2591,14 +2606,14 @@ SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1CloseIndexGapsInLabelMa
 
 
 SWIGEXPORT void JNICALL Java_clesperantoJNI_Clesperanto_1CloseIndexGapsInLabelMap_1_1SWIG_11(JNIEnv *jenv, jclass jcls, jlong jarg1, jobject jarg1_, jlong jarg2, jlong jarg3) {
-  Clesperanto *arg1 = (Clesperanto *) 0 ;
+  cle::Clesperanto *arg1 = (cle::Clesperanto *) 0 ;
   Object *arg2 = 0 ;
   Object *arg3 = 0 ;
   
   (void)jenv;
   (void)jcls;
   (void)jarg1_;
-  arg1 = *(Clesperanto **)&jarg1; 
+  arg1 = *(cle::Clesperanto **)&jarg1; 
   arg2 = *(Object **)&jarg2;
   if (!arg2) {
     SWIG_JavaThrowException(jenv, SWIG_JavaNullPointerException, "Object & reference is null");

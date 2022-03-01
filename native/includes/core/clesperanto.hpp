@@ -1,4 +1,3 @@
-
 #ifndef __clesperanto_hpp
 #define __clesperanto_hpp
 

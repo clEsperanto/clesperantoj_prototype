@@ -1,2 +1,4 @@
 cd native
-swig -java -module CLIc example.i
+cd includes
+cd core
+swig -java -c++ example.i

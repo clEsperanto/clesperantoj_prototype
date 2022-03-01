@@ -8,12 +8,4 @@
 
 
 public class clesperanto {
-  public static void setCle(SWIGTYPE_p_namespace value) {
-    clesperantoJNI.cle_set(SWIGTYPE_p_namespace.getCPtr(value));
-  }
-
-  public static SWIGTYPE_p_namespace getCle() {
-    return new SWIGTYPE_p_namespace(clesperantoJNI.cle_get(), true);
-  }
-
 }

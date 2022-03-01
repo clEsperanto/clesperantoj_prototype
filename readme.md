@@ -28,3 +28,7 @@ Open the x64 Native Tools Command Prompt for VS 2019 (64 bit!), navigate to the 
 ```
 mvn
 ```
+
+## SWIG Links
+http://www.swig.org/tutorial.html
+https://valelab4.ucsf.edu/svn/3rdpartypublic/swig/Doc/Manual/Java.html

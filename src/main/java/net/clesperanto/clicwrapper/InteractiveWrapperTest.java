@@ -2,8 +2,12 @@ package net.clesperanto.clicwrapper;
 
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.ShortPointer;
+import org.jocl.NativePointerObject;
 
 import net.clesperanto.clicwrapper.clesperantojWrapper.ClesperantoJ;
+import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
+import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
+import net.haesleinhuepf.clij2.CLIJ2;
 import net.clesperanto.clicwrapper.ConvertersUtility;
 import net.imagej.Dataset;
 import net.imagej.ImageJ;
@@ -52,6 +56,33 @@ public class InteractiveWrapperTest {
 		
 		ij.ui().show(outIm);
 		//ij.ui().show(outImShort);
+		
+		
+		///////////////// long pointer test
+		
+		CLIJ2 clij2=null;
+		// get clij
+		try {
+			clij2 = CLIJ2.getInstance("RTX");
+		}
+		catch(Exception e) {
+			System.out.println(e);
+			return;
+		}
+		
+		ClearCLBuffer gpuIn = clij2.push(img);
+		ClearCLBuffer gpuOut= clij2.create(gpuIn.getDimensions(), NativeTypeEnum.Float);
+		
+		// Get the CL Buffers, context, queue and device as long native pointers
+		long longPointerIn = ((NativePointerObject) (gpuIn.getPeerPointer()
+				.getPointer())).getNativePointer();
+		long longPointerOut = ((NativePointerObject) (gpuOut.getPeerPointer()
+				.getPointer())).getNativePointer();
+		
+		test.guassianBlur2dLongLong(longPointerIn, longPointerOut, (int)(img.dimension(0)), (int)(img.dimension(1)), 3.f, 3.f);
+		
+		clij2.show(gpuOut, "from CLIJ2 long pointer");
+		
 	}
 
 }

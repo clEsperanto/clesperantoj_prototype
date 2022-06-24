@@ -92,6 +92,22 @@
 			<artifactId>javacpp</artifactId>
 			<version>1.5</version>
 		</dependency>
+		
+			<dependency>
+			<groupId>net.haesleinhuepf</groupId>
+			<artifactId>clij_</artifactId>
+     	</dependency>
+		
+		<dependency>
+			<groupId>net.haesleinhuepf</groupId>
+			<artifactId>clij-clearcl</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.haesleinhuepf</groupId>
+			<artifactId>clij2_</artifactId>
+		</dependency>
+		
 
 	</dependencies>
 

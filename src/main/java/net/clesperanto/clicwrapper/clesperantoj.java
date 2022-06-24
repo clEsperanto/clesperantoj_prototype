@@ -16,7 +16,7 @@ import org.bytedeco.javacpp.tools.*;
 	// os specific properties (note relative include and library paths are specified in the pom)	
 	@Platform(value = "windows-x86_64",
 		includepath = {
-			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/include/"},	
+			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/include/"},	 
 		linkpath = {
 			"C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/lib/x64/"
 		}),

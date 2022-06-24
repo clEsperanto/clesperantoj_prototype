@@ -18,6 +18,8 @@ public:
     // templated version
     template<typename T>
     void guassianBlur2dT(T*in, T*out, int nr, int nc, float sx, float sy);
+
+    void guassianBlur2dLongLong(long long in, long long out, int nr, int nc, float sx, float xy);
 };
 
 
@@ -26,6 +28,10 @@ void ClesperantoJ::guassianBlur2dT(T*in, T*out, int nx, int ny, float sx, float 
     
     std::cout<<"test templated guassian blur\n"<<std::flush;
 
+    // need to convert the input to a vector in order to push...
+    // this step is wasteful, TODO:  
+    // create version of Push that takes in pointer ??
+    // or pass in cl_mem created in java and create object from that?
     std::vector<T> vecData;
     vecData.resize(nx*ny);
 

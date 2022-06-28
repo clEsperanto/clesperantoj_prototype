@@ -37,5 +37,11 @@ public class clesperantoj implements InfoMapper {
 		// that specify the name of the wrapper to each template type we want to generate
 		infoMap.put(new Info("ClesperantoJ::guassianBlur2dT<float>").javaNames("FloatGaussianBlur2dT"));
 		infoMap.put(new Info("ClesperantoJ::guassianBlur2dT<short>").javaNames("ShortGaussianBlur2dT"));
+		infoMap.put(new Info("ClesperantoJ::create<float>").javaNames("FloatCreate"));
+		infoMap.put(new Info("ClesperantoJ::create<short>").javaNames("ShortCreate"));
+		infoMap.put(new Info("ClesperantoJ::push<float>").javaNames("FloatPush"));
+		infoMap.put(new Info("ClesperantoJ::push<short>").javaNames("ShortPush"));
+		infoMap.put(new Info("ClesperantoJ::pull<float>").javaNames("FloatPull"));
+		infoMap.put(new Info("ClesperantoJ::pull<short>").javaNames("ShortPull"));
 	}
 }

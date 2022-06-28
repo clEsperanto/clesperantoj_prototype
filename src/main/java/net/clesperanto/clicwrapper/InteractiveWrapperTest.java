@@ -5,6 +5,7 @@ import org.bytedeco.javacpp.ShortPointer;
 import org.jocl.NativePointerObject;
 
 import net.clesperanto.clicwrapper.clesperantojWrapper.ClesperantoJ;
+import net.clesperanto.clicwrapper.clesperantojWrapper.ObjectJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.haesleinhuepf.clij2.CLIJ2;
@@ -21,68 +22,78 @@ public class InteractiveWrapperTest {
 	final static ImageJ ij = new ImageJ();
 
 	public static void main(String[] args) throws Exception {
+		
 		System.out.println("Test clesperantoj wrapper");
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		
 		ij.launch(args);
 		
-		ClesperantoJ test = new ClesperantoJ();
+		ClesperantoJ clesperantoJ = new ClesperantoJ();
 		
-		test.sayHello();
+		// sanity test
+		clesperantoJ.sayHello();
 		
-		// load the dataset
+		// load the test dataset
 		Dataset dataset = (Dataset) ij.io().open("./imgs/boats.tif");
 
 		Img<FloatType> img = ij.op().convert().float32((Img)dataset);
 		Img<ShortType> imgShort = ij.op().convert().int16((Img)dataset);
 		
-		ij.ui().show(img);
-	
-		// convert images to Float/ShortPointers and create outputs
-		FloatPointer fp = ConvertersUtility.ii2DToFloatPointer(img);
-		FloatPointer out = new FloatPointer(img.dimension(0)*img.dimension(1));
+		ij.ui().show("img as float", img);
+		ij.ui().show("img as short", img);
 		
-		ShortPointer fpShort = ConvertersUtility.ii2DToShortPointer(imgShort);
-		ShortPointer outShort = new ShortPointer(img.dimension(0)*img.dimension(1));
+		int nx = (int)img.dimension(0);
+		int ny = (int)img.dimension(1);
+	
+		// convert images to FloatPointers and create outputs
+		FloatPointer fp = ConvertersUtility.ii2DToFloatPointer(img);
+		FloatPointer outFp = new FloatPointer(img.dimension(0)*img.dimension(1));
+				
+		// push the input 
+		ObjectJ objIn = clesperantoJ.FloatPush(fp, nx, ny);
+		// create GPU memory for output
+		ObjectJ objOut = clesperantoJ.FloatCreate(nx, ny);
+		
+		// call Gaussian blur
+		clesperantoJ.gaussianBlur2d(objIn, objOut, 10.f, 10.f);
+		
+		// pull from GPU
+		clesperantoJ.FloatPull(outFp, objOut);
+		
+		Img outImFromObj=ConvertersUtility.floatPointerToImg2D(outFp, img);
+		ij.ui().show("float result from obj approach", outImFromObj);
+
+		// below is the short version of the above test, commented out for now 
+		// as there is an issue with pushing shorts
+		/*
+		
+		ShortPointer sp = ConvertersUtility.ii2DToShortPointer(imgShort);
+		
+		objIn = clesperantoJ.ShortPush(sp, nx, ny);
+		objOut = clesperantoJ.ShortCreate(nx, ny);
+		
+		clesperantoJ.gaussianBlur2d(objIn, objOut, 10.f, 10.f);
+		
+		ShortPointer outSp = new ShortPointer(nx*ny);
+		clesperantoJ.ShortPull(outSp, objOut);
+		
+		Img outImFromObjShort=ConvertersUtility.shortPointerToImg2D(outSp, img);
+		ij.ui().show("short result from obj approach", outImFromObjShort);
+		*/
+		
 		
 		// test templated version of wrapper
-		test.FloatGaussianBlur2dT(fp, out, (int)img.dimension(0), (int)img.dimension(1), 3.f, 3.f);
+		//clesperantoJ.FloatGaussianBlur2dT(fp, outFp, (int)img.dimension(0), (int)img.dimension(1), 3.f, 3.f);
 		//test.ShortGaussianBlur2dT(fpShort, outShort, (int)img.dimension(0), (int)img.dimension(1), 3.f, 3.f);
 		
 		// convert outputs back to Img so we can display them
 		
-		Img outIm=ConvertersUtility.floatPointerToImg2D(out, img);
+		//Img outIm=ConvertersUtility.floatPointerToImg2D(outFp, img);
 		//Img outImShort=ConvertersUtility.shortPointerToImg2D(outShort, img);
 		
-		ij.ui().show(outIm);
+		//ij.ui().show(outIm);
 		//ij.ui().show(outImShort);
-		
-		
-		///////////////// long pointer test
-		
-		CLIJ2 clij2=null;
-		// get clij
-		try {
-			clij2 = CLIJ2.getInstance("RTX");
-		}
-		catch(Exception e) {
-			System.out.println(e);
-			return;
-		}
-		
-		ClearCLBuffer gpuIn = clij2.push(img);
-		ClearCLBuffer gpuOut= clij2.create(gpuIn.getDimensions(), NativeTypeEnum.Float);
-		
-		// Get the CL Buffers, context, queue and device as long native pointers
-		long longPointerIn = ((NativePointerObject) (gpuIn.getPeerPointer()
-				.getPointer())).getNativePointer();
-		long longPointerOut = ((NativePointerObject) (gpuOut.getPeerPointer()
-				.getPointer())).getNativePointer();
-		
-		test.guassianBlur2dLongLong(longPointerIn, longPointerOut, (int)(img.dimension(0)), (int)(img.dimension(1)), 3.f, 3.f);
-		
-		clij2.show(gpuOut, "from CLIJ2 long pointer");
-		
+
 	}
 
 }

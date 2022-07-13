@@ -188,7 +188,7 @@
 				<includePaths>
 					<includePath>${project.build.sourceDirectory}</includePath>
 					<includePath>${basedir}/native/clesperantoj/include</includePath>
-					<includePath>${basedir}/../CLIc_prototype/bin/include/CLIc/</includePath>
+					<includePath>${basedir}/../CLIc_prototype/build/include/CLIc/</includePath>
 					<includePath>${basedir}/../CLIc_prototype/thirdparty/opencl/ocl-clhpp/include/</includePath>
 				</includePaths>
 				<linkPaths>

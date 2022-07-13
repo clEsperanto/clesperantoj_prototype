@@ -5,10 +5,17 @@
 Install Microsoft Build tools as explained [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/). Hint: activate Windows C++ development.
 Install [git-scm](https://git-scm.com/downloads) and add it to the PATH so that `bash` can be called from any command line.
 
- Add the folder where "cl.exe" lives to the PATH, e.g. this one:
+Add the folder where "cl.exe" lives to the PATH, e.g. this one:
 
 ```
 C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC\Tools\MSVC\14.29.30133\bin\Hostx64\x64
+```
+
+Follow the instructions to build [CLIc](https://github.com/clEsperanto/CLIc_prototype/blob/master/docs/windows_build/windows_build.md). 
+Make sure when setting up CMAKE, that it is built into this directory as explained [here](https://github.com/clEsperanto/CLIc_prototype/blob/master/docs/windows_build/windows_build.md).
+
+```
+../CLIc_prototype/build/
 ```
 
 Set the environment variable JAVA_HOME to a valid SDK, e.g.:

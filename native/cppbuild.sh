@@ -26,6 +26,11 @@ case $KERNEL in
         KERNEL=windows
         ARCH=x86_64
         ;;
+    msys_nt*)
+        OS=windows
+        KERNEL=windows
+        ARCH=x86_64
+        ;;
     *)
         OS=$KERNEL
         ;;

@@ -40,27 +40,7 @@ public class ClesperantoJ {
     }
 
     public ImagePlus pull(Object image) {
-
-        if (image == null) {
-            return null;
-        }
-        if (image instanceof ImagePlus) {
-            return (ImagePlus) image;
-        }
-        if (image instanceof clesperantojWrapper.ObjectJ) {
-            clesperantojWrapper.ObjectJ gpu_image = (clesperantojWrapper.ObjectJ)image;
-            int width = gpu_image.getWidth();
-            int height = gpu_image.getHeight();
-            int depth = gpu_image.getDepth();
-            FloatPointer outFp = new FloatPointer(width * height * depth);
-
-            _native.FloatPull(outFp, gpu_image);
-            Img outImFromObj = ConvertersUtility.floatPointerToImg(outFp, width, height, depth);
-            ImagePlus result = ImageJFunctions.wrap(outImFromObj, "Output");
-            result.resetDisplayRange();
-            return result;
-        }
-        throw new RuntimeException("Type not supported" + image.getClass().getName());
+        return convert(image, ImagePlus.class);
     }
 
 

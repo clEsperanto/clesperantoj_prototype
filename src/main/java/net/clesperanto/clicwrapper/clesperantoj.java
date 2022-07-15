@@ -35,13 +35,13 @@ public class clesperantoj implements InfoMapper {
 		// the parser will try to automatically make wrappers for all functions in cleperantoj.h
 		// however templates need to be handled specially, and we need to set properties in the info map
 		// that specify the name of the wrapper to each template type we want to generate
-		infoMap.put(new Info("ClesperantoJ::guassianBlur2dT<float>").javaNames("FloatGaussianBlur2dT"));
-		infoMap.put(new Info("ClesperantoJ::guassianBlur2dT<short>").javaNames("ShortGaussianBlur2dT"));
-		infoMap.put(new Info("ClesperantoJ::create<float>").javaNames("FloatCreate"));
-		infoMap.put(new Info("ClesperantoJ::create<short>").javaNames("ShortCreate"));
-		infoMap.put(new Info("ClesperantoJ::push<float>").javaNames("FloatPush"));
-		infoMap.put(new Info("ClesperantoJ::push<short>").javaNames("ShortPush"));
-		infoMap.put(new Info("ClesperantoJ::pull<float>").javaNames("FloatPull"));
-		infoMap.put(new Info("ClesperantoJ::pull<short>").javaNames("ShortPull"));
+		infoMap.put(new Info("ClesperantoJInternal::guassianBlur2dT<float>").javaNames("FloatGaussianBlur2dT"));
+		infoMap.put(new Info("ClesperantoJInternal::guassianBlur2dT<short>").javaNames("ShortGaussianBlur2dT"));
+		infoMap.put(new Info("ClesperantoJInternal::create<float>").javaNames("FloatCreate"));
+		infoMap.put(new Info("ClesperantoJInternal::create<short>").javaNames("ShortCreate"));
+		infoMap.put(new Info("ClesperantoJInternal::push<float>").javaNames("FloatPush"));
+		infoMap.put(new Info("ClesperantoJInternal::push<short>").javaNames("ShortPush"));
+		infoMap.put(new Info("ClesperantoJInternal::pull<float>").javaNames("FloatPull"));
+		infoMap.put(new Info("ClesperantoJInternal::pull<short>").javaNames("ShortPull"));
 	}
 }

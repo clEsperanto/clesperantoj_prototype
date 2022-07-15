@@ -4,15 +4,15 @@
 
 using namespace std;
 
-ClesperantoJ::ClesperantoJ()
+ClesperantoJInternal::ClesperantoJInternal()
 {}
 
-void ClesperantoJ::sayHello() 
+void ClesperantoJInternal::sayHello()
 {
     std::cout<<"Hello Java, from c++\n";
 }
 
-void ClesperantoJ::gaussianBlur2d(float*in, float*out, int nx, int ny, float sx, float sy) {
+void ClesperantoJInternal::gaussianBlur2d(float*in, float*out, int nx, int ny, float sx, float sy) {
     
     std::vector<float> vecData;
     vecData.resize(nx*ny);
@@ -37,6 +37,11 @@ void ClesperantoJ::gaussianBlur2d(float*in, float*out, int nx, int ny, float sx,
     }
 }
 
-void ClesperantoJ::gaussianBlur2d(ObjectJ in, ObjectJ out, float sx, float sy) {
+void ClesperantoJInternal::gaussianBlur2d(ObjectJ in, ObjectJ out, float sx, float sy) {
     cle.GaussianBlur(in.obj, out.obj, sx, sy,1);
 } 
+
+ObjectJ ClesperantoJInternal::gaussian_blur(ObjectJ in, ObjectJ out, float sigma_x, float sigma_y, float sigma_z) {
+    cle.GaussianBlur(in.obj, out.obj, sigma_x, sigma_y, sigma_z);
+    return out;
+}

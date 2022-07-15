@@ -4,7 +4,7 @@ import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.ShortPointer;
 import org.jocl.NativePointerObject;
 
-import net.clesperanto.clicwrapper.clesperantojWrapper.ClesperantoJ;
+import net.clesperanto.clicwrapper.clesperantojWrapper.ClesperantoJInternal;
 import net.clesperanto.clicwrapper.clesperantojWrapper.ObjectJ;
 import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
 import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
@@ -27,8 +27,8 @@ public class InteractiveWrapperTest {
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		
 		ij.launch(args);
-		
-		ClesperantoJ clesperantoJ = new ClesperantoJ();
+
+		ClesperantoJInternal clesperantoJ = new ClesperantoJInternal();
 		
 		// sanity test
 		clesperantoJ.sayHello();
@@ -55,7 +55,7 @@ public class InteractiveWrapperTest {
 		ObjectJ objOut = clesperantoJ.FloatCreate(nx, ny);
 		
 		// call Gaussian blur
-		clesperantoJ.gaussianBlur2d(objIn, objOut, 10.f, 10.f);
+		clesperantoJ.gaussian_blur(objIn, objOut, 10.f, 10.f, 10.f);
 		
 		// pull from GPU
 		clesperantoJ.FloatPull(outFp, objOut);

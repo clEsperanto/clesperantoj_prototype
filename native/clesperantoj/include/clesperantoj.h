@@ -12,12 +12,12 @@
  */
 class ObjectJ
 {
-    friend class ClesperantoJ;    
+    friend class ClesperantoJInternal;
     private:
         cle::Object obj;
 };
 
-class ClesperantoJ
+class ClesperantoJInternal
 {
 
 
@@ -25,8 +25,8 @@ private:
     cle::Clesperanto cle;
 
 public:
-    ClesperantoJ();
-    ~ClesperantoJ() = default;
+    ClesperantoJInternal();
+    ~ClesperantoJInternal() = default;
 
     void sayHello();
 
@@ -44,6 +44,8 @@ public:
     
     void gaussianBlur2d(ObjectJ in, ObjectJ out, float sx, float sy);
 
+    ObjectJ gaussian_blur(ObjectJ in, ObjectJ out, float sigma_x, float sigma_y, float sigma_z);
+
     // templated version
     template<typename T>
     void guassianBlur2dT(T*in, T*out, int nr, int nc, float sx, float sy);
@@ -52,7 +54,7 @@ public:
 
 
 template<typename T>
-void ClesperantoJ::guassianBlur2dT(T*in, T*out, int nx, int ny, float sx, float sy)   {
+void ClesperantoJInternal::guassianBlur2dT(T*in, T*out, int nx, int ny, float sx, float sy)   {
     
     std::cout<<"test templated guassian blur\n"<<std::flush;
 
@@ -84,7 +86,7 @@ void ClesperantoJ::guassianBlur2dT(T*in, T*out, int nx, int ny, float sx, float 
 }
 
 template<typename T>
-ObjectJ ClesperantoJ::create(int nx, int ny) {
+ObjectJ ClesperantoJInternal::create(int nx, int ny) {
 
     std::array<size_t,3> dimensions = {nx, ny, 1};
     auto obj = cle.Create<T>(dimensions,"image");
@@ -96,7 +98,7 @@ ObjectJ ClesperantoJ::create(int nx, int ny) {
 }
 
 template<typename T>
-ObjectJ ClesperantoJ::push(T *in, int nx, int ny) {
+ObjectJ ClesperantoJInternal::push(T *in, int nx, int ny) {
     
     std::array<size_t,3> dimensions = {nx, ny, 1};
     std::vector<T> vecData;
@@ -117,7 +119,7 @@ ObjectJ ClesperantoJ::push(T *in, int nx, int ny) {
 }
 
 template<typename T>
-void ClesperantoJ::pull(T *out, ObjectJ obj) {
+void ClesperantoJInternal::pull(T *out, ObjectJ obj) {
     std::vector<T> outVec=cle.Pull<T>(obj.obj); 
     
     T * temp = outVec.data();

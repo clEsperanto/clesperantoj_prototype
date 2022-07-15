@@ -39,18 +39,18 @@ public static class ObjectJ extends Pointer {
 
 }
 
-@NoOffset public static class ClesperantoJ extends Pointer {
+@NoOffset public static class ClesperantoJInternal extends Pointer {
     static { Loader.load(); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public ClesperantoJ(Pointer p) { super(p); }
+    public ClesperantoJInternal(Pointer p) { super(p); }
     /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public ClesperantoJ(long size) { super((Pointer)null); allocateArray(size); }
+    public ClesperantoJInternal(long size) { super((Pointer)null); allocateArray(size); }
     private native void allocateArray(long size);
-    @Override public ClesperantoJ position(long position) {
-        return (ClesperantoJ)super.position(position);
+    @Override public ClesperantoJInternal position(long position) {
+        return (ClesperantoJInternal)super.position(position);
     }
 
-    public ClesperantoJ() { super((Pointer)null); allocate(); }
+    public ClesperantoJInternal() { super((Pointer)null); allocate(); }
     private native void allocate();
 
     public native void sayHello();
@@ -81,6 +81,8 @@ public static class ObjectJ extends Pointer {
     public native void gaussianBlur2d(float[] in, float[] out, int nr, int nc, float sx, float sy);
     
     public native void gaussianBlur2d(@ByVal ObjectJ in, @ByVal ObjectJ out, float sx, float sy);
+
+    public native @ByVal ObjectJ gaussian_blur(@ByVal ObjectJ in, @ByVal ObjectJ out, float sigma_x, float sigma_y, float sigma_z);
 
     // templated version
     public native @Name("guassianBlur2dT<float>") void FloatGaussianBlur2dT(FloatPointer in, FloatPointer out, int nr, int nc, float sx, float sy);

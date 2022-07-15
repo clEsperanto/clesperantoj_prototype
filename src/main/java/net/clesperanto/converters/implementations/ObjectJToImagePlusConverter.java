@@ -2,22 +2,10 @@ package net.clesperanto.converters.implementations;
 
 import ij.ImagePlus;
 import ij.gui.NewImage;
-import ij.plugin.Duplicator;
 import net.clesperanto.clicwrapper.clesperantojWrapper;
 import net.clesperanto.converters.AbstractConverter;
 import net.clesperanto.converters.ConverterPlugin;
-import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.converters.AbstractCLIJConverter;
-import net.haesleinhuepf.clij.converters.CLIJConverterPlugin;
-import net.haesleinhuepf.clij.converters.implementations.ClearCLBufferToRandomAccessibleIntervalConverter;
-import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.display.imagej.ImageJFunctions;
 import org.scijava.plugin.Plugin;
-
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
 
 
 @Plugin(type = ConverterPlugin.class)

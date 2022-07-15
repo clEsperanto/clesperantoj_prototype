@@ -1,13 +1,8 @@
 package net.clesperanto.converters.implementations;
 
-import net.clesperanto.clicwrapper.ConvertersUtility;
 import net.clesperanto.clicwrapper.clesperantojWrapper;
 import net.clesperanto.converters.AbstractConverter;
 import net.clesperanto.converters.ConverterPlugin;
-import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.converters.AbstractCLIJConverter;
-import net.haesleinhuepf.clij.converters.ConverterUtilities;
-import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.type.numeric.RealType;
@@ -17,14 +12,11 @@ import net.imglib2.type.numeric.integer.UnsignedByteType;
 import net.imglib2.type.numeric.integer.UnsignedShortType;
 import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.view.Views;
-import org.bytedeco.javacpp.FloatPointer;
 import org.scijava.plugin.Plugin;
 
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
-
-import static net.clesperanto.pyclesperanto.cle;
 
 @Plugin(type = ConverterPlugin.class)
 public class RandomAccessibleIntervalToObjectJConverter extends AbstractConverter<RandomAccessibleInterval, clesperantojWrapper.ObjectJ> {
@@ -59,7 +51,6 @@ public class RandomAccessibleIntervalToObjectJConverter extends AbstractConverte
             }
             ByteBuffer byteBuffer = ByteBuffer.wrap(inputArray);
             return cle._native.CharPush(byteBuffer, (int)dimensions3d[0], (int)dimensions3d[1], (int)dimensions3d[2]);
-            //target.readFrom(byteBuffer, true);
         } else if (pixel instanceof ShortType ||
                    pixel instanceof UnsignedShortType) {
 
@@ -70,7 +61,6 @@ public class RandomAccessibleIntervalToObjectJConverter extends AbstractConverte
             }
             ShortBuffer shortBuffer = ShortBuffer.wrap(inputArray);
             return cle._native.ShortPush(shortBuffer, (int)dimensions3d[0], (int)dimensions3d[1], (int)dimensions3d[2]);
-            //target.readFrom(shortBuffer, true);
         } else if (pixel instanceof FloatType) {
             float[] inputArray = new float[(int) numberOfPixels];
             while (cursor.hasNext()) {
@@ -79,7 +69,6 @@ public class RandomAccessibleIntervalToObjectJConverter extends AbstractConverte
             }
             FloatBuffer floatBuffer = FloatBuffer.wrap(inputArray);
             return cle._native.FloatPush(floatBuffer, (int)dimensions3d[0], (int)dimensions3d[1], (int)dimensions3d[2]);
-            //target.readFrom(floatBuffer, true);
         } else {
             throw new IllegalArgumentException("Cannot copy content of buffer because of unknown type.");
         }

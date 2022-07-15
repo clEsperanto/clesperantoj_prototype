@@ -48,6 +48,7 @@ public class ConverterService extends AbstractPTService<ConverterPlugin> impleme
 
     private PluginInfo<ConverterPlugin> findPluginInfo(ClassPair pair) {
         for (ClassPair item : converterPlugins.keySet()) {
+            //System.out.println("Checking " + item.a.getName() + " ?? " + pair.a.getName());
             if( item.a.isAssignableFrom(pair.a) && item.b == pair.b) {
                 return converterPlugins.get(item);
             }

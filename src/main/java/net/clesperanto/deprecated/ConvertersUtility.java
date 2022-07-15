@@ -1,4 +1,4 @@
-package net.clesperanto.clicwrapper;
+package net.clesperanto.deprecated;
 
 import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.ShortPointer;

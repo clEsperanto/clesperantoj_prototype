@@ -1,8 +1,9 @@
-package net.clesperanto.clicwrapper;
+package net.clesperanto.test;
 
 import ij.IJ;
 import ij.ImagePlus;
 import net.clesperanto.ClesperantoJ;
+import net.clesperanto.clicwrapper.clesperantojWrapper;
 import net.clesperanto.pyclesperanto;
 import net.imagej.Dataset;
 import net.imagej.ImageJ;

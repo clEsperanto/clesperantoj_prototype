@@ -1,18 +1,11 @@
-package net.clesperanto.clicwrapper;
+package net.clesperanto.deprecated;
 
 import org.bytedeco.javacpp.FloatPointer;
-import org.bytedeco.javacpp.ShortPointer;
-import org.jocl.NativePointerObject;
 
 import net.clesperanto.clicwrapper.clesperantojWrapper.ClesperantoJInternal;
 import net.clesperanto.clicwrapper.clesperantojWrapper.ObjectJ;
-import net.haesleinhuepf.clij.clearcl.ClearCLBuffer;
-import net.haesleinhuepf.clij.coremem.enums.NativeTypeEnum;
-import net.haesleinhuepf.clij2.CLIJ2;
-import net.clesperanto.clicwrapper.ConvertersUtility;
 import net.imagej.Dataset;
 import net.imagej.ImageJ;
-import net.imglib2.Dimensions;
 import net.imglib2.img.Img;
 import net.imglib2.type.numeric.integer.ShortType;
 import net.imglib2.type.numeric.real.FloatType;

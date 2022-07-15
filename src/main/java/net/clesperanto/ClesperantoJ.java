@@ -1,18 +1,10 @@
 package net.clesperanto;
 
 import ij.ImagePlus;
-import net.clesperanto.clicwrapper.ConvertersUtility;
 import net.clesperanto.clicwrapper.clesperantojWrapper;
 import net.clesperanto.converters.ConverterPlugin;
 import net.clesperanto.converters.ConverterService;
-import net.haesleinhuepf.clij.converters.CLIJConverterPlugin;
-import net.haesleinhuepf.clij.converters.CLIJConverterService;
-import net.haesleinhuepf.clij.converters.FallBackCLIJConverterService;
-import net.imglib2.IterableInterval;
 import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.Img;
-import net.imglib2.img.display.imagej.ImageJFunctions;
-import org.bytedeco.javacpp.FloatPointer;
 import org.scijava.Context;
 
 public class ClesperantoJ {

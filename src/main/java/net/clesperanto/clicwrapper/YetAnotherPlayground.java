@@ -17,13 +17,13 @@ public class YetAnotherPlayground {
         new ImageJ();
 
         ImagePlus imp = IJ.openImage("./imgs/boats.tif");
+        imp.show();
 
         ClesperantoJ cle = pyclesperanto.cle;
+        clesperantojWrapper.ObjectJ output = cle.gaussian_blur(imp, null, 3, 3,0);
+        cle.imshow(output);
 
-        imp.show();
-        clesperantojWrapper.ObjectJ input = cle.push(imp);
-
-        ImagePlus result = cle.pull(input);
-        result.show();
+        //ImagePlus result = cle.pull(output);
+        //result.show();
     }
 }

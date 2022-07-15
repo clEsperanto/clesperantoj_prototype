@@ -14,6 +14,9 @@ public class ClesperantoJ {
     private clesperantojWrapper.ClesperantoJInternal clesperantoJ = new clesperantojWrapper.ClesperantoJInternal();
 
     public clesperantojWrapper.ObjectJ push(Object image) {
+        if (image == null) {
+            return null;
+        }
         if (image instanceof ImagePlus) {
             image = ImageJFunctions.convertFloat((ImagePlus)image);
         }
@@ -33,6 +36,13 @@ public class ClesperantoJ {
         return null;
     }
 
+    public clesperantojWrapper.ObjectJ push_if_necessary(Object image) {
+        if (image instanceof clesperantojWrapper.ObjectJ) {
+            return (clesperantojWrapper.ObjectJ) image;
+        }
+        return push(image);
+    }
+
     public ImagePlus pull(clesperantojWrapper.ObjectJ gpu_image) {
         int width = gpu_image.getWidth();
         int height = gpu_image.getHeight();
@@ -44,5 +54,42 @@ public class ClesperantoJ {
         ImagePlus result = ImageJFunctions.wrap(outImFromObj, "Output");
         result.resetDisplayRange();
         return result;
+    }
+
+    public ImagePlus pull_if_necessary(Object image) {
+        if (image == null) {
+            return null;
+        }
+        if (image instanceof ImagePlus) {
+            return (ImagePlus) image;
+        }
+        if (image instanceof clesperantojWrapper.ObjectJ){
+            return pull((clesperantojWrapper.ObjectJ) image);
+        }
+        throw new RuntimeException("Image type not supported: " + image.getClass().getName());
+    }
+
+    public void imshow(Object gpu_image) {
+        ImagePlus image = pull_if_necessary(gpu_image);
+        image.show();
+    }
+
+    public clesperantojWrapper.ObjectJ create_like(clesperantojWrapper.ObjectJ source) {
+        return clesperantoJ.FloatCreate(source.getWidth(), source.getHeight(), source.getDepth());
+    }
+
+    private clesperantojWrapper.ObjectJ create_like_if_none(Object source, Object target) {
+        clesperantojWrapper.ObjectJ sourceJ = push_if_necessary(source); // that might be not necessary and slow
+        clesperantojWrapper.ObjectJ targetJ = push_if_necessary(target); // that might be not necessary and slow
+        if (targetJ != null) {
+            return targetJ;
+        }
+        return create_like(sourceJ);
+    }
+
+    public clesperantojWrapper.ObjectJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
+        clesperantojWrapper.ObjectJ sourceJ = push_if_necessary(source);
+        clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
+        return clesperantoJ.gaussian_blur(sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
     }
 }

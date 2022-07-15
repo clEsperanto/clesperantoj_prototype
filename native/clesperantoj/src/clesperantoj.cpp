@@ -13,6 +13,9 @@ int ObjectJ::getHeight() {
 int ObjectJ::getDepth() {
     return obj.Shape()[2];
 }
+const char* ObjectJ::getDataType() {
+    return obj.GetDataType();
+}
 
 ClesperantoJInternal::ClesperantoJInternal()
 {}

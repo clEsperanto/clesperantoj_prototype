@@ -40,6 +40,7 @@ public static class ObjectJ extends Pointer {
         public native int getWidth();
         public native int getHeight();
         public native int getDepth();
+        public native @Cast("const char*") BytePointer getDataType();
 }
 
 @NoOffset public static class ClesperantoJInternal extends Pointer {
@@ -58,17 +59,27 @@ public static class ObjectJ extends Pointer {
 
     public native void sayHello();
 
+    public native @ByVal @Name("create<char>") ObjectJ CharCreate(int nx, int ny, int nz);
+
     public native @ByVal @Name("create<float>") ObjectJ FloatCreate(int nx, int ny, int nz);
 
     public native @ByVal @Name("create<short>") ObjectJ ShortCreate(int nx, int ny, int nz);
 
-    public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatPointer in, int nx, int ny);
-    public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatBuffer in, int nx, int ny);
-    public native @ByVal @Name("push<float>") ObjectJ FloatPush(float[] in, int nx, int ny);
+    public native @ByVal @Name("push<char>") ObjectJ CharPush(@Cast("char*") BytePointer in, int nx, int ny, int nz);
+    public native @ByVal @Name("push<char>") ObjectJ CharPush(@Cast("char*") ByteBuffer in, int nx, int ny, int nz);
+    public native @ByVal @Name("push<char>") ObjectJ CharPush(@Cast("char*") byte[] in, int nx, int ny, int nz);
 
-    public native @ByVal @Name("push<short>") ObjectJ ShortPush(ShortPointer in, int nx, int ny);
-    public native @ByVal @Name("push<short>") ObjectJ ShortPush(ShortBuffer in, int nx, int ny);
-    public native @ByVal @Name("push<short>") ObjectJ ShortPush(short[] in, int nx, int ny);
+    public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatPointer in, int nx, int ny, int nz);
+    public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatBuffer in, int nx, int ny, int nz);
+    public native @ByVal @Name("push<float>") ObjectJ FloatPush(float[] in, int nx, int ny, int nz);
+
+    public native @ByVal @Name("push<short>") ObjectJ ShortPush(ShortPointer in, int nx, int ny, int nz);
+    public native @ByVal @Name("push<short>") ObjectJ ShortPush(ShortBuffer in, int nx, int ny, int nz);
+    public native @ByVal @Name("push<short>") ObjectJ ShortPush(short[] in, int nx, int ny, int nz);
+
+    public native @Name("pull<char>") void CharPull(@Cast("char*") BytePointer out, @ByVal ObjectJ obj);
+    public native @Name("pull<char>") void CharPull(@Cast("char*") ByteBuffer out, @ByVal ObjectJ obj);
+    public native @Name("pull<char>") void CharPull(@Cast("char*") byte[] out, @ByVal ObjectJ obj);
 
     public native @Name("pull<float>") void FloatPull(FloatPointer out, @ByVal ObjectJ obj);
     public native @Name("pull<float>") void FloatPull(FloatBuffer out, @ByVal ObjectJ obj);

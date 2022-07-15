@@ -50,7 +50,7 @@ public class InteractiveWrapperTest {
 		FloatPointer outFp = new FloatPointer(img.dimension(0)*img.dimension(1));
 				
 		// push the input 
-		ObjectJ objIn = clesperantoJ.FloatPush(fp, nx, ny);
+		ObjectJ objIn = clesperantoJ.FloatPush(fp, nx, ny, 1);
 		// create GPU memory for output
 		ObjectJ objOut = clesperantoJ.FloatCreate(nx, ny, 1);
 		

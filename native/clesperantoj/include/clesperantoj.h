@@ -19,6 +19,7 @@ class ObjectJ
         int getWidth();
         int getHeight();
         int getDepth();
+        const char* getDataType();
 };
 
 class ClesperantoJInternal
@@ -38,7 +39,7 @@ public:
     ObjectJ create(int nx, int ny, int nz);
 
     template<typename T>
-    ObjectJ push(T* in, int nx, int ny);
+    ObjectJ push(T* in, int nx, int ny, int nz);
 
     template<typename T>
     void pull(T * out, ObjectJ obj);
@@ -103,9 +104,9 @@ ObjectJ ClesperantoJInternal::create(int nx, int ny, int nz) {
 }
 
 template<typename T>
-ObjectJ ClesperantoJInternal::push(T *in, int nx, int ny) {
+ObjectJ ClesperantoJInternal::push(T *in, int nx, int ny, int nz) {
     
-    std::array<size_t,3> dimensions = {nx, ny, 1};
+    std::array<size_t,3> dimensions = {nx, ny, nz};
     std::vector<T> vecData;
     vecData.resize(nx*ny);
 

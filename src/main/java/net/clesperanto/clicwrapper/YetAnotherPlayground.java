@@ -12,6 +12,7 @@ public class YetAnotherPlayground {
         new ImageJ();
 
         ImagePlus imp = IJ.openImage("./imgs/boats.tif");
+        IJ.run(imp, "32-bit", "");
         imp.show();
 
         ClesperantoJ cle = pyclesperanto.cle;

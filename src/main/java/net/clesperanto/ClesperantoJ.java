@@ -3,42 +3,40 @@ package net.clesperanto;
 import ij.ImagePlus;
 import net.clesperanto.clicwrapper.ConvertersUtility;
 import net.clesperanto.clicwrapper.clesperantojWrapper;
+import net.clesperanto.converters.ConverterPlugin;
+import net.clesperanto.converters.ConverterService;
+import net.haesleinhuepf.clij.converters.CLIJConverterPlugin;
+import net.haesleinhuepf.clij.converters.CLIJConverterService;
+import net.haesleinhuepf.clij.converters.FallBackCLIJConverterService;
 import net.imglib2.IterableInterval;
-import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
 import net.imglib2.img.display.imagej.ImageJFunctions;
 import org.bytedeco.javacpp.FloatPointer;
+import org.scijava.Context;
 
 public class ClesperantoJ {
 
-    private clesperantojWrapper.ClesperantoJInternal clesperantoJ = new clesperantojWrapper.ClesperantoJInternal();
+    @Deprecated
+    public ClesperantoJ() {
+
+    }
+
+    private static ClesperantoJ instance = null;
+    public static ClesperantoJ getInstance() {
+        if (instance == null) {
+            instance = new ClesperantoJ();
+        }
+        return instance;
+    }
+
+    public clesperantojWrapper.ClesperantoJInternal _native = new clesperantojWrapper.ClesperantoJInternal();
 
     public void say_hello() {
-        clesperantoJ.sayHello();
+        _native.sayHello();
     }
 
     public clesperantojWrapper.ObjectJ push(Object image) {
-        if (image == null) {
-            return null;
-        }
-        if (image instanceof clesperantojWrapper.ObjectJ) {
-            return (clesperantojWrapper.ObjectJ) image;
-        }
-        if (image instanceof ImagePlus) {
-            image = ImageJFunctions.convertFloat((ImagePlus)image);
-        }
-        if (image instanceof IterableInterval) {
-            IterableInterval img = (IterableInterval) image;
-
-            int nx = (int)img.dimension(0);
-            int ny = (int)img.dimension(1);
-
-            FloatPointer fp = ConvertersUtility.ii2DToFloatPointer(img);
-            clesperantojWrapper.ObjectJ objIn = clesperantoJ.FloatPush(fp, nx, ny);
-
-            return objIn;
-        }
-        throw new RuntimeException("Type not supported" + image.getClass().getName());
+        return convert(image, clesperantojWrapper.ObjectJ.class);
     }
 
     public ImagePlus pull(Object image) {
@@ -56,7 +54,7 @@ public class ClesperantoJ {
             int depth = gpu_image.getDepth();
             FloatPointer outFp = new FloatPointer(width * height * depth);
 
-            clesperantoJ.FloatPull(outFp, gpu_image);
+            _native.FloatPull(outFp, gpu_image);
             Img outImFromObj = ConvertersUtility.floatPointerToImg(outFp, width, height, depth);
             ImagePlus result = ImageJFunctions.wrap(outImFromObj, "Output");
             result.resetDisplayRange();
@@ -65,13 +63,40 @@ public class ClesperantoJ {
         throw new RuntimeException("Type not supported" + image.getClass().getName());
     }
 
+
+    private ConverterService converterService = null;
+
+    public <S, T> T convert(S source, Class<T> targetClass) {
+        if (source == null) {
+            return null;
+        }
+        if (targetClass.isAssignableFrom(source.getClass())) {
+            return (T) source;
+        }
+        synchronized (this) {
+            //try {
+                if (converterService == null) {
+                    converterService = new Context(ConverterService.class).service(ConverterService.class);
+                }
+            //} catch (RuntimeException e) {
+            //    converterService = FallBackCLIJConverterService.getInstance();
+            //}
+            converterService.setCLE(this);
+            ConverterPlugin<S, T> converter = (ConverterPlugin<S, T>) converterService.getConverter(source.getClass(), targetClass);
+            converter.setCLE(this);
+            T result = converter.convert(source);
+
+            return  result;
+        }
+    }
+
     public void imshow(Object gpu_image) {
         ImagePlus image = pull(gpu_image);
         image.show();
     }
 
     public clesperantojWrapper.ObjectJ create_like(clesperantojWrapper.ObjectJ source) {
-        return clesperantoJ.FloatCreate(source.getWidth(), source.getHeight(), source.getDepth());
+        return _native.FloatCreate(source.getWidth(), source.getHeight(), source.getDepth());
     }
 
     private clesperantojWrapper.ObjectJ create_like_if_none(Object source, Object target) {
@@ -86,6 +111,6 @@ public class ClesperantoJ {
     public clesperantojWrapper.ObjectJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
         clesperantojWrapper.ObjectJ sourceJ = push(source);
         clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
-        return clesperantoJ.gaussian_blur(sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
+        return _native.gaussian_blur(sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
     }
 }

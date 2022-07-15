@@ -37,6 +37,9 @@ public static class ObjectJ extends Pointer {
         return (ObjectJ)super.position(position);
     }
 
+        public native int getWidth();
+        public native int getHeight();
+        public native int getDepth();
 }
 
 @NoOffset public static class ClesperantoJInternal extends Pointer {

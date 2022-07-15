@@ -15,6 +15,10 @@ class ObjectJ
     friend class ClesperantoJInternal;
     private:
         cle::Object obj;
+    public:
+        int getWidth();
+        int getHeight();
+        int getDepth();
 };
 
 class ClesperantoJInternal

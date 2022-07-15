@@ -4,6 +4,16 @@
 
 using namespace std;
 
+int ObjectJ::getWidth() {
+    return obj.Shape()[0];
+}
+int ObjectJ::getHeight() {
+    return obj.Shape()[1];
+}
+int ObjectJ::getDepth() {
+    return obj.Shape()[2];
+}
+
 ClesperantoJInternal::ClesperantoJInternal()
 {}
 

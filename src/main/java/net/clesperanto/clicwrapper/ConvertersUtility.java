@@ -256,6 +256,15 @@ public class ConvertersUtility {
 		return ArrayImgs.floats(temp, d.dimension(0), d.dimension(1));
 	}
 
+	static public Img<FloatType> floatPointerToImg(final FloatPointer fp, int width, int height, int depth)
+	{
+
+		final float[] temp = new float[(int) (width * height * depth)];
+		fp.get(temp);
+
+		return ArrayImgs.floats(temp, width, height, depth);
+	}
+
 	/**
 	 * Converts from a FloatPointer to an Img
 	 */

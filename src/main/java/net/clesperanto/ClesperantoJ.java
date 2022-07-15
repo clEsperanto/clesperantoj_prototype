@@ -13,9 +13,16 @@ public class ClesperantoJ {
 
     private clesperantojWrapper.ClesperantoJInternal clesperantoJ = new clesperantojWrapper.ClesperantoJInternal();
 
+    public void say_hello() {
+        clesperantoJ.sayHello();
+    }
+
     public clesperantojWrapper.ObjectJ push(Object image) {
         if (image == null) {
             return null;
+        }
+        if (image instanceof clesperantojWrapper.ObjectJ) {
+            return (clesperantojWrapper.ObjectJ) image;
         }
         if (image instanceof ImagePlus) {
             image = ImageJFunctions.convertFloat((ImagePlus)image);
@@ -34,13 +41,6 @@ public class ClesperantoJ {
             System.out.println("Type not supported" + image.getClass().getName());
         }
         return null;
-    }
-
-    public clesperantojWrapper.ObjectJ push_if_necessary(Object image) {
-        if (image instanceof clesperantojWrapper.ObjectJ) {
-            return (clesperantojWrapper.ObjectJ) image;
-        }
-        return push(image);
     }
 
     public ImagePlus pull(clesperantojWrapper.ObjectJ gpu_image) {
@@ -79,8 +79,8 @@ public class ClesperantoJ {
     }
 
     private clesperantojWrapper.ObjectJ create_like_if_none(Object source, Object target) {
-        clesperantojWrapper.ObjectJ sourceJ = push_if_necessary(source); // that might be not necessary and slow
-        clesperantojWrapper.ObjectJ targetJ = push_if_necessary(target); // that might be not necessary and slow
+        clesperantojWrapper.ObjectJ sourceJ = push(source); // that might be not necessary and slow
+        clesperantojWrapper.ObjectJ targetJ = push(target); // that might be not necessary and slow
         if (targetJ != null) {
             return targetJ;
         }
@@ -88,7 +88,7 @@ public class ClesperantoJ {
     }
 
     public clesperantojWrapper.ObjectJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
-        clesperantojWrapper.ObjectJ sourceJ = push_if_necessary(source);
+        clesperantojWrapper.ObjectJ sourceJ = push(source);
         clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
         return clesperantoJ.gaussian_blur(sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
     }

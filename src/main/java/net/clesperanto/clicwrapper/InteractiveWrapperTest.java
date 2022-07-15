@@ -25,11 +25,11 @@ public class InteractiveWrapperTest {
 		
 		System.out.println("Test clesperantoj wrapper");
 		System.out.println("Working Directory = " + System.getProperty("user.dir"));
-		
+
 		ij.launch(args);
 
 		ClesperantoJInternal clesperantoJ = new ClesperantoJInternal();
-		
+
 		// sanity test
 		clesperantoJ.sayHello();
 		
@@ -52,7 +52,7 @@ public class InteractiveWrapperTest {
 		// push the input 
 		ObjectJ objIn = clesperantoJ.FloatPush(fp, nx, ny);
 		// create GPU memory for output
-		ObjectJ objOut = clesperantoJ.FloatCreate(nx, ny);
+		ObjectJ objOut = clesperantoJ.FloatCreate(nx, ny, 1);
 		
 		// call Gaussian blur
 		clesperantoJ.gaussian_blur(objIn, objOut, 10.f, 10.f, 10.f);

@@ -35,7 +35,7 @@ public:
     void sayHello();
 
     template<typename T>
-    ObjectJ create(int nx, int ny);
+    ObjectJ create(int nx, int ny, int nz);
 
     template<typename T>
     ObjectJ push(T* in, int nx, int ny);
@@ -89,10 +89,11 @@ void ClesperantoJInternal::guassianBlur2dT(T*in, T*out, int nx, int ny, float sx
     }
 }
 
-template<typename T>
-ObjectJ ClesperantoJInternal::create(int nx, int ny) {
 
-    std::array<size_t,3> dimensions = {nx, ny, 1};
+template<typename T>
+ObjectJ ClesperantoJInternal::create(int nx, int ny, int nz) {
+
+    std::array<size_t,3> dimensions = {nx, ny, nz};
     auto obj = cle.Create<T>(dimensions,"image");
 
     ObjectJ objJ = ObjectJ();

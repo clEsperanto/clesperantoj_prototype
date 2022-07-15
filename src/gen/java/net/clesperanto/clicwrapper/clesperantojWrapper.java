@@ -58,9 +58,9 @@ public static class ObjectJ extends Pointer {
 
     public native void sayHello();
 
-    public native @ByVal @Name("create<float>") ObjectJ FloatCreate(int nx, int ny);
+    public native @ByVal @Name("create<float>") ObjectJ FloatCreate(int nx, int ny, int nz);
 
-    public native @ByVal @Name("create<short>") ObjectJ ShortCreate(int nx, int ny);
+    public native @ByVal @Name("create<short>") ObjectJ ShortCreate(int nx, int ny, int nz);
 
     public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatPointer in, int nx, int ny);
     public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatBuffer in, int nx, int ny);
@@ -96,6 +96,7 @@ public static class ObjectJ extends Pointer {
     public native @Name("guassianBlur2dT<short>") void ShortGaussianBlur2dT(short[] in, short[] out, int nr, int nc, float sx, float sy);
 
 }
+
 
 
 

@@ -37,40 +37,36 @@ public class ClesperantoJ {
             clesperantojWrapper.ObjectJ objIn = clesperantoJ.FloatPush(fp, nx, ny);
 
             return objIn;
-        } else {
-            System.out.println("Type not supported" + image.getClass().getName());
         }
-        return null;
+        throw new RuntimeException("Type not supported" + image.getClass().getName());
     }
 
-    public ImagePlus pull(clesperantojWrapper.ObjectJ gpu_image) {
-        int width = gpu_image.getWidth();
-        int height = gpu_image.getHeight();
-        int depth = gpu_image.getDepth();
-        FloatPointer outFp = new FloatPointer(width * height * depth);
+    public ImagePlus pull(Object image) {
 
-        clesperantoJ.FloatPull(outFp, gpu_image);
-        Img outImFromObj = ConvertersUtility.floatPointerToImg(outFp, width, height, depth);
-        ImagePlus result = ImageJFunctions.wrap(outImFromObj, "Output");
-        result.resetDisplayRange();
-        return result;
-    }
-
-    public ImagePlus pull_if_necessary(Object image) {
         if (image == null) {
             return null;
         }
         if (image instanceof ImagePlus) {
             return (ImagePlus) image;
         }
-        if (image instanceof clesperantojWrapper.ObjectJ){
-            return pull((clesperantojWrapper.ObjectJ) image);
+        if (image instanceof clesperantojWrapper.ObjectJ) {
+            clesperantojWrapper.ObjectJ gpu_image = (clesperantojWrapper.ObjectJ)image;
+            int width = gpu_image.getWidth();
+            int height = gpu_image.getHeight();
+            int depth = gpu_image.getDepth();
+            FloatPointer outFp = new FloatPointer(width * height * depth);
+
+            clesperantoJ.FloatPull(outFp, gpu_image);
+            Img outImFromObj = ConvertersUtility.floatPointerToImg(outFp, width, height, depth);
+            ImagePlus result = ImageJFunctions.wrap(outImFromObj, "Output");
+            result.resetDisplayRange();
+            return result;
         }
-        throw new RuntimeException("Image type not supported: " + image.getClass().getName());
+        throw new RuntimeException("Type not supported" + image.getClass().getName());
     }
 
     public void imshow(Object gpu_image) {
-        ImagePlus image = pull_if_necessary(gpu_image);
+        ImagePlus image = pull(gpu_image);
         image.show();
     }
 

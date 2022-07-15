@@ -6,6 +6,7 @@ import net.clesperanto.ClesperantoJ;
 import net.clesperanto.pyclesperanto;
 import net.imagej.Dataset;
 import net.imagej.ImageJ;
+import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
 import net.imglib2.type.numeric.real.FloatType;
 
@@ -23,7 +24,9 @@ public class YetAnotherPlaygroundImgLib2 {
 
         ClesperantoJ cle = pyclesperanto.cle;
         clesperantojWrapper.ObjectJ output = cle.gaussian_blur(img, null, 3, 3,0);
-        cle.imshow(output);
+        //cle.imshow(output);
 
+        RandomAccessibleInterval result = cle.pullRAI(output);
+        ij.ui().show("output", result);
     }
 }

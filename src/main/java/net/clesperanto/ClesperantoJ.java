@@ -9,6 +9,7 @@ import net.haesleinhuepf.clij.converters.CLIJConverterPlugin;
 import net.haesleinhuepf.clij.converters.CLIJConverterService;
 import net.haesleinhuepf.clij.converters.FallBackCLIJConverterService;
 import net.imglib2.IterableInterval;
+import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.Img;
 import net.imglib2.img.display.imagej.ImageJFunctions;
 import org.bytedeco.javacpp.FloatPointer;
@@ -41,6 +42,10 @@ public class ClesperantoJ {
 
     public ImagePlus pull(Object image) {
         return convert(image, ImagePlus.class);
+    }
+
+    public RandomAccessibleInterval pullRAI(Object image) {
+        return convert(image, RandomAccessibleInterval.class);
     }
 
 

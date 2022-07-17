@@ -95,6 +95,13 @@ Open the x64 Native Tools Command Prompt for VS 2019 (64 bit!), navigate to the 
 mvn
 ```
 
+## Running the prototype
+
+After the build succeeded, you can run the main functions in [this package](https://github.com/clEsperanto/clesperantoj_prototype/tree/main/src/main/java/net/clesperanto/test) and play with clesperantoj. 
+This is recommended to do from an IDE such as IntellIJ by clicking on the green triangle next to the main function:
+
+![img.png](developer_docs/intellij_screenshot.png)
+
 ## Trouble shooting
 
 * Take a look at the ```javacpp``` section of the poml.xml and make sure the ```includePath``` and ```linkPath``` locations exist on your machine.

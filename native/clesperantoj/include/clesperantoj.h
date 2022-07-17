@@ -46,6 +46,10 @@ public:
 
     ObjectJ gaussian_blur(ObjectJ source, ObjectJ target, float sigma_x, float sigma_y, float sigma_z);
 
+    ObjectJ threshold_otsu(ObjectJ source, ObjectJ target);
+
+    ObjectJ connected_component_labeling_box(ObjectJ source, ObjectJ target);
+
 };
 
 

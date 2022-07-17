@@ -91,6 +91,10 @@ public static class ObjectJ extends Pointer {
 
     public native @ByVal ObjectJ gaussian_blur(@ByVal ObjectJ source, @ByVal ObjectJ target, float sigma_x, float sigma_y, float sigma_z);
 
+    public native @ByVal ObjectJ threshold_otsu(@ByVal ObjectJ source, @ByVal ObjectJ target);
+
+    public native @ByVal ObjectJ connected_component_labeling_box(@ByVal ObjectJ source, @ByVal ObjectJ target);
+
 }
 
 

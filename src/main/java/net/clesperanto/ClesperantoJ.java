@@ -90,4 +90,15 @@ public class ClesperantoJ {
         clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
         return _native.gaussian_blur(sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
     }
+    public clesperantojWrapper.ObjectJ thresold_otsu(Object source, Object target) {
+        clesperantojWrapper.ObjectJ sourceJ = push(source);
+        clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
+        return _native.threshold_otsu(sourceJ, targetJ);
+    }
+
+    public clesperantojWrapper.ObjectJ connected_component_labeling_box(Object source, Object target) {
+        clesperantojWrapper.ObjectJ sourceJ = push(source);
+        clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
+        return _native.connected_component_labeling_box(sourceJ, targetJ);
+    }
 }

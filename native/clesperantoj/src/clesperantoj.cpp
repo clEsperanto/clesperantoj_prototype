@@ -29,3 +29,13 @@ ObjectJ ClesperantoJInternal::gaussian_blur(ObjectJ source, ObjectJ target, floa
     cle.GaussianBlur(source.obj, target.obj, sigma_x, sigma_y, sigma_z);
     return target;
 }
+
+ObjectJ ClesperantoJInternal::threshold_otsu(ObjectJ source, ObjectJ target) {
+    cle.ThresholdOtsu(source.obj, target.obj);
+    return target;
+}
+
+ObjectJ ClesperantoJInternal::connected_component_labeling_box(ObjectJ source, ObjectJ target) {
+    cle.ConnectedComponentsLabelingBox(source.obj, target.obj);
+    return target;
+}

@@ -89,27 +89,9 @@ public static class ObjectJ extends Pointer {
     public native @Name("pull<short>") void ShortPull(ShortBuffer out, @ByVal ObjectJ obj);
     public native @Name("pull<short>") void ShortPull(short[] out, @ByVal ObjectJ obj);
 
-    // non templated version of gaussian blur
-    public native void gaussianBlur2d(FloatPointer in, FloatPointer out, int nr, int nc, float sx, float sy);
-    public native void gaussianBlur2d(FloatBuffer in, FloatBuffer out, int nr, int nc, float sx, float sy);
-    public native void gaussianBlur2d(float[] in, float[] out, int nr, int nc, float sx, float sy);
-    
-    public native void gaussianBlur2d(@ByVal ObjectJ in, @ByVal ObjectJ out, float sx, float sy);
-
-    public native @ByVal ObjectJ gaussian_blur(@ByVal ObjectJ in, @ByVal ObjectJ out, float sigma_x, float sigma_y, float sigma_z);
-
-    // templated version
-    public native @Name("guassianBlur2dT<float>") void FloatGaussianBlur2dT(FloatPointer in, FloatPointer out, int nr, int nc, float sx, float sy);
-    public native @Name("guassianBlur2dT<float>") void FloatGaussianBlur2dT(FloatBuffer in, FloatBuffer out, int nr, int nc, float sx, float sy);
-    public native @Name("guassianBlur2dT<float>") void FloatGaussianBlur2dT(float[] in, float[] out, int nr, int nc, float sx, float sy);
-    public native @Name("guassianBlur2dT<short>") void ShortGaussianBlur2dT(ShortPointer in, ShortPointer out, int nr, int nc, float sx, float sy);
-    public native @Name("guassianBlur2dT<short>") void ShortGaussianBlur2dT(ShortBuffer in, ShortBuffer out, int nr, int nc, float sx, float sy);
-    public native @Name("guassianBlur2dT<short>") void ShortGaussianBlur2dT(short[] in, short[] out, int nr, int nc, float sx, float sy);
+    public native @ByVal ObjectJ gaussian_blur(@ByVal ObjectJ source, @ByVal ObjectJ target, float sigma_x, float sigma_y, float sigma_z);
 
 }
-
-
-
 
 
 

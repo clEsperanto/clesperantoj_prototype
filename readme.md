@@ -111,6 +111,15 @@ This is recommended to do from an IDE such as IntellIJ by clicking on the green 
 * In some cases, the build fails when executed the first time. 
 You find a potential workaround explained [here](https://github.com/clEsperanto/clesperantoj_prototype/issues/4#issuecomment-1184768674).
 
+* You may need to add the src/gen/java path to the java build path in your IDE.
+
+  * For Eclipse follow below instructions
+
+1.  Go to Project -> Properties -> Java Build Path -> Source (tab). Then add src/main as a source folder.
+2. Right-clicking your project, then click Properties .
+3. In the left pane, click Java Build Path . In the right pane, select the Source tab .
+4. Here you can add/edit/remove source folders.
+
 ## Acknowledgements
 This project was supported by the Deutsche Forschungsgemeinschaft under Germany’s Excellence Strategy – EXC2068 - Cluster of Excellence "Physics of Life" of TU Dresden.
 This project has been made possible in part by grant number [2021-237734 (GPU-accelerating Fiji and friends using distributed CLIJ, NEUBIAS-style, EOSS4)](https://chanzuckerberg.com/eoss/proposals/gpu-accelerating-fiji-and-friends-using-distributed-clij-neubias-style/) from the Chan Zuckerberg Initiative DAF, an advised fund of the Silicon Valley Community Foundation.

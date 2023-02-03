@@ -1,7 +1,7 @@
 
 
-lib/
-native/build
+lib/*
+native/cppbuild/*
 
 # from CLIJ2
 

@@ -9,18 +9,21 @@ import org.bytedeco.javacpp.annotation.*;
 public class clesperantojWrapper extends net.clesperanto.clicwrapper.clesperantoj {
     static { Loader.load(); }
 
-// Parsed from clesperantoj.h
+// Parsed from clesperantoj.hpp
+
+// #ifndef __INCLUDE_CLESPERANTOJ_HPP
+// #define __INCLUDE_CLESPERANTOJ_HPP
 
 // #include "clesperanto.hpp"
 
 /**
- * \brief 
+ * \brief
  * ObjectJ just wraps an CLIc Object
- * 
+ *
  * This is done so we can store Clic Objects on the java side
- * 
+ *
  * However the Object itself is private so the java side doesn't need to wrap all of Object (and thus much of cl.cpp)
- * 
+ *
  * Note we declare ClesperantoJ as a friend class so that ClesperantoJ can access the Object
  */
 public static class ObjectJ extends Pointer {
@@ -37,10 +40,9 @@ public static class ObjectJ extends Pointer {
         return (ObjectJ)super.position(position);
     }
 
-        public native int getWidth();
-        public native int getHeight();
-        public native int getDepth();
-        public native @Cast("const char*") BytePointer getDataType();
+    public native int getWidth();
+    public native int getHeight();
+    public native int getDepth();
 }
 
 @NoOffset public static class ClesperantoJInternal extends Pointer {
@@ -59,49 +61,70 @@ public static class ObjectJ extends Pointer {
 
     public native void sayHello();
 
-    public native @ByVal @Name("create<char>") ObjectJ CharCreate(int nx, int ny, int nz);
+    // template <typename T>
+    // ObjectJ create(int nx, int ny, int nz);
 
-    public native @ByVal @Name("create<float>") ObjectJ FloatCreate(int nx, int ny, int nz);
+    // template <typename T>
+    // ObjectJ push(T *in, int nx, int ny, int nz);
 
-    public native @ByVal @Name("create<short>") ObjectJ ShortCreate(int nx, int ny, int nz);
+    // template <typename T>
+    // void pull(T *out, ObjectJ obj);
 
-    public native @ByVal @Name("push<char>") ObjectJ CharPush(@Cast("char*") BytePointer in, int nx, int ny, int nz);
-    public native @ByVal @Name("push<char>") ObjectJ CharPush(@Cast("char*") ByteBuffer in, int nx, int ny, int nz);
-    public native @ByVal @Name("push<char>") ObjectJ CharPush(@Cast("char*") byte[] in, int nx, int ny, int nz);
+    // ObjectJ gaussian_blur(ObjectJ source, ObjectJ target, float sigma_x, float sigma_y, float sigma_z);
 
-    public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatPointer in, int nx, int ny, int nz);
-    public native @ByVal @Name("push<float>") ObjectJ FloatPush(FloatBuffer in, int nx, int ny, int nz);
-    public native @ByVal @Name("push<float>") ObjectJ FloatPush(float[] in, int nx, int ny, int nz);
-
-    public native @ByVal @Name("push<short>") ObjectJ ShortPush(ShortPointer in, int nx, int ny, int nz);
-    public native @ByVal @Name("push<short>") ObjectJ ShortPush(ShortBuffer in, int nx, int ny, int nz);
-    public native @ByVal @Name("push<short>") ObjectJ ShortPush(short[] in, int nx, int ny, int nz);
-
-    public native @Name("pull<char>") void CharPull(@Cast("char*") BytePointer out, @ByVal ObjectJ obj);
-    public native @Name("pull<char>") void CharPull(@Cast("char*") ByteBuffer out, @ByVal ObjectJ obj);
-    public native @Name("pull<char>") void CharPull(@Cast("char*") byte[] out, @ByVal ObjectJ obj);
-
-    public native @Name("pull<float>") void FloatPull(FloatPointer out, @ByVal ObjectJ obj);
-    public native @Name("pull<float>") void FloatPull(FloatBuffer out, @ByVal ObjectJ obj);
-    public native @Name("pull<float>") void FloatPull(float[] out, @ByVal ObjectJ obj);
-
-    public native @Name("pull<short>") void ShortPull(ShortPointer out, @ByVal ObjectJ obj);
-    public native @Name("pull<short>") void ShortPull(ShortBuffer out, @ByVal ObjectJ obj);
-    public native @Name("pull<short>") void ShortPull(short[] out, @ByVal ObjectJ obj);
-
-    public native @ByVal ObjectJ gaussian_blur(@ByVal ObjectJ source, @ByVal ObjectJ target, float sigma_x, float sigma_y, float sigma_z);
-
-    public native @ByVal ObjectJ threshold_otsu(@ByVal ObjectJ source, @ByVal ObjectJ target);
-
-    public native @ByVal ObjectJ connected_component_labeling_box(@ByVal ObjectJ source, @ByVal ObjectJ target);
-
+    // ObjectJ threshold_otsu(ObjectJ source, ObjectJ target);
 }
 
+// template <typename T>
+// ObjectJ ClesperantoJInternal::create(int nx, int ny, int nz)
+// {
 
+//     std::array<size_t, 3> dimensions = {nx, ny, nz};
+//     auto obj = cle.Create<T>(dimensions, "image");
 
+//     ObjectJ objJ = ObjectJ();
+//     objJ.obj = obj;
 
+//     return objJ;
+// }
 
+// template <typename T>
+// ObjectJ ClesperantoJInternal::push(T *in, int nx, int ny, int nz)
+// {
 
+//     std::array<size_t, 3> dimensions = {nx, ny, nz};
+//     std::vector<T> vecData;
+//     vecData.resize(nx * ny);
+
+//     T *vecPointer = vecData.data();
+
+//     for (int i = 0; i < nx * ny; i++)
+//     {
+//         vecPointer[i] = in[i];
+//     }
+
+//     auto obj = cle.Push<T>(vecData, dimensions, "image");
+
+//     ObjectJ objJ = ObjectJ();
+//     objJ.obj = obj;
+
+//     return objJ;
+// }
+
+// template <typename T>
+// void ClesperantoJInternal::pull(T *out, ObjectJ obj)
+// {
+//     std::vector<T> outVec = cle.Pull<T>(obj.obj);
+
+//     T *temp = outVec.data();
+
+//     for (int i = 0; i < outVec.size(); i++)
+//     {
+//         out[i] = temp[i];
+//     }
+// }
+
+// #endif // __INCLUDE_CLESPERANTOJ_HPP
 
 
 }

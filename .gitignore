@@ -2,7 +2,7 @@
 
 lib/*
 native/cppbuild/*
-gen/*
+src/gen/*
 
 # from CLIJ2
 

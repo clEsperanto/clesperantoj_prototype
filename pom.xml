@@ -43,34 +43,19 @@
 		</developer>
 	</developers>
 
-  <mailingLists>
+  	<mailingLists>
 		<mailingList>
 			<name>ImageSc Forum</name>
 			<archive>http://forum.image.sc/</archive>
 		</mailingList>
 	</mailingLists>
 
-	<scm>
-		<connection>scm:git:git://github.com/clij/clij2</connection>
-        <developerConnection>scm:git:git@github.com/clij/clij2</developerConnection>
-        <tag>HEAD</tag>
-		<url>https://github.com/clij/clij2</url>
-	</scm>
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/clij/clij2/issues</url>
-	</issueManagement>
-	<ciManagement>
-		<system>None</system>
-	</ciManagement>
-
 	<properties>
 		<package-name>net.haesleinhuepf</package-name>
 		<license.licenseName>bsd_3</license.licenseName>
 		<license.copyrightOwners>Robert Haase, MPI CBG</license.copyrightOwners>
 		<scijava.app.directory>/home/stephane/Documents/Fiji.app/</scijava.app.directory>
-		<!--<scijava.app.directory>/home/rhaase/programs/fiji/Fiji.app/</scijava.app.directory>
-		<scijava.app.directory>/Applications/Fiji.app/</scijava.app.directory>-->
+		<!-- <scijava.app.directory>/PATH/TO/YOUR/FIJI/Fiji.app/</scijava.app.directory> -->
 	</properties>
 
     <dependencies>
@@ -165,8 +150,9 @@
 				<includePaths>
 					<includePath>${project.build.sourceDirectory}</includePath>
 					<includePath>${basedir}/native/clesperantoj/include</includePath>
-					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
+					<!-- add all necessary include paths here for CLIc -->
 					<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic_lib-build/clic/include</includePath>
+					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
 					<!-- <includePath>${basedir}/../CLIc_prototype/bin/include/CLIc/</includePath> -->
 					<!-- <includePath>${basedir}/../CLIc_prototype/thirdparty/opencl/ocl-clhpp/include/</includePath> -->
 				</includePaths>
@@ -174,7 +160,7 @@
 					<linkPath>${basedir}/lib/win64/</linkPath>
 					<linkPath>${basedir}/lib/linux64/</linkPath>
 					<linkPath>${basedir}/lib/macosx/</linkPath>
-					<linkPath>${basedir}/native/lib/</linkPath>
+					<!-- <linkPath>${basedir}/native/lib/</linkPath> -->
 					<!-- <linkPath>${basedir}/../CLIc_prototype/bin/lib</linkPath> -->
                     <linkPath>${basedir}/lib/win64/lib</linkPath>
 					<linkPath>${basedir}/lib/linux64/lib</linkPath>

@@ -9,5 +9,6 @@ public class ClesperantoJ {
 
         ClesperantoJInternal _native = new ClesperantoJInternal();
         _native.sayHello();
+        _native.getDeviceInfo();
     }
 }

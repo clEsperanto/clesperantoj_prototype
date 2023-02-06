@@ -12,9 +12,7 @@ public class ClesperantoJ {
         _native.sayHello();
         _native.getDeviceInfo();
 
-        try (// create a ObjectJ
-                ObjectJ object = new ObjectJ()) {
-            // print object width
+        try (ObjectJ object = new ObjectJ()) {
             System.out.println("Object width: " + object.getWidth());
         }
     }

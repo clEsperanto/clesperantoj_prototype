@@ -1,6 +1,7 @@
 package net.clesperanto;
 
 import net.clesperanto.clicwrapper.clesperantojWrapper.ClesperantoJInternal;
+import net.clesperanto.clicwrapper.clesperantojWrapper.ObjectJ;
 
 public class ClesperantoJ {
 
@@ -10,5 +11,11 @@ public class ClesperantoJ {
         ClesperantoJInternal _native = new ClesperantoJInternal();
         _native.sayHello();
         _native.getDeviceInfo();
+
+        try (// create a ObjectJ
+                ObjectJ object = new ObjectJ()) {
+            // print object width
+            System.out.println("Object width: " + object.getWidth());
+        }
     }
 }

@@ -13,18 +13,18 @@
  *
  * Note we declare ClesperantoJ as a friend class so that ClesperantoJ can access the Object
  */
-// class ObjectJ
-// {
-//     friend class ClesperantoJInternal;
+class ObjectJ
+{
+    friend class ClesperantoJInternal;
 
-// private:
-//     cle::Image obj;
+private:
+    cle::Image obj;
 
-// public:
-//     int getWidth();
-//     int getHeight();
-//     int getDepth();
-// };
+public:
+    size_t getWidth();
+    size_t getHeight();
+    size_t getDepth();
+};
 
 class ClesperantoJInternal
 {
@@ -37,7 +37,6 @@ public:
     ~ClesperantoJInternal() = default;
 
     void sayHello();
-
     void getDeviceInfo();
 };
 

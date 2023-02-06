@@ -26,18 +26,24 @@ public class clesperantojWrapper extends net.clesperanto.clicwrapper.clesperanto
  *
  * Note we declare ClesperantoJ as a friend class so that ClesperantoJ can access the Object
  */
-// class ObjectJ
-// {
-//     friend class ClesperantoJInternal;
+public static class ObjectJ extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public ObjectJ() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public ObjectJ(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ObjectJ(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public ObjectJ position(long position) {
+        return (ObjectJ)super.position(position);
+    }
 
-// private:
-//     cle::Image obj;
-
-// public:
-//     int getWidth();
-//     int getHeight();
-//     int getDepth();
-// };
+    public native @Cast("size_t") long getWidth();
+    public native @Cast("size_t") long getHeight();
+    public native @Cast("size_t") long getDepth();
+}
 
 @NoOffset public static class ClesperantoJInternal extends Pointer {
     static { Loader.load(); }
@@ -54,7 +60,6 @@ public class clesperantojWrapper extends net.clesperanto.clicwrapper.clesperanto
     private native void allocate();
 
     public native void sayHello();
-
     public native void getDeviceInfo();
 }
 

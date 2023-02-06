@@ -5,29 +5,29 @@
 
 using namespace std;
 
-// int ObjectJ::getWidth()
-// {
-//     return obj.Shape()[0];
-// }
-// int ObjectJ::getHeight()
-// {
-//     return obj.Shape()[1];
-// }
-// int ObjectJ::getDepth()
-// {
-//     return obj.Shape()[2];
-// }
+auto ObjectJ::getWidth() -> size_t
+{
+    return obj.Shape()[0];
+}
+auto ObjectJ::getHeight() -> size_t
+{
+    return obj.Shape()[1];
+}
+auto ObjectJ::getDepth() -> size_t
+{
+    return obj.Shape()[2];
+}
 
 ClesperantoJInternal::ClesperantoJInternal()
 {
 }
 
-void ClesperantoJInternal::sayHello()
+auto ClesperantoJInternal::sayHello() -> void
 {
     std::cout << "Hello Java, from c++" << std::endl;
 }
 
-void ClesperantoJInternal::getDeviceInfo()
+auto ClesperantoJInternal::getDeviceInfo() -> void
 {
     std::cout << cle.Info() << std::endl;
 }

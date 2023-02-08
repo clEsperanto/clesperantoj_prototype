@@ -153,6 +153,8 @@
 					<!-- add all necessary include paths here for CLIc -->
 					<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic_lib-build/clic/include</includePath>
 					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
+					<includePath>${basedir}/lib/win64/include/CLIc</includePath>
+					<includePath>${basedir}/lib/macosx/include/CLIc</includePath>
 					<!-- <includePath>${basedir}/../CLIc_prototype/bin/include/CLIc/</includePath> -->
 					<!-- <includePath>${basedir}/../CLIc_prototype/thirdparty/opencl/ocl-clhpp/include/</includePath> -->
 				</includePaths>

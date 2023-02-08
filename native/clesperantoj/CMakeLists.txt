@@ -13,6 +13,9 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 endif()
 
+set(CMAKE_CXX_STANDARD_REQUIRED ON) # Require (at least) it
+set(CMAKE_CXX_EXTENSIONS OFF) # Don't use e.g. GNU extension (like -std=gnu++11) for portability
+
 include(FetchContent)
 option(BUILD_TESTING OFF)
 option(BUILD_BENCHMARK OFF)
@@ -28,6 +31,8 @@ add_library(clesperantoj SHARED ./src/clesperantoj.cpp)
 target_include_directories(clesperantoj PUBLIC ./include)
 
 target_link_libraries(clesperantoj PUBLIC CLIc::CLIc)
+
+target_compile_features(clesperantoj PUBLIC cxx_std_17)
 
 add_library(clesperantoj::clesperantoj ALIAS clesperantoj)
 

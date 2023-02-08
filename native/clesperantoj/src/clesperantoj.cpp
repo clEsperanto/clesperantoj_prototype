@@ -5,15 +5,15 @@
 
 using namespace std;
 
-auto ObjectJ::getWidth() -> size_t
+auto ObjectJ::getWidth() -> int
 {
     return obj.Shape()[0];
 }
-auto ObjectJ::getHeight() -> size_t
+auto ObjectJ::getHeight() -> int
 {
     return obj.Shape()[1];
 }
-auto ObjectJ::getDepth() -> size_t
+auto ObjectJ::getDepth() -> int
 {
     return obj.Shape()[2];
 }

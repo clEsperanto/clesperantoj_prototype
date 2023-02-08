@@ -21,9 +21,9 @@ private:
     cle::Image obj;
 
 public:
-    size_t getWidth();
-    size_t getHeight();
-    size_t getDepth();
+    int getWidth();
+    int getHeight();
+    int getDepth();
 };
 
 class ClesperantoJInternal

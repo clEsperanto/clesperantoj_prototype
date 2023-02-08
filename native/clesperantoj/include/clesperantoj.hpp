@@ -21,9 +21,9 @@ private:
     cle::Image obj;
 
 public:
-    int getWidth();
-    int getHeight();
-    int getDepth();
+    auto getWidth() -> size_t;
+    auto getHeight() -> size_t;
+    auto getDepth() -> size_t;
 };
 
 class ClesperantoJInternal
@@ -36,8 +36,8 @@ public:
     ClesperantoJInternal();
     ~ClesperantoJInternal() = default;
 
-    void sayHello();
-    void getDeviceInfo();
+    auto sayHello() -> void;
+    auto getDeviceInfo() -> void;
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

@@ -73,7 +73,7 @@
         <dependency>
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacpp</artifactId>
-			<version>1.5</version>
+			<version>1.5.8</version>
 		</dependency>
     </dependencies>
 
@@ -144,7 +144,7 @@
         <plugin>
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacpp</artifactId>
-			<version>1.5</version>
+			<version>1.5.8</version>
 			<configuration>
 				<classPath>${project.build.outputDirectory}</classPath>
 				<includePaths>

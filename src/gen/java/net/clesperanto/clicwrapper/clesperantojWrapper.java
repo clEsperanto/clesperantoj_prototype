@@ -40,9 +40,9 @@ public static class ObjectJ extends Pointer {
         return (ObjectJ)super.position(position);
     }
 
-    public native @Cast("size_t") long getWidth();
-    public native @Cast("size_t") long getHeight();
-    public native @Cast("size_t") long getDepth();
+    public native int getWidth();
+    public native int getHeight();
+    public native int getDepth();
 }
 
 @NoOffset public static class ClesperantoJInternal extends Pointer {

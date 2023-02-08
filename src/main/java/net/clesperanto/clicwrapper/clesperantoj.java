@@ -12,7 +12,7 @@ import org.bytedeco.javacpp.tools.*;
 		// header file for c++ class we want to wrap
 		include = "clesperantoj.hpp",
 		// libraries we need to link to
-		link = { "clesperantoj", "CLIc" }),
+		link = { "clesperantoj", "CLIc" })
 		// os specific properties (note relative include and library paths are specified
 		// in the pom)
 		// @Platform(value = "windows-x86_64", includepath = {
@@ -20,12 +20,12 @@ import org.bytedeco.javacpp.tools.*;
 		// linkpath = {
 		// "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/lib/x64/"
 		// }),
-		@Platform(value = "linux-x86_64"
+		// @Platform(value = "linux-x86_64"
 		// includepath = {"/usr/local/cuda-10.0/include/"},
 		// linkpath = {
 		// "/usr/lib/x86_64-linux-gnu/" }
 		// preload = { "clFFT" }
-		)
+		// )
 },
 		// name of java wrapper class that will be generated (look in src/gen/java to
 		// find it)

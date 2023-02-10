@@ -43,9 +43,9 @@ public static class ObjectJ extends Pointer {
         return new ObjectJ((Pointer)this).offsetAddress(i);
     }
 
-    public native long getWidth();
-    public native long getHeight();
-    public native long getDepth();
+    public native int getWidth();
+    public native int getHeight();
+    public native int getDepth();
 }
 
 @NoOffset public static class ClesperantoJInternal extends Pointer {

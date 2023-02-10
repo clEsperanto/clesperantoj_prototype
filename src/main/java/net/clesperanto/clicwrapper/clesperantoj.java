@@ -8,7 +8,7 @@ import org.bytedeco.javacpp.tools.*;
 // see https://github.com/bytedeco/javacpp/wiki/Mapping-Recipes
 @Properties(value = { @Platform(
 		// note: comment this in to debug
-		compiler = { "release" }, // removed "fastfpu", don't know what it does
+		compiler = { "cpp17" }, // removed "fastfpu", don't know what it does
 		// header file for c++ class we want to wrap
 		include = "clesperantoj.hpp",
 		// libraries we need to link to

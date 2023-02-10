@@ -201,8 +201,8 @@
 							<!-- <classOrPackageName>net.clesperanto.clicwrapper.clesperantoWrapper</classOrPackageName> -->
 							<classOrPackageName>net.clesperanto.clicwrapper.clesperantojWrapper</classOrPackageName>
 						</classOrPackageNames>
-						<compiler>g++</compiler>
-						<compilerArgs>-std=c++17</compilerArgs>
+						<!-- <compiler>g++</compiler>
+						<compilerArgs>-std=c++17</compilerArgs> -->
 						<!-- <compiler>cl</compiler>
 						<compilerArgs>/std:c++17</compilerArgs> -->
 					</configuration>

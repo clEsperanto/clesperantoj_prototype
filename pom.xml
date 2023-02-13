@@ -125,7 +125,7 @@
                         <sources>
                             <source>${project.basedir}/src/gen/java</source>
                             <!--  Not sure if below is needed.  TODO:  Erase and confirm build still works -->
-                            <source>${project.basedir}/cppbuild/${javacpp.platform}${javacpp.platform.extension}/java/</source>
+                            <!-- <source>${project.basedir}/cppbuild/${javacpp.platform}${javacpp.platform.extension}/java/</source> -->
                         </sources>
                     </configuration>
                 </execution>
@@ -151,7 +151,7 @@
 					<includePath>${project.build.sourceDirectory}</includePath>
 					<includePath>${basedir}/native/clesperantoj/include</includePath>
 					<!-- add all necessary include paths here for CLIc -->
-					<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic_lib-build/clic/include</includePath>
+					<!-- <includePath>${basedir}/native/clesperantoj/tmp_build/_deps/clic_lib-build/clic/include</includePath> -->
 					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/win64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/macosx/include/CLIc</includePath>
@@ -164,9 +164,9 @@
 					<linkPath>${basedir}/lib/macosx/</linkPath>
 					<!-- <linkPath>${basedir}/native/lib/</linkPath> -->
 					<!-- <linkPath>${basedir}/../CLIc_prototype/bin/lib</linkPath> -->
-                    <linkPath>${basedir}/lib/win64/lib</linkPath>
+                    <!-- <linkPath>${basedir}/lib/win64/lib</linkPath>
 					<linkPath>${basedir}/lib/linux64/lib</linkPath>
-					<linkPath>${basedir}/lib/macosx/lib</linkPath>
+					<linkPath>${basedir}/lib/macosx/lib</linkPath> -->
 				</linkPaths>
 				<copyLibs>true</copyLibs>
 			</configuration>

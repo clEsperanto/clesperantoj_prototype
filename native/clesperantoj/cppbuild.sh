@@ -5,7 +5,7 @@ set -eu
 
 if [[ -z "$PLATFORM" ]]; then
     pushd ..
-    bash cppbuild.sh "$@" MKLFFTW
+    bash cppbuild.sh "$@" clic
     popd
     exit
 fi
@@ -30,6 +30,8 @@ case $PLATFORM in
         #        -DCMAKE_CXX_COMPILER="g++" \
         #        -DCMAKE_CUDA_HOST_COMPILER="g++" \
 		# -DCLFFT_LIBRARY_DIR="/Users/haase/Downloads/clfft-2.12.2-h83d4a3d_1/lib" ..
+        make -j
+        make install
         ;;
     windows-x86_64)
         $CMAKE -G"NMake Makefiles" \

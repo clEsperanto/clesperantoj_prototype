@@ -164,9 +164,11 @@
 					<linkPath>${basedir}/lib/macosx/</linkPath>
 					<!-- <linkPath>${basedir}/native/lib/</linkPath> -->
 					<!-- <linkPath>${basedir}/../CLIc_prototype/bin/lib</linkPath> -->
-                    <!-- <linkPath>${basedir}/lib/win64/lib</linkPath>
+                    <linkPath>${basedir}/lib/win64/lib</linkPath>
 					<linkPath>${basedir}/lib/linux64/lib</linkPath>
-					<linkPath>${basedir}/lib/macosx/lib</linkPath> -->
+					<linkPath>${basedir}/lib/macosx/lib</linkPath>
+					<linkPath>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/lib/x64/</linkPath>
+
 				</linkPaths>
 				<copyLibs>true</copyLibs>
 			</configuration>

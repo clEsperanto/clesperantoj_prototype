@@ -27,7 +27,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(clic_lib)
 
-add_library(clesperantoj SHARED ./src/clesperantoj.cpp)
+add_library(clesperantoj STATIC ./src/clesperantoj.cpp)
 add_library(clesperantoj::clesperantoj ALIAS clesperantoj)
 
 target_include_directories(clesperantoj PUBLIC ./include)

@@ -12,8 +12,8 @@ import org.bytedeco.javacpp.tools.*;
 		// header file for c++ class we want to wrap
 		include = "clesperantoj.hpp",
 		// libraries we need to link to
-		link = { "clesperantoj" }) // Addin "CLIc" should not be necessary as it is
-									// included in clesperantoj
+		link = { "JCLIc" }) // , "CLIc", "OpenCL" }) // Addin "CLIc" should not be necessary as it is
+		// included in clesperantoj
 		// os specific properties (note relative include and library paths are specified
 		// in the pom)
 		// @Platform(value = "windows-x86_64", includepath = {

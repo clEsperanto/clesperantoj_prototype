@@ -4,9 +4,9 @@
 #  - we rely on the master branch
 cmake_minimum_required(VERSION 3.20)
 
-project(clesperanto)
+project(JCLIc)
 
-message(STATUS "clesperantoj")
+set(LIB_PACKAGE_NAME ${PROJECT_NAME} )
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
@@ -16,6 +16,7 @@ endif()
 set(CMAKE_CXX_STANDARD 17) # C++17...
 set(CMAKE_CXX_STANDARD_REQUIRED ON) # Require (at least) it
 set(CMAKE_CXX_EXTENSIONS OFF) # Don't use e.g. GNU extension (like -std=gnu++11) for portability
+set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON) # Export all symbols for shared library windows
 
 include(FetchContent)
 option(BUILD_TESTING OFF)
@@ -27,12 +28,20 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(clic_lib)
 
-add_library(clesperantoj SHARED ./src/clesperantoj.cpp)
-add_library(clesperantoj::clesperantoj ALIAS clesperantoj)
+file(GLOB_RECURSE WRAPPER_SOURCES_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
+file(GLOB_RECURSE WRAPPER_HEADERS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
+set(WRAPPER_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_include_directories(clesperantoj PUBLIC ./include)
-target_link_libraries(clesperantoj PUBLIC CLIc::CLIc)
+add_library(${LIB_PACKAGE_NAME} SHARED ${WRAPPER_SOURCES_FILES})
 
-# target_compile_features(clesperantoj PUBLIC cxx_std_17)
+target_link_libraries(${LIB_PACKAGE_NAME} PUBLIC CLIc::CLIc)
 
-install(TARGETS clesperantoj DESTINATION .)
+target_include_directories(${LIB_PACKAGE_NAME} PUBLIC "$<BUILD_INTERFACE:${WRAPPER_DIR}>")
+
+install(TARGETS ${LIB_PACKAGE_NAME} DESTINATION .)
+
+# if(APPLE)
+#     set_target_properties(${LIB_PACKAGE_NAME} PROPERTIES INSTALL_RPATH "@loader_path/${CMAKE_INSTALL_LIBDIR}")
+# else()
+#     set_target_properties(${LIB_PACKAGE_NAME} PROPERTIES INSTALL_RPATH "$ORIGIN/${CMAKE_INSTALL_LIBDIR}")
+# endif()

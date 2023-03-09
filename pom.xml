@@ -150,23 +150,17 @@
 				<includePaths>
 					<includePath>${project.build.sourceDirectory}</includePath>
 					<includePath>${basedir}/native/clesperantoj/include</includePath>
-					<!-- add all necessary include paths here for CLIc -->
-					<!-- <includePath>${basedir}/native/clesperantoj/tmp_build/_deps/clic_lib-build/clic/include</includePath> -->
 					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/win64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/macosx/include/CLIc</includePath>
-					<!-- <includePath>${basedir}/../CLIc_prototype/bin/include/CLIc/</includePath> -->
-					<!-- <includePath>${basedir}/../CLIc_prototype/thirdparty/opencl/ocl-clhpp/include/</includePath> -->
 				</includePaths>
 				<linkPaths>
 					<linkPath>${basedir}/lib/win64/</linkPath>
 					<linkPath>${basedir}/lib/linux64/</linkPath>
 					<linkPath>${basedir}/lib/macosx/</linkPath>
-					<!-- <linkPath>${basedir}/native/lib/</linkPath> -->
-					<!-- <linkPath>${basedir}/../CLIc_prototype/bin/lib</linkPath> -->
-                    <!-- <linkPath>${basedir}/lib/win64/lib</linkPath>
+                    <linkPath>${basedir}/lib/win64/lib</linkPath>
 					<linkPath>${basedir}/lib/linux64/lib</linkPath>
-					<linkPath>${basedir}/lib/macosx/lib</linkPath> -->
+					<linkPath>${basedir}/lib/macosx/lib</linkPath>
 				</linkPaths>
 				<copyLibs>true</copyLibs>
 			</configuration>
@@ -183,32 +177,28 @@
 					<configuration>
 						<outputDirectory>${project.basedir}/src/gen/java</outputDirectory>
 						<classOrPackageNames>
-							<classOrPackageName>net.clesperanto.clicwrapper.clesperantoj</classOrPackageName>
-							<!-- <classOrPackageName>net.clesperanto.clicwrapper.clesperanto</classOrPackageName> -->
+							<classOrPackageName>net.clesperanto.presets.clesperantoj</classOrPackageName>
+							<classOrPackageName>net.clesperanto.presets.kernelj</classOrPackageName>
 						</classOrPackageNames>
 					</configuration>
 				</execution>
 
                 <!--  2. Process classes generated in step 1 to create c++ wrapper library -->
-			  	<execution>
-					<id>process-classes</id>
+			  	<execution> 
+					<id>process-classes</id> 
 					<phase>process-classes</phase>
 					<goals>
 						<goal>build</goal>
 					</goals>
 					<configuration>
 						<classOrPackageNames>
-							<!-- <classOrPackageName>net.clesperanto.clicwrapper.clesperantoWrapper</classOrPackageName> -->
-							<classOrPackageName>net.clesperanto.clicwrapper.clesperantojWrapper</classOrPackageName>
-						</classOrPackageNames>
-						<!-- <compiler>g++</compiler>
-						<compilerArgs>-std=c++17</compilerArgs> -->
-						<!-- <compiler>cl</compiler>
-						<compilerArgs>/std:c++17</compilerArgs> -->
+							<classOrPackageName>net.clesperanto.wrapper.clesperantoj</classOrPackageName>
+							<classOrPackageName>net.clesperanto.wrapper.kernelj</classOrPackageName>
+						</classOrPackageNames> 
 					</configuration>
 				</execution>
 
-            </executions>
+            </executions> 
 		</plugin>
 
         </plugins>

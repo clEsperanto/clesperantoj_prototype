@@ -54,9 +54,13 @@
 		<package-name>net.haesleinhuepf</package-name>
 		<license.licenseName>bsd_3</license.licenseName>
 		<license.copyrightOwners>Robert Haase, MPI CBG</license.copyrightOwners>
-		<scijava.app.directory>/home/stephane/Documents/Fiji.app/</scijava.app.directory>
 		<!-- <scijava.app.directory>/PATH/TO/YOUR/FIJI/Fiji.app/</scijava.app.directory> -->
+		<scijava.app.directory>/home/stephane/Documents/Fiji.app/</scijava.app.directory>
+		<!-- specify your cuda version (for windows users) -->
+    	<cuda.version>12</cuda.version>
 	</properties>
+
+
 
     <dependencies>
         <!-- ImageJ dependencies -->
@@ -161,6 +165,11 @@
                     <linkPath>${basedir}/lib/win64/lib</linkPath>
 					<linkPath>${basedir}/lib/linux64/lib</linkPath>
 					<linkPath>${basedir}/lib/macosx/lib</linkPath>
+
+					<!-- For Windows, we need to link to the OpenCL library -->
+					<!-- todo: ship a ocl-ICD-loader with the native lib to avoid this linking? -->
+					<linkPath>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v{cuda.version}/lib/x64/</linkPath>
+
 				</linkPaths>
 				<copyLibs>true</copyLibs>
 			</configuration>

@@ -5,7 +5,7 @@ set -eu
 
 which cmake3 &> /dev/null && CMAKE3="cmake3" || CMAKE3="cmake"
 [[ -z ${CMAKE:-} ]] && CMAKE=$CMAKE3
-[[ -z ${MAKEJ:-} ]] && MAKEJ=4
+[[ -z ${MAKEJ:-} ]] && MAKEJ=10
 [[ -z ${OLDCC:-} ]] && OLDCC="gcc"
 [[ -z ${OLDCXX:-} ]] && OLDCXX="g++"
 [[ -z ${OLDFC:-} ]] && OLDFC="gfortran"

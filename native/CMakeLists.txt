@@ -1,14 +1,9 @@
-add_subdirectory(test)
+cmake_minimum_required(VERSION 3.20)
+
+project(clesperantoj_cxx_native)
+
+message(STATUS "ClesperantoJ and TEST")
+
 add_subdirectory(clesperantoj)
+add_subdirectory(clesperantoj_test)
 
-find_package(OpenCL)
-
-# find CLIC path
-FIND_PATH( OPENCL_INCLUDE_DIR $ENV{OPENCL_INCLUDE_DIR} clic DOC "OPENCL include path")
-FIND_PATH( CLIC_INCLUDE_DIR $ENV{CLIC_INCLUDE_DIR} clic DOC "CLIC include path")
-FIND_PATH( CLIC_LIBRARY_DIR $ENV{CLIC_LIBRARY_DIR} clic DOC "CLIC library path")
-FIND_PATH( OCLCL_INCLUDE_DIR $ENV{OCLCL_INCLUDE_DIR} oclcl DOC "OCLCL include path")
-
-message("opencl link is ${OpenCL_LIBRARY}")
-message("include dir is ${CLIC_INCLUDE_DIR}")
-message("ocl include dir is ${OCLCL_INCLUDE_DIR}")

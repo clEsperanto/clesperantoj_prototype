@@ -1,11 +1,10 @@
 
 
 lib/
-native/build
+native/cppbuild
 
 # from CLIJ2
 
-/target/
 /.idea/
 *.iml
 CLIJ*.txt

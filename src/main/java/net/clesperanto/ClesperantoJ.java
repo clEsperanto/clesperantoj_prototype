@@ -1,104 +1,88 @@
 package net.clesperanto;
 
-import ij.ImagePlus;
-import net.clesperanto.clicwrapper.clesperantojWrapper;
-import net.clesperanto.converters.ConverterPlugin;
-import net.clesperanto.converters.ConverterService;
-import net.imglib2.RandomAccessibleInterval;
-import org.scijava.Context;
+import net.clesperanto.wrapper.clesperantoj.StringVector;
+
+import java.util.Arrays;
+
+import org.bytedeco.javacpp.LongPointer;
+
+import net.clesperanto.wrapper.clesperantoj.ProcessorJ;
+import net.clesperanto.wrapper.kernelj.Tier1;
+import net.clesperanto.wrapper.clesperantoj.BufferJ;
+import net.clesperanto.wrapper.clesperantoj.MemoryJ;
 
 public class ClesperantoJ {
 
-    @Deprecated
-    public ClesperantoJ() {
+    public static void main(String[] args) {
+        System.out.println("Hello World! Native Java");
 
-    }
+        try (ProcessorJ proc = new ProcessorJ()) {
+            StringVector deviceList = proc.getAvailableDevices();
+            for (int i = 0; i < deviceList.size(); i++) {
+                System.out.println(deviceList.get(i) + " is available");
+            }
+            System.out.println("device currently used is : " + proc.getDevice());
 
-    private static ClesperantoJ instance = null;
-    public static ClesperantoJ getInstance() {
-        if (instance == null) {
-            instance = new ClesperantoJ();
+            proc.setDevice("Intel");
+            System.out.println("device currently used is : " + proc.getDevice());
         }
-        return instance;
-    }
 
-    public clesperantojWrapper.ClesperantoJInternal _native = new clesperantojWrapper.ClesperantoJInternal();
-
-    public void say_hello() {
-        _native.sayHello();
-    }
-
-    public clesperantojWrapper.ObjectJ push(Object image) {
-        return convert(image, clesperantojWrapper.ObjectJ.class);
-    }
-
-    public ImagePlus pull(Object image) {
-        return convert(image, ImagePlus.class);
-    }
-
-    public RandomAccessibleInterval pullRAI(Object image) {
-        return convert(image, RandomAccessibleInterval.class);
-    }
-
-
-    private ConverterService converterService = null;
-
-    public <S, T> T convert(S source, Class<T> targetClass) {
-        if (source == null) {
-            return null;
+        try (BufferJ buffer = new BufferJ()) {
+            System.out.println("Buffer created");
         }
-        if (targetClass.isAssignableFrom(source.getClass())) {
-            return (T) source;
+
+        ProcessorJ proc = new ProcessorJ("TX");
+
+        try (BufferJ buffer = MemoryJ.makeFloatBuffer(proc, 3, 3, 2, "buffer")) {
+
+            System.out.println("Buffer created");
+            System.out.println("Buffer shape is (" + buffer.getWidth() + ", " + buffer.getHeight() + ", "
+                    + buffer.getDepth() + ")");
+            System.out.println("Buffer data type is " + buffer.getDataType());
+            System.out.println("Buffer mem type is " + buffer.getMemoryType());
+            System.out.println("Buffer device is " + buffer.getDevice());
+
+            float data[] = new float[3 * 3 * 2];
+            float out[] = new float[3 * 3 * 2];
+            Arrays.fill(data, 5);
+            Arrays.fill(out, 1);
+
+            for (int i = 0; i < out.length; i++) {
+                System.out.println("before out[" + i + "] = " + out[i]);
+            }
+
+            MemoryJ.writeFloatBuffer(buffer, data, (long) data.length);
+            MemoryJ.readFloatBuffer(buffer, out, (long) out.length);
+
+            for (int i = 0; i < out.length; i++) {
+                System.out.println("after out[" + i + "] = " + out[i]);
+            }
+
+            buffer.fillMemory(10.0f);
+            MemoryJ.readFloatBuffer(buffer, out, (long) out.length);
+            for (int i = 0; i < out.length; i++) {
+                System.out.println("out[" + i + "] = " + out[i]);
+            }
         }
-        synchronized (this) {
-            //try {
-                if (converterService == null) {
-                    converterService = new Context(ConverterService.class).service(ConverterService.class);
-                }
-            //} catch (RuntimeException e) {
-            //    converterService = FallBackCLIJConverterService.getInstance();
-            //}
-            converterService.setCLE(this);
-            ConverterPlugin<S, T> converter = (ConverterPlugin<S, T>) converterService.getConverter(source.getClass(), targetClass);
-            converter.setCLE(this);
-            T result = converter.convert(source);
 
-            return  result;
+        BufferJ input = MemoryJ.makeFloatBuffer(proc, 3, 3, 2, "buffer");
+        BufferJ output = MemoryJ.makeFloatBuffer(proc, 3, 3, 2, "buffer");
+
+        float data[] = new float[3 * 3 * 2];
+        float out[] = new float[3 * 3 * 2];
+        Arrays.fill(data, 5);
+        Arrays.fill(out, 1);
+
+        MemoryJ.writeFloatBuffer(input, data, (long) data.length);
+        MemoryJ.writeFloatBuffer(output, out, (long) out.length);
+
+        Tier1.addImageAndScalar(proc, input, output, 10.0f);
+
+        MemoryJ.readFloatBuffer(output, out, (long) out.length);
+
+        for (int i = 0; i < out.length; i++) {
+            System.out.println("out[" + i + "] = " + out[i]);
         }
     }
 
-    public void imshow(Object gpu_image) {
-        ImagePlus image = pull(gpu_image);
-        image.show();
-    }
-
-    public clesperantojWrapper.ObjectJ create_like(clesperantojWrapper.ObjectJ source) {
-        return _native.FloatCreate(source.getWidth(), source.getHeight(), source.getDepth());
-    }
-
-    private clesperantojWrapper.ObjectJ create_like_if_none(Object source, Object target) {
-        clesperantojWrapper.ObjectJ sourceJ = push(source); // that might be not necessary and slow
-        clesperantojWrapper.ObjectJ targetJ = push(target); // that might be not necessary and slow
-        if (targetJ != null) {
-            return targetJ;
-        }
-        return create_like(sourceJ);
-    }
-
-    public clesperantojWrapper.ObjectJ gaussian_blur(Object source, Object target, float sigma_x, float sigma_y, float sigma_z) {
-        clesperantojWrapper.ObjectJ sourceJ = push(source);
-        clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
-        return _native.gaussian_blur(sourceJ, targetJ, sigma_x, sigma_y, sigma_z);
-    }
-    public clesperantojWrapper.ObjectJ thresold_otsu(Object source, Object target) {
-        clesperantojWrapper.ObjectJ sourceJ = push(source);
-        clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
-        return _native.threshold_otsu(sourceJ, targetJ);
-    }
-
-    public clesperantojWrapper.ObjectJ connected_component_labeling_box(Object source, Object target) {
-        clesperantojWrapper.ObjectJ sourceJ = push(source);
-        clesperantojWrapper.ObjectJ targetJ = create_like_if_none(sourceJ, target);
-        return _native.connected_component_labeling_box(sourceJ, targetJ);
-    }
 }

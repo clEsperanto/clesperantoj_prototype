@@ -23,8 +23,8 @@ public class ClesperantoJ {
             }
             System.out.println("device currently used is : " + proc.getDevice());
 
-            proc.setDevice("Intel");
-            System.out.println("device currently used is : " + proc.getDevice());
+            //proc.setDevice("Intel");
+            //System.out.println("device currently used is : " + proc.getDevice());
         }
 
         try (BufferJ buffer = new BufferJ()) {

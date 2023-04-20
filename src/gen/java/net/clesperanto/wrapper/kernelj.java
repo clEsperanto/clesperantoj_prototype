@@ -37,6 +37,7 @@ public static class Tier1 extends Pointer {
     }
 
     public static native void addImageAndScalar(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float scalar);
+    public static native void gaussianBlur(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigmaX, float sigmaY, float sigmaZ);
 }
 
 // #endif // __INCLUDE_KERNELJ_HPP

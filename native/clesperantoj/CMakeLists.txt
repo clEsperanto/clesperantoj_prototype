@@ -24,7 +24,7 @@ option(BUILD_BENCHMARK OFF)
 FetchContent_Declare(
   clic_lib
   GIT_REPOSITORY https://github.com/clEsperanto/CLIc_prototype.git
-  GIT_TAG master # 0.6.3
+  GIT_TAG 0.6.4
 )
 FetchContent_MakeAvailable(clic_lib)
 

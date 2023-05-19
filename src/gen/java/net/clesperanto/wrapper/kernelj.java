@@ -38,6 +38,7 @@ public static class Tier1 extends Pointer {
 
     public static native void addImageAndScalar(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float scalar);
     public static native void gaussianBlur(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigmaX, float sigmaY, float sigmaZ);
+    public static native void meanBox(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int radiusX, float radiusY, float radiusZ);
 }
 
 // #endif // __INCLUDE_KERNELJ_HPP

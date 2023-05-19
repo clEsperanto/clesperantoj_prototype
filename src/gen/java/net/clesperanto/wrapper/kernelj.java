@@ -14,10 +14,12 @@ public class kernelj extends net.clesperanto.presets.kernelj {
 
 // Parsed from kernelj.hpp
 
+
 // #ifndef __INCLUDE_KERNELJ_HPP
 // #define __INCLUDE_KERNELJ_HPP
 
 // #include "clesperantoj.hpp"
+
 
 public static class Tier1 extends Pointer {
     static { Loader.load(); }
@@ -36,12 +38,194 @@ public static class Tier1 extends Pointer {
         return new Tier1((Pointer)this).offsetAddress(i);
     }
 
-    public static native void addImageAndScalar(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float scalar);
-    public static native void gaussianBlur(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigmaX, float sigmaY, float sigmaZ);
-    public static native void meanBox(@Const @ByRef ProcessorJ proc, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int radiusX, float radiusY, float radiusZ);
+        public static native void absolute(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void addImageAndScalar(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void addImagesWeighted(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst, float w1, float w2);
+        public static native void binaryAnd(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void binaryEdgeDetection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void binaryNot(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void binaryOr(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void binarySubtract(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void binaryXor(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void blockEnumerate(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ sum, @Const @ByRef BufferJ dst, int value);
+        public static native void convolve(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ convolve_kernel, @Const @ByRef BufferJ dst);
+        public static native void copy(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void crop(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int index0, int index1, int index2);
+        public static native void detectMaxima(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void dilateBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void dilateSphere(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void divideImageAndScalar(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float scalar);
+        public static native void divideImages(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void equalConstant(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void equal(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void erodeBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void erodeSphere(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void flagExistingLabels(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void gaussianBlur(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigma_x, float sigma_y, float sigma_z);
+        public static native void gradientX(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void gradientY(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void gradientZ(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void greaterConstant(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void greater(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void greaterOrEqualConstant(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void greaterOrEqual(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void laplaceBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void mask(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ mask, @Const @ByRef BufferJ dst);
+        public static native void maximumBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int radius_x, int radius_y, int radius_z);
+        public static native void maximumImages(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void maximumSphere(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float radius_x, float radius_y, float radius_z);
+        public static native void maximumXProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void maximumYProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void maximumZProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void meanBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float radius_x, float radius_y, float radius_z);
+        public static native void meanSphere(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float radius_x, float radius_y, float radius_z);
+        public static native void minimumBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int radius_x, int radius_y, int radius_z);
+        public static native void minimumImages(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void minimumSphere(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float radius_x, float radius_y, float radius_z);
+        public static native void minimumXProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void minimumYProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void minimumZProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void multiplyImageAndScalar(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void multiplyImages(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void nonzeroMinimumBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, @Const @ByRef BufferJ flag);
+        public static native void notEqualConstant(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void notEqual(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void onlyzeroOverwriteMaximumBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst1, @Const @ByRef BufferJ dst2);
+        public static native void onlyzeroOverwriteMaximumDiamond(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst1, @Const @ByRef BufferJ dst2);
+        public static native void powerImages(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void power(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float scalar);
+        public static native void replaceIntensities(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, @Const @ByRef BufferJ map);
+        public static native void replaceIntensity(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float in_value, float out_value);
+        public static native void setColumn(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, int index, float value);
+        public static native void set(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, float value);
+        public static native void setNonzeroPixelsToPixelindex(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void smallerConstant(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void smaller(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void smallerOrEqualConstant(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void smallerOrEqual(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src1, @Const @ByRef BufferJ src2, @Const @ByRef BufferJ dst);
+        public static native void sobel(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void subtractImageFromScalar(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float value);
+        public static native void sumReductionX(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int value);
+        public static native void sumXProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void sumYProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void sumZProjection(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
 }
+    
+
+public static class Tier2 extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public Tier2() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Tier2(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Tier2(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public Tier2 position(long position) {
+        return (Tier2)super.position(position);
+    }
+    @Override public Tier2 getPointer(long i) {
+        return new Tier2((Pointer)this).offsetAddress(i);
+    }
+
+        public static native void dilateLabels(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float radius);
+        public static native void extendLabelingViaVoronoi(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void maximumOfAllPixels(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void minimumOfAllPixels(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void sumOfAllPixels(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void topHatBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int radius_x, int radius_y, int radius_z);
+}
+    
+
+public static class Tier3 extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public Tier3() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Tier3(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Tier3(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public Tier3 position(long position) {
+        return (Tier3)super.position(position);
+    }
+    @Override public Tier3 getPointer(long i) {
+        return new Tier3((Pointer)this).offsetAddress(i);
+    }
+
+        public static native void closeIndexGapsInLabelMap(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int value);
+        public static native void differenceOfGaussian(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigma1_x, float sigma1_y, float sigma1_z, float sigma2_x, float sigma2_y, float sigma2_z);
+        public static native void histogram(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, @Cast("const size_t") long bin, float min_intensity, float max_intensity);
+}
+    
+
+public static class Tier4 extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public Tier4() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Tier4(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Tier4(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public Tier4 position(long position) {
+        return (Tier4)super.position(position);
+    }
+    @Override public Tier4 getPointer(long i) {
+        return new Tier4((Pointer)this).offsetAddress(i);
+    }
+
+        public static native void connectedComponentLabelingBox(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+        public static native void thresholdOtsu(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst);
+}
+    
+
+public static class Tier5 extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public Tier5() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Tier5(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Tier5(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public Tier5 position(long position) {
+        return (Tier5)super.position(position);
+    }
+    @Override public Tier5 getPointer(long i) {
+        return new Tier5((Pointer)this).offsetAddress(i);
+    }
+
+        public static native void maskedVoronoiLabeling(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, @Const @ByRef BufferJ mask);
+}
+    
+
+public static class Tier6 extends Pointer {
+    static { Loader.load(); }
+    /** Default native constructor. */
+    public Tier6() { super((Pointer)null); allocate(); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public Tier6(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public Tier6(Pointer p) { super(p); }
+    private native void allocate();
+    private native void allocateArray(long size);
+    @Override public Tier6 position(long position) {
+        return (Tier6)super.position(position);
+    }
+    @Override public Tier6 getPointer(long i) {
+        return new Tier6((Pointer)this).offsetAddress(i);
+    }
+
+        public static native void voronoiOtsuLabeling(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigma1, float sigma2);
+}
+    
 
 // #endif // __INCLUDE_KERNELJ_HPP
-
+    
 
 }

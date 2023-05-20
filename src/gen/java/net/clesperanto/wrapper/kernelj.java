@@ -157,7 +157,7 @@ public static class Tier3 extends Pointer {
 
         public static native void closeIndexGapsInLabelMap(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, int value);
         public static native void differenceOfGaussian(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, float sigma1_x, float sigma1_y, float sigma1_z, float sigma2_x, float sigma2_y, float sigma2_z);
-        public static native void histogram(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, @Cast("const size_t") long bin, float min_intensity, float max_intensity);
+        public static native void histogram(@Const @ByRef ProcessorJ device, @Const @ByRef BufferJ src, @Const @ByRef BufferJ dst, long bin, float min_intensity, float max_intensity);
 }
     
 

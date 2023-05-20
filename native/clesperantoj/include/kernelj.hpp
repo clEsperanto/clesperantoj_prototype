@@ -99,7 +99,7 @@ class Tier3
 public:
         static void closeIndexGapsInLabelMap(const ProcessorJ & device, const BufferJ & src, const BufferJ & dst, const int & value);
         static void differenceOfGaussian(const ProcessorJ & device, const BufferJ & src, const BufferJ & dst, const float & sigma1_x, const float & sigma1_y, const float & sigma1_z, const float & sigma2_x, const float & sigma2_y, const float & sigma2_z);
-        static void histogram(const ProcessorJ & device, const BufferJ & src, const BufferJ & dst, const int & bin, const float & min_intensity, const float & max_intensity);
+        static void histogram(const ProcessorJ & device, const BufferJ & src, const BufferJ & dst, const long & bin, const float & min_intensity, const float & max_intensity);
 };
     
 

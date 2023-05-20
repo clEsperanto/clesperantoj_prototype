@@ -478,7 +478,7 @@
     }
     
     
-    void Tier3::histogram(const ProcessorJ & device, const BufferJ & src, const BufferJ & dst, const int & bin, const float & min_intensity, const float & max_intensity)
+    void Tier3::histogram(const ProcessorJ & device, const BufferJ & src, const BufferJ & dst, const long & bin, const float & min_intensity, const float & max_intensity)
     {
         cle::HistogramKernel_Call(device.getShared(), src.get(), dst.get(), bin, min_intensity, max_intensity);
     }

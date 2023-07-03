@@ -1,159 +1,172 @@
 #include "clesperantoj.hpp"
 
-#include "cleMemory.hpp"
-#include "cleTypes.hpp"
+#include <sstream>
 
-ProcessorJ::ProcessorJ() : proc(cle::Processor(""))
+void BackendJ::setBackend(const std::string &backendName)
 {
-}
-
-ProcessorJ::ProcessorJ(const std::string &name) : proc(cle::Processor(name))
-{
-}
-
-ProcessorJ::ProcessorJ(const cle::Processor &proc) : proc(proc)
-{
-}
-
-std::vector<std::string> ProcessorJ::getAvailableDevices()
-{
-    return cle::Processor::ListAvailableDevices();
-}
-
-void ProcessorJ::setDevice(const std::string &name)
-{
-    this->proc.SelectDevice(name);
-}
-
-std::string ProcessorJ::getDevice()
-{
-    return this->proc.GetDeviceName();
-}
-
-cle::Processor ProcessorJ::get() const
-{
-    return this->proc;
-}
-
-std::shared_ptr<cle::Processor> ProcessorJ::getShared() const
-{
-    return std::make_shared<cle::Processor>(this->proc);
-}
-
-BufferJ::BufferJ() : buffer(cle::Image())
-{
-}
-
-BufferJ::BufferJ(const cle::Image &buffer) : buffer(buffer)
-{
-}
-
-size_t BufferJ::getWidth()
-{
-    return this->buffer.Shape()[0];
-}
-
-size_t BufferJ::getHeight()
-{
-    return this->buffer.Shape()[1];
-}
-
-size_t BufferJ::getDepth()
-{
-    return this->buffer.Shape()[2];
-}
-
-void BufferJ::getShape(size_t *shape)
-{
-    shape[0] = this->buffer.Shape()[0];
-    shape[1] = this->buffer.Shape()[1];
-    shape[2] = this->buffer.Shape()[2];
-}
-
-unsigned int BufferJ::getDimension()
-{
-    return this->buffer.Ndim();
-}
-
-std::string BufferJ::getDataType()
-{
-    return DataTypeToString(this->buffer.GetDataType());
-}
-
-std::string BufferJ::getMemoryType()
-{
-    return MemoryTypeToString(this->buffer.GetMemoryType());
-}
-
-std::string BufferJ::getDevice()
-{
-    return this->buffer.GetDevice()->GetDeviceName();
-}
-
-void BufferJ::fillMemory(float value)
-{
-    this->buffer.Fill(value);
-}
-
-void BufferJ::copyDataTo(BufferJ &dst)
-{
-    this->buffer.CopyDataTo(dst.get());
-}
-
-cle::Image BufferJ::get() const
-{
-    return this->buffer;
-}
-
-std::shared_ptr<cle::Image> BufferJ::getShared() const
-{
-    return std::make_shared<cle::Image>(this->buffer);
-}
-
-BufferJ MemoryJ::makeFloatBuffer(const ProcessorJ &proc, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type)
-{
-    if (memory_type == "image")
+    if (backendName.find("cuda") != std::string::npos)
     {
-        cle::Image image = cle::Memory::AllocateImageMemory(proc.getShared(), {width, height, depth}, cle::DataType::FLOAT32);
-        return BufferJ{image};
+        cle::BackendManager::getInstance().setBackend(true);
+        std::cout << "Using CUDA backend" << std::endl;
     }
     else
     {
-        cle::Image image = cle::Memory::AllocateBufferMemory(proc.getShared(), {width, height, depth}, cle::DataType::FLOAT32);
-        return BufferJ{image};
+        cle::BackendManager::getInstance().setBackend(false);
+        std::cout << "Using OpenCL backend" << std::endl;
     }
 }
 
-BufferJ MemoryJ::makeIntBuffer(const ProcessorJ &proc, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type)
+DeviceJ::DeviceJ()
+{
+    this->device_ = cle::BackendManager::getInstance().getBackend().getDevice("", "all");
+}
+
+std::vector<std::string> DeviceJ::getAvailableDevices(const std::string &deviceType)
+{
+    return cle::BackendManager::getInstance().getBackend().getDevicesList(deviceType);
+}
+
+void DeviceJ::setDevice(const std::string &deviceName, const std::string &deviceType)
+{
+    this->device_ = cle::BackendManager::getInstance().getBackend().getDevice(deviceName, deviceType);
+}
+
+std::string DeviceJ::getName()
+{
+    return this->device_->getName();
+}
+
+std::string DeviceJ::getInfo()
+{
+    return this->device_->getInfo();
+}
+
+std::shared_ptr<cle::Device> DeviceJ::get() const
+{
+    return this->device_;
+}
+
+ArrayJ::ArrayJ(const std::shared_ptr<cle::Array> &array) : array_(array)
+{
+}
+
+ArrayJ ArrayJ::create(const size_t &width, const size_t &height, const size_t &depth, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device)
+{
+    auto data = cle::Array::create(width, height, depth, cle::dType::FLOAT, cle::mType::BUFFER, device.get());
+    return ArrayJ{data};
+}
+
+void ArrayJ::read(void *data) const
+{
+    this->array_->read(data);
+}
+
+void ArrayJ::write(void *data) const
+{
+    this->array_->write(data);
+}
+
+size_t ArrayJ::getWidth()
+{
+    return this->array_->width();
+}
+
+size_t ArrayJ::getHeight()
+{
+    return this->array_->height();
+}
+
+size_t ArrayJ::getDepth()
+{
+    return this->array_->depth();
+}
+
+unsigned int ArrayJ::getDimension()
+{
+    return this->array_->dim();
+}
+
+std::string ArrayJ::getDataType()
+{
+    std::ostringstream oss;
+    oss << this->array_->dtype();
+    return oss.str();
+}
+
+std::string ArrayJ::getMemoryType()
+{
+    std::ostringstream oss;
+    oss << this->array_->mtype();
+    return oss.str();
+}
+
+std::string ArrayJ::getDevice()
+{
+    return this->array_->device()->getName();
+}
+
+std::shared_ptr<cle::Array> ArrayJ::get() const
+{
+    return this->array_;
+}
+
+void ArrayJ::fillMemory(float value)
+{
+    this->array_->fill(value);
+}
+
+void ArrayJ::copyDataTo(ArrayJ &dst)
+{
+    this->array_->copy(dst.get());
+}
+
+// void Array::getShape(size_t *shape)
+// {
+//     shape[0] = this->array_.width();
+//     shape[1] = this->array_.height();
+//     shape[2] = this->array_.width();
+// }
+
+ArrayJ MemoryJ::makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type)
 {
     if (memory_type == "image")
     {
-        cle::Image image = cle::Memory::AllocateImageMemory(proc.getShared(), {width, height, depth}, cle::DataType::FLOAT32);
-        return BufferJ{image};
+        return ArrayJ::create(width, height, depth, cle::dType::FLOAT, cle::mType::IMAGE, device);
     }
     else
     {
-        cle::Image image = cle::Memory::AllocateBufferMemory(proc.getShared(), {width, height, depth}, cle::DataType::FLOAT32);
-        return BufferJ{image};
+        return ArrayJ::create(width, height, depth, cle::dType::FLOAT, cle::mType::BUFFER, device);
     }
 }
 
-void MemoryJ::writeFloatBuffer(const BufferJ &buffer, float *data, const size_t &size)
+ArrayJ MemoryJ::makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type)
 {
-    cle::Memory::WriteObject<float>(buffer.get(), data, size);
+    if (memory_type == "image")
+    {
+        return ArrayJ::create(width, height, depth, cle::dType::INT32, cle::mType::IMAGE, device);
+    }
+    else
+    {
+        return ArrayJ::create(width, height, depth, cle::dType::INT32, cle::mType::BUFFER, device);
+    }
 }
 
-void MemoryJ::writeIntBuffer(const BufferJ &buffer, int *data, const size_t &size)
+void MemoryJ::writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
 {
-    cle::Memory::WriteObject<int>(buffer.get(), data, size);
+    array.write(static_cast<void *>(data));
 }
 
-void MemoryJ::readFloatBuffer(const BufferJ &buffer, float *data, const size_t &size)
+void MemoryJ::writeIntBuffer(const ArrayJ &array, int *data, const size_t &size)
 {
-    cle::Memory::ReadObject<float>(buffer.get(), data, size);
+    array.write(static_cast<void *>(data));
 }
 
-void MemoryJ::readIntBuffer(const BufferJ &buffer, int *data, const size_t &size)
+void MemoryJ::readFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
 {
-    cle::Memory::ReadObject<int>(buffer.get(), data, size);
+    array.read(static_cast<void *>(data));
+}
+
+void MemoryJ::readIntBuffer(const ArrayJ &array, int *data, const size_t &size)
+{
+    array.read(static_cast<void *>(data));
 }

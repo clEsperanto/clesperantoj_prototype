@@ -18,15 +18,26 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON) # Require (at least) it
 set(CMAKE_CXX_EXTENSIONS OFF) # Don't use e.g. GNU extension (like -std=gnu++11) for portability
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON) # Export all symbols for shared library windows
 
+# include(FetchContent)
+# option(BUILD_TESTING OFF)
+# option(BUILD_BENCHMARK OFF)
+# FetchContent_Declare(
+#   clic_lib
+#   GIT_REPOSITORY https://github.com/clEsperanto/CLIc_prototype.git
+#   GIT_TAG master # 0.6.3
+# )
+# FetchContent_MakeAvailable(clic_lib)
+
+## fetch CLIc using CMake FetchContent
 include(FetchContent)
 option(BUILD_TESTING OFF)
 option(BUILD_BENCHMARK OFF)
 FetchContent_Declare(
-  clic_lib
-  GIT_REPOSITORY https://github.com/clEsperanto/CLIc_prototype.git
-  GIT_TAG master # 0.6.3
+  CLIc_lib 
+  GIT_REPOSITORY https://github.com/clEsperanto/MultiBackends.git
+  GIT_TAG fit-arch-to-clic
 )
-FetchContent_MakeAvailable(clic_lib)
+FetchContent_MakeAvailable(CLIc_lib)
 
 file(GLOB_RECURSE WRAPPER_SOURCES_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
 file(GLOB_RECURSE WRAPPER_HEADERS_FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)

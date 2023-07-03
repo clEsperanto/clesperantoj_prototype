@@ -6,7 +6,8 @@
 class Tier1
 {
 public:
-    static void addImageAndScalar(const ProcessorJ &proc, const BufferJ &src, const BufferJ &dst, const float &scalar);
+    static void absolute(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst);
+    static void gaussianBlur(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst, const float &sigmaX, const float &sigmaY, const float &sigmaZ);
 };
 
 #endif // __INCLUDE_KERNELJ_HPP

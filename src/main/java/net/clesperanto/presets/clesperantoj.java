@@ -11,7 +11,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 
 @Properties(inherit = javacpp.class, value = {
 		@Platform(compiler = { "cpp17" }, define = { "SHARED_PTR_NAMESPACE std" }, include = {
-				"clesperantoj.hpp" }, link = { "JCLIc", "OpenCL" })
+				"clesperantoj.hpp" }, link = { "JCLIc", "OpenCL", "cuda" })
 }, target = "net.clesperanto.wrapper.clesperantoj")
 
 public class clesperantoj implements InfoMapper {
@@ -27,6 +27,6 @@ public class clesperantoj implements InfoMapper {
 				.pointerTypes("@Cast({\"char*\", \"std::string*\"}) BytePointer"))
 				.put(new Info("std::vector<std::string>").pointerTypes("StringVector").define());
 
-		infoMap.put(new Info("cle::Image", "cle::Processor").skip());
+		infoMap.put(new Info("cle::Array", "cle::Device", "cle::BackendManager", "cle::Backend").skip());
 	}
 }

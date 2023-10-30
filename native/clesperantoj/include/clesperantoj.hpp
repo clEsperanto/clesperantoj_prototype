@@ -10,9 +10,6 @@
 #include "device.hpp"
 #include "utils.hpp"
 
-// #include "cleImage.hpp"
-// #include "cleProcessor.hpp"
-
 class BackendJ
 {
 public:

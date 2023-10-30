@@ -20,6 +20,8 @@ public class ClesperantoJ {
     public static void main(String[] args) {
         System.out.println("Hello World! Native Java");
 
+        System.out.println(System.getProperty("java.library.path"));
+
         BackendJ.setBackend("opencl");
         BackendJ.setBackend("cuda");
 

@@ -113,9 +113,6 @@ public class clesperantoj extends net.clesperanto.presets.clesperantoj {
 // #include "device.hpp"
 // #include "utils.hpp"
 
-// #include "cleImage.hpp"
-// #include "cleProcessor.hpp"
-
 public static class BackendJ extends Pointer {
     static { Loader.load(); }
     /** Default native constructor. */
@@ -216,19 +213,19 @@ public static class MemoryJ extends Pointer {
     public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString String memory_type);
     public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString BytePointer memory_type);
 
-    public static native void writeFloatBuffer(@Const @ByRef ArrayJ buffer, FloatPointer data, @Cast("const size_t") long size);
-    public static native void writeFloatBuffer(@Const @ByRef ArrayJ buffer, FloatBuffer data, @Cast("const size_t") long size);
-    public static native void writeFloatBuffer(@Const @ByRef ArrayJ buffer, float[] data, @Cast("const size_t") long size);
-    public static native void writeIntBuffer(@Const @ByRef ArrayJ buffer, IntPointer data, @Cast("const size_t") long size);
-    public static native void writeIntBuffer(@Const @ByRef ArrayJ buffer, IntBuffer data, @Cast("const size_t") long size);
-    public static native void writeIntBuffer(@Const @ByRef ArrayJ buffer, int[] data, @Cast("const size_t") long size);
+    public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, FloatPointer data, @Cast("const size_t") long size);
+    public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, FloatBuffer data, @Cast("const size_t") long size);
+    public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, float[] data, @Cast("const size_t") long size);
+    public static native void writeIntBuffer(@Const @ByRef ArrayJ array, IntPointer data, @Cast("const size_t") long size);
+    public static native void writeIntBuffer(@Const @ByRef ArrayJ array, IntBuffer data, @Cast("const size_t") long size);
+    public static native void writeIntBuffer(@Const @ByRef ArrayJ array, int[] data, @Cast("const size_t") long size);
 
-    public static native void readFloatBuffer(@Const @ByRef ArrayJ buffer, FloatPointer data, @Cast("const size_t") long size);
-    public static native void readFloatBuffer(@Const @ByRef ArrayJ buffer, FloatBuffer data, @Cast("const size_t") long size);
-    public static native void readFloatBuffer(@Const @ByRef ArrayJ buffer, float[] data, @Cast("const size_t") long size);
-    public static native void readIntBuffer(@Const @ByRef ArrayJ buffer, IntPointer data, @Cast("const size_t") long size);
-    public static native void readIntBuffer(@Const @ByRef ArrayJ buffer, IntBuffer data, @Cast("const size_t") long size);
-    public static native void readIntBuffer(@Const @ByRef ArrayJ buffer, int[] data, @Cast("const size_t") long size);
+    public static native void readFloatBuffer(@Const @ByRef ArrayJ array, FloatPointer data, @Cast("const size_t") long size);
+    public static native void readFloatBuffer(@Const @ByRef ArrayJ array, FloatBuffer data, @Cast("const size_t") long size);
+    public static native void readFloatBuffer(@Const @ByRef ArrayJ array, float[] data, @Cast("const size_t") long size);
+    public static native void readIntBuffer(@Const @ByRef ArrayJ array, IntPointer data, @Cast("const size_t") long size);
+    public static native void readIntBuffer(@Const @ByRef ArrayJ array, IntBuffer data, @Cast("const size_t") long size);
+    public static native void readIntBuffer(@Const @ByRef ArrayJ array, int[] data, @Cast("const size_t") long size);
 }
 
 // #endif // __INCLUDE_CLESPERANTOJ_HPP

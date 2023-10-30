@@ -57,7 +57,7 @@
 		<!-- <scijava.app.directory>/PATH/TO/YOUR/FIJI/Fiji.app/</scijava.app.directory> -->
 		<scijava.app.directory>/home/stephane/Documents/Fiji.app/</scijava.app.directory>
 		<!-- specify your cuda version (for windows users) -->
-    	<cuda.version>12</cuda.version>
+    	<cuda.version>11.2</cuda.version>
 	</properties>
 
 
@@ -193,8 +193,8 @@
 				</execution>
 
                 <!--  2. Process classes generated in step 1 to create c++ wrapper library -->
-			  	<execution> 
-					<id>process-classes</id> 
+			  	<execution>
+					<id>process-classes</id>
 					<phase>process-classes</phase>
 					<goals>
 						<goal>build</goal>
@@ -203,11 +203,11 @@
 						<classOrPackageNames>
 							<classOrPackageName>net.clesperanto.wrapper.clesperantoj</classOrPackageName>
 							<classOrPackageName>net.clesperanto.wrapper.kernelj</classOrPackageName>
-						</classOrPackageNames> 
+						</classOrPackageNames>
 					</configuration>
 				</execution>
 
-            </executions> 
+            </executions>
 		</plugin>
 
         </plugins>

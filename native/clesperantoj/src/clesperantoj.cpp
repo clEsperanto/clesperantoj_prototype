@@ -50,9 +50,9 @@ ArrayJ::ArrayJ(const std::shared_ptr<cle::Array> &array) : array_(array)
 {
 }
 
-ArrayJ ArrayJ::create(const size_t &width, const size_t &height, const size_t &depth, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device)
+ArrayJ ArrayJ::create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device)
 {
-    auto data = cle::Array::create(width, height, depth, cle::dType::FLOAT, cle::mType::BUFFER, device.get());
+    auto data = cle::Array::create(width, height, depth, dimension, cle::dType::FLOAT, cle::mType::BUFFER, device.get());
     return ArrayJ{data};
 }
 
@@ -83,7 +83,7 @@ size_t ArrayJ::getDepth()
 
 unsigned int ArrayJ::getDimension()
 {
-    return this->array_->dim();
+    return this->array_->dimension();
 }
 
 std::string ArrayJ::getDataType()
@@ -120,34 +120,34 @@ void ArrayJ::copyDataTo(ArrayJ &dst)
     this->array_->copy(dst.get());
 }
 
-// void Array::getShape(size_t *shape)
-// {
-//     shape[0] = this->array_.width();
-//     shape[1] = this->array_.height();
-//     shape[2] = this->array_.width();
-// }
+// // void Array::getShape(size_t *shape)
+// // {
+// //     shape[0] = this->array_.width();
+// //     shape[1] = this->array_.height();
+// //     shape[2] = this->array_.width();
+// // }
 
-ArrayJ MemoryJ::makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type)
+ArrayJ MemoryJ::makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
 {
     if (memory_type == "image")
     {
-        return ArrayJ::create(width, height, depth, cle::dType::FLOAT, cle::mType::IMAGE, device);
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::FLOAT, cle::mType::IMAGE, device);
     }
     else
     {
-        return ArrayJ::create(width, height, depth, cle::dType::FLOAT, cle::mType::BUFFER, device);
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::FLOAT, cle::mType::BUFFER, device);
     }
 }
 
-ArrayJ MemoryJ::makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type)
+ArrayJ MemoryJ::makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
 {
     if (memory_type == "image")
     {
-        return ArrayJ::create(width, height, depth, cle::dType::INT32, cle::mType::IMAGE, device);
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::INT32, cle::mType::IMAGE, device);
     }
     else
     {
-        return ArrayJ::create(width, height, depth, cle::dType::INT32, cle::mType::BUFFER, device);
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::INT32, cle::mType::BUFFER, device);
     }
 }
 

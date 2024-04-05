@@ -55,7 +55,7 @@
 		<license.licenseName>bsd_3</license.licenseName>
 		<license.copyrightOwners>Robert Haase, MPI CBG</license.copyrightOwners>
 		<!-- <scijava.app.directory>/PATH/TO/YOUR/FIJI/Fiji.app/</scijava.app.directory> -->
-		<scijava.app.directory>/home/stephane/Documents/Fiji.app/</scijava.app.directory>
+		<scijava.app.directory>/home/stephane/Libraries/Fiji.app/</scijava.app.directory>
 		<!-- specify your cuda version (for windows users) -->
     	<cuda.version>11.2</cuda.version>
 	</properties>

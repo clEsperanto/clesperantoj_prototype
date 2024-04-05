@@ -44,7 +44,7 @@ private:
     friend class MemoryJ;
 
 protected:
-    static ArrayJ create(const size_t &width, const size_t &height, const size_t &depth, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device);
+    static ArrayJ create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device);
     void write(void *data) const;
     void read(void *data) const;
 
@@ -69,8 +69,8 @@ public:
 class MemoryJ
 {
 public:
-    static ArrayJ makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type);
-    static ArrayJ makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type);
+    static ArrayJ makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
 
     static void writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
     static void writeIntBuffer(const ArrayJ &array, int *data, const size_t &size);

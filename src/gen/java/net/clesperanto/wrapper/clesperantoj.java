@@ -208,10 +208,10 @@ public static class MemoryJ extends Pointer {
         return new MemoryJ((Pointer)this).offsetAddress(i);
     }
 
-    public static native @ByVal ArrayJ makeFloatBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString String memory_type);
-    public static native @ByVal ArrayJ makeFloatBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString BytePointer memory_type);
-    public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString String memory_type);
-    public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString BytePointer memory_type);
+    public static native @ByVal ArrayJ makeFloatBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString String memory_type);
+    public static native @ByVal ArrayJ makeFloatBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString BytePointer memory_type);
+    public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString String memory_type);
+    public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString BytePointer memory_type);
 
     public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, FloatPointer data, @Cast("const size_t") long size);
     public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, FloatBuffer data, @Cast("const size_t") long size);

@@ -11,8 +11,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 
 @Properties(inherit = javacpp.class, value = {
 		@Platform(compiler = { "cpp17" }, define = { "SHARED_PTR_NAMESPACE std" }, include = {
-				"clesperantoj.hpp" }, linkpath = {"C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v11.2\\lib\\x64"},
-				link = { "JCLIc", "OpenCL", "cuda" })
+				"clesperantoj.hpp" }, includepath = {
+						"/usr/local/cuda-12.3/targets/x86_64-linux/include" }, linkpath = {
+								"/usr/local/cuda-12.3/targets/x86_64-linux/lib" }, link = { "JCLIc", "OpenCL" })
 }, target = "net.clesperanto.wrapper.clesperantoj")
 
 public class clesperantoj implements InfoMapper {

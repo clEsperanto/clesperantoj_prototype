@@ -23,7 +23,7 @@ public class ClesperantoJ {
         System.out.println(System.getProperty("java.library.path"));
 
         BackendJ.setBackend("opencl");
-        BackendJ.setBackend("cuda");
+        // BackendJ.setBackend("cuda");
 
         StringVector deviceList = DeviceJ.getAvailableDevices();
         for (int i = 0; i < deviceList.size(); i++) {
@@ -40,8 +40,8 @@ public class ClesperantoJ {
         DeviceJ currentDevice = new DeviceJ();
         currentDevice.setDevice("TX", "all");
 
-        ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, "buffer");
-        ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, "buffer");
+        ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
+        ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
 
         float data[] = new float[3 * 3 * 2];
         float out[] = new float[3 * 3 * 2];

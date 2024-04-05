@@ -39,7 +39,6 @@ class ArrayJ
 
 private:
     std::shared_ptr<cle::Array> array_;
-    ArrayJ(const std::shared_ptr<cle::Array> &array);
 
     friend class MemoryJ;
 
@@ -50,6 +49,7 @@ protected:
 
 public:
     ArrayJ() = default;
+    ArrayJ(const std::shared_ptr<cle::Array> &array);
 
     size_t getWidth();
     size_t getHeight();

@@ -41,7 +41,7 @@ public class ClesperantoJ {
         currentDevice.setDevice("TX", "all");
 
         ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
-        ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
+        // ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
 
         float data[] = new float[3 * 3 * 2];
         float out[] = new float[3 * 3 * 2];
@@ -49,9 +49,9 @@ public class ClesperantoJ {
         Arrays.fill(out, -1);
 
         MemoryJ.writeFloatBuffer(input, data, (long) data.length);
-        MemoryJ.writeFloatBuffer(output, out, (long) out.length);
+        // MemoryJ.writeFloatBuffer(output, out, (long) out.length);
 
-        Tier1.absolute(currentDevice, input, output);
+        ArrayJ output = Tier1.absolute(currentDevice, input);
 
         MemoryJ.readFloatBuffer(output, out, (long) out.length);
 

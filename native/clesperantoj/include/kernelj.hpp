@@ -6,7 +6,8 @@
 class Tier1
 {
 public:
-    static void absolute(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst);
+    static ArrayJ absolute(const DeviceJ &dev, const ArrayJ &src, ArrayJ &dst);
+    static ArrayJ absolute(const DeviceJ &dev, const ArrayJ &src);
     static void gaussianBlur(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst, const float &sigmaX, const float &sigmaY, const float &sigmaZ);
     static void addImageAndScalar(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst, const float &scalar);
 };

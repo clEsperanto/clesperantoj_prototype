@@ -157,6 +157,8 @@
 					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/win64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/macosx/include/CLIc</includePath>
+					<!-- JavaCpp need to have the library includes -->
+					<includePath>/usr/local/cuda-12.3/targets/x86_64-linux/include</includePath>
 				</includePaths>
 				<linkPaths>
 					<linkPath>${basedir}/lib/win64/</linkPath>
@@ -169,6 +171,7 @@
 					<!-- For Windows, we need to link to the OpenCL library -->
 					<!-- todo: ship a ocl-ICD-loader with the native lib to avoid this linking? -->
 					<linkPath>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v{cuda.version}/lib/x64/</linkPath>
+					<linkPath>/usr/local/cuda-12.3/targets/x86_64-linux/lib</linkPath>
 
 				</linkPaths>
 				<copyLibs>true</copyLibs>

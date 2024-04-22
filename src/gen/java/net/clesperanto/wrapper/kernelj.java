@@ -36,7 +36,8 @@ public static class Tier1 extends Pointer {
         return new Tier1((Pointer)this).offsetAddress(i);
     }
 
-    public static native void absolute(@Const @ByRef DeviceJ dev, @Const @ByRef ArrayJ src, @Const @ByRef ArrayJ dst);
+    public static native @ByVal ArrayJ absolute(@Const @ByRef DeviceJ dev, @Const @ByRef ArrayJ src, @ByRef ArrayJ dst);
+    public static native @ByVal ArrayJ absolute(@Const @ByRef DeviceJ dev, @Const @ByRef ArrayJ src);
     public static native void gaussianBlur(@Const @ByRef DeviceJ dev, @Const @ByRef ArrayJ src, @Const @ByRef ArrayJ dst, float sigmaX, float sigmaY, float sigmaZ);
     public static native void addImageAndScalar(@Const @ByRef DeviceJ dev, @Const @ByRef ArrayJ src, @Const @ByRef ArrayJ dst, float scalar);
 }

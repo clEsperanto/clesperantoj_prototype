@@ -23,7 +23,7 @@ case $PLATFORM in
         ;;
     macosx-*)
         # the following line might not be necessary if make would be properly installed in the path
-        CMAKE=/Applications/CMake.app/Contents/bin/cmake
+        # CMAKE=/Applications/CMake.app/Contents/bin/cmake
         
         $CMAKE -DCMAKE_BUILD_TYPE=Release \
                -DCMAKE_INSTALL_PREFIX="../../../lib/macosx/" ..

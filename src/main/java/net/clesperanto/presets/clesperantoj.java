@@ -9,11 +9,19 @@ import org.bytedeco.javacpp.tools.Info;
 import org.bytedeco.javacpp.tools.InfoMap;
 import org.bytedeco.javacpp.tools.InfoMapper;
 
+// // compile on ubuntu
+// @Properties(inherit = javacpp.class, value = {
+// 		@Platform(compiler = { "cpp17", "-framework OpenCL" }, define = { "SHARED_PTR_NAMESPACE std" }, include = {
+// 				"clesperantoj.hpp" }, includepath = {
+// 						"/usr/local/cuda-12.3/targets/x86_64-linux/include" }, linkpath = {
+// 								"/usr/local/cuda-12.3/targets/x86_64-linux/lib" }, link = { "JCLIc", "OpenCL" })
+// }, target = "net.clesperanto.wrapper.clesperantoj")
+
+// compile on mac
 @Properties(inherit = javacpp.class, value = {
-		@Platform(compiler = { "cpp17" }, define = { "SHARED_PTR_NAMESPACE std" }, include = {
-				"clesperantoj.hpp" }, includepath = {
-						"/usr/local/cuda-12.3/targets/x86_64-linux/include" }, linkpath = {
-								"/usr/local/cuda-12.3/targets/x86_64-linux/lib" }, link = { "JCLIc", "OpenCL" })
+		@Platform(compiler = { "cpp17", "-framework OpenCL" }, define = {
+				"SHARED_PTR_NAMESPACE std" }, include = {
+						"clesperantoj.hpp" }, link = { "JCLIc" })
 }, target = "net.clesperanto.wrapper.clesperantoj")
 
 public class clesperantoj implements InfoMapper {

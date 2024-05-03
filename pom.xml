@@ -62,7 +62,7 @@
 
 
 
-    <dependencies>
+    <dependencies> 
         <!-- ImageJ dependencies -->
 		<dependency>
 			<groupId>net.imagej</groupId>
@@ -111,9 +111,9 @@
 						<workingDirectory>${project.basedir}/native</workingDirectory>
 					</configuration>
 				</execution>
-			</executions>
+			</executions> 
 		</plugin>
-
+ 
         <plugin>
        		<groupId>org.codehaus.mojo</groupId>
        		<artifactId>build-helper-maven-plugin</artifactId>
@@ -150,6 +150,11 @@
 			<artifactId>javacpp</artifactId>
 			<version>1.5.8</version>
 			<configuration>
+				<compilerOptions>
+					<compilerOption>-std=c++17</compilerOption>
+					<!-- needed in macos but fail in ubuntu or win -->
+					<!-- <compilerOption>-framework OpenCL</compilerOption> -->
+				</compilerOptions>
 				<classPath>${project.build.outputDirectory}</classPath>
 				<includePaths>
 					<includePath>${project.build.sourceDirectory}</includePath>
@@ -157,8 +162,14 @@
 					<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/win64/include/CLIc</includePath>
 					<includePath>${basedir}/lib/macosx/include/CLIc</includePath>
-					<!-- JavaCpp need to have the library includes -->
+
+
+					<!-- Include path for any header needed to build.
+					It replace the need of includepath in the presets.
+					NB: not needed in MacOS, Ubuntu requires it if not in PATH -->
 					<includePath>/usr/local/cuda-12.3/targets/x86_64-linux/include</includePath>
+				
+
 				</includePaths>
 				<linkPaths>
 					<linkPath>${basedir}/lib/win64/</linkPath>
@@ -168,11 +179,13 @@
 					<linkPath>${basedir}/lib/linux64/lib</linkPath>
 					<linkPath>${basedir}/lib/macosx/lib</linkPath>
 
-					<!-- For Windows, we need to link to the OpenCL library -->
-					<!-- todo: ship a ocl-ICD-loader with the native lib to avoid this linking? -->
-					<linkPath>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v{cuda.version}/lib/x64/</linkPath>
-					<linkPath>/usr/local/cuda-12.3/targets/x86_64-linux/lib</linkPath>
 
+					<!-- link path to the OpenCL library
+					This provide the library path for javacpp to link to.
+					It (should) avoid the need to add the linkpath in the presets.
+					NB: not needed in MacOS, nor in Ubuntu -->
+					<!-- <linkPath>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v{cuda.version}/lib/x64/</linkPath> -->
+					<!-- <linkPath>/usr/local/cuda-12.3/targets/x86_64-linux/lib</linkPath> -->
 				</linkPaths>
 				<copyLibs>true</copyLibs>
 			</configuration>
@@ -195,7 +208,7 @@
 					</configuration>
 				</execution>
 
-                <!--  2. Process classes generated in step 1 to create c++ wrapper library -->
+                 <!-- 2. Process classes generated in step 1 to create c++ wrapper library -->
 			  	<execution>
 					<id>process-classes</id>
 					<phase>process-classes</phase>
@@ -208,7 +221,7 @@
 							<classOrPackageName>net.clesperanto.wrapper.kernelj</classOrPackageName>
 						</classOrPackageNames>
 					</configuration>
-				</execution>
+				</execution> 
 
             </executions>
 		</plugin>

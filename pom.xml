@@ -195,7 +195,7 @@
 				<!--  1. Parse the c++ header files specified in java files to generate java wrapper classes -->
 			  	<execution>
 					<id>generate-sources</id>
-					<phase>generate-sources</phase>
+					<phase>compile</phase>
 					<goals>
 						<goal>parse</goal>
 					</goals>

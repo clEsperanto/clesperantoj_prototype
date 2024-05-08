@@ -20,6 +20,8 @@ jobs:
         distribution: 'adopt'
     - name: Find available GPUs
       run: lspci | grep -i vga
+    - name: Install openCL
+      run: sudo apt install intel-opencl-icd
     - name: Build with Maven
       run: mvn clean install
 

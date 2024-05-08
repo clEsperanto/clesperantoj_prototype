@@ -18,7 +18,8 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-
+    - name: Find available GPUs
+      run: lspci | grep -i vga
     - name: Build with Maven
       run: mvn clean install
 

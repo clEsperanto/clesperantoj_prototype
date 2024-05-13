@@ -18,7 +18,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 // }, target = "net.clesperanto.wrapper.clesperantoj")
 
 @Properties(inherit = javacpp.class, value = {
-	@Platform(include = { "clesperantoj.hpp" }, link = { "JCLIc"})
+	@Platform(include = { "clesperantoj.hpp" }, link = { "JCLIc", "Shell32"})
 }, target = "net.clesperanto.wrapper.clesperantoj")
 
 public class clesperantoj implements InfoMapper {

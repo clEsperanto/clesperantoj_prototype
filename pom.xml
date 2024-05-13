@@ -168,7 +168,7 @@
 				<version>1.5.8</version>
 				<configuration>
 					<compilerOptions>
-						<compilerOption>-std=c++17</compilerOption>
+						<compilerOption>/std:c++17</compilerOption>
 						<!-- needed in macos but fail in ubuntu or win -->
 						<!-- <compilerOption>-framework OpenCL</compilerOption> -->
 					</compilerOptions>
@@ -184,7 +184,7 @@
 						<!-- Include path for any header needed to build.
 						It replace the need of includepath in the presets.
 						NB: not needed in MacOS, Ubuntu requires it if not in PATH -->
-						<includePath>/usr/local/cuda-12.3/targets/x86_64-linux/include</includePath>
+						<includePath>C:/Program Files (x86)/OCL_SDK_Light/include</includePath>
 					
 		
 					</includePaths>
@@ -201,9 +201,11 @@
 						This provide the library path for javacpp to link to.
 						It (should) avoid the need to add the linkpath in the presets.
 						NB: not needed in MacOS, nor in Ubuntu -->
-						<!-- <linkPath>C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v{cuda.version}/lib/x64/</linkPath> -->
-						<!-- <linkPath>/usr/local/cuda-12.3/targets/x86_64-linux/lib</linkPath> -->
+						<linkPath>C:/Program Files (x86)/OCL_SDK_Light/lib/x86_64</linkPath>
+						<linkPath>C:/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x64</linkPath>
 					</linkPaths>
+					<link>
+					</link>
 					<copyLibs>true</copyLibs>
 				</configuration>
 		

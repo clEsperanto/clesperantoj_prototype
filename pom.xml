@@ -208,7 +208,8 @@
 						<!-- Include path for any header needed to build.
 						It replace the need of includepath in the presets.
 						NB: not needed in MacOS, Ubuntu requires it if not in PATH -->
-						<includePath>C:/Program Files (x86)/OCL_SDK_Light/include</includePath>
+						<!-- in WINdows it can be on the INCLUDE env var
+						<includePath>C:/Program Files (x86)/OCL_SDK_Light/include</includePath> -->
 					
 		
 					</includePaths>
@@ -225,8 +226,10 @@
 						This provide the library path for javacpp to link to.
 						It (should) avoid the need to add the linkpath in the presets.
 						NB: not needed in MacOS, nor in Ubuntu -->
-						<linkPath>C:/Program Files (x86)/OCL_SDK_Light/lib/x86_64</linkPath>
-						<linkPath>C:/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x64</linkPath>
+						<!-- does not seem necessary that it is anywhere on Win
+						<linkPath>C:/Program Files (x86)/OCL_SDK_Light/lib/x86_64</linkPath> -->
+						<!-- On WIn, this just needs to be on the LIB path
+						<linkPath>C:/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x64</linkPath> -->
 					</linkPaths>
 					<link>
 					</link>

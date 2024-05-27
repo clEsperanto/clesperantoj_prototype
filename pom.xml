@@ -59,6 +59,30 @@
 		<!-- specify your cuda version (for windows users) -->
     	<cuda.version>11.2</cuda.version>
 	</properties>
+    <profiles>
+        <profile>
+            <id>os-windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <compiler.option>/std:c++17</compiler.option>
+            </properties>
+        </profile>
+        <profile>
+            <id>non-windows</id>
+            <activation>
+                <os>
+                    <family>!Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <compiler.option>-std=c++17</compiler.option>
+            </properties>
+        </profile>
+    </profiles>
 
 
 
@@ -168,7 +192,7 @@
 				<version>1.5.8</version>
 				<configuration>
 					<compilerOptions>
-						<compilerOption>/std:c++17</compilerOption>
+						<compilerOption>${compiler.option}</compilerOption>
 						<!-- needed in macos but fail in ubuntu or win -->
 						<!-- <compilerOption>-framework OpenCL</compilerOption> -->
 					</compilerOptions>

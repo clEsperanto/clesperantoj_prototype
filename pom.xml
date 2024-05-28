@@ -61,7 +61,7 @@
 	</properties>
     <profiles>
         <profile>
-            <id>os-windows</id>
+            <id>win</id>
             <activation>
                 <os>
                     <family>Windows</family>
@@ -69,17 +69,32 @@
             </activation>
             <properties>
                 <compiler.option>/std:c++17</compiler.option>
+                <folder.name>win64</folder.name>
             </properties>
         </profile>
         <profile>
-            <id>non-windows</id>
+            <id>mac</id>
             <activation>
                 <os>
-                    <family>!Windows</family>
+                    <family>mac</family>
                 </os>
             </activation>
             <properties>
                 <compiler.option>-std=c++17</compiler.option>
+                <folder.name>macosx</folder.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <name>Linux</name>
+                </os>
+            </activation>
+            <properties>
+                <compiler.option>-std=c++17</compiler.option>
+                <folder.name>linux64</folder.name>
             </properties>
         </profile>
     </profiles>
@@ -153,8 +168,6 @@
 	                    <configuration>
 	                        <sources>
 	                            <source>${project.basedir}/src/gen/java</source>
-	                            <!--  Not sure if below is needed.  TODO:  Erase and confirm build still works -->
-	                            <!-- <source>${project.basedir}/cppbuild/${javacpp.platform}${javacpp.platform.extension}/java/</source> -->
 	                        </sources>
 	                    </configuration>
 	                </execution>
@@ -164,8 +177,8 @@
 		    	<artifactId>maven-compiler-plugin</artifactId>
 		    	<version>3.12.1</version>
 		    	<configuration>
-		      		<source>1.7</source>
-		      		<target>1.7</target>
+		      		<source>1.8</source>
+		      		<target>1.8</target>
 		    	</configuration>
 		    	<executions>
 			      	<execution>
@@ -193,46 +206,25 @@
 				<configuration>
 					<compilerOptions>
 						<compilerOption>${compiler.option}</compilerOption>
-						<!-- needed in macos but fail in ubuntu or win -->
-						<!-- <compilerOption>-framework OpenCL</compilerOption> -->
 					</compilerOptions>
 					<classPath>${project.build.outputDirectory}</classPath>
 					<includePaths>
+						<!-- Include path for any header needed to build.
+						The path to the OpenCL headers on Linux does not need to be included if it
+						is in the PATH. On Win, it should be in the INCLUDE env var -->
 						<includePath>${project.build.sourceDirectory}</includePath>
 						<includePath>${basedir}/native/clesperantoj/include</includePath>
-						<includePath>${basedir}/lib/linux64/include/CLIc</includePath>
-						<includePath>${basedir}/lib/win64/include/CLIc</includePath>
-						<includePath>${basedir}/lib/macosx/include/CLIc</includePath>
-		
-		
-						<!-- Include path for any header needed to build.
-						It replace the need of includepath in the presets.
-						NB: not needed in MacOS, Ubuntu requires it if not in PATH -->
-						<!-- in WINdows it can be on the INCLUDE env var
-						<includePath>C:/Program Files (x86)/OCL_SDK_Light/include</includePath> -->
-					
-		
+						<includePath>${basedir}/lib/${folder.name}/include/CLIc</includePath>
 					</includePaths>
 					<linkPaths>
-						<linkPath>${basedir}/lib/win64/</linkPath>
-						<linkPath>${basedir}/lib/linux64/</linkPath>
-						<linkPath>${basedir}/lib/macosx/</linkPath>
-		                <linkPath>${basedir}/lib/win64/lib</linkPath>
-						<linkPath>${basedir}/lib/linux64/lib</linkPath>
-						<linkPath>${basedir}/lib/macosx/lib</linkPath>
-		
-		
+						<linkPath>${basedir}/lib/${folder.name}/</linkPath>
+		                <linkPath>${basedir}/lib/${folder.name}/lib</linkPath>
 						<!-- link path to the OpenCL library
 						This provide the library path for javacpp to link to.
 						It (should) avoid the need to add the linkpath in the presets.
-						NB: not needed in MacOS, nor in Ubuntu -->
-						<!-- does not seem necessary that it is anywhere on Win
-						<linkPath>C:/Program Files (x86)/OCL_SDK_Light/lib/x86_64</linkPath> -->
-						<!-- On WIn, this just needs to be on the LIB path
-						<linkPath>C:/Program Files (x86)/Windows Kits/10/Lib/10.0.22621.0/um/x64</linkPath> -->
+						NB: Only needed on Windows unless the LIB env var contains the 
+						path to OpenCL lib  and teh path to Windows Kit-->
 					</linkPaths>
-					<link>
-					</link>
 					<copyLibs>true</copyLibs>
 				</configuration>
 		

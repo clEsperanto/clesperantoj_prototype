@@ -23,7 +23,7 @@ case $PLATFORM in
         ;;
     macosx-*)
         # the following line might not be necessary if make would be properly installed in the path
-        CMAKE=/Applications/CMake.app/Contents/bin/cmake
+        # CMAKE=/Applications/CMake.app/Contents/bin/cmake
         
         $CMAKE -DCMAKE_BUILD_TYPE=Release \
                -DCMAKE_INSTALL_PREFIX="../../../lib/macosx/" ..
@@ -36,8 +36,9 @@ case $PLATFORM in
     windows-x86_64)
         $CMAKE -G"NMake Makefiles" \
 		       -DCMAKE_BUILD_TYPE=Release \
-               -DCMAKE_INSTALL_PREFIX="../../../lib/win64/" ..
-            #    -DOPENCL_INCLUDE_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v11.2/include/" \
+               -DCMAKE_INSTALL_PREFIX="../../../lib/win64/"  ..
+            #   -DOpenCL_INCLUDE_DIR="C:/Program Files (x86)/OCL_SDK_Light/include" \
+            #   -DOpenCL_LIBRARY="C:/Program Files (x86)/OCL_SDK_Light/lib/x86_64/opencl.lib" ..
             #    -DCLIC_INCLUDE_DIR="../../../CLIc_prototype/clic/include/core" \
             #    -DOCLCL_INCLUDE_DIR="../../../CLIc_prototype/thirdparty/opencl/ocl-clhpp/include" \
 		    #    -DCLFFT_LIBRARY_DIR="C:/OpenCL/clFFT-2.12.2-Windows-x64/lib64/import/" .. 

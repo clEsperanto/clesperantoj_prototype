@@ -5,44 +5,55 @@
 #include <string>
 #include <vector>
 
-#include "cleImage.hpp"
-#include "cleProcessor.hpp"
+#include "array.hpp"
+#include "backend.hpp"
+#include "device.hpp"
+#include "utils.hpp"
 
-class ProcessorJ
+class BackendJ
 {
-    friend class BufferJ;
-    friend class MemoryJ;
-
-private:
-    cle::Processor proc;
-    ProcessorJ(const cle::Processor &proc);
-
 public:
-    ProcessorJ();
-    ProcessorJ(const std::string &name);
-    std::vector<std::string> getAvailableDevices();
-    void setDevice(const std::string &name);
-    std::string getDevice();
-
-    cle::Processor get() const;
-    std::shared_ptr<cle::Processor> getShared() const;
+    static void setBackend(const std::string &backendName);
 };
 
-class BufferJ
+class DeviceJ
 {
-    friend class MemoryJ;
+    friend class BackendJ;
 
 private:
-    cle::Image buffer;
-    BufferJ(const cle::Image &buffer);
+    std::shared_ptr<cle::Device> device_;
 
 public:
-    BufferJ();
+    DeviceJ();
+
+    static std::vector<std::string> getAvailableDevices(const std::string &deviceType = "all");
+
+    void setDevice(const std::string &deviceName = "", const std::string &deviceType = "all");
+    std::string getName();
+    std::string getInfo();
+
+    std::shared_ptr<cle::Device> get() const;
+};
+class ArrayJ
+{
+
+private:
+    std::shared_ptr<cle::Array> array_;
+
+    friend class MemoryJ;
+
+protected:
+    static ArrayJ create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device);
+    void write(void *data) const;
+    void read(void *data) const;
+
+public:
+    ArrayJ() = default;
+    ArrayJ(const std::shared_ptr<cle::Array> &array);
 
     size_t getWidth();
     size_t getHeight();
     size_t getDepth();
-    void getShape(size_t *shape);
     unsigned int getDimension();
 
     std::string getDataType();
@@ -50,23 +61,22 @@ public:
     std::string getDevice();
 
     void fillMemory(float value);
-    void copyDataTo(BufferJ &dst);
+    void copyDataTo(ArrayJ &dst);
 
-    cle::Image get() const;
-    std::shared_ptr<cle::Image> getShared() const;
+    std::shared_ptr<cle::Array> get() const;
 };
 
 class MemoryJ
 {
 public:
-    static BufferJ makeFloatBuffer(const ProcessorJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type);
-    static BufferJ makeIntBuffer(const ProcessorJ &device, const size_t &width, const size_t &height, const size_t &depth, const std::string &memory_type);
+    static ArrayJ makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
 
-    static void writeFloatBuffer(const BufferJ &buffer, float *data, const size_t &size);
-    static void writeIntBuffer(const BufferJ &buffer, int *data, const size_t &size);
+    static void writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
+    static void writeIntBuffer(const ArrayJ &array, int *data, const size_t &size);
 
-    static void readFloatBuffer(const BufferJ &buffer, float *data, const size_t &size);
-    static void readIntBuffer(const BufferJ &buffer, int *data, const size_t &size);
+    static void readFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
+    static void readIntBuffer(const ArrayJ &array, int *data, const size_t &size);
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

@@ -108,56 +108,79 @@ public class clesperantoj extends net.clesperanto.presets.clesperantoj {
 // #include <string>
 // #include <vector>
 
-// #include "cleImage.hpp"
-// #include "cleProcessor.hpp"
+// #include "array.hpp"
+// #include "backend.hpp"
+// #include "device.hpp"
+// #include "utils.hpp"
 
-public static class ProcessorJ extends Pointer {
+public static class BackendJ extends Pointer {
     static { Loader.load(); }
-    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public ProcessorJ(Pointer p) { super(p); }
+    /** Default native constructor. */
+    public BackendJ() { super((Pointer)null); allocate(); }
     /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public ProcessorJ(long size) { super((Pointer)null); allocateArray(size); }
+    public BackendJ(long size) { super((Pointer)null); allocateArray(size); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public BackendJ(Pointer p) { super(p); }
+    private native void allocate();
     private native void allocateArray(long size);
-    @Override public ProcessorJ position(long position) {
-        return (ProcessorJ)super.position(position);
+    @Override public BackendJ position(long position) {
+        return (BackendJ)super.position(position);
     }
-    @Override public ProcessorJ getPointer(long i) {
-        return new ProcessorJ((Pointer)this).offsetAddress(i);
+    @Override public BackendJ getPointer(long i) {
+        return new BackendJ((Pointer)this).offsetAddress(i);
     }
 
-    public ProcessorJ() { super((Pointer)null); allocate(); }
-    private native void allocate();
-    public ProcessorJ(@StdString String name) { super((Pointer)null); allocate(name); }
-    private native void allocate(@StdString String name);
-    public ProcessorJ(@StdString BytePointer name) { super((Pointer)null); allocate(name); }
-    private native void allocate(@StdString BytePointer name);
-    public native @ByVal StringVector getAvailableDevices();
-    public native void setDevice(@StdString String name);
-    public native void setDevice(@StdString BytePointer name);
-    public native @StdString String getDevice();
+    public static native void setBackend(@StdString String backendName);
+    public static native void setBackend(@StdString BytePointer backendName);
 }
 
-public static class BufferJ extends Pointer {
+public static class DeviceJ extends Pointer {
     static { Loader.load(); }
     /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
-    public BufferJ(Pointer p) { super(p); }
+    public DeviceJ(Pointer p) { super(p); }
     /** Native array allocator. Access with {@link Pointer#position(long)}. */
-    public BufferJ(long size) { super((Pointer)null); allocateArray(size); }
+    public DeviceJ(long size) { super((Pointer)null); allocateArray(size); }
     private native void allocateArray(long size);
-    @Override public BufferJ position(long position) {
-        return (BufferJ)super.position(position);
+    @Override public DeviceJ position(long position) {
+        return (DeviceJ)super.position(position);
     }
-    @Override public BufferJ getPointer(long i) {
-        return new BufferJ((Pointer)this).offsetAddress(i);
+    @Override public DeviceJ getPointer(long i) {
+        return new DeviceJ((Pointer)this).offsetAddress(i);
     }
 
-    public BufferJ() { super((Pointer)null); allocate(); }
+    public DeviceJ() { super((Pointer)null); allocate(); }
+    private native void allocate();
+
+    public static native @ByVal StringVector getAvailableDevices(@StdString String deviceType/*="all"*/);
+    public static native @ByVal StringVector getAvailableDevices();
+    public static native @ByVal StringVector getAvailableDevices(@StdString BytePointer deviceType/*="all"*/);
+
+    public native void setDevice(@StdString String deviceName/*=""*/, @StdString String deviceType/*="all"*/);
+    public native void setDevice();
+    public native void setDevice(@StdString BytePointer deviceName/*=""*/, @StdString BytePointer deviceType/*="all"*/);
+    public native @StdString String getName();
+    public native @StdString String getInfo();
+}
+public static class ArrayJ extends Pointer {
+    static { Loader.load(); }
+    /** Pointer cast constructor. Invokes {@link Pointer#Pointer(Pointer)}. */
+    public ArrayJ(Pointer p) { super(p); }
+    /** Native array allocator. Access with {@link Pointer#position(long)}. */
+    public ArrayJ(long size) { super((Pointer)null); allocateArray(size); }
+    private native void allocateArray(long size);
+    @Override public ArrayJ position(long position) {
+        return (ArrayJ)super.position(position);
+    }
+    @Override public ArrayJ getPointer(long i) {
+        return new ArrayJ((Pointer)this).offsetAddress(i);
+    }
+
+    public ArrayJ() { super((Pointer)null); allocate(); }
     private native void allocate();
 
     public native @Cast("size_t") long getWidth();
     public native @Cast("size_t") long getHeight();
     public native @Cast("size_t") long getDepth();
-    public native void getShape(@Cast("size_t*") SizeTPointer shape);
     public native @Cast("unsigned int") int getDimension();
 
     public native @StdString String getDataType();
@@ -165,7 +188,7 @@ public static class BufferJ extends Pointer {
     public native @StdString String getDevice();
 
     public native void fillMemory(float value);
-    public native void copyDataTo(@ByRef BufferJ dst);
+    public native void copyDataTo(@ByRef ArrayJ dst);
 }
 
 public static class MemoryJ extends Pointer {
@@ -185,24 +208,24 @@ public static class MemoryJ extends Pointer {
         return new MemoryJ((Pointer)this).offsetAddress(i);
     }
 
-    public static native @ByVal BufferJ makeFloatBuffer(@Const @ByRef ProcessorJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString String memory_type);
-    public static native @ByVal BufferJ makeFloatBuffer(@Const @ByRef ProcessorJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString BytePointer memory_type);
-    public static native @ByVal BufferJ makeIntBuffer(@Const @ByRef ProcessorJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString String memory_type);
-    public static native @ByVal BufferJ makeIntBuffer(@Const @ByRef ProcessorJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @StdString BytePointer memory_type);
+    public static native @ByVal ArrayJ makeFloatBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString String memory_type);
+    public static native @ByVal ArrayJ makeFloatBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString BytePointer memory_type);
+    public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString String memory_type);
+    public static native @ByVal ArrayJ makeIntBuffer(@Const @ByRef DeviceJ device, @Cast("const size_t") long width, @Cast("const size_t") long height, @Cast("const size_t") long depth, @Cast("const size_t") long dimension, @StdString BytePointer memory_type);
 
-    public static native void writeFloatBuffer(@Const @ByRef BufferJ buffer, FloatPointer data, @Cast("const size_t") long size);
-    public static native void writeFloatBuffer(@Const @ByRef BufferJ buffer, FloatBuffer data, @Cast("const size_t") long size);
-    public static native void writeFloatBuffer(@Const @ByRef BufferJ buffer, float[] data, @Cast("const size_t") long size);
-    public static native void writeIntBuffer(@Const @ByRef BufferJ buffer, IntPointer data, @Cast("const size_t") long size);
-    public static native void writeIntBuffer(@Const @ByRef BufferJ buffer, IntBuffer data, @Cast("const size_t") long size);
-    public static native void writeIntBuffer(@Const @ByRef BufferJ buffer, int[] data, @Cast("const size_t") long size);
+    public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, FloatPointer data, @Cast("const size_t") long size);
+    public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, FloatBuffer data, @Cast("const size_t") long size);
+    public static native void writeFloatBuffer(@Const @ByRef ArrayJ array, float[] data, @Cast("const size_t") long size);
+    public static native void writeIntBuffer(@Const @ByRef ArrayJ array, IntPointer data, @Cast("const size_t") long size);
+    public static native void writeIntBuffer(@Const @ByRef ArrayJ array, IntBuffer data, @Cast("const size_t") long size);
+    public static native void writeIntBuffer(@Const @ByRef ArrayJ array, int[] data, @Cast("const size_t") long size);
 
-    public static native void readFloatBuffer(@Const @ByRef BufferJ buffer, FloatPointer data, @Cast("const size_t") long size);
-    public static native void readFloatBuffer(@Const @ByRef BufferJ buffer, FloatBuffer data, @Cast("const size_t") long size);
-    public static native void readFloatBuffer(@Const @ByRef BufferJ buffer, float[] data, @Cast("const size_t") long size);
-    public static native void readIntBuffer(@Const @ByRef BufferJ buffer, IntPointer data, @Cast("const size_t") long size);
-    public static native void readIntBuffer(@Const @ByRef BufferJ buffer, IntBuffer data, @Cast("const size_t") long size);
-    public static native void readIntBuffer(@Const @ByRef BufferJ buffer, int[] data, @Cast("const size_t") long size);
+    public static native void readFloatBuffer(@Const @ByRef ArrayJ array, FloatPointer data, @Cast("const size_t") long size);
+    public static native void readFloatBuffer(@Const @ByRef ArrayJ array, FloatBuffer data, @Cast("const size_t") long size);
+    public static native void readFloatBuffer(@Const @ByRef ArrayJ array, float[] data, @Cast("const size_t") long size);
+    public static native void readIntBuffer(@Const @ByRef ArrayJ array, IntPointer data, @Cast("const size_t") long size);
+    public static native void readIntBuffer(@Const @ByRef ArrayJ array, IntBuffer data, @Cast("const size_t") long size);
+    public static native void readIntBuffer(@Const @ByRef ArrayJ array, int[] data, @Cast("const size_t") long size);
 }
 
 // #endif // __INCLUDE_CLESPERANTOJ_HPP

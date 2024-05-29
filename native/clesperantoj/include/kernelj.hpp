@@ -6,8 +6,10 @@
 class Tier1
 {
 public:
-    static void addImageAndScalar(const ProcessorJ &proc, const BufferJ &src, const BufferJ &dst, const float &scalar);
-    static void gaussianBlur(const ProcessorJ &proc, const BufferJ &src, const BufferJ &dst, const float &sigmaX, const float &sigmaY, const float &sigmaZ);
+    static ArrayJ absolute(const DeviceJ &dev, const ArrayJ &src, ArrayJ &dst);
+    static ArrayJ absolute(const DeviceJ &dev, const ArrayJ &src);
+    static void gaussianBlur(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst, const float &sigmaX, const float &sigmaY, const float &sigmaZ);
+    static void addImageAndScalar(const DeviceJ &dev, const ArrayJ &src, const ArrayJ &dst, const float &scalar);
 };
 
 #endif // __INCLUDE_KERNELJ_HPP

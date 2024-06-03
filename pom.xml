@@ -215,6 +215,7 @@
 						<includePath>${project.build.sourceDirectory}</includePath>
 						<includePath>${basedir}/native/clesperantoj/include</includePath>
 						<includePath>${basedir}/lib/${folder.name}/include/CLIc</includePath>
+						<includePath>${basedir}/lib/${folder.name}/include</includePath>
 					</includePaths>
 					<linkPaths>
 						<linkPath>${basedir}/lib/${folder.name}/</linkPath>

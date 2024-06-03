@@ -101,7 +101,7 @@
 
 
 
-    <dependencies> 
+    <dependencies>
         <!-- ImageJ dependencies -->
 		<dependency>
 			<groupId>net.imagej</groupId>
@@ -152,7 +152,7 @@
 							<workingDirectory>${project.basedir}/native</workingDirectory>
 						</configuration>
 					</execution>
-				</executions> 
+				</executions>
 			</plugin>
 	        <plugin>
 	       		<groupId>org.codehaus.mojo</groupId>
@@ -223,14 +223,14 @@
 						<!-- link path to the OpenCL library
 						This provide the library path for javacpp to link to.
 						It (should) avoid the need to add the linkpath in the presets.
-						NB: Only needed on Windows unless the LIB env var contains the 
+						NB: Only needed on Windows unless the LIB env var contains the
 						path to OpenCL lib  and teh path to Windows Kit-->
 					</linkPaths>
 					<copyLibs>true</copyLibs>
 				</configuration>
-		
+
 				<executions>
-		
+
 					<!--  1. Parse the c++ header files specified in java files to generate java wrapper classes -->
 				  	<execution>
 						<id>javacpp-parser</id>
@@ -246,7 +246,7 @@
 							</classOrPackageNames>
 						</configuration>
 					</execution>
-		
+
 		             <!-- 2. Process classes generated in step 1 to create c++ wrapper library -->
 				  	<execution>
 						<id>process-classes</id>
@@ -260,11 +260,11 @@
 								<classOrPackageName>net.clesperanto.wrapper.kernelj</classOrPackageName>
 							</classOrPackageNames>
 						</configuration>
-					</execution> 
-		
+					</execution>
+
 		        </executions>
 			</plugin>
-			
+
 			<!-- Test plugin -->
 	        <plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -274,7 +274,7 @@
 					<argLine>-Xmx2G</argLine>
 				</configuration>
 			</plugin>
-		
+
 		</plugins>
 	</build>
 

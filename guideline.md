@@ -17,7 +17,7 @@ We will need the following tools installed and available in the path:
 
 Most of those software will propose to be added to the path during installation. If not, you will need to add them manually.
 
-#### **_For windows:_**  
+#### **_For windows:_**
 To do so, open the "System" control panel, then "Advanced system settings", then "Environment Variables". In the "System variables" section, edit the "Path" variable and add the path to the executables.
 E.g. for maven, you will need to add `C:\Program Files\apache-maven-3.6.0\bin` to the path.
 
@@ -55,7 +55,7 @@ The project is structured as follow:
 
 * Sometimes we had to make a trivial change to [clesperantoj](https://github.com/clEsperanto/clesperantoj_prototype/blob/javacpp/src/main/java/net/clesperanto/clicwrapper/clesperantoj.java), like adding a space, to activate the parser that generated the java wrapper.)
 
-* In some cases, the build fails when executed the first time. 
+* In some cases, the build fails when executed the first time.
 You find a potential workaround explained [here](https://github.com/clEsperanto/clesperantoj_prototype/issues/4#issuecomment-1184768674).
 
 * You may need to add the src/gen/java path to the java build path in your IDE.

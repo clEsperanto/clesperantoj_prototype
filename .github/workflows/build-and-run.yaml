@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-14]
+        os: [ubuntu-latest, macos-13, macos-14]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -25,16 +25,6 @@ jobs:
     - name: Install openCL on Ubuntu
       if: runner.os == 'Linux'
       run: sudo apt install ocl-icd-opencl-dev
-    - name: Check memory and swap (macOS)
-      if: runner.os == 'macOS'
-      run: |
-        echo "Checking RAM and Swap for macOS Runner"
-        vm_stat
-        sysctl vm.swapusage
-    - name: Check architecture (macOS)
-      if: runner.os == 'macOS'
-      run: |
-        uname -m
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'
       run: |
@@ -44,8 +34,14 @@ jobs:
         sudo mkswap /swapfile
         sudo swapon /swapfile
         sudo swapon --show
-    - name: Build with Maven
+    - name: Build with Maven on x86_64 based hosts
+      if: matrix.os != 'macos-14'
       run:  sudo mvn clean install
+    - name: Build with Maven on arm64 host (memory constrained)
+      if: matrix.os == 'macos-14'
+      run: |
+        export MAVEN_OPTS="-Xmx6g -XX:+UseG1GC"
+        mvn clean install
 
     - name: Run Java class
       run: java -cp target/classes com.example.YourMainClass

@@ -25,7 +25,7 @@ jobs:
     - name: Check installation
       run: dpkg -L ocl-icd-opencl-dev
     - name: Build with Maven
-      run: mvn clean install
+      run: MAVEN_OPTS="-Xmx1024m -Xms512m" mvn clean install
 
     - name: Run Java class
       run: java -cp target/classes com.example.YourMainClass

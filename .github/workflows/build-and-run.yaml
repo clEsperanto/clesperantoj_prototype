@@ -34,7 +34,7 @@ jobs:
     - name: Install openCL runtime on Windows
       if: runner.os == 'Windows'
       run: |
-        curl -L -o "opencl_runtime_installer.exe" "https://downloadcenter.intel.com/download/XYZ/w_opencl_runtime_p_2024.1.0.968.exe"
+        curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
         .\opencl_runtime_installer.exe /S /norestart
 
     - name: Increase swapfile on Ubuntu

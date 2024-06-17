@@ -24,8 +24,19 @@ jobs:
       run: sudo apt install ocl-icd-opencl-dev
     - name: Check installation
       run: dpkg -L ocl-icd-opencl-dev
+    - name: Check available memory
+      run: |
+        df -h
+    - name: Increase swapfile
+      run: |
+        sudo swapoff -a
+        sudo fallocate -l 15G /swapfile
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        sudo swapon --show
     - name: Build with Maven
-      run: MAVEN_OPTS="-Xmx1024m -Xms512m" mvn clean install
+      run:  sudo mvn clean install
 
     - name: Run Java class
       run: java -cp target/classes com.example.YourMainClass

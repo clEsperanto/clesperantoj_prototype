@@ -2,9 +2,9 @@ name: Build and Run
 
 on:
   push:
-    branches: [ use-new-backend-gpu ]
+    branches: [ carlos-ci ]
   pull_request:
-    branches: [ use-new-backend-gpu ]
+    branches: [ carlos-ci ]
 
 jobs:
   build:

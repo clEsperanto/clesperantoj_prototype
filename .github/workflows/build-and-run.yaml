@@ -37,11 +37,14 @@ jobs:
 #        curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
 #        Start-Process -FilePath ".\opencl_runtime_installer.exe" -ArgumentList '/S', '/norestart' -NoNewWindow -Wait
 
-    - name: Install LLVM and Clang
+    - name: Install Oclgrind
+      if: runner.os == 'Windows'
       uses: actions/checkout@v3
       with:
         repository: jrprice/Oclgrind
-        ref: 'master'  # or whatever branch/tag you need
+        ref: 'master'
+
+    - name: Install LLVM and Clang
       if: runner.os == 'Windows'
       run: |
         choco install llvm --version=11.0

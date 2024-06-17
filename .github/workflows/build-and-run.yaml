@@ -35,7 +35,7 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
-        .\opencl_runtime_installer.exe /S /norestart
+        Start-Process -FilePath ".\opencl_runtime_installer.exe" -ArgumentList '/S', '/norestart' -NoNewWindow -Wait
 
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'

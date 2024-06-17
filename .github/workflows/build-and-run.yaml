@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: [ubuntu-latest, macos-latest]
 
     steps:
     - uses: actions/checkout@v2
@@ -18,16 +18,11 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Find available GPUs
-      run: lspci | grep -i vga
-    - name: Install openCL
+    - name: Install openCL on Ubuntu
+      if: matrix.platform_name == 'Ubuntu'
       run: sudo apt install ocl-icd-opencl-dev
-    - name: Check installation
-      run: dpkg -L ocl-icd-opencl-dev
-    - name: Check available memory
-      run: |
-        df -h
-    - name: Increase swapfile
+    - name: Increase swapfile on Ubuntu
+      if: matrix.platform_name == 'Ubuntu'
       run: |
         sudo swapoff -a
         sudo fallocate -l 15G /swapfile

@@ -8,7 +8,10 @@ on:
 
 jobs:
   build:
-    runs-on: [ubuntu-latest, macos-latest]
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v2
@@ -19,10 +22,10 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
     - name: Install openCL on Ubuntu
-      if: matrix.platform_name == 'Ubuntu'
+      if: runner.os == 'Linux'
       run: sudo apt install ocl-icd-opencl-dev
     - name: Increase swapfile on Ubuntu
-      if: matrix.platform_name == 'Ubuntu'
+      if: runner.os == 'Linux'
       run: |
         sudo swapoff -a
         sudo fallocate -l 15G /swapfile

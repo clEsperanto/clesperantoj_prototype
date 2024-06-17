@@ -23,10 +23,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Install openCL on Ubuntu
-      if: runner.os == 'Linux'
-      run: sudo apt install ocl-icd-opencl-dev
-
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'
       run: |

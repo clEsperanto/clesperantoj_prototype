@@ -22,9 +22,11 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
+
     - name: Install openCL on Ubuntu
       if: runner.os == 'Linux'
       run: sudo apt install ocl-icd-opencl-dev
+
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'
       run: |
@@ -34,16 +36,19 @@ jobs:
         sudo mkswap /swapfile
         sudo swapon /swapfile
         sudo swapon --show
+
     - name: Build with Maven on x86_64 based hosts
       if: matrix.os != 'macos-14'
       run:  sudo mvn clean install
+      
     - name: Build with Maven on arm64 host (memory constrained)
       if: matrix.os == 'macos-14'
       run: |
         export MAVEN_OPTS="-Xmx6g -XX:+UseG1GC"
         mvn clean install
 
-    - name: Run Java class
+    - name: Run Java class (only possible on MacOS)
+      if: contains(matrix.os, 'macos')
       run: |
         mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
         java -cp target/classes:$(cat classpath.txt) net.clesperanto.ClesperantoJ

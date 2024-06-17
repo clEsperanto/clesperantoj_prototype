@@ -37,16 +37,9 @@ jobs:
         sudo swapon /swapfile
         sudo swapon --show
 
-    - name: Build with Maven on x86_64 based hosts
-      if: matrix.os != 'macos-14'
+    - name: Build with Maven 
       run:  sudo mvn clean install
       shell: bash
-      
-    - name: Build with Maven on arm64 host (memory constrained)
-      if: matrix.os == 'macos-14'
-      run: |
-        export MAVEN_OPTS="-Xmx6g -XX:+UseG1GC"
-        mvn clean install
 
     - name: Run Java class (only possible on MacOS)
       if: contains(matrix.os, 'macos')

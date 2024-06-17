@@ -31,6 +31,12 @@ jobs:
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
 
+    - name: Install openCL runtime on Windows
+      if: runner.os == 'Windows'
+      run: |
+        curl -L -o "opencl_runtime_installer.exe" "https://downloadcenter.intel.com/download/XYZ/w_opencl_runtime_p_2024.1.0.968.exe"
+        .\opencl_runtime_installer.exe /S /norestart
+
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'
       run: |

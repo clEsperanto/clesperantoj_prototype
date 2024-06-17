@@ -44,4 +44,6 @@ jobs:
         mvn clean install
 
     - name: Run Java class
-      run: java -cp target/classes com.example.YourMainClass
+      run: |
+        mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
+        java -cp target/classes:$(cat classpath.txt) net.clesperanto.ClesperantoJ

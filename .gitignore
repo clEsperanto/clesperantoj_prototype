@@ -14,20 +14,20 @@ CLIJ*.txt
 *~*
 *.swp
 
-# Maven 
+# Maven
 target/
 
-# Eclipse 
+# Eclipse
 .classpath
 .project
 .settings/
 /.metadata
 /.recommenders
 
-# vscode 
+# vscode
 .vscode/
 
-# binaries 
+# binaries
 *.class
 *.exp
 *.obj
@@ -36,7 +36,7 @@ target/
 # java cpp
 cppbuild
 
-# CMake 
+# CMake
 CMakeCache.txt
 CMakeFiles
 CMakeScripts
@@ -56,4 +56,3 @@ __pycache__/
 *.egg-info
 python/dist
 python/lib
-

@@ -6,4 +6,3 @@ message(STATUS "ClesperantoJ and TEST")
 
 add_subdirectory(clesperantoj)
 add_subdirectory(clesperantoj_test)
-

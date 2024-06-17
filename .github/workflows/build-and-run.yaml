@@ -31,11 +31,24 @@ jobs:
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Install openCL runtime on Windows
+#    - name: Install openCL runtime on Windows
+#      if: runner.os == 'Windows'
+#     run: |
+#        curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
+#        Start-Process -FilePath ".\opencl_runtime_installer.exe" -ArgumentList '/S', '/norestart' -NoNewWindow -Wait
+
+    - name: Install LLVM and Clang
+      uses: actions/checkout@v3
+      with:
+        repository: jrprice/Oclgrind
+        ref: 'master'  # or whatever branch/tag you need
       if: runner.os == 'Windows'
       run: |
-        curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
-        Start-Process -FilePath ".\opencl_runtime_installer.exe" -ArgumentList '/S', '/norestart' -NoNewWindow -Wait
+        choco install llvm --version=11.0
+        echo "LLVM_DIR=C:/ProgramData/chocolatey/lib/llvm/tools/llvm/lib/cmake/llvm" >> $GITHUB_ENV
+        cmake -S . -B build -G "Ninja" -DLLVM_DIR=${LLVM_DIR}
+        cmake --build build
+
 
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'

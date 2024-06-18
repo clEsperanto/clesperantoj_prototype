@@ -17,14 +17,14 @@ case $PLATFORM in
             #    -DCMAKE_CXX_COMPILER="/usr/bin/g++" \
             #    -DCMAKE_CUDA_HOST_COMPILER="/usr/bin/g++" \
             #    -DOPENCL_INCLUDE_DIR="/usr/local/cuda/include/" \
-		# -DCLFFT_LIBRARY_DIR="/opt/OpenCL/clFFT-2.12.2-Linux-x64/lib64/" .. 
-        make -j 
+		# -DCLFFT_LIBRARY_DIR="/opt/OpenCL/clFFT-2.12.2-Linux-x64/lib64/" ..
+        make -j
         make install
         ;;
     macosx-*)
         # the following line might not be necessary if make would be properly installed in the path
         # CMAKE=/Applications/CMake.app/Contents/bin/cmake
-        
+
         $CMAKE -DCMAKE_BUILD_TYPE=Release \
                -DCMAKE_INSTALL_PREFIX="../../../lib/macosx/" ..
         #        -DCMAKE_CXX_COMPILER="g++" \
@@ -41,7 +41,7 @@ case $PLATFORM in
             #   -DOpenCL_LIBRARY="C:/Program Files (x86)/OCL_SDK_Light/lib/x86_64/opencl.lib" ..
             #    -DCLIC_INCLUDE_DIR="../../../CLIc_prototype/clic/include/core" \
             #    -DOCLCL_INCLUDE_DIR="../../../CLIc_prototype/thirdparty/opencl/ocl-clhpp/include" \
-		    #    -DCLFFT_LIBRARY_DIR="C:/OpenCL/clFFT-2.12.2-Windows-x64/lib64/import/" .. 
+		    #    -DCLFFT_LIBRARY_DIR="C:/OpenCL/clFFT-2.12.2-Windows-x64/lib64/import/" ..
         nmake
         nmake install
         ;;
@@ -49,5 +49,3 @@ case $PLATFORM in
         echo "Error: Platform \"$PLATFORM\" is not supported"
         ;;
 esac
-
-

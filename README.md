@@ -1,6 +1,6 @@
 
 
-# clEsperantoJ 
+# clEsperantoJ
 
 clEsperantoJ is the Java package of [clEsperanto] - a multi-language framework for GPU-accelerated image processing. It relies on a familly of [OpenCL kernels] originated from [CLIJ]. This package is developped in Java and C++ wrapped using JavaCPP, and uses the C++ [CLIc] library as a processing backend.
 
@@ -22,12 +22,12 @@ A certain diversity of ressources will be required to build clesperantoJ from so
 
 #### Install a C++ compiler and CMake
 
-For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with Windows C++ development selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).  
-For __MacOS__, you will need to install the command-line tools from xcode by running this command in a prompt: `xcode-select --install`.  
-For __Unix__, similarly to OSX, you will need to install the `build-essential` package by running this command in a prompt: `sudo apt install build-essential`.  
+For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with Windows C++ development selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).
+For __MacOS__, you will need to install the command-line tools from xcode by running this command in a prompt: `xcode-select --install`.
+For __Unix__, similarly to OSX, you will need to install the `build-essential` package by running this command in a prompt: `sudo apt install build-essential`.
 
 CMake can be install by downloading it from its official website or using package managed like brew or apt for MacOS and Ubuntu.
-You will need to install cmake with its CLI (Command Line Interface). 
+You will need to install cmake with its CLI (Command Line Interface).
 You can test if installed by calling the command `cmake --version` in a command prompt.
 
 #### Java Development Kit and Maven

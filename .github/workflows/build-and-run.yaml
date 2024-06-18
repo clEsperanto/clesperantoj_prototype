@@ -31,6 +31,11 @@ jobs:
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
 
+    - name: Check GPU Details
+      if: runner.os == 'Windows'
+      run: |
+        Get-WmiObject Win32_VideoController | Format-Table Name, Description, DeviceID, AdapterRAM, DriverVersion -AutoSize
+      shell: powershell
 #    - name: Install openCL runtime on Windows
 #      if: runner.os == 'Windows'
 #     run: |

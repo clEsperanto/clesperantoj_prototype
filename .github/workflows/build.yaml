@@ -1,4 +1,4 @@
-name: Build and Run
+name: build
 
 on:
   push:
@@ -28,10 +28,6 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Install openCL on Ubuntu
-      if: runner.os == 'Linux'
-      run: sudo apt install ocl-icd-opencl-dev
-
     - name: Set up MSVC compiler environment on Windows
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
@@ -47,12 +43,6 @@ jobs:
         cmake -D CMAKE_PREFIX_PATH="./OpenCL-Headers" -D OPENCL_ICD_LOADER_HEADERS_DIR="./OpenCL-Headers/" -S "./OpenCL-ICD-Loader" -B "./OpenCL-ICD-Loader/build" -A x64
         cmake --build "./OpenCL-ICD-Loader/build" --parallel 6 --target install --config Release
       shell: bash -l {0}
-#    - name: Install openCL runtime on Windows
-#      if: runner.os == 'Windows'
-#     run: |
-#        curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
-#        Start-Process -FilePath ".\opencl_runtime_installer.exe" -ArgumentList '/S', '/norestart' -NoNewWindow -Wait
-
 
     - name: Increase swapfile on Ubuntu
       if: runner.os == 'Linux'
@@ -63,6 +53,10 @@ jobs:
         sudo mkswap /swapfile
         sudo swapon /swapfile
         sudo swapon --show
+
+    - name: Install openCL on Ubuntu
+      if: runner.os == 'Linux'
+      run: sudo apt install ocl-icd-opencl-dev
 
     - name: Build with Maven 
       run:  mvn clean install

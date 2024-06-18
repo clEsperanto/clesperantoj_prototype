@@ -16,7 +16,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-13, windows-latest] #  macos-14,
+        name: [ubuntu, windows, macos]
+        include:
+          - name: ubuntu
+            os: ubuntu-latest
+            c-compiler: "gcc"
+            cxx-compiler: "g++"
+            cmake-build-type: "Release"
+            cmake-build-flag: ""
+          - name: windows
+            os: windows-latest
+            c-compiler: "cl.exe"
+            cxx-compiler: "cl.exe"
+            cmake-build-type: "Release"
+            cmake-build-flag: "-A x64"
+          - name: macos
+            os: macos-13
+            c-compiler: "clang"
+            cxx-compiler: "clang++"
+            cmake-build-type: "Release"
+            cmake-build-flag: ""
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -28,9 +47,9 @@ jobs:
         java-version: '11'
         distribution: 'adopt'
 
-    - name: Set up MSVC compiler environment on Windows
-      if: runner.os == 'Windows'
-      uses: ilammy/msvc-dev-cmd@v1
+#    - name: Set up MSVC compiler environment on Windows
+#      if: runner.os == 'Windows'
+#      uses: ilammy/msvc-dev-cmd@v1
 
     - name: Install ocl-icd-loader - windows
       if: runner.os == 'Windows'

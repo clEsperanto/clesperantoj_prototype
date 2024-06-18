@@ -31,10 +31,26 @@ jobs:
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Check GPU Details
+    - name: Check OpenCL ICD Loader
       if: runner.os == 'Windows'
       run: |
-        Get-WmiObject Win32_VideoController | Format-Table Name, Description, DeviceID, AdapterRAM, DriverVersion -AutoSize
+        $openclDllPath = "C:\Windows\System32\OpenCL.dll"
+        if (Test-Path $openclDllPath) {
+          Write-Output "OpenCL.dll is present at $openclDllPath"
+          
+          # Optional: Check registry for OpenCL vendors
+          $openclVendors = Get-ChildItem -Path "HKLM:\SOFTWARE\Khronos\OpenCL\Vendors" -ErrorAction SilentlyContinue
+          if ($openclVendors) {
+            Write-Output "OpenCL vendors found in registry:"
+            $openclVendors | ForEach-Object {
+              Write-Output $_.Name
+            }
+          } else {
+            Write-Output "No OpenCL vendors found in the registry."
+          }
+        } else {
+          Write-Output "OpenCL.dll is not present in System32."
+        }
       shell: powershell
 #    - name: Install openCL runtime on Windows
 #      if: runner.os == 'Windows'

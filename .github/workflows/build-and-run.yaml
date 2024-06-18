@@ -47,7 +47,6 @@ jobs:
     - name: Install LLVM and Clang
       if: runner.os == 'Windows'
       run: |
-        echo "LLVM_DIR=C:/ProgramData/chocolatey/lib/llvm/tools/llvm/lib/cmake/llvm" >> $GITHUB_ENV
         mkdir build
         cmake -S . -B build -G "Ninja" -DLLVM_DIR=${LLVM_DIR}
         cmake --build build

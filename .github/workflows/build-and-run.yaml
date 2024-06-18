@@ -31,46 +31,22 @@ jobs:
       if: runner.os == 'Windows'
       uses: ilammy/msvc-dev-cmd@v1
 
-    - name: Check OpenCL ICD Loader
-      if: runner.os == 'Windows'
+    - name: Install ocl-icd-loader - windows
+      if: matrix.os == 'windows-latest'
       run: |
-        $openclDllPath = "C:\Windows\System32\OpenCL.dll"
-        if (Test-Path $openclDllPath) {
-          Write-Output "OpenCL.dll is present at $openclDllPath"
-          
-          # Optional: Check registry for OpenCL vendors
-          $openclVendors = Get-ChildItem -Path "HKLM:\SOFTWARE\Khronos\OpenCL\Vendors" -ErrorAction SilentlyContinue
-          if ($openclVendors) {
-            Write-Output "OpenCL vendors found in registry:"
-            $openclVendors | ForEach-Object {
-              Write-Output $_.Name
-            }
-          } else {
-            Write-Output "No OpenCL vendors found in the registry."
-          }
-        } else {
-          Write-Output "OpenCL.dll is not present in System32."
-        }
-      shell: powershell
+        cd ..
+        git clone --branch ${{ env.opencl-icd-loader-git-tag }} https://github.com/KhronosGroup/OpenCL-ICD-Loader
+        git clone --branch ${{ env.opencl-headers-git-tag }} https://github.com/KhronosGroup/OpenCL-Headers
+        cmake -S "./OpenCL-Headers" -B "./OpenCL-Headers/build"
+        cmake --build "./OpenCL-Headers/build" --parallel 6 --target install
+        cmake -D CMAKE_PREFIX_PATH="./OpenCL-Headers" -D OPENCL_ICD_LOADER_HEADERS_DIR="./OpenCL-Headers/" -S "./OpenCL-ICD-Loader" -B "./OpenCL-ICD-Loader/build" -A x64
+        cmake --build "./OpenCL-ICD-Loader/build" --parallel 6 --target install --config Release
+      shell: bash -l {0}
 #    - name: Install openCL runtime on Windows
 #      if: runner.os == 'Windows'
 #     run: |
 #        curl -L -o opencl_runtime_installer.exe "https://registrationcenter-download.intel.com/akdlm/IRC_NAS/0e6849e6-2c56-480b-afcf-be8331d5c4f6-opencl/w_opencl_runtime_p_2024.1.0.968.exe"
 #        Start-Process -FilePath ".\opencl_runtime_installer.exe" -ArgumentList '/S', '/norestart' -NoNewWindow -Wait
-
-    - name: Install Oclgrind
-      if: runner.os == 'Windows'
-      uses: actions/checkout@v3
-      with:
-        repository: jrprice/Oclgrind
-        ref: 'master'
-
-    - name: Install LLVM and Clang
-      if: runner.os == 'Windows'
-      run: |
-        mkdir build
-        cmake -S . -B build -G "Ninja" -DLLVM_DIR=${LLVM_DIR}
-        cmake --build build
 
 
     - name: Increase swapfile on Ubuntu

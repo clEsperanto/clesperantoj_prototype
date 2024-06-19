@@ -2,9 +2,9 @@ name: build
 
 on:
   push:
-    branches: [ carlos-ci ]
+    branches: [ main ]
   pull_request:
-    branches: [ carlos-ci ]
+    branches: [ main ]
 
 
 env:

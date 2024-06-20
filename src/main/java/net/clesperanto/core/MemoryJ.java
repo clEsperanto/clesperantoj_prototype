@@ -7,6 +7,13 @@ import java.nio.IntBuffer;
 /**
  * Class that provides the utility methods to read and write arrays to the wanted device (GPU)
  */
+/**
+ * TODO other possible methods:
+ * - access a certain position of the array
+ * - do we check that the dimensions of the float buffer or float[] match the ones of the ArrayJ  
+ * 	when doing read or write here? Do we check them on the C side= dp we let them fail?
+ * - method to return a reference to the byte buffer of teh array in the GPU
+ */
 public class MemoryJ {
 	
 	/**

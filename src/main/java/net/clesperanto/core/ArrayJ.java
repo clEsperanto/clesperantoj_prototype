@@ -7,6 +7,7 @@ package net.clesperanto.core;
  * TODO think about possible new methods
  * 
  * - method to modify the data inside the array from this class
+ * - access a certain position of the array
  * - Do we check here if the size of the destination array is compatible for the method {@link #copyDataTo(ArrayJ)}
  * 
  */

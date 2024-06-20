@@ -11,7 +11,7 @@ import net.clesperanto.wrapper.clesperantoj.StringVector;
  */
 public class DeviceJ {
 	
-	private net.clesperanto.wrapper.clesperantoj.DeviceJ jcppDeviceJ;
+	protected net.clesperanto.wrapper.clesperantoj.DeviceJ jcppDeviceJ;
 	
 	/**
 	 * Constructor that initializes the default device

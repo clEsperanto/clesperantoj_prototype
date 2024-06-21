@@ -21,11 +21,26 @@ import net.imglib2.util.Fraction;
  * - define whether the buffers follow big or little endian and whether the copies are c- or fortran order
  * - using array img and blocks copy limits to images whose array size is smaller than the integer max
  */
+/**
+ * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
+ */
 public class Converters {
 	
 	private static String FLOAT32 = "float32";
 	
-	public static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A > arrayJToImgLib2(
+	/** TODO extend to RandomAccessibleInterval
+	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
+	 * Creates a copy of the ArrayJ in the GPU into an ArrayImg in the CPU
+	 * 
+	 * @param <T>
+	 * 	data type of the ImgLib2 ArrayImg
+	 * @param <A>
+	 * 	ImgLib2 data type of the BufferAccess
+	 * @param arrayj
+	 * 	array that is located in the GPU for clesperanto to do some operations
+	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
+	 */
+	public static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A > copyArrayJToImgLib2(
 			ArrayJ arrayj )
 	{
 		String dType = arrayj.getDataType();
@@ -42,7 +57,25 @@ public class Converters {
 		}
 	}
 	
-	public static < T extends NativeType< T > > ArrayJ imgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, String memoryType) {
+	/**
+	 * Copy a {@link RandomAccessibleInterval} on the CPU into an {@link ArrayJ} on the device (GPU) of interest.
+	 * The {@link RandomAccessibleInterval} should have at most 3 dimensions, and the order of the dimensions
+	 * should be [width, height, depth]
+	 * 
+	 * 
+	 * @param <T>
+	 * 	the ImgLib2 data type of the {@link RandomAccessibleInterval}
+	 * @param rai
+	 *  the {@link RandomAccessibleInterval} that is going to be copied into the GPU
+	 * @param device
+	 * 	the device into which the rai is going to be copied
+	 * @param memoryType
+	 * 	the type of memory array that we are working with. The options are image or buffer. For image use the
+	 * 	String "image", for buffer use "buffer"
+	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
+	 */
+	public static < T extends NativeType< T > > 
+		ArrayJ copyImgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, String memoryType) {
 		checkSize(rai);
 		PrimitiveBlocks< T > blocks = PrimitiveBlocks.of( rai );
 		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
@@ -53,7 +86,7 @@ public class Converters {
 		if (rai.getType() instanceof FloatType) {
 			float[] flatArr = new float[(int) totalSize];
 			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
-			ArrayJ arrayJ = MemoryJ.makeFloatBuffer(device, integerDims[0], integerDims[1], integerDims[2], totalSize, memoryType);
+			ArrayJ arrayJ = MemoryJ.makeFloatBuffer(device, rai.dimensionsAsLongArray(), memoryType);
 			MemoryJ.writeFloatBuffer(arrayJ, flatArr, 0);
 			return arrayJ;
 		} else {

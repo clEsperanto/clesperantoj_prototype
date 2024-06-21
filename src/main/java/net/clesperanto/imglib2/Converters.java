@@ -13,6 +13,12 @@ import net.imglib2.img.basictypeaccess.nio.BufferAccess;
 import net.imglib2.img.basictypeaccess.nio.BufferDataAccessFactory;
 import net.imglib2.type.NativeType;
 import net.imglib2.type.NativeTypeFactory;
+import net.imglib2.type.numeric.integer.ByteType;
+import net.imglib2.type.numeric.integer.IntType;
+import net.imglib2.type.numeric.integer.ShortType;
+import net.imglib2.type.numeric.integer.UnsignedByteType;
+import net.imglib2.type.numeric.integer.UnsignedIntType;
+import net.imglib2.type.numeric.integer.UnsignedShortType;
 import net.imglib2.type.numeric.real.FloatType;
 import net.imglib2.util.Fraction;
 
@@ -25,8 +31,14 @@ import net.imglib2.util.Fraction;
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
 public class Converters {
-	
+
 	private static String FLOAT32 = "float32";
+	private static String INT32 = "int32";
+	private static String UINT32 = "uint32";
+	private static String INT16 = "int16";
+	private static String UINT16 = "uint16";
+	private static String INT8 = "int8";
+	private static String UINT8 = "uint8";
 	
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
@@ -52,6 +64,30 @@ public class Converters {
 			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 4);
 			MemoryJ.readFloatBuffer(arrayj, byteBuffer.asFloatBuffer(), 0);
 			return fromBuffer(byteBuffer, (T) new FloatType(), arrayj.getDimensions());
+		} else if (dType.equals(INT32)) {
+			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 4);
+			MemoryJ.readIntBuffer(arrayj, byteBuffer.asIntBuffer(), 0);
+			return fromBuffer(byteBuffer, (T) new IntType(), arrayj.getDimensions());
+		} else if (dType.equals(UINT32)) {
+			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 4);
+			MemoryJ.readUIntBuffer(arrayj, byteBuffer.asIntBuffer(), 0);
+			return fromBuffer(byteBuffer, (T) new UnsignedIntType(), arrayj.getDimensions());
+		} else if (dType.equals(INT16)) {
+			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 2);
+			MemoryJ.readShortBuffer(arrayj, byteBuffer.asShortBuffer(), 0);
+			return fromBuffer(byteBuffer, (T) new ShortType(), arrayj.getDimensions());
+		} else if (dType.equals(UINT16)) {
+			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 2);
+			MemoryJ.readUShortBuffer(arrayj, byteBuffer.asShortBuffer(), 0);
+			return fromBuffer(byteBuffer, (T) new UnsignedShortType(), arrayj.getDimensions());
+		} else if (dType.equals(INT8)) {
+			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims);
+			MemoryJ.readByteBuffer(arrayj, byteBuffer, 0);
+			return fromBuffer(byteBuffer, (T) new ByteType(), arrayj.getDimensions());
+		} else if (dType.equals(UINT8)) {
+			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims);
+			MemoryJ.readUByteBuffer(arrayj, byteBuffer, 0);
+			return fromBuffer(byteBuffer, (T) new UnsignedByteType(), arrayj.getDimensions());
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -88,6 +124,42 @@ public class Converters {
 			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
 			ArrayJ arrayJ = MemoryJ.makeFloatBuffer(device, rai.dimensionsAsLongArray(), memoryType);
 			MemoryJ.writeFloatBuffer(arrayJ, flatArr, 0);
+			return arrayJ;
+		} else if (rai.getType() instanceof IntType) {
+			int[] flatArr = new int[(int) totalSize];
+			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
+			ArrayJ arrayJ = MemoryJ.makeIntBuffer(device, rai.dimensionsAsLongArray(), memoryType);
+			MemoryJ.writeIntBuffer(arrayJ, flatArr, 0);
+			return arrayJ;
+		} else if (rai.getType() instanceof UnsignedIntType) {
+			int[] flatArr = new int[(int) totalSize];
+			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
+			ArrayJ arrayJ = MemoryJ.makeUIntBuffer(device, rai.dimensionsAsLongArray(), memoryType);
+			MemoryJ.writeUIntBuffer(arrayJ, flatArr, 0);
+			return arrayJ;
+		} else if (rai.getType() instanceof ShortType) {
+			short[] flatArr = new short[(int) totalSize];
+			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
+			ArrayJ arrayJ = MemoryJ.makeShortBuffer(device, rai.dimensionsAsLongArray(), memoryType);
+			MemoryJ.writeShortBuffer(arrayJ, flatArr, 0);
+			return arrayJ;
+		} else if (rai.getType() instanceof UnsignedShortType) {
+			short[] flatArr = new short[(int) totalSize];
+			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
+			ArrayJ arrayJ = MemoryJ.makeUShortBuffer(device, rai.dimensionsAsLongArray(), memoryType);
+			MemoryJ.writeUShortBuffer(arrayJ, flatArr, 0);
+			return arrayJ;
+		} else if (rai.getType() instanceof ByteType) {
+			byte[] flatArr = new byte[(int) totalSize];
+			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
+			ArrayJ arrayJ = MemoryJ.makeByteBuffer(device, rai.dimensionsAsLongArray(), memoryType);
+			MemoryJ.writeByteBuffer(arrayJ, flatArr, 0);
+			return arrayJ;
+		} else if (rai.getType() instanceof UnsignedByteType) {
+			byte[] flatArr = new byte[(int) totalSize];
+			blocks.copy( new int[rai.dimensionsAsLongArray().length], flatArr, integerDims );
+			ArrayJ arrayJ = MemoryJ.makeUByteBuffer(device, rai.dimensionsAsLongArray(), memoryType);
+			MemoryJ.writeUByteBuffer(arrayJ, flatArr, 0);
 			return arrayJ;
 		} else {
 			throw new IllegalArgumentException();

@@ -70,13 +70,29 @@ class MemoryJ
 {
 public:
     static ArrayJ makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeUByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeUShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
     static ArrayJ makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static ArrayJ makeUIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
 
     static void writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
+    static void writeByteBuffer(const ArrayJ &array, char *data, const size_t &size);
+    static void writeUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size);
+    static void writeShortBuffer(const ArrayJ &array, short *data, const size_t &size);
+    static void writeUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size);
     static void writeIntBuffer(const ArrayJ &array, int *data, const size_t &size);
+    static void writeUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size);
 
     static void readFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
+    static void readByteBuffer(const ArrayJ &array, char *data, const size_t &size);
+    static void readUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size);
+    static void readShortBuffer(const ArrayJ &array, short *data, const size_t &size);
+    static void readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size);
     static void readIntBuffer(const ArrayJ &array, int *data, const size_t &size);
+    static void readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size);
+    
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

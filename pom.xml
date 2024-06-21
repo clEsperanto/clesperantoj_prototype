@@ -256,8 +256,8 @@
 						</goals>
 						<configuration>
 							<classOrPackageNames>
-								<classOrPackageName>net.clesperanto.wrapper.clesperantoj</classOrPackageName>
-								<classOrPackageName>net.clesperanto.wrapper.kernelj</classOrPackageName>
+								<classOrPackageName>net.clesperanto.jclic</classOrPackageName>
+								<classOrPackageName>net.clesperanto.kernelj</classOrPackageName>
 							</classOrPackageNames>
 						</configuration>
 					</execution>

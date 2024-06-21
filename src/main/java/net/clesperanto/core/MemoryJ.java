@@ -12,7 +12,7 @@ import java.nio.IntBuffer;
  * - access a certain position of the array
  * - do we check that the dimensions of the float buffer or float[] match the ones of the ArrayJ  
  * 	when doing read or write here? Do we check them on the C side= dp we let them fail?
- * - method to return a reference to the byte buffer of teh array in the GPU
+ * - method to return a reference to the byte buffer of the array in the GPU
  */
 public class MemoryJ {
 	
@@ -32,7 +32,7 @@ public class MemoryJ {
 	 * @param depth
 	 * 	the depth of the nd-array created
 	 * @param dimension
-	 * 	the dimensions of the nd-array created, shuould be between 1 and 3
+	 * 	the number of dimensions of the nd-array created, shuould be between 1 and 3
 	 * @param memoryType
 	 * 	whether the array represents an image or not. For the memory type to be image, 
 	 * 	the String should be "image" any other String will be understood as "buffer"
@@ -44,6 +44,33 @@ public class MemoryJ {
 		net.clesperanto.wrapper.clesperantoj.ArrayJ arrayJ = 
 				net.clesperanto.wrapper.clesperantoj.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
+		return new ArrayJ(arrayJ);
+	}
+	
+	/**
+	 * TODO what is the memory type and what are the possibilities
+	 * 
+	 * Create an float array in the wanted device with the wanted dimensions and the 
+	 * memory type (whether it is an image or not).
+	 * The dimensions array should be at least of length 1 and at max of length 3.
+	 * The order of the dimensions should be: [width, height, depth]
+	 * 
+	 * 
+	 * @param device
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * @param dims
+	 * 	the dimensions of the nd-array created
+	 * @param memoryType
+	 * 	whether the array represents an image or not. For the memory type to be image, 
+	 * 	the String should be "image" any other String will be understood as "buffer"
+	 * @return an {@link ArrayJ} that references the float array on the device
+	 */
+	public static ArrayJ makeFloatBuffer(DeviceJ device, long[] dims, String memoryType ) {
+		dims = transformDims(dims);
+		if (memoryType == null) memoryType = "";
+		net.clesperanto.wrapper.clesperantoj.ArrayJ arrayJ = 
+				net.clesperanto.wrapper.clesperantoj.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
 	
@@ -125,7 +152,7 @@ public class MemoryJ {
 	 * @param depth
 	 * 	the depth of the nd-array created
 	 * @param dimension
-	 * 	the dimensions of the nd-array created, shuould be between 1 and 3
+	 * 	the number of dimensions of the nd-array created, shuould be between 1 and 3
 	 * @param memoryType
 	 * 	whether the array represents an image or not. For the memory type to be image, 
 	 * 	the String should be "image" any other String will be understood as "buffer"
@@ -136,6 +163,33 @@ public class MemoryJ {
 		net.clesperanto.wrapper.clesperantoj.ArrayJ arrayJ = 
 				net.clesperanto.wrapper.clesperantoj.MemoryJ.makeIntBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
+		return new ArrayJ(arrayJ);
+	}
+	
+	/**
+	 * TODO what is the memory type and what are the possibilities
+	 * 
+	 * Create an int array in the wanted device with the wanted dimensions and the 
+	 * memory type (whether it is an image or not).
+	 * The dimensions array should be at least of length 1 and at max of length 3.
+	 * The order of the dimensions should be: [width, height, depth]
+	 * 
+	 * 
+	 * @param device
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * @param dims
+	 * 	the dimensions of the nd-array created
+	 * @param memoryType
+	 * 	whether the array represents an image or not. For the memory type to be image, 
+	 * 	the String should be "image" any other String will be understood as "buffer"
+	 * @return an {@link ArrayJ} that references the int array on the device
+	 */
+	public static ArrayJ makeIntBuffer(DeviceJ device, long[] dims, String memoryType ) {
+		dims = transformDims(dims);
+		if (memoryType == null) memoryType = "";
+		net.clesperanto.wrapper.clesperantoj.ArrayJ arrayJ = 
+				net.clesperanto.wrapper.clesperantoj.MemoryJ.makeIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
 	
@@ -199,5 +253,16 @@ public class MemoryJ {
 	 */
 	public static void readIntBuffer(ArrayJ array, int[] data, long size) {
 		net.clesperanto.wrapper.clesperantoj.MemoryJ.readIntBuffer(array.arrayj, data, size);
+	}
+	
+	private static long[] transformDims(long[] dims) {
+		if (dims.length > 3)
+			throw new IllegalArgumentException();
+		else if (dims.length == 0)
+			throw new IllegalArgumentException();
+		else if (dims.length == 1)
+			return new long[] {dims[0], 1, 1};
+		else 
+			return new long[] {dims[0], dims[1], 1};
 	}
 }

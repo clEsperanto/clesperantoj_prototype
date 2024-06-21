@@ -1,6 +1,6 @@
 package net.clesperanto;
 
-import net.clesperanto.wrapper.clesperantoj.StringVector;
+import net.clesperanto.jclic.StringVector;
 
 import java.util.Arrays;
 
@@ -8,12 +8,12 @@ import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
 
-import net.clesperanto.wrapper.clesperantoj.DeviceJ;
-import net.clesperanto.wrapper.clesperantoj.MemoryJ;
-import net.clesperanto.wrapper.clesperantoj.BackendJ;
-import net.clesperanto.wrapper.clesperantoj.ArrayJ;
+import net.clesperanto.jclic.DeviceJ;
+import net.clesperanto.jclic.MemoryJ;
+import net.clesperanto.jclic.BackendJ;
+import net.clesperanto.jclic.ArrayJ;
 
-import net.clesperanto.wrapper.kernelj.Tier1;
+import net.clesperanto.kernelj.Tier1;
 
 public class ClesperantoJ {
 

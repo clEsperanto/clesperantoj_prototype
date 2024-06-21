@@ -4,20 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import net.clesperanto.wrapper.clesperantoj.StringVector;
+import net.clesperanto.jclic.StringVector;
 
 /**
  * Class to interact with the devide that is going to be used to do the operations
  */
 public class DeviceJ {
 	
-	protected net.clesperanto.wrapper.clesperantoj.DeviceJ jcppDeviceJ;
+	protected net.clesperanto.jclic.DeviceJ jcppDeviceJ;
 	
 	/**
 	 * Constructor that initializes the default device
 	 */
 	public DeviceJ() {
-		jcppDeviceJ = new net.clesperanto.wrapper.clesperantoj.DeviceJ();
+		jcppDeviceJ = new net.clesperanto.jclic.DeviceJ();
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class DeviceJ {
 	public DeviceJ(String deviceName, String deviceType) {
 		Objects.requireNonNull(deviceName, "The device name cannot be null");
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\"");
-		jcppDeviceJ = new net.clesperanto.wrapper.clesperantoj.DeviceJ();
+		jcppDeviceJ = new net.clesperanto.jclic.DeviceJ();
 		jcppDeviceJ.setDevice(deviceName, deviceType);
 	}
 	
@@ -73,7 +73,7 @@ public class DeviceJ {
 	 * @return a list of the available devices in the computer of the specific type
 	 */
 	public static List<String> getAvailableDevices(){
-		StringVector devices = net.clesperanto.wrapper.clesperantoj.DeviceJ.getAvailableDevices();
+		StringVector devices = net.clesperanto.jclic.DeviceJ.getAvailableDevices();
 		List<String> devicesList = new ArrayList<String>();
 		for (int i = 0; i < devices.size(); i++) {
 			devicesList.add(devices.get(i));
@@ -92,7 +92,7 @@ public class DeviceJ {
 	public static List<String> getAvailableDevices(String deviceType){
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\" or"
 				+ " use the method \"DeviceJ.getAvailableDevices()\"");
-		StringVector devices = net.clesperanto.wrapper.clesperantoj.DeviceJ.getAvailableDevices(deviceType);
+		StringVector devices = net.clesperanto.jclic.DeviceJ.getAvailableDevices(deviceType);
 		List<String> devicesList = new ArrayList<String>();
 		for (int i = 0; i < devices.size(); i++) {
 			devicesList.add(devices.get(i));

@@ -13,9 +13,9 @@ package net.clesperanto.core;
  */
 public class ArrayJ {
 	
-	protected net.clesperanto.wrapper.clesperantoj.ArrayJ arrayj;
+	protected net.clesperanto.jclic.ArrayJ arrayj;
 
-    protected ArrayJ(net.clesperanto.wrapper.clesperantoj.ArrayJ arrayj) {
+    protected ArrayJ(net.clesperanto.jclic.ArrayJ arrayj) {
     	this.arrayj = arrayj;
     }
     

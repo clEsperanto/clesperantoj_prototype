@@ -9,7 +9,7 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 @Properties(inherit = clesperantoj.class, value = {
         @Platform(compiler = { "cpp17" }, define = { "SHARED_PTR_NAMESPACE std" }, include = {
                 "kernelj.hpp" }, link = { "JCLIc" })
-}, target = "net.clesperanto.wrapper.kernelj")
+}, target = "net.clesperanto.kernelj")
 
 public class kernelj implements InfoMapper {
     static {

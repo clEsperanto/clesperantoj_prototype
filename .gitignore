@@ -36,6 +36,7 @@ target/
 
 # java cpp
 cppbuild
+src/gen/
 
 # CMake
 CMakeCache.txt

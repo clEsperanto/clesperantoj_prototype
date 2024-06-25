@@ -52,7 +52,7 @@ ArrayJ::ArrayJ(const std::shared_ptr<cle::Array> &array) : array_(array)
 
 ArrayJ ArrayJ::create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device)
 {
-    auto data = cle::Array::create(width, height, depth, dimension, cle::dType::FLOAT, cle::mType::BUFFER, device.get());
+    auto data = cle::Array::create(width, height, depth, dimension, data_type, memory_type, device.get());
     return ArrayJ{data};
 }
 

@@ -35,12 +35,12 @@ import net.imglib2.util.Util;
 public class Converters {
 
 	private static String FLOAT32 = "float";
-	private static String INT32 = "int32";
-	private static String UINT32 = "uint32";
-	private static String INT16 = "int16";
-	private static String UINT16 = "uint16";
-	private static String INT8 = "int8";
-	private static String UINT8 = "uint8";
+	private static String INT32 = "int";
+	private static String UINT32 = "uint";
+	private static String INT16 = "short";
+	private static String UINT16 = "ushort";
+	private static String INT8 = "char";
+	private static String UINT8 = "uchar";
 	
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
@@ -67,27 +67,27 @@ public class Converters {
 			MemoryJ.readFloatBuffer(arrayj, byteBuffer.asFloatBuffer(), 0);
 			return fromBuffer(byteBuffer, (T) new FloatType(), arrayj.getDimensions());
 		} else if (dType.equals(INT32)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 4).order(ByteOrder.LITTLE_ENDIAN);
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * 4).order(ByteOrder.LITTLE_ENDIAN);
 			MemoryJ.readIntBuffer(arrayj, byteBuffer.asIntBuffer(), 0);
 			return fromBuffer(byteBuffer, (T) new IntType(), arrayj.getDimensions());
 		} else if (dType.equals(UINT32)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 4).order(ByteOrder.LITTLE_ENDIAN);
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * 4).order(ByteOrder.LITTLE_ENDIAN);
 			MemoryJ.readUIntBuffer(arrayj, byteBuffer.asIntBuffer(), 0);
 			return fromBuffer(byteBuffer, (T) new UnsignedIntType(), arrayj.getDimensions());
 		} else if (dType.equals(INT16)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 2).order(ByteOrder.LITTLE_ENDIAN);
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * 2).order(ByteOrder.LITTLE_ENDIAN);
 			MemoryJ.readShortBuffer(arrayj, byteBuffer.asShortBuffer(), 0);
 			return fromBuffer(byteBuffer, (T) new ShortType(), arrayj.getDimensions());
 		} else if (dType.equals(UINT16)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims * 2).order(ByteOrder.LITTLE_ENDIAN);
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * 2).order(ByteOrder.LITTLE_ENDIAN);
 			MemoryJ.readUShortBuffer(arrayj, byteBuffer.asShortBuffer(), 0);
 			return fromBuffer(byteBuffer, (T) new UnsignedShortType(), arrayj.getDimensions());
 		} else if (dType.equals(INT8)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims).order(ByteOrder.LITTLE_ENDIAN);
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims).order(ByteOrder.LITTLE_ENDIAN);
 			MemoryJ.readByteBuffer(arrayj, byteBuffer, 0);
 			return fromBuffer(byteBuffer, (T) new ByteType(), arrayj.getDimensions());
 		} else if (dType.equals(UINT8)) {
-			ByteBuffer byteBuffer = ByteBuffer.allocate((int) flatDims).order(ByteOrder.LITTLE_ENDIAN);
+			ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims).order(ByteOrder.LITTLE_ENDIAN);
 			MemoryJ.readUByteBuffer(arrayj, byteBuffer, 0);
 			return fromBuffer(byteBuffer, (T) new UnsignedByteType(), arrayj.getDimensions());
 		} else {

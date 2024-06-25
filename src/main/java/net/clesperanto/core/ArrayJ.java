@@ -102,4 +102,12 @@ public class ArrayJ {
     public void copyDataTo(ArrayJ dst) {
     	this.arrayj.copyDataTo(dst.arrayj);
     }
+    
+    /**
+     * 
+     * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
+     */
+    public net.clesperanto.jclic.ArrayJ getRaw() {
+    	return this.arrayj;
+    }
 }

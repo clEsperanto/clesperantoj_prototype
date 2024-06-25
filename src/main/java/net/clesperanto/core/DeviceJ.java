@@ -99,4 +99,12 @@ public class DeviceJ {
         }
 		return devicesList;
 	}
+    
+    /**
+     * 
+     * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
+     */
+    public net.clesperanto.jclic.DeviceJ getRaw() {
+    	return this.jcppDeviceJ;
+    }
 }

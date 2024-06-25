@@ -111,6 +111,8 @@ public class MemoryJ {
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device
 	 * @param data
@@ -200,6 +202,8 @@ public class MemoryJ {
 	 * TODO size parameter might not be used
 	 * Write the data from the CPU ByteBuffer into the existing {@link ArrayJ} on the device (GPU).
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} that is going to be overwritten
 	 * @param data
@@ -230,6 +234,8 @@ public class MemoryJ {
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the {@link ByteBuffer}
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
+	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
 	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device
@@ -320,6 +326,8 @@ public class MemoryJ {
 	 * TODO size parameter might not be used
 	 * Write the data from the CPU ByteBuffer into the existing {@link ArrayJ} on the device (GPU).
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} that is going to be overwritten
 	 * @param data
@@ -350,6 +358,8 @@ public class MemoryJ {
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the {@link ByteBuffer}
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
+	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
 	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device
@@ -439,6 +449,8 @@ public class MemoryJ {
 	 * TODO size parameter might not be used
 	 * Write the data from the CPU {@link ShortBuffer} into the existing {@link ArrayJ} on the device (GPU).
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} that is going to be overwritten
 	 * @param data
@@ -469,6 +481,8 @@ public class MemoryJ {
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the {@link ShortBuffer}
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
+	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
 	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device
@@ -542,6 +556,8 @@ public class MemoryJ {
 	 * TODO size parameter might not be used
 	 * Write the data from the CPU {@link ShortBuffer} into the existing {@link ArrayJ} on the device (GPU).
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} that is going to be overwritten
 	 * @param data
@@ -572,6 +588,8 @@ public class MemoryJ {
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the {@link ShortBuffer}
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
+	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
 	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device
@@ -661,6 +679,8 @@ public class MemoryJ {
 	 * TODO size parameter might not be used
 	 * Write the data from the CPU {@link IntBuffer} into the existing {@link ArrayJ} on the device (GPU).
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} that is going to be overwritten
 	 * @param data
@@ -691,6 +711,8 @@ public class MemoryJ {
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the {@link IntBuffer}
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
+	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
 	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device
@@ -764,6 +786,8 @@ public class MemoryJ {
 	 * TODO size parameter might not be used
 	 * Write the data from the CPU {@link IntBuffer} into the existing {@link ArrayJ} on the device (GPU).
 	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
+	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} that is going to be overwritten
 	 * @param data
@@ -794,6 +818,8 @@ public class MemoryJ {
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the {@link IntBuffer}
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.
+	 * 
+	 * The buffer should have {@link java.nio.ByteOrder#LITTLE_ENDIAN}
 	 * 
 	 * @param array
 	 * 	the {@link ArrayJ} on the device

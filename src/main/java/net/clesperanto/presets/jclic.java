@@ -28,10 +28,10 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 	        include = "clesperantoj.hpp",
 	        link = "JCLIc"
 	    )},
-	    target = "net.clesperanto.jclic"
+	    target = "net.clesperanto._internals.jclic"
 	)
 
-public class clesperantoj implements InfoMapper {
+public class jclic implements InfoMapper {
 	static {
 		Loader.load();
 	}

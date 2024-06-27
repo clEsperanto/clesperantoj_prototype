@@ -241,7 +241,7 @@
 						<configuration>
 							<outputDirectory>${project.basedir}/src/gen/java</outputDirectory>
 							<classOrPackageNames>
-								<classOrPackageName>net.clesperanto.presets.clesperantoj</classOrPackageName>
+								<classOrPackageName>net.clesperanto.presets.jclic</classOrPackageName>
 								<classOrPackageName>net.clesperanto.presets.kernelj</classOrPackageName>
 							</classOrPackageNames>
 						</configuration>
@@ -256,8 +256,8 @@
 						</goals>
 						<configuration>
 							<classOrPackageNames>
-								<classOrPackageName>net.clesperanto.jclic</classOrPackageName>
-								<classOrPackageName>net.clesperanto.kernelj</classOrPackageName>
+								<classOrPackageName>net.clesperanto._internals.jclic</classOrPackageName>
+								<classOrPackageName>net.clesperanto._internals.kernelj</classOrPackageName>
 							</classOrPackageNames>
 						</configuration>
 					</execution>

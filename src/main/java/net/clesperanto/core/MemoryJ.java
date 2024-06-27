@@ -43,8 +43,8 @@ public class MemoryJ {
 	public static ArrayJ makeFloatBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -70,8 +70,8 @@ public class MemoryJ {
 	public static ArrayJ makeFloatBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -88,7 +88,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the float buffer
 	 */
 	public static void writeFloatBuffer(ArrayJ array, FloatBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeFloatBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeFloatBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -103,7 +103,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the float[]
 	 */
 	public static void writeFloatBuffer(ArrayJ array, float[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeFloatBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeFloatBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -121,7 +121,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link FloatBuffer}
 	 */
 	public static void readFloatBuffer(ArrayJ array, FloatBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readFloatBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readFloatBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -137,7 +137,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the float[]
 	 */
 	public static void readFloatBuffer(ArrayJ array, float[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.readFloatBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readFloatBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -165,8 +165,8 @@ public class MemoryJ {
 	public static ArrayJ makeByteBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -192,8 +192,8 @@ public class MemoryJ {
 	public static ArrayJ makeByteBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -212,7 +212,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the ByteBuffer
 	 */
 	public static void writeByteBuffer(ArrayJ array, ByteBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -227,7 +227,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the byte[]
 	 */
 	public static void writeByteBuffer(ArrayJ array, byte[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -245,7 +245,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link ByteBuffer}
 	 */
 	public static void readByteBuffer(ArrayJ array, ByteBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -261,7 +261,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the byte[]
 	 */
 	public static void readByteBuffer(ArrayJ array, byte[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.readByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -289,8 +289,8 @@ public class MemoryJ {
 	public static ArrayJ makeUByteBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -316,8 +316,8 @@ public class MemoryJ {
 	public static ArrayJ makeUByteBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -336,7 +336,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the ByteBuffer
 	 */
 	public static void writeUByteBuffer(ArrayJ array, ByteBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeUByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeUByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -351,7 +351,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the byte[]
 	 */
 	public static void writeUByteBuffer(ArrayJ array, byte[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeUByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeUByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -369,7 +369,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link ByteBuffer}
 	 */
 	public static void readUByteBuffer(ArrayJ array, ByteBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readUByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readUByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -385,7 +385,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the byte[]
 	 */
 	public static void readUByteBuffer(ArrayJ array, byte[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.readUByteBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readUByteBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -412,8 +412,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeShortBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -439,8 +439,8 @@ public class MemoryJ {
 	public static ArrayJ makeShortBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -459,7 +459,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link ShortBuffer}
 	 */
 	public static void writeShortBuffer(ArrayJ array, ShortBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -474,7 +474,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the short[]
 	 */
 	public static void writeShortBuffer(ArrayJ array, short[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -492,7 +492,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link ShortBuffer}
 	 */
 	public static void readShortBuffer(ArrayJ array, ShortBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -519,8 +519,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeUShortBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -546,8 +546,8 @@ public class MemoryJ {
 	public static ArrayJ makeUShortBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -566,7 +566,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link ShortBuffer}
 	 */
 	public static void writeUShortBuffer(ArrayJ array, ShortBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeUShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeUShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -581,7 +581,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the short[]
 	 */
 	public static void writeUShortBuffer(ArrayJ array, short[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeUShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeUShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -599,7 +599,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link ShortBuffer}
 	 */
 	public static void readUShortBuffer(ArrayJ array, ShortBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readUShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readUShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -615,7 +615,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the short[]
 	 */
 	public static void readUShortBuffer(ArrayJ array, short[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.readUShortBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readUShortBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -642,8 +642,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeIntBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -669,8 +669,8 @@ public class MemoryJ {
 	public static ArrayJ makeIntBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -689,7 +689,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link IntBuffer}
 	 */
 	public static void writeIntBuffer(ArrayJ array, IntBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeIntBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -704,7 +704,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the int[]
 	 */
 	public static void writeIntBuffer(ArrayJ array, int[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeIntBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -722,7 +722,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link IntBuffer}
 	 */
 	public static void readIntBuffer(ArrayJ array, IntBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readIntBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -749,8 +749,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeUIntBuffer(DeviceJ device, long width, long height, long depth, 
 			long dimension, String memoryType ) {
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, width, height, depth, 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -776,8 +776,8 @@ public class MemoryJ {
 	public static ArrayJ makeUIntBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
-		net.clesperanto.jclic.ArrayJ arrayJ = 
-				net.clesperanto.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
+		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
+				net.clesperanto._internals.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
 		return new ArrayJ(arrayJ);
 	}
@@ -796,7 +796,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link IntBuffer}
 	 */
 	public static void writeUIntBuffer(ArrayJ array, IntBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeUIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeUIntBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -811,7 +811,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the int[]
 	 */
 	public static void writeUIntBuffer(ArrayJ array, int[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.writeUIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.writeUIntBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -829,7 +829,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the {@link IntBuffer}
 	 */
 	public static void readUIntBuffer(ArrayJ array, IntBuffer data, long size) {
-		net.clesperanto.jclic.MemoryJ.readUIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readUIntBuffer(array.arrayj, data, size);
 	}
 	
 	/**
@@ -845,7 +845,7 @@ public class MemoryJ {
 	 * 	the total size in bytes of the int[]
 	 */
 	public static void readUIntBuffer(ArrayJ array, int[] data, long size) {
-		net.clesperanto.jclic.MemoryJ.readUIntBuffer(array.arrayj, data, size);
+		net.clesperanto._internals.jclic.MemoryJ.readUIntBuffer(array.arrayj, data, size);
 	}
 	
 	private static long[] transformDims(long[] dims) {

@@ -13,9 +13,9 @@ package net.clesperanto.core;
  */
 public class ArrayJ {
 	
-	protected net.clesperanto.jclic.ArrayJ arrayj;
+	protected net.clesperanto._internals.jclic.ArrayJ arrayj;
 
-    protected ArrayJ(net.clesperanto.jclic.ArrayJ arrayj) {
+    protected ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj) {
     	this.arrayj = arrayj;
     }
     
@@ -107,7 +107,7 @@ public class ArrayJ {
      * 
      * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
      */
-    public net.clesperanto.jclic.ArrayJ getRaw() {
+    public net.clesperanto._internals.jclic.ArrayJ getRaw() {
     	return this.arrayj;
     }
 }

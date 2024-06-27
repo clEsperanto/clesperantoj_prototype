@@ -1,6 +1,6 @@
 package net.clesperanto;
 
-import net.clesperanto.jclic.StringVector;
+import net.clesperanto._internals.jclic.StringVector;
 
 import java.util.Arrays;
 
@@ -8,12 +8,12 @@ import org.bytedeco.javacpp.FloatPointer;
 import org.bytedeco.javacpp.LongPointer;
 import org.bytedeco.javacpp.Pointer;
 
-import net.clesperanto.jclic.DeviceJ;
-import net.clesperanto.jclic.MemoryJ;
-import net.clesperanto.jclic.BackendJ;
-import net.clesperanto.jclic.ArrayJ;
+import net.clesperanto._internals.jclic.DeviceJ;
+import net.clesperanto._internals.jclic.MemoryJ;
+import net.clesperanto._internals.jclic.BackendJ;
+import net.clesperanto._internals.jclic.ArrayJ;
 
-import net.clesperanto.kernelj.Tier1;
+import net.clesperanto._internals.kernelj.Tier1;
 
 public class ClesperantoJ {
 
@@ -40,8 +40,8 @@ public class ClesperantoJ {
         DeviceJ currentDevice = new DeviceJ();
         currentDevice.setDevice("TX", "all");
 
-        ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
-        // ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
+        ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "image");
+        ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "image");
 
         float data[] = new float[3 * 3 * 2];
         float out[] = new float[3 * 3 * 2];
@@ -51,8 +51,8 @@ public class ClesperantoJ {
         MemoryJ.writeFloatBuffer(input, data, (long) data.length);
         // MemoryJ.writeFloatBuffer(output, out, (long) out.length);
 
-        ArrayJ output = Tier1.absolute(currentDevice, input);
-
+        Tier1.absolute(currentDevice, input, output);
+        
         MemoryJ.readFloatBuffer(output, out, (long) out.length);
 
         for (int i = 0; i < out.length; i++) {

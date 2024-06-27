@@ -13,6 +13,6 @@ public class BackendJ {
 	 * 	if it is anything else it will be set to "opencl"
 	 */
     public static void setBackend(String backend) {
-    	net.clesperanto.jclic.BackendJ.setBackend(backend);
+    	net.clesperanto._internals.jclic.BackendJ.setBackend(backend);
     }
 }

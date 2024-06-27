@@ -15,6 +15,9 @@ public class DeviceJ {
 	
 	/**
 	 * Constructor that initializes the default device
+	 * IMPORTANT: Does not initialize the backend.
+	 * 
+	 * 
 	 */
 	public DeviceJ() {
 		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
@@ -22,6 +25,7 @@ public class DeviceJ {
 	
 	/**
 	 * Constructor that initializes the wanted device
+	 * IMPORTANT: Does not initialize the backend.
 	 * 
 	 * TODO provide a better explanation of what deviceName is and what device type is
 	 * 
@@ -35,6 +39,68 @@ public class DeviceJ {
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\"");
 		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
 		jcppDeviceJ.setDevice(deviceName, deviceType);
+	}
+	
+	/**
+	 * Get the first device available. By default this method tries to use an OpenCL backend.
+	 * If not OpenCL backend is available the method will fail.
+	 * @return the default device where Clesperanto operations can be done.
+	 */
+	public static DeviceJ getDefaultDevice() {
+		BackendJ.setBackend("");
+		return new DeviceJ();
+	}
+	
+	/**
+	 * Get the first device available and select the wanted backend.
+	 * If the wanted backend is not available, the method will fall back to OpenCL.
+	 * And if OpenCL is not available either the method will fail.
+	 * @param backend
+	 * 	the type of backend that wants to be used. It should be either "cuda" or "opencl",
+	 * 	if it is anything else it will be set to "opencl"
+	 * @return the default device where Clesperanto operations can be done.
+	 */
+	public static DeviceJ getDefaultDevice(String backend) {
+		BackendJ.setBackend(backend);
+		return new DeviceJ();
+	}
+	
+	/**
+	 * Get the wanted device by its name and device type. Initialize the device with openCL backend.
+	 * If not OpenCL backend is available the method will fail.
+	 * 
+	 * TODO provide a better explanation of what deviceName is and what device type is
+	 * 
+	 * @param deviceName
+	 * 	the name of the device that wants to be initialized
+	 * @param deviceType
+	 * 	the type that wants to be initialized. If any type works, the argument should be "all"
+	 * @return the wanted device where Clesperanto operations can be done.
+	 */
+	public static DeviceJ getDeviceWithDefaultBackend(String deviceName, String deviceType) {
+		BackendJ.setBackend("");
+		return new DeviceJ(deviceName, deviceType);
+	}
+	
+	/**
+	 * Get the wanted device by its name and device type. Initialize the device with 
+	 * the wanted backend. If the backend is not available it will fallback to OpenCl backend.
+	 * If OpenCL backend is not available the method will fail.
+	 * 
+	 * TODO provide a better explanation of what deviceName is and what device type is
+	 * 
+	 * @param deviceName
+	 * 	the name of the device that wants to be initialized
+	 * @param deviceType
+	 * 	the type that wants to be initialized. If any type works, the argument should be "all"
+	 * @param backend
+	 * 	the type of backend that wants to be used. It should be either "cuda" or "opencl",
+	 * 	if it is anything else it will be set to "opencl"
+	 * @return the wanted device where Clesperanto operations can be done.
+	 */
+	public static DeviceJ getDevice(String deviceName, String deviceType, String backend) {
+		BackendJ.setBackend(backend);
+		return new DeviceJ(deviceName, deviceType);
 	}
 	
 	/**
@@ -98,6 +164,21 @@ public class DeviceJ {
 			devicesList.add(devices.get(i));
         }
 		return devicesList;
+	}
+	
+	/**
+	 * Return the backend that the device is using.
+	 * @return the backend (opencl, cuda) that the device is using
+	 * @throws RuntimeException if there is any error finding the backend
+	 */
+	public String getBackend() {
+		String info = this.getInfo();
+		
+		int ind = info.indexOf(")");
+		
+		if (ind == -1) throw new RuntimeException("Unable to retrieve backend");
+		
+		return info.substring(1, ind).toLowerCase();
 	}
     
     /**

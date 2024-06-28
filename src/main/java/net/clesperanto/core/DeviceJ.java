@@ -10,25 +10,25 @@ import net.clesperanto._internals.jclic.StringVector;
  * Class to interact with the divide that is going to be used to do the operations
  */
 public class DeviceJ {
-	
+
 	protected net.clesperanto._internals.jclic.DeviceJ jcppDeviceJ;
-	
+
 	/**
 	 * Constructor that initializes the default device
 	 * IMPORTANT: Does not initialize the backend.
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public DeviceJ() {
 		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
 	}
-	
+
 	/**
 	 * Constructor that initializes the wanted device
 	 * IMPORTANT: Does not initialize the backend.
-	 * 
+	 *
 	 * TODO provide a better explanation of what deviceName is and what device type is
-	 * 
+	 *
 	 * @param deviceName
 	 * 	the name of the device that wants to be initialized
 	 * @param deviceType
@@ -40,7 +40,7 @@ public class DeviceJ {
 		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
 		jcppDeviceJ.setDevice(deviceName, deviceType);
 	}
-	
+
 	/**
 	 * Get the first device available. By default this method tries to use an OpenCL backend.
 	 * If not OpenCL backend is available the method will fail.
@@ -50,7 +50,7 @@ public class DeviceJ {
 		BackendJ.setBackend("");
 		return new DeviceJ();
 	}
-	
+
 	/**
 	 * Get the first device available and select the wanted backend.
 	 * If the wanted backend is not available, the method will fall back to OpenCL.
@@ -64,13 +64,13 @@ public class DeviceJ {
 		BackendJ.setBackend(backend);
 		return new DeviceJ();
 	}
-	
+
 	/**
 	 * Get the wanted device by its name and device type. Initialize the device with openCL backend.
 	 * If not OpenCL backend is available the method will fail.
-	 * 
+	 *
 	 * TODO provide a better explanation of what deviceName is and what device type is
-	 * 
+	 *
 	 * @param deviceName
 	 * 	the name of the device that wants to be initialized
 	 * @param deviceType
@@ -81,14 +81,14 @@ public class DeviceJ {
 		BackendJ.setBackend("");
 		return new DeviceJ(deviceName, deviceType);
 	}
-	
+
 	/**
-	 * Get the wanted device by its name and device type. Initialize the device with 
+	 * Get the wanted device by its name and device type. Initialize the device with
 	 * the wanted backend. If the backend is not available it will fallback to OpenCl backend.
 	 * If OpenCL backend is not available the method will fail.
-	 * 
+	 *
 	 * TODO provide a better explanation of what deviceName is and what device type is
-	 * 
+	 *
 	 * @param deviceName
 	 * 	the name of the device that wants to be initialized
 	 * @param deviceType
@@ -102,23 +102,23 @@ public class DeviceJ {
 		BackendJ.setBackend(backend);
 		return new DeviceJ(deviceName, deviceType);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return the name of the current device
 	 */
 	public String getName() {
 		return this.jcppDeviceJ.getName();
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return the info about the current device
 	 */
 	public String getInfo() {
 		return this.jcppDeviceJ.getInfo();
 	}
-	
+
 	/**
 	 * Change the current device to the wanted one
 	 * @param deviceName
@@ -129,7 +129,7 @@ public class DeviceJ {
 	public void setDevice(String deviceName, String deviceType) {
 		jcppDeviceJ.setDevice(deviceName, deviceType);
 	}
-	
+
 	/**
 	 * TODO confirm if the devices are only GPUs or can be other hardware
 	 * Method that returns the available devices (GPUs) on the computer.
@@ -146,7 +146,7 @@ public class DeviceJ {
         }
 		return devicesList;
 	}
-	
+
 	/**
 	 * TODO confirm if the devices are only GPUs or can be other hardware
 	 * Method that returns the available devices (GPUs) on the computer by the type..
@@ -165,7 +165,7 @@ public class DeviceJ {
         }
 		return devicesList;
 	}
-	
+
 	/**
 	 * Return the backend that the device is using.
 	 * @return the backend (opencl, cuda) that the device is using
@@ -173,16 +173,16 @@ public class DeviceJ {
 	 */
 	public String getBackend() {
 		String info = this.getInfo();
-		
+
 		int ind = info.indexOf(")");
-		
+
 		if (ind == -1) throw new RuntimeException("Unable to retrieve backend");
-		
+
 		return info.substring(1, ind).toLowerCase();
 	}
-    
+
     /**
-     * 
+     *
      * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
      */
     public net.clesperanto._internals.jclic.DeviceJ getRaw() {

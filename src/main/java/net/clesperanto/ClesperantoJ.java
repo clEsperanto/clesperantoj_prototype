@@ -52,7 +52,7 @@ public class ClesperantoJ {
         // MemoryJ.writeFloatBuffer(output, out, (long) out.length);
 
         Tier1.absolute(currentDevice, input, output);
-        
+
         MemoryJ.readFloatBuffer(output, out, (long) out.length);
 
         for (int i = 0; i < out.length; i++) {

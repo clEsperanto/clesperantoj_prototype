@@ -102,10 +102,10 @@
 
 
     <dependencies>
-        <!-- ImageJ dependencies -->
 		<dependency>
-			<groupId>net.imagej</groupId>
-			<artifactId>imagej</artifactId>
+			<groupId>net.imglib2</groupId>
+			<artifactId>imglib2</artifactId>
+			<version>7.0.2</version>
 		</dependency>
         <dependency>
 			<groupId>junit</groupId>
@@ -241,7 +241,7 @@
 						<configuration>
 							<outputDirectory>${project.basedir}/src/gen/java</outputDirectory>
 							<classOrPackageNames>
-								<classOrPackageName>net.clesperanto.presets.clesperantoj</classOrPackageName>
+								<classOrPackageName>net.clesperanto.presets.jclic</classOrPackageName>
 								<classOrPackageName>net.clesperanto.presets.kernelj</classOrPackageName>
 							</classOrPackageNames>
 						</configuration>
@@ -256,8 +256,8 @@
 						</goals>
 						<configuration>
 							<classOrPackageNames>
-								<classOrPackageName>net.clesperanto.wrapper.clesperantoj</classOrPackageName>
-								<classOrPackageName>net.clesperanto.wrapper.kernelj</classOrPackageName>
+								<classOrPackageName>net.clesperanto._internals.jclic</classOrPackageName>
+								<classOrPackageName>net.clesperanto._internals.kernelj</classOrPackageName>
 							</classOrPackageNames>
 						</configuration>
 					</execution>

@@ -139,6 +139,54 @@ ArrayJ MemoryJ::makeFloatBuffer(const DeviceJ &device, const size_t &width, cons
     }
 }
 
+ArrayJ MemoryJ::makeByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
+{
+    if (memory_type == "image")
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::INT8, cle::mType::IMAGE, device);
+    }
+    else
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::INT8, cle::mType::BUFFER, device);
+    }
+}
+
+ArrayJ MemoryJ::makeUByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
+{
+    if (memory_type == "image")
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT8, cle::mType::IMAGE, device);
+    }
+    else
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT8, cle::mType::BUFFER, device);
+    }
+}
+
+ArrayJ MemoryJ::makeShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
+{
+    if (memory_type == "image")
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::INT16, cle::mType::IMAGE, device);
+    }
+    else
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::INT16, cle::mType::BUFFER, device);
+    }
+}
+
+ArrayJ MemoryJ::makeUShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
+{
+    if (memory_type == "image")
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT16, cle::mType::IMAGE, device);
+    }
+    else
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT16, cle::mType::BUFFER, device);
+    }
+}
+
 ArrayJ MemoryJ::makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
 {
     if (memory_type == "image")
@@ -151,7 +199,39 @@ ArrayJ MemoryJ::makeIntBuffer(const DeviceJ &device, const size_t &width, const 
     }
 }
 
+ArrayJ MemoryJ::makeUIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
+{
+    if (memory_type == "image")
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT32, cle::mType::IMAGE, device);
+    }
+    else
+    {
+        return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT32, cle::mType::BUFFER, device);
+    }
+}
+
 void MemoryJ::writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
+{
+    array.write(static_cast<void *>(data));
+}
+
+void MemoryJ::writeByteBuffer(const ArrayJ &array, char *data, const size_t &size)
+{
+    array.write(static_cast<void *>(data));
+}
+
+void MemoryJ::writeUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size)
+{
+    array.write(static_cast<void *>(data));
+}
+
+void MemoryJ::writeShortBuffer(const ArrayJ &array, short *data, const size_t &size)
+{
+    array.write(static_cast<void *>(data));
+}
+
+void MemoryJ::writeUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size)
 {
     array.write(static_cast<void *>(data));
 }
@@ -161,12 +241,42 @@ void MemoryJ::writeIntBuffer(const ArrayJ &array, int *data, const size_t &size)
     array.write(static_cast<void *>(data));
 }
 
+void MemoryJ::writeUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size)
+{
+    array.write(static_cast<void *>(data));
+}
+
 void MemoryJ::readFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
 {
     array.read(static_cast<void *>(data));
 }
 
+void MemoryJ::readByteBuffer(const ArrayJ &array, char *data, const size_t &size)
+{
+    array.read(static_cast<void *>(data));
+}
+
+void MemoryJ::readUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size)
+{
+    array.read(static_cast<void *>(data));
+}
+
+void MemoryJ::readShortBuffer(const ArrayJ &array, short *data, const size_t &size)
+{
+    array.read(static_cast<void *>(data));
+}
+
+void MemoryJ::readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size)
+{
+    array.read(static_cast<void *>(data));
+}
+
 void MemoryJ::readIntBuffer(const ArrayJ &array, int *data, const size_t &size)
+{
+    array.read(static_cast<void *>(data));
+}
+
+void MemoryJ::readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size)
 {
     array.read(static_cast<void *>(data));
 }

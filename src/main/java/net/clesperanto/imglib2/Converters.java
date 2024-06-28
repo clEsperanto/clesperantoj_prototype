@@ -17,7 +17,7 @@ import net.imglib2.util.Fraction;
 import net.imglib2.util.Util;
 
 /**
- * TODO 
+ * TODO
  * - define whether the buffers follow big or little endian and whether the copies are c- or fortran order
  * - using array img and blocks copy limits to images whose array size is smaller than the integer max
  */
@@ -25,11 +25,11 @@ import net.imglib2.util.Util;
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
 public class Converters {
-	
+
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
 	 * Creates a copy of the ArrayJ in the GPU into an ArrayImg in the CPU
-	 * 
+	 *
 	 * @param <T>
 	 * 	data type of the ImgLib2 ArrayImg
 	 * @param <A>
@@ -45,22 +45,22 @@ public class Converters {
 		DataType dataType = DataType.fromString(arrayj.getDataType());
 		if (flatDims * dataType.getByteSize() > Integer.MAX_VALUE)
 			throw new IllegalArgumentException("The ArrayJ provided is too big to be converted into an ImgLib2 ArrayImg.");
-		
+
 		ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * dataType.getByteSize())
                 .order(ByteOrder.LITTLE_ENDIAN);
 		dataType.readToBuffer(arrayj, byteBuffer);
-		
+
 		T type = dataType.createType();
-		
+
 		return fromBuffer(byteBuffer, type, arrayj.getDimensions());
 	}
-	
+
 	/**
 	 * Copy a {@link RandomAccessibleInterval} on the CPU into an {@link ArrayJ} on the device (GPU) of interest.
 	 * The {@link RandomAccessibleInterval} should have at most 3 dimensions, and the order of the dimensions
 	 * should be [width, height, depth]
-	 * 
-	 * 
+	 *
+	 *
 	 * @param <T>
 	 * 	the ImgLib2 data type of the {@link RandomAccessibleInterval}
 	 * @param rai
@@ -72,7 +72,7 @@ public class Converters {
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static < T extends NativeType< T > > 
+	public static < T extends NativeType< T > >
 		ArrayJ copyImgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, String memoryType) {
 		checkSize(rai);
 		T type = Util.getTypeFromInterval(rai);
@@ -81,15 +81,15 @@ public class Converters {
 		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
 		if (totalSize > Integer.MAX_VALUE * dataType.getByteSize())
 			throw new IllegalArgumentException();
-		
+
 		int[] integerDims = Arrays.stream(rai.dimensionsAsLongArray()).mapToInt(x -> (int) x).toArray();
 	    Object flatArr = dataType.createArray((int) totalSize);
 	    blocks.copy(new int[rai.dimensionsAsLongArray().length], flatArr, integerDims);
-	    
+
 	    return dataType.makeAndWriteArrayJ(flatArr, device, rai.dimensionsAsLongArray(), memoryType);
 	}
-	
-	private static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A > 
+
+	private static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A >
 		fromBuffer(ByteBuffer byteBuffer, T type, long[] dimensions) {
 
 		final Fraction entitiesPerPixel = type.getEntitiesPerPixel();
@@ -101,7 +101,7 @@ public class Converters {
 		img.setLinkedType( typeFactory.createLinkedType( img ) );
 		return img;
 	}
-	
+
 	private static < T extends NativeType< T > > void checkSize(RandomAccessibleInterval<T> rai) {
 		long[] dims = rai.dimensionsAsLongArray();
 		for (long l : dims) {

@@ -12,8 +12,9 @@ package net.clesperanto.core;
  * 
  */
 public class ArrayJ {
-	
+
 	protected net.clesperanto._internals.jclic.ArrayJ arrayj;
+	protected DeviceJ devicej;
 
     protected ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj) {
     	this.arrayj = arrayj;
@@ -77,9 +78,19 @@ public class ArrayJ {
     
     /**
      * 
+     * @return the device object that represents where the arrayJ is loaded
+     */
+    public DeviceJ getDevice() {
+    	if (this.devicej == null)
+    		devicej = DeviceJ.getDeviceWithDefaultBackend(arrayj.getDevice(), "all");
+    	return devicej;
+    }
+    
+    /**
+     * 
      * @return the name of the device where the array is allocated
      */
-    public String getDevice() {
+    public String getDeviceName() {
     	return arrayj.getDevice();
     }
     

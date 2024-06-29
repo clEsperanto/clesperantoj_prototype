@@ -13,11 +13,12 @@ package net.clesperanto.core;
  */
 public class ArrayJ {
 
-	protected net.clesperanto._internals.jclic.ArrayJ arrayj;
-	protected DeviceJ devicej;
+	protected final net.clesperanto._internals.jclic.ArrayJ arrayj;
+	protected final DeviceJ devicej;
 
-    protected ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj) {
+    protected ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj, DeviceJ devicej) {
     	this.arrayj = arrayj;
+    	this.devicej = devicej;
     }
     
     /**
@@ -81,8 +82,6 @@ public class ArrayJ {
      * @return the device object that represents where the arrayJ is loaded
      */
     public DeviceJ getDevice() {
-    	if (this.devicej == null)
-    		devicej = DeviceJ.getDeviceWithDefaultBackend(arrayj.getDevice(), "all");
     	return devicej;
     }
     

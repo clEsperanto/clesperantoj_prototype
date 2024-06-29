@@ -46,7 +46,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -168,7 +168,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -292,7 +292,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -319,7 +319,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -415,7 +415,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -442,7 +442,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -522,7 +522,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -549,7 +549,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -645,7 +645,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -672,7 +672,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -752,7 +752,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, width, height, depth, 
 						dimension, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**
@@ -779,7 +779,7 @@ public class MemoryJ {
 		net.clesperanto._internals.jclic.ArrayJ arrayJ = 
 				net.clesperanto._internals.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2], 
 						3, memoryType);
-		return new ArrayJ(arrayJ);
+		return new ArrayJ(arrayJ, device);
 	}
 	
 	/**

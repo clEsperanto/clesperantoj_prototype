@@ -833,6 +833,40 @@ public class MemoryJ {
 	}
 	
 	/**
+	 * TODO change by enum
+	 * Create an empty {@link ArrayJ} with the same dimensions, data type, device and memory type
+	 * as the input {@link ArrayJ}
+	 * @param arrayj
+	 * 	{@link ArrayJ} used as inspiration
+	 * @return the new {@link ArrayJ}
+	 */
+	public static ArrayJ like(ArrayJ arrayj) {
+		if (arrayj.getDataType().equals("float")) {
+			return makeFloatBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
+		} else if (arrayj.getDataType().equals("int")) {
+			return makeIntBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
+		} else if (arrayj.getDataType().equals("short")) {
+			return makeShortBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
+		} else if (arrayj.getDataType().equals("ushort")) {
+			return makeUShortBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
+		} else if (arrayj.getDataType().equals("char")) {
+			return makeByteBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
+		} else if (arrayj.getDataType().equals("uchar")) {
+			return makeUByteBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
+		} else {
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	/**
+	 * TODO find out how to do it directly on the GPU
+	 * @return
+	 */
+	private static ArrayJ createCopy() {
+		return null;
+	}
+	
+	/**
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the int[]
 	 * 'data' that is on the CPU.
 	 * This method copies the data from the device into the CPU.

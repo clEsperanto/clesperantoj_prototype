@@ -97,7 +97,7 @@ public enum DataType {
     }
 
     public Object createArray(int size) {
-        return java.lang.reflect.Array.newInstance(arrayClass.getComponentType(), size);
+        return java.lang.reflect.Array.newInstance(arrayClass, size);
     }
     
     public int getByteSize() {

@@ -79,7 +79,7 @@ public class Converters {
 		DataType dataType = DataType.fromImgLib2DataType(type);
 		PrimitiveBlocks< T > blocks = PrimitiveBlocks.of( rai );
 		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
-		if (totalSize > Integer.MAX_VALUE * dataType.getByteSize())
+		if (totalSize * dataType.getByteSize() > Integer.MAX_VALUE)
 			throw new IllegalArgumentException();
 		
 		int[] integerDims = Arrays.stream(rai.dimensionsAsLongArray()).mapToInt(x -> (int) x).toArray();

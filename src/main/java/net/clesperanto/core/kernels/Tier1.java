@@ -1,6 +1,5 @@
 package net.clesperanto.core.kernels;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 import net.clesperanto.core.ArrayJ;
@@ -17,7 +16,7 @@ public class Tier1 {
 	}
 	
 	
-	public static void absolute(ArrayJ input, ArrayJ output) {
+	public static void absoluteInPlace(ArrayJ input, ArrayJ output) {
 		if (input.getDevice().getName() != output.getDevice().getName())
 			throw new IllegalArgumentException("The input and output should be on the same device. Input is on '"
 					+ input.getDeviceName() + "' and output on'" + output.getDeviceName() + "'.");
@@ -30,21 +29,18 @@ public class Tier1 {
 					+ "are " + Arrays.toString(input.getDimensions()) + " and output dimensions are "
 					+ Arrays.toString(output.getDimensions()));
 		
-		
 		net.clesperanto._internals.kernelj.Tier1.absolute(input.getDevice().getRaw(), input.getRaw(), output.getRaw());		
 	}
 	
 	
-	public static Object absoluteReturnSameType(DeviceJ device, Object input) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		if (input instanceof ArrayJ)
+	public static Object absoluteReturnSameType(DeviceJ device, Object input) {
+		if (input instanceof ArrayJ) {
 			return absolute((ArrayJ) input);
-		if (DepsManager.RAI_CLASS != null && DepsManager.RAI_CONVERTERS_CLASS != null && DepsManager.RAI_2_ARRAYJ_METHOD != null
-				&& DepsManager.RAI_CLASS.isInstance(input)) {
-            Object[] arguments = new Object[] { DepsManager.RAI_CLASS.cast(input), device, "buffer" };
-            ArrayJ arrayj = (ArrayJ) DepsManager.RAI_2_ARRAYJ_METHOD.invoke(null, arguments);
+		} else if (DepsManager.IMGLIB2_AVAILABLE && DepsManager.RAI_CLASS.isInstance(input)) {
+            ArrayJ arrayj = (ArrayJ) ObjectTypeConverter.convertImgLib2ToType(input, device, ObjectType.ARRAYJ);
             arrayj = absolute(arrayj);
-            return DepsManager.ARRAYJ_2_RAI_METHOD.invoke(null, new Object[] {arrayj});
-		} else if (DepsManager.IMAGEPLUS_CLASS != null && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
+            return ObjectTypeConverter.convertArrayJToType(arrayj, ObjectType.IMGLIB2);
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
 			return null;
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
@@ -53,23 +49,18 @@ public class Tier1 {
 	}
 	
 	/**
-	 * TODO remove exceptions
+	 * 
 	 * @param device
 	 * @param input
 	 * @return
-	 * @throws IllegalAccessException
-	 * @throws IllegalArgumentException
-	 * @throws InvocationTargetException
 	 */
-	public static ArrayJ absoluteReturnArrayJ(DeviceJ device, Object input) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		if (input instanceof ArrayJ)
+	public static ArrayJ absoluteReturnArrayJ(DeviceJ device, Object input) {
+		if (input instanceof ArrayJ) {
 			return absolute((ArrayJ) input);
-		if (DepsManager.RAI_CLASS != null && DepsManager.RAI_CONVERTERS_CLASS != null && DepsManager.RAI_2_ARRAYJ_METHOD != null
-				&& DepsManager.RAI_CLASS.isInstance(input)) {
-            Object[] arguments = new Object[] { DepsManager.RAI_CLASS.cast(input), device, "buffer" };
-            ArrayJ arrayj = (ArrayJ) DepsManager.RAI_2_ARRAYJ_METHOD.invoke(null, arguments);
+		} else if (DepsManager.IMGLIB2_AVAILABLE && DepsManager.RAI_CLASS.isInstance(input)) {
+			ArrayJ arrayj = (ArrayJ) ObjectTypeConverter.convertImgLib2ToType(input, device, ObjectType.ARRAYJ);
 			return absolute(arrayj);
-		} else if (DepsManager.IMAGEPLUS_CLASS != null && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
 			return null;
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
@@ -77,8 +68,53 @@ public class Tier1 {
 	}
 	
 	
-	public static Object absolute(DeviceJ device, Object input, String returnType) {
-		return null;
+	public static Object absoluteReturnWanted(DeviceJ device, Object input, ObjectType objectType) {
+		ArrayJ outArrayJ;
+		if (input instanceof ArrayJ) {
+			outArrayJ = absolute((ArrayJ) input);
+		} else if (DepsManager.IMGLIB2_AVAILABLE && DepsManager.RAI_CLASS.isInstance(input)) {
+			ArrayJ inputArrayJ = (ArrayJ) ObjectTypeConverter.convertImagePlus2ToType(input, device, ObjectType.ARRAYJ);
+			outArrayJ =  absolute(inputArrayJ);
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
+			return null;
+		} else {
+			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
+		}
+		
+		return ObjectTypeConverter.convertArrayJToType(outArrayJ, objectType);
+	}
+	
+	
+	public static void absoluteInPlace(DeviceJ device, Object input, Object output) {
+		if (input instanceof ArrayJ && output instanceof ArrayJ) {
+			absoluteInPlace((ArrayJ) input, (ArrayJ) output);
+		} else if (DepsManager.IMGLIB2_AVAILABLE
+				&& DepsManager.RAI_CLASS.isInstance(input) && DepsManager.RAI_CLASS.isInstance(output)) {
+			// TODO do something
+		} else if (DepsManager.IMGLIB2_AVAILABLE 
+				&& DepsManager.RAI_CLASS.isInstance(input) && output instanceof ArrayJ) {
+			// TODO do something
+		} else if (DepsManager.IMGLIB2_AVAILABLE 
+				 && input instanceof ArrayJ && DepsManager.RAI_CLASS.isInstance(output)) {
+			// TODO do something
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE 
+				&& DepsManager.IMAGEPLUS_CLASS.isInstance(input) && DepsManager.IMAGEPLUS_CLASS.isInstance(output)) {
+			// TODO do something
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE 
+				&& DepsManager.IMAGEPLUS_CLASS.isInstance(input) && output instanceof ArrayJ) {
+			// TODO do something
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE 
+				&& input instanceof ArrayJ && DepsManager.IMAGEPLUS_CLASS.isInstance(output)) {
+			// TODO do something
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMGLIB2_AVAILABLE 
+				&& DepsManager.IMAGEPLUS_CLASS.isInstance(input) && DepsManager.RAI_CLASS.isInstance(output)) {
+			// TODO do something
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMGLIB2_AVAILABLE 
+				&& DepsManager.RAI_CLASS.isInstance(input) && DepsManager.IMAGEPLUS_CLASS.isInstance(output)) {
+			// TODO do something
+		} else {
+			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
+		}
 	}
 
 }

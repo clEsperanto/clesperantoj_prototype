@@ -1,6 +1,6 @@
 package net.clesperanto.core.kernels;
 
-import java.lang.reflect.Method;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
 import net.clesperanto.core.ArrayJ;
@@ -8,35 +8,6 @@ import net.clesperanto.core.DeviceJ;
 import net.clesperanto.core.MemoryJ;
 
 public class Tier1 {
-	
-	public static final String RAI_CLS_NAME = "";
-	
-	public static final String RAI_CONVERTERS_CLS_NAME = "";
-	
-	public static final String IMAGEPLUS_CLS_NAME = "";
-	
-	public static final String IMAGEPLUS_CONVERTERS_CLS_NAME = "";
-	
-	public static final Class<?> RAI_CLASS;
-	
-	public static final Class<?> RAI_CONVERTERS_CLASS;
-	
-	public static final Class<?> IMAGEPLUS_CLASS;
-	
-	public static final Class<?> IMAGEPLUS_CONVERTERS_CLASS;
-	
-	/**
-	 * Initialize the classes for ImgLib2 and ImagePlus if the exist
-	 */
-	static {
-		RAI_CLASS = initializeClass(RAI_CLS_NAME);
-		if (RAI_CLASS != null) RAI_CONVERTERS_CLASS = initializeClass(RAI_CONVERTERS_CLS_NAME);
-		else RAI_CONVERTERS_CLASS = null;
-
-		IMAGEPLUS_CLASS = initializeClass(IMAGEPLUS_CLS_NAME);
-		if (IMAGEPLUS_CLASS != null) IMAGEPLUS_CONVERTERS_CLASS = initializeClass(IMAGEPLUS_CONVERTERS_CLS_NAME);
-		else IMAGEPLUS_CONVERTERS_CLASS = null;
-	}
 	
 	
 	public static ArrayJ absolute(ArrayJ input) {
@@ -64,33 +35,42 @@ public class Tier1 {
 	}
 	
 	
-	public static Object absolute(DeviceJ device, Object input) {
+	public static Object absoluteReturnSameType(DeviceJ device, Object input) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		if (input instanceof ArrayJ)
 			return absolute((ArrayJ) input);
-		if (RAI_CLASS != null && RAI_CONVERTERS_CLASS != null && RAI_CLASS.isInstance(input)) {
-			Class<?>[] parameterTypes = new Class<?>[] { DeviceJ.class, RAI_CLASS, String.class };
-			Method method = RAI_CONVERTERS_CLASS.getMethod("", parameterTypes);
-            Object[] arguments = new Object[] { 10, 20 };
-            ArrayJ arrayj = (ArrayJ) method.invoke(null, arguments);
-			return absolute(arrayj);
-		} else if (IMAGEPLUS_CLASS != null && IMAGEPLUS_CLASS.isInstance(input)) {
+		if (DepsManager.RAI_CLASS != null && DepsManager.RAI_CONVERTERS_CLASS != null && DepsManager.RAI_2_ARRAYJ_METHOD != null
+				&& DepsManager.RAI_CLASS.isInstance(input)) {
+            Object[] arguments = new Object[] { DepsManager.RAI_CLASS.cast(input), device, "buffer" };
+            ArrayJ arrayj = (ArrayJ) DepsManager.RAI_2_ARRAYJ_METHOD.invoke(null, arguments);
+            arrayj = absolute(arrayj);
+            return DepsManager.ARRAYJ_2_RAI_METHOD.invoke(null, new Object[] {arrayj});
+		} else if (DepsManager.IMAGEPLUS_CLASS != null && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
+			return null;
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
 		}
 		
 	}
 	
-	
-	public static ArrayJ absolute(DeviceJ device, Object input) {
+	/**
+	 * TODO remove exceptions
+	 * @param device
+	 * @param input
+	 * @return
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 * @throws InvocationTargetException
+	 */
+	public static ArrayJ absoluteReturnArrayJ(DeviceJ device, Object input) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		if (input instanceof ArrayJ)
 			return absolute((ArrayJ) input);
-		if (RAI_CLASS != null && RAI_CONVERTERS_CLASS != null && RAI_CLASS.isInstance(input)) {
-			Class<?>[] parameterTypes = new Class<?>[] { DeviceJ.class, RAI_CLASS, String.class };
-			Method method = RAI_CONVERTERS_CLASS.getMethod("", parameterTypes);
-            Object[] arguments = new Object[] { 10, 20 };
-            ArrayJ arrayj = (ArrayJ) method.invoke(null, arguments);
+		if (DepsManager.RAI_CLASS != null && DepsManager.RAI_CONVERTERS_CLASS != null && DepsManager.RAI_2_ARRAYJ_METHOD != null
+				&& DepsManager.RAI_CLASS.isInstance(input)) {
+            Object[] arguments = new Object[] { DepsManager.RAI_CLASS.cast(input), device, "buffer" };
+            ArrayJ arrayj = (ArrayJ) DepsManager.RAI_2_ARRAYJ_METHOD.invoke(null, arguments);
 			return absolute(arrayj);
-		} else if (IMAGEPLUS_CLASS != null && IMAGEPLUS_CLASS.isInstance(input)) {
+		} else if (DepsManager.IMAGEPLUS_CLASS != null && DepsManager.IMAGEPLUS_CLASS.isInstance(input)) {
+			return null;
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
 		}
@@ -98,50 +78,7 @@ public class Tier1 {
 	
 	
 	public static Object absolute(DeviceJ device, Object input, String returnType) {
-		
-	}
-	
-	private static boolean checkIfClassLoaded(String className) {
-		try {
-		    Class.forName(className, false, Tier1.class.getClassLoader());
-		    return true;
-		} catch (ClassNotFoundException e) {
-		    return false;
-		}
-    }
-	
-	private static void initializeImgLib2RelatedClassesIfExist(String className1, String className2,
-			Class<?> class1, Class<?> class2) {
-		if (checkIfClassLoaded(className1)) {
-			Class<?> cls;
-			Class<?> cls2;
-			try {
-				cls = Class.forName(className1);
-				cls2 = Class.forName(className2);
-			} catch (ClassNotFoundException e) {
-				cls = null;
-				cls2 = null;
-			}
-			class1 = cls;
-			class2 = cls2;
-		} else {
-			class1 = null;
-			class2 = null;
-		}
-	}
-	
-	private static Class<?> initializeClass(String classname) {
-		if (checkIfClassLoaded(classname)) {
-			Class<?> cls;
-			try {
-				cls = Class.forName(classname);
-			} catch (ClassNotFoundException e) {
-				cls = null;
-			}
-			return cls;
-		} else {
-			return null;
-		}
+		return null;
 	}
 
 }

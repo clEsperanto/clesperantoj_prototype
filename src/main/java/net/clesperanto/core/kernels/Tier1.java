@@ -1,5 +1,6 @@
 package net.clesperanto.core.kernels;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 import net.clesperanto.core.ArrayJ;
@@ -10,39 +11,31 @@ public class Tier1 {
 	
 	public static final String RAI_CLS_NAME = "";
 	
+	public static final String RAI_CONVERTERS_CLS_NAME = "";
+	
 	public static final String IMAGEPLUS_CLS_NAME = "";
+	
+	public static final String IMAGEPLUS_CONVERTERS_CLS_NAME = "";
 	
 	public static final Class<?> RAI_CLASS;
 	
+	public static final Class<?> RAI_CONVERTERS_CLASS;
+	
 	public static final Class<?> IMAGEPLUS_CLASS;
+	
+	public static final Class<?> IMAGEPLUS_CONVERTERS_CLASS;
 	
 	/**
 	 * Initialize the classes for ImgLib2 and ImagePlus if the exist
 	 */
 	static {
-		if (checkIfClassLoaded(RAI_CLS_NAME)) {
-			Class<?> cls;
-			try {
-				cls = Class.forName(RAI_CLS_NAME);
-			} catch (ClassNotFoundException e) {
-				cls = null;
-			}
-			RAI_CLASS = cls;
-		} else {
-			RAI_CLASS = null;
-		}
-		
-		if (checkIfClassLoaded(IMAGEPLUS_CLS_NAME)) {
-			Class<?> cls;
-			try {
-				cls = Class.forName(IMAGEPLUS_CLS_NAME);
-			} catch (ClassNotFoundException e) {
-				cls = null;
-			}
-			IMAGEPLUS_CLASS = cls;
-		} else {
-			IMAGEPLUS_CLASS = null;
-		}
+		RAI_CLASS = initializeClass(RAI_CLS_NAME);
+		if (RAI_CLASS != null) RAI_CONVERTERS_CLASS = initializeClass(RAI_CONVERTERS_CLS_NAME);
+		else RAI_CONVERTERS_CLASS = null;
+
+		IMAGEPLUS_CLASS = initializeClass(IMAGEPLUS_CLS_NAME);
+		if (IMAGEPLUS_CLASS != null) IMAGEPLUS_CONVERTERS_CLASS = initializeClass(IMAGEPLUS_CONVERTERS_CLS_NAME);
+		else IMAGEPLUS_CONVERTERS_CLASS = null;
 	}
 	
 	
@@ -74,10 +67,13 @@ public class Tier1 {
 	public static Object absolute(DeviceJ device, Object input) {
 		if (input instanceof ArrayJ)
 			return absolute((ArrayJ) input);
-		if (RAI_CLASS != null && RAI_CLASS.isInstance(input)) {
-			
+		if (RAI_CLASS != null && RAI_CONVERTERS_CLASS != null && RAI_CLASS.isInstance(input)) {
+			Class<?>[] parameterTypes = new Class<?>[] { DeviceJ.class, RAI_CLASS, String.class };
+			Method method = RAI_CONVERTERS_CLASS.getMethod("", parameterTypes);
+            Object[] arguments = new Object[] { 10, 20 };
+            ArrayJ arrayj = (ArrayJ) method.invoke(null, arguments);
+			return absolute(arrayj);
 		} else if (IMAGEPLUS_CLASS != null && IMAGEPLUS_CLASS.isInstance(input)) {
-			
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
 		}
@@ -86,7 +82,18 @@ public class Tier1 {
 	
 	
 	public static ArrayJ absolute(DeviceJ device, Object input) {
-		
+		if (input instanceof ArrayJ)
+			return absolute((ArrayJ) input);
+		if (RAI_CLASS != null && RAI_CONVERTERS_CLASS != null && RAI_CLASS.isInstance(input)) {
+			Class<?>[] parameterTypes = new Class<?>[] { DeviceJ.class, RAI_CLASS, String.class };
+			Method method = RAI_CONVERTERS_CLASS.getMethod("", parameterTypes);
+            Object[] arguments = new Object[] { 10, 20 };
+            ArrayJ arrayj = (ArrayJ) method.invoke(null, arguments);
+			return absolute(arrayj);
+		} else if (IMAGEPLUS_CLASS != null && IMAGEPLUS_CLASS.isInstance(input)) {
+		} else {
+			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
+		}
 	}
 	
 	
@@ -102,5 +109,39 @@ public class Tier1 {
 		    return false;
 		}
     }
+	
+	private static void initializeImgLib2RelatedClassesIfExist(String className1, String className2,
+			Class<?> class1, Class<?> class2) {
+		if (checkIfClassLoaded(className1)) {
+			Class<?> cls;
+			Class<?> cls2;
+			try {
+				cls = Class.forName(className1);
+				cls2 = Class.forName(className2);
+			} catch (ClassNotFoundException e) {
+				cls = null;
+				cls2 = null;
+			}
+			class1 = cls;
+			class2 = cls2;
+		} else {
+			class1 = null;
+			class2 = null;
+		}
+	}
+	
+	private static Class<?> initializeClass(String classname) {
+		if (checkIfClassLoaded(classname)) {
+			Class<?> cls;
+			try {
+				cls = Class.forName(classname);
+			} catch (ClassNotFoundException e) {
+				cls = null;
+			}
+			return cls;
+		} else {
+			return null;
+		}
+	}
 
 }

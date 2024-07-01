@@ -55,6 +55,13 @@ public class DepsManager {
 		else IMAGEPLUS_CONVERTERS_CLASS = null;
 	}
 	
+	protected static final boolean IMGLIB2_AVAILABLE = (RAI_CLASS != null) && (RAI_CONVERTERS_CLASS != null)
+														&& (RAI_2_ARRAYJ_METHOD != null) && (ARRAYJ_2_RAI_METHOD != null);
+	
+	protected static final boolean IMAGEPLUS_AVAILABLE = (IMAGEPLUS_CLASS != null) && (IMAGEPLUS_CONVERTERS_CLASS != null)
+														&& (RAI_2_ARRAYJ_METHOD != null) && (ARRAYJ_2_RAI_METHOD != null);
+	
+	
 	private static boolean checkIfClassLoaded(String className) {
 		try {
 		    Class.forName(className, false, DepsManager.class.getClassLoader());

@@ -66,7 +66,7 @@ public class Converters {
 	 * @param rai
 	 *  the {@link RandomAccessibleInterval} that is going to be copied into the GPU
 	 * @param device
-	 * 	the device into which the rai is going to be copied
+	 * 	the device into which the rai is going to be copied. If null, the default system device is used.
 	 * @param memoryType
 	 * 	the type of memory array that we are working with. The options are image or buffer. For image use the
 	 * 	String "image", for buffer use "buffer"

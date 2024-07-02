@@ -44,7 +44,7 @@ public enum DataType {
             (array, buffer, offset) -> MemoryJ.writeUByteBuffer(array, (byte[])buffer, offset)
             );
 
-    public final String name;
+    private final String name;
     private final int byteSize;
     private final Class<?> arrayClass;
     private final MemoryReadFunction readFunction;
@@ -70,6 +70,10 @@ public enum DataType {
             }
         }
         throw new IllegalArgumentException("Unsupported data type: " + dType);
+    }
+    
+    public String getName() {
+    	return name;
     }
 
     public Object createArray(int size) {

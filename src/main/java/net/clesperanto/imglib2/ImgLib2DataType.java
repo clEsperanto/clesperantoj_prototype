@@ -34,11 +34,15 @@ public enum ImgLib2DataType {
 
     public static ImgLib2DataType fromString(String dType) {
         for (ImgLib2DataType type : values()) {
-            if (type.dt.name.equals(dType)) {
+            if (type.dt.getName().equals(dType)) {
                 return type;
             }
         }
         throw new IllegalArgumentException("Unsupported data type: " + dType);
+    }
+    
+    public String getName() {
+    	return dt.getName();
     }
 
     public static < T extends NativeType< T > > ImgLib2DataType fromImgLib2DataType(T dType) {

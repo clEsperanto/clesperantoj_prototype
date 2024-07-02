@@ -7,15 +7,15 @@ import net.clesperanto.core.DeviceJ;
 import net.clesperanto.core.MemoryJ;
 
 public class Tier1 {
-	
-	
+
+
 	public static ArrayJ absolute(ArrayJ input) {
 		ArrayJ out = MemoryJ.like(input);
 		net.clesperanto._internals.kernelj.Tier1.absolute(input.getDevice().getRaw(), input.getRaw(), out.getRaw());
 		return out;
 	}
-	
-	
+
+
 	public static void absoluteInPlace(ArrayJ input, ArrayJ output) {
 		if (input.getDevice().getName() != output.getDevice().getName())
 			throw new IllegalArgumentException("The input and output should be on the same device. Input is on '"
@@ -28,11 +28,11 @@ public class Tier1 {
 			throw new IllegalArgumentException("Dimensions of input and output ArrayJs must coincide. Input dimensions "
 					+ "are " + Arrays.toString(input.getDimensions()) + " and output dimensions are "
 					+ Arrays.toString(output.getDimensions()));
-		
-		net.clesperanto._internals.kernelj.Tier1.absolute(input.getDevice().getRaw(), input.getRaw(), output.getRaw());		
+
+		net.clesperanto._internals.kernelj.Tier1.absolute(input.getDevice().getRaw(), input.getRaw(), output.getRaw());
 	}
-	
-	
+
+
 	public static Object absoluteReturnSameType(DeviceJ device, Object input) {
 		if (input instanceof ArrayJ) {
 			return absolute((ArrayJ) input);
@@ -45,11 +45,11 @@ public class Tier1 {
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
 		}
-		
+
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @param device
 	 * @param input
 	 * @return
@@ -66,8 +66,8 @@ public class Tier1 {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
 		}
 	}
-	
-	
+
+
 	public static Object absoluteReturnWanted(DeviceJ device, Object input, ObjectType objectType) {
 		ArrayJ outArrayJ;
 		if (input instanceof ArrayJ) {
@@ -80,36 +80,36 @@ public class Tier1 {
 		} else {
 			throw new IllegalArgumentException("Unsupported input object: " + device.getClass().toString());
 		}
-		
+
 		return ObjectTypeConverter.convertArrayJToType(outArrayJ, objectType);
 	}
-	
-	
+
+
 	public static void absoluteInPlace(DeviceJ device, Object input, Object output) {
 		if (input instanceof ArrayJ && output instanceof ArrayJ) {
 			absoluteInPlace((ArrayJ) input, (ArrayJ) output);
 		} else if (DepsManager.IMGLIB2_AVAILABLE
 				&& DepsManager.RAI_CLASS.isInstance(input) && DepsManager.RAI_CLASS.isInstance(output)) {
 			// TODO do something
-		} else if (DepsManager.IMGLIB2_AVAILABLE 
+		} else if (DepsManager.IMGLIB2_AVAILABLE
 				&& DepsManager.RAI_CLASS.isInstance(input) && output instanceof ArrayJ) {
 			// TODO do something
-		} else if (DepsManager.IMGLIB2_AVAILABLE 
+		} else if (DepsManager.IMGLIB2_AVAILABLE
 				 && input instanceof ArrayJ && DepsManager.RAI_CLASS.isInstance(output)) {
 			// TODO do something
-		} else if (DepsManager.IMAGEPLUS_AVAILABLE 
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE
 				&& DepsManager.IMAGEPLUS_CLASS.isInstance(input) && DepsManager.IMAGEPLUS_CLASS.isInstance(output)) {
 			// TODO do something
-		} else if (DepsManager.IMAGEPLUS_AVAILABLE 
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE
 				&& DepsManager.IMAGEPLUS_CLASS.isInstance(input) && output instanceof ArrayJ) {
 			// TODO do something
-		} else if (DepsManager.IMAGEPLUS_AVAILABLE 
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE
 				&& input instanceof ArrayJ && DepsManager.IMAGEPLUS_CLASS.isInstance(output)) {
 			// TODO do something
-		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMGLIB2_AVAILABLE 
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMGLIB2_AVAILABLE
 				&& DepsManager.IMAGEPLUS_CLASS.isInstance(input) && DepsManager.RAI_CLASS.isInstance(output)) {
 			// TODO do something
-		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMGLIB2_AVAILABLE 
+		} else if (DepsManager.IMAGEPLUS_AVAILABLE && DepsManager.IMGLIB2_AVAILABLE
 				&& DepsManager.RAI_CLASS.isInstance(input) && DepsManager.IMAGEPLUS_CLASS.isInstance(output)) {
 			// TODO do something
 		} else {

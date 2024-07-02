@@ -7,7 +7,7 @@ import net.clesperanto.core.DeviceJ;
 
 public class ObjectTypeConverter {
 
-	
+
 	public static Object convertArrayJToType(ArrayJ arrayj, ObjectType objectType) {
 		switch (objectType) {
 			case IMGLIB2:
@@ -37,13 +37,13 @@ public class ObjectTypeConverter {
 				return arrayj;
 		}
 	}
-	
+
 	public static Object convertImgLib2ToType(Object array, DeviceJ device, ObjectType objectType) {
 		if (DepsManager.RAI_CLASS == null)
 			throw new IllegalArgumentException("Cannot work with ImgLib2 objects if the ImgLib2 dependencies are not on the classpath.");
 		else if(!DepsManager.RAI_CLASS.isInstance(objectType))
 			throw new IllegalArgumentException("The input argument 'array' is not an instance of an ImgLib2 RandomAccessibleInterval.");
-			
+
 		switch (objectType) {
 			case IMGLIB2:
 				return array;
@@ -73,13 +73,13 @@ public class ObjectTypeConverter {
 				}
 		}
 	}
-	
+
 	public static Object convertImagePlus2ToType(Object array, DeviceJ device, ObjectType objectType) {
 		if (DepsManager.IMAGEPLUS_CLASS == null)
 			throw new IllegalArgumentException("Cannot work with ImagePlus objects if the ImageJ dependencies are not on the classpath.");
 		else if(!DepsManager.IMAGEPLUS_CLASS.isInstance(objectType))
 			throw new IllegalArgumentException("The input argument 'array' is not an instance of an ImageJ ImagePlus.");
-			
+
 		switch (objectType) {
 			case IMAGEPLUS:
 				return array;

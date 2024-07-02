@@ -78,15 +78,15 @@ public class ArrayJ {
     }
 
     /**
-     * 
+     *
      * @return the device object that represents where the arrayJ is loaded
      */
     public DeviceJ getDevice() {
     	return devicej;
     }
-    
+
     /**
-     * 
+     *
      *
      * @return the name of the device where the array is allocated
      */

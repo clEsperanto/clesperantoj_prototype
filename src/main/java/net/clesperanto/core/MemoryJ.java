@@ -857,7 +857,7 @@ public class MemoryJ {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 	/**
 	 * TODO find out how to do it directly on the GPU
 	 * @return
@@ -865,7 +865,7 @@ public class MemoryJ {
 	private static ArrayJ createCopy() {
 		return null;
 	}
-	
+
 	/**
 	 * Read the array located in the GPU defined by the {@link ArrayJ} 'array' into the int[]
 	 * 'data' that is on the CPU.

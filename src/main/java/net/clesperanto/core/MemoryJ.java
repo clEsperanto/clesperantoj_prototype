@@ -26,7 +26,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -43,6 +44,7 @@ public class MemoryJ {
 	public static ArrayJ makeFloatBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -59,7 +61,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -70,6 +73,7 @@ public class MemoryJ {
 	public static ArrayJ makeFloatBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeFloatBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
 						3, memoryType);
@@ -148,7 +152,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -165,6 +170,7 @@ public class MemoryJ {
 	public static ArrayJ makeByteBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -181,7 +187,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -192,6 +199,7 @@ public class MemoryJ {
 	public static ArrayJ makeByteBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
 						3, memoryType);
@@ -272,7 +280,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -289,6 +298,7 @@ public class MemoryJ {
 	public static ArrayJ makeUByteBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -305,7 +315,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -316,6 +327,7 @@ public class MemoryJ {
 	public static ArrayJ makeUByteBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeUByteBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
 						3, memoryType);
@@ -396,7 +408,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -412,6 +425,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeShortBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
+		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -428,7 +443,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -439,6 +455,7 @@ public class MemoryJ {
 	public static ArrayJ makeShortBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
 						3, memoryType);
@@ -503,7 +520,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -519,6 +537,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeUShortBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
+		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -535,7 +555,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -545,6 +566,7 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeUShortBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		if (memoryType == null) memoryType = "";
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeUShortBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
@@ -626,7 +648,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -642,6 +665,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeIntBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
+		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -658,7 +683,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -669,6 +695,7 @@ public class MemoryJ {
 	public static ArrayJ makeIntBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
 						3, memoryType);
@@ -733,7 +760,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param width
 	 * 	the width of the nd-array created
 	 * @param height
@@ -749,6 +777,8 @@ public class MemoryJ {
 	 */
 	public static ArrayJ makeUIntBuffer(DeviceJ device, long width, long height, long depth,
 			long dimension, String memoryType ) {
+		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, width, height, depth,
 						dimension, memoryType);
@@ -765,7 +795,8 @@ public class MemoryJ {
 	 *
 	 *
 	 * @param device
-	 * 	the device where the data is going to be created, represented by {@link DeviceJ}
+	 * 	the device where the data is going to be created, represented by {@link DeviceJ}.
+	 * 	If null, the default system device is used.
 	 * @param dims
 	 * 	the dimensions of the nd-array created
 	 * @param memoryType
@@ -776,6 +807,7 @@ public class MemoryJ {
 	public static ArrayJ makeUIntBuffer(DeviceJ device, long[] dims, String memoryType ) {
 		dims = transformDims(dims);
 		if (memoryType == null) memoryType = "";
+		if (device == null) device = DeviceJ.getDefaultDevice();
 		net.clesperanto._internals.jclic.ArrayJ arrayJ =
 				net.clesperanto._internals.jclic.MemoryJ.makeUIntBuffer(device.jcppDeviceJ, dims[0], dims[1], dims[2],
 						3, memoryType);

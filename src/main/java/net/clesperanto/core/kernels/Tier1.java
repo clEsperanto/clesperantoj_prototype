@@ -14,7 +14,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image. <pre>f(x) = |x| </pre>
-	 * 
+	 *
 	 * @param input
 	 * 	the input image to be processed.
 	 * @return the output image. An {@link ArrayJ} object containing the resultant image after applying the absolute value
@@ -30,13 +30,13 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image. <pre>f(x) = |x| </pre>
-	 * 
+	 *
 	 * @param input
 	 * 	the input image to be processed
 	 * @param output
 	 * 	the output image where results are written into. Cannot be null, the result is written into this object.
 	 * @throws NullPointerException if either input or output is null.
-	 * @throws IllegalArgumentException if input and output are not on the same device, 
+	 * @throws IllegalArgumentException if input and output are not on the same device,
 	 * 	use different backends, or have mismatched dimensions.
 	 */
 	public static void absoluteInPlace(ArrayJ input, ArrayJ output) {
@@ -59,11 +59,11 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image. <pre>f(x) = |x| </pre>
-	 * 
+	 *
 	 * The function supports various input types including {@link ArrayJ}, ImageJ ImagePlus, ImagLib2 RandomAccessible,
-	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the 
+	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the
 	 * corresponding dependencies to be included. {@link ArrayJ} does not require any additional dependencies.
-	 * 
+	 *
 	 * @param device
 	 * 	Device to perform the operation on.
 	 * @param input
@@ -94,15 +94,15 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image. <pre>f(x) = |x| </pre>
-	 * 
+	 *
 	 * The function supports various input types including {@link ArrayJ}, ImageJ ImagePlus, ImagLib2 RandomAccessible,
-	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the 
+	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the
 	 * corresponding dependencies to be included. {@link ArrayJ} does not require any additional dependencies.
-	 * 
+	 *
 	 * This method always return an {@link ArrayJ} as the output. Useful if we want to do another operation with
 	 * ClesperantoJ as the {@link ArrayJ} stays on the device (GPU) and does not need to be copied back and forth
 	 * into and from the CPU.
-	 * 
+	 *
 	 * @param device
 	 * 	Device to perform the operation on.
 	 * @param input
@@ -130,11 +130,11 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image. <pre>f(x) = |x| </pre>
-	 * 
+	 *
 	 * The function supports various input types including {@link ArrayJ}, ImageJ ImagePlus, ImagLib2 RandomAccessible,
-	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the 
+	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the
 	 * corresponding dependencies to be included. {@link ArrayJ} does not require any additional dependencies.
-	 * 
+	 *
 	 * @param device
 	 * 	Device to perform the operation on.
 	 * @param input
@@ -142,7 +142,7 @@ public class Tier1 {
 	 *  ImagLib2 RandomAccessible, or Icy Sequence. For types other than {@link ArrayJ}, corresponding
 	 *  dependencies must be included.
 	 * @param objectType
-	 * 	the {@link ObjectType} in which we want the result to be given. If {@code null}, it defaults to 
+	 * 	the {@link ObjectType} in which we want the result to be given. If {@code null}, it defaults to
 	 * 	{@link ObjectType#ARRAYJ} producing an {@link ArrayJ}
 	 * @return the result of the processing on the input. The object type depends on the one selected. Note that
 	 * 	in order to produce something different to {@link ArrayJ} the required dependencies need to be present
@@ -170,14 +170,14 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image. <pre>f(x) = |x| </pre>
-	 * 
+	 *
 	 * The function supports various input and output types including {@link ArrayJ}, ImageJ ImagePlus, ImagLib2 RandomAccessible,
-	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the 
+	 * and Icy Sequence. Usage of ImageJ ImagePlus, ImagLib2 RandomAccessible, and Icy Sequence requires the
 	 * corresponding dependencies to be included. {@link ArrayJ} does not require any additional dependencies.
-	 * 
+	 *
 	 * The input and output objects can be of different types. The operation modifies the output object in-place,
 	 * regardless of its type.
-	 * 
+	 *
 	 * @param device
 	 * 	Device to perform the operation on.
 	 * @param input
@@ -189,7 +189,7 @@ public class Tier1 {
 	 *  ImagLib2 RandomAccessible, or Icy Sequence. For types other than {@link ArrayJ}, corresponding
 	 *  dependencies must be included.
 	 * @throws NullPointerException if either input or output is null.
-	 * @throws IllegalArgumentException if input and output are not on the same device, 
+	 * @throws IllegalArgumentException if input and output are not on the same device,
 	 * 	use different backends, or have mismatched dimensions.
 	 */
 	public static void absoluteInPlace(DeviceJ device, Object input, Object output) {

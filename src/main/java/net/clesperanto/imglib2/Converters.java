@@ -42,7 +42,7 @@ public class Converters {
 			ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
-		DataType dataType = DataType.fromString(arrayj.getDataType());
+		ImgLib2DataType dataType = ImgLib2DataType.fromString(arrayj.getDataType());
 		if (flatDims * dataType.getByteSize() > Integer.MAX_VALUE)
 			throw new IllegalArgumentException("The ArrayJ provided is too big to be converted into an ImgLib2 ArrayImg.");
 
@@ -76,7 +76,7 @@ public class Converters {
 		ArrayJ copyImgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, String memoryType) {
 		checkSize(rai);
 		T type = Util.getTypeFromInterval(rai);
-		DataType dataType = DataType.fromImgLib2DataType(type);
+		ImgLib2DataType dataType = ImgLib2DataType.fromImgLib2DataType(type);
 		PrimitiveBlocks< T > blocks = PrimitiveBlocks.of( rai );
 		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
 		if (totalSize * dataType.getByteSize() > Integer.MAX_VALUE)

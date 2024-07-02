@@ -40,7 +40,7 @@ public enum ImgLib2DataType {
         }
         throw new IllegalArgumentException("Unsupported data type: " + dType);
     }
-    
+
     public String getName() {
     	return dt.getName();
     }

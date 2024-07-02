@@ -71,7 +71,7 @@ public enum DataType {
         }
         throw new IllegalArgumentException("Unsupported data type: " + dType);
     }
-    
+
     public String getName() {
     	return name;
     }

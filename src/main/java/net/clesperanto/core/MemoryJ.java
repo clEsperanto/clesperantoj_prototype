@@ -865,29 +865,17 @@ public class MemoryJ {
 	}
 
 	/**
-	 * TODO change by enum
 	 * Create an empty {@link ArrayJ} with the same dimensions, data type, device and memory type
 	 * as the input {@link ArrayJ}
 	 * @param arrayj
 	 * 	{@link ArrayJ} used as inspiration
 	 * @return the new {@link ArrayJ}
+	 * @throws IllegalArgumentException if the data type of the input array is not supported or has been altered
 	 */
 	public static ArrayJ like(ArrayJ arrayj) {
-		if (arrayj.getDataType().equals("float")) {
-			return makeFloatBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
-		} else if (arrayj.getDataType().equals("int")) {
-			return makeIntBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
-		} else if (arrayj.getDataType().equals("short")) {
-			return makeShortBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
-		} else if (arrayj.getDataType().equals("ushort")) {
-			return makeUShortBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
-		} else if (arrayj.getDataType().equals("char")) {
-			return makeByteBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
-		} else if (arrayj.getDataType().equals("uchar")) {
-			return makeUByteBuffer(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
-		} else {
-			throw new IllegalArgumentException();
-		}
+		String strDt = arrayj.getDataType();
+		DataType dt = DataType.fromString(strDt);
+		return dt.makeEmptyArrayJ(arrayj.getDevice(), arrayj.getDimensions(), arrayj.getMemoryType());
 	}
 
 	/**

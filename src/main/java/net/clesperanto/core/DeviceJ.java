@@ -19,7 +19,7 @@ public class DeviceJ {
 	 *
 	 *
 	 */
-	public DeviceJ() {
+	protected DeviceJ() {
 		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
 	}
 
@@ -34,7 +34,7 @@ public class DeviceJ {
 	 * @param deviceType
 	 * 	the type that wants to be initialized. If any type works, the argument should be "all"
 	 */
-	public DeviceJ(String deviceName, String deviceType) {
+	protected DeviceJ(String deviceName, String deviceType) {
 		Objects.requireNonNull(deviceName, "The device name cannot be null");
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\"");
 		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();

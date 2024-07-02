@@ -92,7 +92,7 @@ public:
     static void readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size);
     static void readIntBuffer(const ArrayJ &array, int *data, const size_t &size);
     static void readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size);
-    
+
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

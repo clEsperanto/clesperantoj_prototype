@@ -22,13 +22,13 @@ import net.imglib2.type.numeric.real.FloatType;
 
 public enum DataType {
     FLOAT32("float", 4, float.class, FloatType::new, ByteBuffer::asFloatBuffer,
-            (array, buffer, offset) -> MemoryJ.readFloatBuffer(array, (FloatBuffer)buffer, offset), 
-            (device, dims, memType) -> MemoryJ.makeFloatBuffer(device, dims, memType), 
-            (array, buffer, offset) -> MemoryJ.writeFloatBuffer(array, (float[])buffer, offset) 
+            (array, buffer, offset) -> MemoryJ.readFloatBuffer(array, (FloatBuffer)buffer, offset),
+            (device, dims, memType) -> MemoryJ.makeFloatBuffer(device, dims, memType),
+            (array, buffer, offset) -> MemoryJ.writeFloatBuffer(array, (float[])buffer, offset)
             ),
     INT32("int", 4, int.class, IntType::new, ByteBuffer::asIntBuffer,
-            (array, buffer, offset) -> MemoryJ.readIntBuffer(array, (IntBuffer)buffer, offset), 
-            (device, dims, memType) -> MemoryJ.makeIntBuffer(device, dims, memType), 
+            (array, buffer, offset) -> MemoryJ.readIntBuffer(array, (IntBuffer)buffer, offset),
+            (device, dims, memType) -> MemoryJ.makeIntBuffer(device, dims, memType),
             (array, buffer, offset) -> MemoryJ.writeIntBuffer(array, (int[])buffer, offset)
             ),
     UINT32("uint", 4, int.class, UnsignedIntType::new, ByteBuffer::asIntBuffer,
@@ -99,28 +99,28 @@ public enum DataType {
     public Object createArray(int size) {
         return java.lang.reflect.Array.newInstance(arrayClass, size);
     }
-    
+
     public int getByteSize() {
     	return this.byteSize;
     }
-    
+
     public void readToBuffer(ArrayJ arrayj, ByteBuffer buffer) {
     	this.readFunction.read(arrayj, bufferConverter.apply(buffer), 0);
     }
-    
+
     public void writeToBuffer(ArrayJ arrayj, ByteBuffer buffer) {
     	this.writeFunction.write(arrayj, bufferConverter.apply(buffer), 0);
     }
-    
+
     public ArrayJ makeEmptyArrayJ(DeviceJ device, long[] dims, String memoryType) {
     	 return this.makeFunction.make(device, dims, memoryType);
     }
-    
+
     public ArrayJ makeAndWriteArrayJ(Object buffer, DeviceJ device, long[] dims, String memoryType) {
     	 ArrayJ arrayj = this.makeFunction.make(device, dims, memoryType);
     	 this.writeFunction.write(arrayj, buffer, 0);
     	 return arrayj;
-    	 
+
     }
 
     public < T extends NativeType< T > > T createType() {

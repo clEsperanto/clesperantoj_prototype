@@ -4,10 +4,6 @@ import net.clesperanto._internals.jclic.StringVector;
 
 import java.util.Arrays;
 
-import org.bytedeco.javacpp.FloatPointer;
-import org.bytedeco.javacpp.LongPointer;
-import org.bytedeco.javacpp.Pointer;
-
 import net.clesperanto._internals.jclic.DeviceJ;
 import net.clesperanto._internals.jclic.MemoryJ;
 import net.clesperanto._internals.jclic.BackendJ;
@@ -40,8 +36,8 @@ public class ClesperantoJ {
         DeviceJ currentDevice = new DeviceJ();
         currentDevice.setDevice("TX", "all");
 
-        ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "image");
-        ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "image");
+        ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
+        ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
 
         float data[] = new float[3 * 3 * 2];
         float out[] = new float[3 * 3 * 2];
@@ -52,7 +48,7 @@ public class ClesperantoJ {
         // MemoryJ.writeFloatBuffer(output, out, (long) out.length);
 
         Tier1.absolute(currentDevice, input, output);
-        
+
         MemoryJ.readFloatBuffer(output, out, (long) out.length);
 
         for (int i = 0; i < out.length; i++) {

@@ -16,7 +16,10 @@ public class ArrayJ {
 	protected final net.clesperanto._internals.jclic.ArrayJ arrayj;
 	protected final DeviceJ devicej;
 
-    protected ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj, DeviceJ devicej) {
+    public ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj, DeviceJ devicej) {
+    	if (!arrayj.getDevice().equals(devicej.getName()))
+    		throw new IllegalArgumentException("Device name does not coincide with ArrayJ associated name: "
+    				+ devicej.getName() + " vs " + arrayj.getDevice());
     	this.arrayj = arrayj;
     	this.devicej = devicej;
     }

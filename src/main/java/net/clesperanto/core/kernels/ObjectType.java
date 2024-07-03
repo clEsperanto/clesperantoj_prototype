@@ -20,7 +20,7 @@ public enum ObjectType {
     public String getDisplayName() {
         return displayName;
     }
-    
+
     public boolean canBeUsed() {
     	return this.classExists;
     }
@@ -53,7 +53,7 @@ public enum ObjectType {
         		+ "The supported types are 'net.clesperanto.core.ArrayJ', '" + DepsManager.RAI_CLS_NAME
         		+ "' and '" + DepsManager.IMAGEPLUS_CLS_NAME + "'. Of them, 'net.clesperanto.core.ArrayJ' "
 				+ "is loaded, '" + DepsManager.RAI_CLS_NAME + "' is " + (DepsManager.IMGLIB2_AVAILABLE ? "" : "not")
-				+ " loaded and " + "'" + DepsManager.IMAGEPLUS_CLS_NAME  + "' is " 
+				+ " loaded and " + "'" + DepsManager.IMAGEPLUS_CLS_NAME  + "' is "
 				+ (DepsManager.IMGLIB2_AVAILABLE ? "" : "not") + " loaded.");
     }
 }

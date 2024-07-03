@@ -6,10 +6,10 @@ import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
 
 public class ObjectConverter {
-	
+
 	public static ArrayJ push(Object input, DeviceJ device, String memoryType) {
 		ObjectType ot = ObjectType.fromObject(input);
-		
+
 		switch (ot) {
 			case ARRAYJ:
 				return (ArrayJ) input;
@@ -38,7 +38,7 @@ public class ObjectConverter {
 				throw new IllegalArgumentException("Unsupported object type");
 		}
 	}
-	
+
 	public static Object pull(ArrayJ input, ObjectType targetObType) {
 		switch (targetObType) {
 			case ARRAYJ:

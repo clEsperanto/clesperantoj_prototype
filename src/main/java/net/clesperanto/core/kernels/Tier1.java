@@ -15,7 +15,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * 
+	 *
 	 * <pre>
 	 * f(x) = |x|
 	 * </pre>
@@ -37,7 +37,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * 
+	 *
 	 * <pre>
 	 * f(x) = |x|
 	 * </pre>
@@ -73,7 +73,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * 
+	 *
 	 * <pre>
 	 * f(x) = |x|
 	 * </pre>
@@ -120,7 +120,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * 
+	 *
 	 * <pre>
 	 * f(x) = |x|
 	 * </pre>
@@ -169,7 +169,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * 
+	 *
 	 * <pre>
 	 * f(x) = |x|
 	 * </pre>
@@ -224,7 +224,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * 
+	 *
 	 * <pre>
 	 * f(x) = |x|
 	 * </pre>

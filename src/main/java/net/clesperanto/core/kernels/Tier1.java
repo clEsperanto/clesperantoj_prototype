@@ -54,11 +54,11 @@ public class Tier1 {
 
 		if (output == null) {
 			return new ArrayJ(
-					net.clesperanto._internals.kernelj.Tier1.absolute(in.getDevice().getRaw(), in.getRaw(), null), 
+					net.clesperanto._internals.kernelj.Tier1.absolute(in.getDevice().getRaw(), in.getRaw(), null),
 					device);
 		}
 		return new ArrayJ(
-				net.clesperanto._internals.kernelj.Tier1.absolute(in.getDevice().getRaw(), in.getRaw(), output.getRaw()), 
+				net.clesperanto._internals.kernelj.Tier1.absolute(in.getDevice().getRaw(), in.getRaw(), output.getRaw()),
 				device);
 	}
 }

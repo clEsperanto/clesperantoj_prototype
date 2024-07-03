@@ -7,11 +7,11 @@ import net.clesperanto.core.DeviceJ;
 
 public class DepsManager {
 
-	private static final String RAI_CLS_NAME = "net.imglib2.RandomAccessibleInterval";
+	protected static final String RAI_CLS_NAME = "net.imglib2.RandomAccessibleInterval";
 
 	private static final String RAI_CONVERTERS_CLS_NAME = "net.clesperanto.imglib2.Converters";
 
-	private static final String IMAGEPLUS_CLS_NAME = "";
+	protected static final String IMAGEPLUS_CLS_NAME = "";
 
 	private static final String IMAGEPLUS_CONVERTERS_CLS_NAME = "";
 

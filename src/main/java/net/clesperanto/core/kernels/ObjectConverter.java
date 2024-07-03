@@ -5,7 +5,68 @@ import java.lang.reflect.InvocationTargetException;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
 
-public class ObjectTypeConverter {
+public class ObjectConverter {
+	
+	public static ArrayJ push(Object input, DeviceJ device, String memoryType) {
+		ObjectType ot = ObjectType.fromObject(input);
+		
+		switch (ot) {
+			case ARRAYJ:
+				return (ArrayJ) input;
+			case IMGLIB2:
+				try {
+					Object[] arguments = new Object[] { DepsManager.RAI_CLASS.cast(input), device, memoryType };
+					return (ArrayJ) DepsManager.RAI_2_ARRAYJ_METHOD.invoke(null, arguments);
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException("Failed to access the method", e);
+				} catch (IllegalArgumentException e) {
+					throw new RuntimeException("Invalid arguments provided to the method", e);
+				} catch (InvocationTargetException e) {
+					Throwable cause = e.getCause();
+				     if (cause instanceof Error) {
+				        throw (Error) cause;
+				    } else if (cause instanceof Exception) {
+				        throw new RuntimeException("Exception occurred inside the invoked method", cause);
+				    } else {
+				        throw new Error("Unhandled throwable type", cause);
+				    }
+				}
+			case IMAGEPLUS:
+				// TODO do something
+				return null;
+			default:
+				throw new IllegalArgumentException("Unsupported object type");
+		}
+	}
+	
+	public static Object pull(ArrayJ input, ObjectType targetObType) {
+		switch (targetObType) {
+			case ARRAYJ:
+				return (ArrayJ) input;
+			case IMGLIB2:
+				try {
+					return DepsManager.ARRAYJ_2_RAI_METHOD.invoke(null, new Object[] {input});
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException("Failed to access the method", e);
+				} catch (IllegalArgumentException e) {
+					throw new RuntimeException("Invalid arguments provided to the method", e);
+				} catch (InvocationTargetException e) {
+					Throwable cause = e.getCause();
+				    if (cause instanceof Error) {
+				        throw (Error) cause;
+				    } else if (cause instanceof Exception) {
+				        throw new RuntimeException("Exception occurred inside the invoked method", cause);
+				    } else {
+				        throw new Error("Unhandled throwable type", cause);
+				    }
+				}
+			case IMAGEPLUS:
+				// TODO do something
+				return null;
+			default:
+				throw new IllegalArgumentException("Unsupported object type");
+		}
+	}
 
 
 	public static Object convertArrayJToType(ArrayJ arrayj, ObjectType objectType) {

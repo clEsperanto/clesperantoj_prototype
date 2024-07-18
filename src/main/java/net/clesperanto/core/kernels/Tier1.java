@@ -50,9 +50,9 @@ public class Tier1 {
 	 */
 	public static ArrayJ absolute(DeviceJ device, ArrayJ input, ArrayJ output) {
 		Objects.requireNonNull(input, "Input cannot be null");
-		
+
 		return new ArrayJ(
-				net.clesperanto._internals.kernelj.Tier1.absolute(input.getDevice().getRaw(), 
+				net.clesperanto._internals.kernelj.Tier1.absolute(input.getDevice().getRaw(),
 						input.getRaw(),
 						output == null ? null : output.getRaw()),
 				device);

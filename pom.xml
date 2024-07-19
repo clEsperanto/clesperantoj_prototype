@@ -118,6 +118,10 @@
 			<artifactId>javacpp</artifactId>
 			<version>1.5.8</version>
 		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+		</dependency>
     </dependencies>
 
     <repositories>

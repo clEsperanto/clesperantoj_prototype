@@ -1,4 +1,4 @@
-package net.clesperanto.core.kernels;
+package net.clesperanto.utils;
 
 import java.lang.reflect.Method;
 

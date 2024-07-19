@@ -1,4 +1,4 @@
-package net.clesperanto.core.kernels;
+package net.clesperanto.kernels;
 
 import java.util.Objects;
 

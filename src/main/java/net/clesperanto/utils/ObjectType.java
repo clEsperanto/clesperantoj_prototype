@@ -1,4 +1,4 @@
-package net.clesperanto.core.kernels;
+package net.clesperanto.utils;
 
 import net.clesperanto._internals.jclic.ArrayJ;
 

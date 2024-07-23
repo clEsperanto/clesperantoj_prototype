@@ -1,7 +1,6 @@
 package net.clesperanto.imagej;
 
 import java.nio.ByteBuffer;
-import java.util.function.Supplier;
 
 import ij.ImagePlus;
 import net.clesperanto.core.ArrayJ;
@@ -36,7 +35,7 @@ public enum ImageJDataType {
 
     public static ImageJDataType fromImgPlusDataType(int dType) {
         for (ImageJDataType type : values()) {
-            if (type.typeSupplier.get().getClass().isInstance(dType)) {
+            if (dType == type.imgDtype) {
                 return type;
             }
         }
@@ -67,7 +66,7 @@ public enum ImageJDataType {
     	return dt.makeAndWriteArrayJ(buffer, device, dims, memoryType);
     }
 
-    public < T extends NativeType< T > > T createType() {
-        return (T) typeSupplier.get();
+    public int createType() {
+        return this.imgDtype;
     }
 }

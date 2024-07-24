@@ -86,6 +86,8 @@ public enum ImageJDataType {
             case UINT8:
                 ((byte[]) arr)[pos] = value.byteValue();
                 break;
+            default:
+            	throw new IllegalArgumentException("Unsupported data type");
         }
     }
 }

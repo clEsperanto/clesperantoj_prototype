@@ -8,20 +8,22 @@ import net.clesperanto.core.DeviceJ;
 
 
 public enum IcyDataType {
-    FLOAT32(DataType.fromString("float"), icy.type.DataType.FLOAT),
-    INT32(DataType.fromString("int"), icy.type.DataType.INT),
-    UINT32(DataType.fromString("uint"), icy.type.DataType.UINT),
-    INT16(DataType.fromString("short"), icy.type.DataType.SHORT),
-    UINT16(DataType.fromString("ushort"), icy.type.DataType.USHORT),
-    INT8(DataType.fromString("char"), icy.type.DataType.BYTE),
-    UINT8(DataType.fromString("uchar"), icy.type.DataType.UBYTE);
+    FLOAT32(DataType.fromString("float"), icy.type.DataType.FLOAT, float[].class),
+    INT32(DataType.fromString("int"), icy.type.DataType.INT, int[].class),
+    UINT32(DataType.fromString("uint"), icy.type.DataType.UINT, int[].class),
+    INT16(DataType.fromString("short"), icy.type.DataType.SHORT, short[].class),
+    UINT16(DataType.fromString("ushort"), icy.type.DataType.USHORT, short[].class),
+    INT8(DataType.fromString("char"), icy.type.DataType.BYTE, byte[].class),
+    UINT8(DataType.fromString("uchar"), icy.type.DataType.UBYTE, byte[].class);
 
     private final DataType dt;
     private final icy.type.DataType icyDT;
+    private final Class<?> arrayClass;
 
-    IcyDataType(DataType dt, icy.type.DataType icyDT) {
+    IcyDataType(DataType dt, icy.type.DataType icyDT, Class<?> arrayClass) {
     	this.dt = dt;
         this.icyDT = icyDT;
+        this.arrayClass = arrayClass;
     }
 
     public static IcyDataType fromString(String dType) {
@@ -72,5 +74,29 @@ public enum IcyDataType {
 
     public icy.type.DataType createType() {
         return this.icyDT;
+    }
+
+    public void putValInArray(Object arr, int pos, Number value) {
+    	if (!arrayClass.isInstance(arr))
+            throw new IllegalArgumentException("The input argument 'arr' is not an instance of " + arrayClass.getSimpleName() + ".");
+
+        switch (this) {
+            case FLOAT32:
+                ((float[]) arr)[pos] = value.floatValue();
+                break;
+            case INT32:
+                ((int[]) arr)[pos] = value.intValue();
+                break;
+            case INT16:
+            case UINT16:
+                ((short[]) arr)[pos] = value.shortValue();
+                break;
+            case INT8:
+            case UINT8:
+                ((byte[]) arr)[pos] = value.byteValue();
+                break;
+            default:
+            	throw new IllegalArgumentException("Unsupported data type");
+        }
     }
 }

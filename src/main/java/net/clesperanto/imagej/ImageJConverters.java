@@ -152,5 +152,4 @@ public class ImageJConverters {
 			throw new IllegalArgumentException();
 		return sizeMap;
 	}
-
 }

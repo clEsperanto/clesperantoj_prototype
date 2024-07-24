@@ -24,7 +24,7 @@ import net.imglib2.util.Util;
 /**
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
-public class Converters {
+public class IcyConverters {
 
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.

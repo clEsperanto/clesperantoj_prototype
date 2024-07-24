@@ -23,7 +23,7 @@ import net.clesperanto.core.DeviceJ;
 /**
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
-public class Converters {
+public class ImageJConverters {
 
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.

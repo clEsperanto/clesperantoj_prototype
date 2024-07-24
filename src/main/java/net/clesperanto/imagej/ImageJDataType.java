@@ -71,11 +71,11 @@ public enum ImageJDataType {
     public int createType() {
         return this.imgDtype;
     }
-    
+
     public void putValInArray(Object arr, int pos, Number value) {
     	if (!arrayClass.isInstance(arr))
             throw new IllegalArgumentException("The input argument 'arr' is not an instance of " + arrayClass.getSimpleName() + ".");
-    	
+
         switch (this) {
             case FLOAT32:
                 ((float[]) arr)[pos] = value.floatValue();

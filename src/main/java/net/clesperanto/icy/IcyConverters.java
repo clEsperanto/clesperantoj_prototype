@@ -149,7 +149,7 @@ public class IcyConverters {
 			throw new IllegalArgumentException();
 		return sizeMap;
 	}
-	
+
     /**
      * Create a sequence of the wanted size and data type
      * @param dims

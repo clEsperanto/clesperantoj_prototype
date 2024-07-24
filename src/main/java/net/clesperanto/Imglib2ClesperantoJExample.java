@@ -32,9 +32,10 @@ public class Imglib2ClesperantoJExample {
         Img<FloatType> output_img = ArrayImgs.floats(out, new long[] { 3, 3, 2 });
 
         ArrayJ input = ImgLib2Converters.copyImgLib2ToArrayJ(input_img, currentDevice, "buffer");
-        ArrayJ output = ImgLib2Converters.copyImgLib2ToArrayJ(output_img, currentDevice, "buffer");
+        // ArrayJ output = ImgLib2Converters.copyImgLib2ToArrayJ(output_img,
+        // currentDevice, "buffer");
 
-        Tier1.absolute(currentDevice, input, output);
+        ArrayJ output = Tier1.absolute(currentDevice, input, null);
 
         output_img = ImgLib2Converters.copyArrayJToImgLib2(output);
 

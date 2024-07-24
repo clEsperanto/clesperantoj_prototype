@@ -1,35 +1,27 @@
 package net.clesperanto.icy;
 
 import java.nio.ByteBuffer;
-import java.util.function.Supplier;
 
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
-import net.imglib2.type.NativeType;
-import net.imglib2.type.numeric.integer.ByteType;
-import net.imglib2.type.numeric.integer.IntType;
-import net.imglib2.type.numeric.integer.ShortType;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.type.numeric.integer.UnsignedIntType;
-import net.imglib2.type.numeric.integer.UnsignedShortType;
-import net.imglib2.type.numeric.real.FloatType;
+
 
 public enum IcyDataType {
-    FLOAT32(DataType.fromString("float"), FloatType::new),
-    INT32(DataType.fromString("int"), IntType::new),
-    UINT32(DataType.fromString("uint"), UnsignedIntType::new),
-    INT16(DataType.fromString("short"), ShortType::new),
-    UINT16(DataType.fromString("ushort"), UnsignedShortType::new),
-    INT8(DataType.fromString("char"), ByteType::new),
-    UINT8(DataType.fromString("uchar"), UnsignedByteType::new);
+    FLOAT32(DataType.fromString("float"), icy.type.DataType.FLOAT),
+    INT32(DataType.fromString("int"), icy.type.DataType.INT),
+    UINT32(DataType.fromString("uint"), icy.type.DataType.UINT),
+    INT16(DataType.fromString("short"), icy.type.DataType.SHORT),
+    UINT16(DataType.fromString("ushort"), icy.type.DataType.USHORT),
+    INT8(DataType.fromString("char"), icy.type.DataType.BYTE),
+    UINT8(DataType.fromString("uchar"), icy.type.DataType.UBYTE);
 
     private final DataType dt;
-    private final Supplier<NativeType<?>> typeSupplier;
+    private final icy.type.DataType icyDT;
 
-    IcyDataType(DataType dt, Supplier<NativeType<?>> typeSupplier) {
+    IcyDataType(DataType dt, icy.type.DataType icyDT) {
     	this.dt = dt;
-        this.typeSupplier = typeSupplier;
+        this.icyDT = icyDT;
     }
 
     public static IcyDataType fromString(String dType) {
@@ -45,13 +37,13 @@ public enum IcyDataType {
     	return dt.getName();
     }
 
-    public static < T extends NativeType< T > > IcyDataType fromImgLib2DataType(T dType) {
+    public static IcyDataType fromIcyDataType(icy.type.DataType icyType) {
         for (IcyDataType type : values()) {
-            if (type.typeSupplier.get().getClass().isInstance(dType)) {
+            if (type.createType() == icyType) {
                 return type;
             }
         }
-        throw new IllegalArgumentException("Unsupported data type: " + dType);
+        throw new IllegalArgumentException("Unsupported data type: " + icyType.toString());
     }
 
     public Object createArray(int size) {
@@ -78,7 +70,7 @@ public enum IcyDataType {
     	return dt.makeAndWriteArrayJ(buffer, device, dims, memoryType);
     }
 
-    public < T extends NativeType< T > > T createType() {
-        return (T) typeSupplier.get();
+    public icy.type.DataType createType() {
+        return this.icyDT;
     }
 }

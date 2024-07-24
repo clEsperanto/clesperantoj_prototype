@@ -8,16 +8,18 @@ import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
 // TODO add all types ImagePlus.GRAY8, ImagePlus.GRAY16, ImagePlus.GRAY32, ImagePlus.COLOR_256 or ImagePlus.COLOR_RGB)
 public enum ImageJDataType {
-    FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32),
-    UINT16(DataType.fromString("ushort"), ImagePlus.GRAY16),
-    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8);
+    FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32, float[].class),
+    UINT16(DataType.fromString("ushort"), ImagePlus.GRAY16, short[].class),
+    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8, byte[].class);
 
-    private final DataType dt;
+	private final DataType dt;
     private final int imgDtype;
+    private final Class<?> arrayClass;
 
-    ImageJDataType(DataType dt, int imgDtype) {
-    	this.dt = dt;
+    ImageJDataType(DataType dt, int imgDtype, Class<?> arrayClass) {
+        this.dt = dt;
         this.imgDtype = imgDtype;
+        this.arrayClass = arrayClass;
     }
 
     public static ImageJDataType fromString(String dType) {
@@ -68,5 +70,22 @@ public enum ImageJDataType {
 
     public int createType() {
         return this.imgDtype;
+    }
+    
+    public void putValInArray(Object arr, int pos, Number value) {
+    	if (!arrayClass.isInstance(arr))
+            throw new IllegalArgumentException("The input argument 'arr' is not an instance of " + arrayClass.getSimpleName() + ".");
+    	
+        switch (this) {
+            case FLOAT32:
+                ((float[]) arr)[pos] = value.floatValue();
+                break;
+            case UINT16:
+                ((short[]) arr)[pos] = value.shortValue();
+                break;
+            case UINT8:
+                ((byte[]) arr)[pos] = value.byteValue();
+                break;
+        }
     }
 }

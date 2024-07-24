@@ -2,9 +2,16 @@ package net.clesperanto.imagej;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.util.Arrays;
+import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
+import ij.IJ;
 import ij.ImagePlus;
+import ij.process.ImageProcessor;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
 
@@ -26,8 +33,7 @@ public class Converters {
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static ImagePlus copyArrayJToImgLib2(
-			ArrayJ arrayj )
+	public static ImagePlus copyArrayJToImgLib2( ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
 		ImageJDataType dataType = ImageJDataType.fromString(arrayj.getDataType());
@@ -38,9 +44,7 @@ public class Converters {
                 .order(ByteOrder.LITTLE_ENDIAN);
 		dataType.readToBuffer(arrayj, byteBuffer);
 
-		T type = dataType.createType();
-
-		return fromBuffer(byteBuffer, type, arrayj.getDimensions());
+		return fromBuffer(byteBuffer, dataType, arrayj.getDimensions());
 	}
 
 	/**
@@ -59,40 +63,94 @@ public class Converters {
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
 	public static ArrayJ copyImgLib2ToArrayJ(ImagePlus rai, DeviceJ device, String memoryType) {
-		checkSize(rai);
-		int type = rai.getType();
-		ImageJDataType dataType = ImageJDataType.fromImgPlusDataType(type);
-		PrimitiveBlocks< T > blocks = PrimitiveBlocks.of( rai );
-		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
-		if (totalSize * dataType.getByteSize() > Integer.MAX_VALUE)
-			throw new IllegalArgumentException();
+		Map<String, Integer> sizeMap = checkSize(rai);
+		ImageJDataType dataType = ImageJDataType.fromImgPlusDataType(rai.getType());
+		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);
 
-		int[] integerDims = Arrays.stream(rai.dimensionsAsLongArray()).mapToInt(x -> (int) x).toArray();
+		long[] dims = sizeMap.values().stream().mapToLong(i -> (long) i).toArray();
 	    Object flatArr = dataType.createArray((int) totalSize);
-	    blocks.copy(new int[rai.dimensionsAsLongArray().length], flatArr, integerDims);
 
-	    return dataType.makeAndWriteArrayJ(flatArr, device, rai.dimensionsAsLongArray(), memoryType);
+	    int sizeT = sizeMap.get("t") != null ? sizeMap.get("t"): 1;
+	    int sizeZ = sizeMap.get("z") != null ? sizeMap.get("z"): 1;
+	    int sizeC = sizeMap.get("c") != null ? sizeMap.get("c"): 1;
+	    int sizeY = sizeMap.get("y") != null ? sizeMap.get("y"): 1;
+	    int sizeX = sizeMap.get("x") != null ? sizeMap.get("x"): 1;
+	    int pos = 0;
+	    for (int t = 0; t <  sizeT; t ++) {
+	    	for (int z = 0; z <  sizeZ; z ++) {
+	    		for (int c = 0; c <  sizeC; c ++) {
+	    			rai.setPositionWithoutUpdate(c + 1, z + 1, t + 1);
+	    			ImageProcessor ip = rai.getProcessor();
+	    			for (int y = 0; y <  sizeY; y ++) {
+	    				for (int x = 0; x <  sizeX; x ++) {
+	    					dataType.putValInArray(flatArr, pos ++,  ip.getValue(x, y));
+	    			    }
+	    		    }
+	    	    }
+		    }
+	    }
+
+	    return dataType.makeAndWriteArrayJ(flatArr, device, dims, memoryType);
 	}
 
-	private static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A >
-		fromBuffer(ByteBuffer byteBuffer, T type, long[] dimensions) {
-
-		final Fraction entitiesPerPixel = type.getEntitiesPerPixel();
-		@SuppressWarnings( { "unchecked", "rawtypes" } )
-		final NativeTypeFactory< T, ? super A > typeFactory = ( NativeTypeFactory ) type.getNativeTypeFactory();
-		final A access = BufferDataAccessFactory.get( typeFactory );
-		final A data = access.newInstance( byteBuffer, true );
-		final ArrayImg< T, A > img = new ArrayImg<>( data, dimensions, entitiesPerPixel );
-		img.setLinkedType( typeFactory.createLinkedType( img ) );
-		return img;
+	private static ImagePlus fromBuffer(ByteBuffer byteBuffer, ImageJDataType type, long[] dimensions) {
+	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.createType());
+	    
+	    switch (type) {
+	        case FLOAT32:
+	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();
+	            fillImage(im, dimensions, floatBuff::get);
+	            break;
+	        case UINT8:
+	            fillImage(im, dimensions, byteBuffer::get);
+	            break;
+	        case UINT16:
+	            ShortBuffer shortBuff = byteBuffer.asShortBuffer();
+	            fillImage(im, dimensions, shortBuff::get);
+	            break;
+	        default:
+	            throw new IllegalArgumentException("Data type not supported.");
+	    }
+	    
+	    return im;
 	}
 
-	private static void checkSize(ImagePlus rai) {
-		int[] dims = rai.getDimensions();
-		for (long l : dims) {
-			if (l > Integer.MAX_VALUE)
-				throw new IllegalArgumentException();
+	private static void fillImage(ImagePlus im, long[] dimensions, Supplier<Number> getValue) {
+	    for (int z = 0; z < dimensions[2]; z++) {
+	        im.setPositionWithoutUpdate(1, 1 + z, 1);
+	        ImageProcessor ip = im.getProcessor();
+	        for (int y = 0; y < dimensions[1]; y++) {
+	            for (int x = 0; x < dimensions[0]; x++) {
+	                ip.putPixelValue(x, y, getValue.get().doubleValue());
+	            }
+	        }
+	    }
+	}
+
+	private static Map<String, Integer> checkSize(ImagePlus imp) {
+		Map<String, Integer> sizeMap = new LinkedHashMap<String, Integer>();
+		sizeMap.put("x", imp.getWidth());
+		sizeMap.put("y", imp.getHeight());
+		sizeMap.put("c", imp.getNChannels());
+		sizeMap.put("z", imp.getNSlices());
+		sizeMap.put("t", imp.getNFrames());
+		sizeMap = sizeMap.entrySet().stream()
+				.filter(ee -> ee.getValue() == 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
+		while (sizeMap.entrySet().size() > 3) {
+			if (sizeMap.get("t") != null)
+				sizeMap.remove("t");
+			else if (sizeMap.get("c") != null)
+				sizeMap.remove("c");
+			else if (sizeMap.get("z") != null)
+				sizeMap.remove("z");
 		}
+		int tot = 1;
+		for (Integer vv : sizeMap.values()) {
+			tot *= vv;
+		}
+		if (tot > Integer.MAX_VALUE)
+			throw new IllegalArgumentException();
+		return sizeMap;
 	}
 
 }

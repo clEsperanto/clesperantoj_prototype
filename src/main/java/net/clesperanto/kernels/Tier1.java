@@ -5,6 +5,17 @@ import java.util.Objects;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
 
+// ToDo after CI and first autogeneration:
+//
+// covertion function between javacpp vector to java arraylist for float, string, and ArrayJ
+// covertJCPPListToArrayList ArrayJList,FloatList, <T>List 
+// {
+// 	element wise"copy"(or move)to a ArrayList<T>
+// }
+
+// future: need also something for std::unordered_map<std::string,std::vector<float>>features;
+// which will be returned by the c++ function statisticsOfLabelledPixels
+
 /**
  * Class containing all functions of tier 1 category
  */

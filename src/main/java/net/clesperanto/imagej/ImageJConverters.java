@@ -95,7 +95,7 @@ public class ImageJConverters {
 
 	private static ImagePlus fromBuffer(ByteBuffer byteBuffer, ImageJDataType type, long[] dimensions) {
 	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.createType());
-	    
+
 	    switch (type) {
 	        case FLOAT32:
 	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();
@@ -111,7 +111,7 @@ public class ImageJConverters {
 	        default:
 	            throw new IllegalArgumentException("Data type not supported.");
 	    }
-	    
+
 	    return im;
 	}
 

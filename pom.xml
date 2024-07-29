@@ -102,6 +102,11 @@
 
 
     <dependencies>
+        <dependency>
+			<groupId>org.bioimageanalysis.icy</groupId>
+			<artifactId>icy-kernel</artifactId>
+			<version>2.5.1</version>
+		</dependency>
 		<dependency>
 			<groupId>net.imglib2</groupId>
 			<artifactId>imglib2</artifactId>
@@ -118,6 +123,10 @@
 			<artifactId>javacpp</artifactId>
 			<version>1.5.8</version>
 		</dependency>
+		<dependency>
+			<groupId>net.imagej</groupId>
+			<artifactId>ij</artifactId>
+		</dependency>
     </dependencies>
 
     <repositories>
@@ -125,6 +134,10 @@
 			<id>scijava.public</id>
 			<url>https://maven.scijava.org/content/groups/public</url>
 		</repository>
+        <repository>
+		    <id>icy</id>
+		    <url>https://icy-nexus.pasteur.fr/repository/Icy/</url>
+        </repository>
 	</repositories>
 
     <build>

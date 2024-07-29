@@ -24,7 +24,7 @@ import net.imglib2.util.Util;
 /**
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
-public class Converters {
+public class ImgLib2Converters {
 
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
@@ -42,7 +42,7 @@ public class Converters {
 			ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
-		DataType dataType = DataType.fromString(arrayj.getDataType());
+		ImgLib2DataType dataType = ImgLib2DataType.fromString(arrayj.getDataType());
 		if (flatDims * dataType.getByteSize() > Integer.MAX_VALUE)
 			throw new IllegalArgumentException("The ArrayJ provided is too big to be converted into an ImgLib2 ArrayImg.");
 
@@ -66,7 +66,7 @@ public class Converters {
 	 * @param rai
 	 *  the {@link RandomAccessibleInterval} that is going to be copied into the GPU
 	 * @param device
-	 * 	the device into which the rai is going to be copied
+	 * 	the device into which the rai is going to be copied. If null, the default system device is used.
 	 * @param memoryType
 	 * 	the type of memory array that we are working with. The options are image or buffer. For image use the
 	 * 	String "image", for buffer use "buffer"
@@ -76,10 +76,10 @@ public class Converters {
 		ArrayJ copyImgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, String memoryType) {
 		checkSize(rai);
 		T type = Util.getTypeFromInterval(rai);
-		DataType dataType = DataType.fromImgLib2DataType(type);
+		ImgLib2DataType dataType = ImgLib2DataType.fromImgLib2DataType(type);
 		PrimitiveBlocks< T > blocks = PrimitiveBlocks.of( rai );
 		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
-		if (totalSize > Integer.MAX_VALUE * dataType.getByteSize())
+		if (totalSize * dataType.getByteSize() > Integer.MAX_VALUE)
 			throw new IllegalArgumentException();
 
 		int[] integerDims = Arrays.stream(rai.dimensionsAsLongArray()).mapToInt(x -> (int) x).toArray();

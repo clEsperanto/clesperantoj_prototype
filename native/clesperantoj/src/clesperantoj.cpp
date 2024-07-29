@@ -58,12 +58,12 @@ ArrayJ ArrayJ::create(size_t width, size_t height, size_t depth, size_t dimensio
 
 void ArrayJ::read(void *data) const
 {
-    this->array_->read(data);
+    this->array_->readTo(data);
 }
 
 void ArrayJ::write(void *data) const
 {
-    this->array_->write(data);
+    this->array_->writeFrom(data);
 }
 
 size_t ArrayJ::getWidth()
@@ -117,7 +117,7 @@ void ArrayJ::fillMemory(float value)
 
 void ArrayJ::copyDataTo(ArrayJ &dst)
 {
-    this->array_->copy(dst.get());
+    this->array_->copyTo(dst.get());
 }
 
 // // void Array::getShape(size_t *shape)

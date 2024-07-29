@@ -13,10 +13,15 @@ package net.clesperanto.core;
  */
 public class ArrayJ {
 
-	protected net.clesperanto._internals.jclic.ArrayJ arrayj;
+	protected final net.clesperanto._internals.jclic.ArrayJ arrayj;
+	protected final DeviceJ devicej;
 
-    protected ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj) {
+    public ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj, DeviceJ devicej) {
+    	if (!arrayj.getDevice().equals(devicej.getName()))
+    		throw new IllegalArgumentException("Device name does not coincide with ArrayJ associated name: "
+    				+ devicej.getName() + " vs " + arrayj.getDevice());
     	this.arrayj = arrayj;
+    	this.devicej = devicej;
     }
 
     /**
@@ -77,9 +82,18 @@ public class ArrayJ {
 
     /**
      *
+     * @return the device object that represents where the arrayJ is loaded
+     */
+    public DeviceJ getDevice() {
+    	return devicej;
+    }
+
+    /**
+     *
+     *
      * @return the name of the device where the array is allocated
      */
-    public String getDevice() {
+    public String getDeviceName() {
     	return arrayj.getDevice();
     }
 

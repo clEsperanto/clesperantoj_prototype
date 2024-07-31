@@ -111,15 +111,15 @@ public class TestAbsolute {
 
     @Test
     public void testAbsoluteImagePlus() {
-    	ImagePlus inputImp = IJ.createImage("input", 2, 2, 1, ImagePlus.GRAY32);
-    	ImagePlus outputImp = IJ.createImage("input", 2, 2, 1, ImagePlus.GRAY32);
+    	ImagePlus inputImp = IJ.createImage("input", 2, 2, 1, 32);
+    	ImagePlus outputImp = IJ.createImage("input", 2, 2, 1, 32);
     	ImageProcessor inpIp = inputImp.getProcessor();
     	ImageProcessor outIp = outputImp.getProcessor();
     	
     	int[] vals = {-1, -1, 1, 1};
     	int c = 0;
     	for (int x = 0; x < 2; x ++) {
-    		for (int y = 0; y < 2; x ++) {
+    		for (int y = 0; y < 2; y ++) {
     			inpIp.putPixelValue(x, y, vals[c]);
     			outIp.putPixelValue(x, y, vals[c ++]);
         	}
@@ -140,7 +140,7 @@ public class TestAbsolute {
 		double max = Double.MIN_VALUE;
 		double mean = 0;
     	for (int x = 0; x < 2; x ++) {
-    		for (int y = 0; y < 2; x ++) {
+    		for (int y = 0; y < 2; y ++) {
     			double val = outIp.getPixelValue(x, y);
     			mean += val / 4;
     			min = Math.min(min,val);
@@ -155,13 +155,13 @@ public class TestAbsolute {
 
     @Test
     public void testAbsolute1ImagePlus() {
-    	ImagePlus inputImp = IJ.createImage("input", 2, 2, 1, ImagePlus.GRAY32);
+    	ImagePlus inputImp = IJ.createImage("input", 2, 2, 1, 32);
     	ImageProcessor inpIp = inputImp.getProcessor();
     	
     	int[] vals = {-1, -1, 1, 1};
     	int c = 0;
     	for (int x = 0; x < 2; x ++) {
-    		for (int y = 0; y < 2; x ++) {
+    		for (int y = 0; y < 2; y ++) {
     			inpIp.putPixelValue(x, y, vals[c ++]);
         	}
     	}
@@ -176,7 +176,7 @@ public class TestAbsolute {
     	ImageProcessor outIp = outputImp.getProcessor();
     	
     	for (int x = 0; x < 2; x ++) {
-    		for (int y = 0; y < 2; x ++) {
+    		for (int y = 0; y < 2; y ++) {
     			double val = outIp.getPixelValue(x, y);
             	assertEquals(1, val);
         	}
@@ -186,10 +186,8 @@ public class TestAbsolute {
     @Test
     public void testAbsoluteIcySequence() {
     	int[] data = new int[] {1, 1, -1, -1};
-    	IcyBufferedImage inputBuff = new IcyBufferedImage(2, 2, data);
-    	IcyBufferedImage outputBuff = new IcyBufferedImage(2, 2, data);
-    	Sequence inputSeq = new Sequence(inputBuff);
-    	Sequence outputSeq = new Sequence(outputBuff);
+    	Sequence inputSeq = createSequence(new long[] {2, 2}, data);
+    	Sequence outputSeq = createSequence(new long[] {2, 2}, data);
     	
     	
     	DeviceJ device = DeviceJ.getDefaultDevice();
@@ -221,8 +219,7 @@ public class TestAbsolute {
     @Test
     public void testAbsolute1IcySequence() {
     	int[] data = new int[] {1, 1, -1, -1};
-    	IcyBufferedImage inputBuff = new IcyBufferedImage(2, 2, data);
-    	Sequence inputSeq = new Sequence(inputBuff);
+    	Sequence inputSeq = createSequence(new long[] {2, 2}, data);
     	
     	
     	DeviceJ device = DeviceJ.getDefaultDevice();
@@ -239,5 +236,31 @@ public class TestAbsolute {
             	assertEquals(1, val);
             }
 	    }
+    }
+    
+    private static Sequence createSequence(long[] dims, int[] data)
+    {
+    	while (dims.length < 3) {
+    		long[] newArray = new long[dims.length + 1];
+    	    System.arraycopy(dims, 0, newArray, 0, dims.length);
+    	    newArray[dims.length] = 1;
+    	    dims = newArray;
+    	}
+        Sequence seq = new Sequence();
+        int z;
+        for (z = 0; z < dims[2]; z++)
+        {
+            seq.setImage(0, z, new IcyBufferedImage((int) dims[0], (int) dims[1], 1, icy.type.DataType.INT));
+        }
+        
+        SequenceCursor cursor = new SequenceCursor(seq);
+        int c = 0;
+        for (int x = 0; x < dims[0]; x ++) {
+        	for (int y = 0; x < dims[1]; y ++) {
+            	cursor.set(x, y, 0, 0, 0, data[c ++]);
+            }
+        }
+        cursor.commitChanges();
+        return seq;
     }
 }

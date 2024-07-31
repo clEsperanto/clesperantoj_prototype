@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.Test;
 
+import ij.IJ;
+import ij.ImagePlus;
+import ij.process.ImageProcessor;
 import net.clesperanto.core.MemoryJ;
+import net.clesperanto.imagej.ImageJConverters;
 import net.clesperanto.imglib2.ImgLib2Converters;
 import net.clesperanto.kernels.Tier1;
 import net.imglib2.RandomAccessibleInterval;
@@ -99,5 +103,79 @@ public class TestAbsolute {
 			double val = px.getRealDouble();
         	assertEquals(1, val);
 		}
+    }
+
+    @Test
+    public void testAbsoluteImagePlus() {
+    	ImagePlus inputImp = IJ.createImage("input", 2, 2, 1, ImagePlus.GRAY32);
+    	ImagePlus outputImp = IJ.createImage("input", 2, 2, 1, ImagePlus.GRAY32);
+    	ImageProcessor inpIp = inputImp.getProcessor();
+    	ImageProcessor outIp = outputImp.getProcessor();
+    	
+    	int[] vals = {-1, -1, 1, 1};
+    	int c = 0;
+    	for (int x = 0; x < 2; x ++) {
+    		for (int y = 0; y < 2; x ++) {
+    			inpIp.putPixelValue(x, y, vals[c]);
+    			outIp.putPixelValue(x, y, vals[c ++]);
+        	}
+    	}
+    	
+    	
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = ImageJConverters.copyImgLib2ToArrayJ(inputImp, device, "buffer");
+    	ArrayJ out = ImageJConverters.copyImgLib2ToArrayJ(outputImp, device, "buffer");
+
+    	Tier1.absolute(device, in, out);
+    	
+    	outputImp = ImageJConverters.copyArrayJToImgLib2(out);
+    	outIp = outputImp.getProcessor();
+    	
+    	
+    	double min = Double.MAX_VALUE;
+		double max = Double.MIN_VALUE;
+		double mean = 0;
+    	for (int x = 0; x < 2; x ++) {
+    		for (int y = 0; y < 2; x ++) {
+    			double val = outIp.getPixelValue(x, y);
+    			mean += val / 4;
+    			min = Math.min(min,val);
+    			max = Math.max(max,val);
+        	}
+    	}
+        
+        assertEquals(1, min);
+        assertEquals(1, max);
+        assertEquals(1, mean);
+    }
+
+    @Test
+    public void testAbsolute1ImagePlus() {
+    	ImagePlus inputImp = IJ.createImage("input", 2, 2, 1, ImagePlus.GRAY32);
+    	ImageProcessor inpIp = inputImp.getProcessor();
+    	
+    	int[] vals = {-1, -1, 1, 1};
+    	int c = 0;
+    	for (int x = 0; x < 2; x ++) {
+    		for (int y = 0; y < 2; x ++) {
+    			inpIp.putPixelValue(x, y, vals[c ++]);
+        	}
+    	}
+    	
+    	
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = ImageJConverters.copyImgLib2ToArrayJ(inputImp, device, "buffer");
+
+    	ArrayJ out = Tier1.absolute(device, in, null);
+    	
+    	ImagePlus outputImp = ImageJConverters.copyArrayJToImgLib2(out);
+    	ImageProcessor outIp = outputImp.getProcessor();
+    	
+    	for (int x = 0; x < 2; x ++) {
+    		for (int y = 0; y < 2; x ++) {
+    			double val = outIp.getPixelValue(x, y);
+            	assertEquals(1, val);
+        	}
+    	}
     }
 }

@@ -1,13 +1,13 @@
-name: Java CI
+name: ClesperantoJ tests
 
 on: [push]
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     strategy:
       matrix:
-        java: [11, 12, 13, 14, 15]
+        java: [8, 11, 17, 21]
     name: Java ${{ matrix.java }} sample
     steps:
       - uses: actions/checkout@v2

@@ -1,9 +1,13 @@
 import org.junit.jupiter.api.Test;
 
+import icy.image.IcyBufferedImage;
+import icy.sequence.Sequence;
+import icy.sequence.SequenceCursor;
 import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
 import net.clesperanto.core.MemoryJ;
+import net.clesperanto.icy.IcyConverters;
 import net.clesperanto.imagej.ImageJConverters;
 import net.clesperanto.imglib2.ImgLib2Converters;
 import net.clesperanto.kernels.Tier1;
@@ -177,5 +181,63 @@ public class TestAbsolute {
             	assertEquals(1, val);
         	}
     	}
+    }
+
+    @Test
+    public void testAbsoluteIcySequence() {
+    	int[] data = new int[] {1, 1, -1, -1};
+    	IcyBufferedImage inputBuff = new IcyBufferedImage(2, 2, data);
+    	IcyBufferedImage outputBuff = new IcyBufferedImage(2, 2, data);
+    	Sequence inputSeq = new Sequence(inputBuff);
+    	Sequence outputSeq = new Sequence(outputBuff);
+    	
+    	
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = IcyConverters.copySequenceToArrayJ(inputSeq, device, "buffer");
+    	ArrayJ out = IcyConverters.copySequenceToArrayJ(outputSeq, device, "buffer");
+
+    	Tier1.absolute(device, in, out);
+    	
+    	outputSeq = IcyConverters.copyArrayJToSequence(out);    	
+    	
+    	double min = Double.MAX_VALUE;
+		double max = Double.MIN_VALUE;
+		double mean = 0;
+		SequenceCursor cursor = new SequenceCursor(outputSeq);
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 2; x++) {
+            	double val = cursor.get(x, y, 0, 0, 0);
+    			mean += val / 4;
+    			min = Math.min(min,val);
+    			max = Math.max(max,val);
+            }
+	    }
+        
+        assertEquals(1, min);
+        assertEquals(1, max);
+        assertEquals(1, mean);
+    }
+
+    @Test
+    public void testAbsolute1IcySequence() {
+    	int[] data = new int[] {1, 1, -1, -1};
+    	IcyBufferedImage inputBuff = new IcyBufferedImage(2, 2, data);
+    	Sequence inputSeq = new Sequence(inputBuff);
+    	
+    	
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = IcyConverters.copySequenceToArrayJ(inputSeq, device, "buffer");
+
+    	ArrayJ out = Tier1.absolute(device, in, null);
+    	
+    	Sequence outputSeq = IcyConverters.copyArrayJToSequence(out);    	
+    	
+		SequenceCursor cursor = new SequenceCursor(outputSeq);
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 2; x++) {
+            	double val = cursor.get(x, y, 0, 0, 0);
+            	assertEquals(1, val);
+            }
+	    }
     }
 }

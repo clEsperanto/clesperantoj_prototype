@@ -123,12 +123,12 @@ public class TestAbsolute {
     	
     	
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImgLib2ToArrayJ(inputImp, device, "buffer");
-    	ArrayJ out = ImageJConverters.copyImgLib2ToArrayJ(outputImp, device, "buffer");
+    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+    	ArrayJ out = ImageJConverters.copyImagePlus2ToArrayJ(outputImp, device, "buffer");
 
     	Tier1.absolute(device, in, out);
     	
-    	outputImp = ImageJConverters.copyArrayJToImgLib2(out);
+    	outputImp = ImageJConverters.copyArrayJToImagePlus(out);
     	outIp = outputImp.getProcessor();
     	
     	
@@ -164,11 +164,11 @@ public class TestAbsolute {
     	
     	
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImgLib2ToArrayJ(inputImp, device, "buffer");
+    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
 
     	ArrayJ out = Tier1.absolute(device, in, null);
     	
-    	ImagePlus outputImp = ImageJConverters.copyArrayJToImgLib2(out);
+    	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(out);
     	ImageProcessor outIp = outputImp.getProcessor();
     	
     	for (int x = 0; x < 2; x ++) {

@@ -33,7 +33,7 @@ public class ImageJConverters {
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static ImagePlus copyArrayJToImgLib2( ArrayJ arrayj )
+	public static ImagePlus copyArrayJToImagePlus( ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
 		ImageJDataType dataType = ImageJDataType.fromString(arrayj.getDataType());
@@ -62,7 +62,7 @@ public class ImageJConverters {
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static ArrayJ copyImgLib2ToArrayJ(ImagePlus rai, DeviceJ device, String memoryType) {
+	public static ArrayJ copyImagePlus2ToArrayJ(ImagePlus rai, DeviceJ device, String memoryType) {
 		Map<String, Integer> sizeMap = checkSize(rai);
 		ImageJDataType dataType = ImageJDataType.fromImgPlusDataType(rai.getType());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);

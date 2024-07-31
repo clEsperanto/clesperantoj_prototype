@@ -33,7 +33,7 @@ public class IcyConverters {
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static Sequence copyArrayJToImgLib2( ArrayJ arrayj )
+	public static Sequence copyArrayJToSequence( ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
 		IcyDataType dataType = IcyDataType.fromString(arrayj.getDataType());
@@ -62,7 +62,7 @@ public class IcyConverters {
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static ArrayJ copyImgLib2ToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
+	public static ArrayJ copySequenceToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
 		Map<String, Integer> sizeMap = checkSize(rai);
 		IcyDataType dataType = IcyDataType.fromIcyDataType(rai.getDataType_());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);

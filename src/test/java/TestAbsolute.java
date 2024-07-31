@@ -1,45 +1,103 @@
 import org.junit.jupiter.api.Test;
+
+import net.clesperanto.core.MemoryJ;
+import net.clesperanto.imglib2.ImgLib2Converters;
+import net.clesperanto.kernels.Tier1;
+import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.img.array.ArrayImgs;
+import net.imglib2.type.numeric.integer.IntType;
+import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DeviceJ;
+
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.nio.IntBuffer;
 import java.util.Arrays;
 
 public class TestAbsolute {
 
     @Test
     public void testAbsolute() {
-        int[][] input = {{1, -1}, {1, -1}};
-        int[][] result = absolute(input);
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = MemoryJ.makeIntBuffer(device, 2, 2, 0, 2, "buffer");
+    	in.fillMemory(-1);
+    	ArrayJ out = MemoryJ.makeIntBuffer(device, 2, 2, 0, 2, "buffer");
+    	out.fillMemory(-1);
+        Tier1.absolute(device, in, out);
         
-        for (int[] row : result) {
-            for (int value : row) {
-                assertEquals(1, value);
-            }
-        }
+        int[] result = new int[4];
+        IntBuffer resultBuff = IntBuffer.wrap(result);
+        MemoryJ.readIntBuffer(out, resultBuff, 4);
         
-        assertEquals(1, Arrays.stream(result).flatMapToInt(Arrays::stream).min().getAsInt());
-        assertEquals(1, Arrays.stream(result).flatMapToInt(Arrays::stream).max().getAsInt());
-        assertEquals(1, Arrays.stream(result).flatMapToInt(Arrays::stream).average().getAsDouble(), 0.001);
+        assertEquals(1, Arrays.stream(result).min().getAsInt());
+        assertEquals(1, Arrays.stream(result).max().getAsInt());
+        assertEquals(1, Arrays.stream(result).average().getAsDouble());
     }
 
     @Test
     public void testAbsolute1() {
-        int[][] input = {{1, -1}, {1, -1}};
-        int[][] result = absolute(input);
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = MemoryJ.makeIntBuffer(device, 2, 2, 0, 2, "buffer");
+    	in.fillMemory(-1);
+        ArrayJ out = Tier1.absolute(device, in, null);
         
-        for (int[] row : result) {
-            for (int value : row) {
-                assertEquals(1, value);
-            }
-        }
+        int[] result = new int[4];
+        IntBuffer resultBuff = IntBuffer.wrap(result);
+        MemoryJ.readIntBuffer(out, resultBuff, 4);
+        
+        for (int val : result)
+        	assertEquals(1, val);
     }
 
-    private int[][] absolute(int[][] input) {
-        int[][] result = new int[input.length][input[0].length];
-        for (int i = 0; i < input.length; i++) {
-            for (int j = 0; j < input[i].length; j++) {
-                result[i][j] = Math.abs(input[i][j]);
-            }
-        }
-        return result;
+    @Test
+    public void testAbsoluteImgLib2() {
+    	int[] flatVals = {1, 1, -1, -1};
+    	RandomAccessibleInterval<IntType> inputImg = ArrayImgs.ints(flatVals, new long[] {2, 2});
+    	RandomAccessibleInterval<IntType> outputImg = ArrayImgs.ints(flatVals, new long[] {2, 2});
+    	
+    	
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+    	ArrayJ out = ImgLib2Converters.copyImgLib2ToArrayJ(outputImg, device, "buffer");
+
+    	Tier1.absolute(device, in, out);
+    	
+    	outputImg = ImgLib2Converters.copyArrayJToImgLib2(out);
+    	
+    	
+    	double min = outputImg.firstElement().getRealDouble();
+		double max = min;
+		double mean = 0;
+
+		for (IntType px : outputImg) {
+			double val = px.getRealDouble();
+			mean += val / 4;
+			min = Math.min(min,val);
+			max = Math.max(max,val);
+		}
+        
+        assertEquals(1, min);
+        assertEquals(1, max);
+        assertEquals(1, mean);
+    }
+
+    @Test
+    public void testAbsolute1ImgLib2() {
+    	int[] flatVals = {1, 1, -1, -1};
+    	RandomAccessibleInterval<IntType> inputImg = ArrayImgs.ints(flatVals, new long[] {2, 2});
+    	
+    	
+    	DeviceJ device = DeviceJ.getDefaultDevice();
+    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+
+    	ArrayJ out = Tier1.absolute(device, in, null);
+    	
+    	RandomAccessibleInterval<IntType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(out);
+    	
+
+		for (IntType px : outputImg) {
+			double val = px.getRealDouble();
+        	assertEquals(1, val);
+		}
     }
 }

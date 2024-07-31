@@ -29,8 +29,8 @@ public:
     static std::vector<std::string> getAvailableDevices(const std::string &deviceType = "all");
 
     void setDevice(const std::string &deviceName = "", const std::string &deviceType = "all");
-    std::string getName();
-    std::string getInfo();
+    std::string getName() const;
+    std::string getInfo() const;
 
     std::shared_ptr<cle::Device> get() const;
 };
@@ -44,21 +44,21 @@ private:
 
 protected:
     static ArrayJ create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device);
-    void write(void *data) const;
-    void read(void *data) const;
+    void writeFrom(void *data, std::array<size_t,3>& region, std::array<size_t,3>& origin) const;
+    void readTo(void *data, std::array<size_t,3>& region, std::array<size_t,3>& origin) const;
 
 public:
     ArrayJ() = default;
     ArrayJ(const std::shared_ptr<cle::Array> &array);
 
-    size_t getWidth();
-    size_t getHeight();
-    size_t getDepth();
-    unsigned int getDimension();
+    size_t getWidth() const;
+    size_t getHeight() const;
+    size_t getDepth() const;
+    unsigned int getDimension() const;
 
-    std::string getDataType();
-    std::string getMemoryType();
-    std::string getDevice();
+    std::string getDataType() const;
+    std::string getMemoryType() const;
+    std::string getDevice() const;
 
     void fillMemory(float value);
     void copyDataTo(ArrayJ &dst);

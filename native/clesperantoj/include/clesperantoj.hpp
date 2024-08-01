@@ -106,6 +106,16 @@ public:
         }
         return keys;
     }
+
+    static std::vector<ArrayJ> convertArrayJ(const std::vector<std::shared_ptr<cle::Array>> &arr)
+    {
+        std::vector<ArrayJ> result(arr.size());
+        std::transform(arr.begin(), arr.end(), std::back_inserter(result), [](const std::shared_ptr<cle::Array> &value)
+                       {
+                           return ArrayJ{value}; // Construct D from T
+                       });
+        return result;
+    }
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

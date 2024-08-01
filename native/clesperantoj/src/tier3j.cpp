@@ -76,4 +76,3 @@ ArrayJ Tier3::morphological_chan_vese(DeviceJ * device, ArrayJ * src, ArrayJ * d
 {
     return ArrayJ{cle::tier3::morphological_chan_vese_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), num_iter, smoothing, lambda1, lambda2)};
 }
-

@@ -226,4 +226,3 @@ ArrayJ Tier2::top_hat(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius
 {
     return ArrayJ{cle::tier2::top_hat_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
-

@@ -30,7 +30,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.absolute_difference(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Calculates the sum of pairs of pixels x and y of two images X and Y.
 	 * <pre>f(x, y) = x + y</pre>.
@@ -48,7 +48,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.add_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Apply a bottomhat filter for background subtraction to the input image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -66,7 +66,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.bottom_hat_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Applies a bottomhat filter for background subtraction to the input image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -84,7 +84,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.bottom_hat_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Applies a bottomhat filter for background subtraction to the input image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -104,7 +104,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.bottom_hat(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 	/**
 	 * Limits the range of values in an image.
 	 * This function is supposed to work similarly as its counter part in numpy [1].
@@ -122,7 +122,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.clip(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), min_intensity, max_intensity), device);
     }
-    
+
 	/**
 	 * Closing operator, boxshaped Applies morphological closing to intensity images using a boxshaped footprint.
 	 * This operator also works with binary images.
@@ -140,7 +140,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.closing_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Closing operator, sphereshaped Applies morphological closing to intensity images using a sphereshaped footprint.
 	 * This operator also works with binary images.
@@ -158,7 +158,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.closing_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Closing operator, sphereshaped Applies morphological closing to intensity images using a sphereshaped footprint.
 	 * This operator also works with binary images.
@@ -177,7 +177,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.closing(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 	/**
 	 * Concatenate two images or stacks along the X axis.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -194,7 +194,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.concatenate_along_x(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Concatenate two images or stacks along the Y axis.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -211,7 +211,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.concatenate_along_y(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Concatenate two images or stacks along the Z axis.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -228,7 +228,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.concatenate_along_z(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Takes a touch matrix as input and delivers a vector with number of touching neighbors per label as a vector.
 	 * Note: Background is considered as something that can touch.
@@ -247,7 +247,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.count_touching_neighbors(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), ignore_background), device);
     }
-    
+
 	/**
 	 * Crops an image by removing the outer pixels, per default 1.
 	 * Notes * To make sure the output image has the right size, provide destination_image=None.
@@ -263,7 +263,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.crop_border(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), border_size), device);
     }
-    
+
 	/**
 	 * Applies Gaussian blur to the input image and divides the original by the result.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -281,7 +281,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.divide_by_gaussian_background(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), sigma_x, sigma_y, sigma_z), device);
     }
-    
+
 	/**
 	 * Converts radians to degrees.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -295,7 +295,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.degrees_to_radians(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Detects local maxima in a given square/cubic neighborhood.
 	 * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
@@ -314,7 +314,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_maxima_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Detects local maxima in a given square/cubic neighborhood.
 	 * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a higher intensity, and to 0 otherwise.
@@ -335,7 +335,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_maxima(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 	/**
 	 * Detects local maxima in a given square/cubic neighborhood.
 	 * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
@@ -354,7 +354,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_minima_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Detects local maxima in a given square/cubic neighborhood.
 	 * Pixels in the resulting image are set to 1 if there is no other pixel in a given radius which has a lower intensity, and to 0 otherwise.
@@ -375,7 +375,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_minima(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 	/**
 	 * Applies Gaussian blur to the input image twice with different sigma values resulting in two images which are then subtracted from each other.
 	 * It is recommended to apply this operation to images of type Float (32 bit) as results might be negative.
@@ -397,7 +397,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.difference_of_gaussian(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), sigma1_x, sigma1_y, sigma1_z, sigma2_x, sigma2_y, sigma2_z), device);
     }
-    
+
 	/**
 	 * Takes a label map image and dilates the regions using a octagon shape until they touch.
 	 * The resulting label map is written to the output.
@@ -413,7 +413,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.extend_labeling_via_voronoi(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Computes the negative value of all pixels in a given image.
 	 * It is recommended to convert images to 32bit float before applying this operation.
@@ -430,7 +430,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.invert(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Transforms a binary image with single pixles set to 1 to a labelled spots image.
 	 * Transforms a spots image as resulting from maximum/minimum detection in an image of the same size where every spot has a number 1, 2,.
@@ -447,7 +447,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.label_spots(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Determines the Hessian eigenvalues and returns the large eigenvalue image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -461,7 +461,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.large_hessian_eigenvalue(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Determines the maximum of all pixels in a given image.
 	 * It will be stored in a new row of ImageJs Results table in the column 'Max'.
@@ -476,7 +476,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return net.clesperanto._internals.kernelj.Tier2.maximum_of_all_pixels(device.getRaw(), input.getRaw());
     }
-    
+
 	/**
 	 * Determines the minimum of all pixels in a given image.
 	 * It will be stored in a new row of ImageJs Results table in the column 'Min'.
@@ -491,7 +491,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return net.clesperanto._internals.kernelj.Tier2.minimum_of_all_pixels(device.getRaw(), input.getRaw());
     }
-    
+
 	/**
 	 * Determines the minimum intensity in a masked image.
 	 * But only in pixels which have nonzero values in another mask image.
@@ -508,7 +508,7 @@ public class Tier2 {
 		Objects.requireNonNull(mask, "mask cannot be null");
         return net.clesperanto._internals.kernelj.Tier2.minimum_of_masked_pixels(device.getRaw(), input.getRaw(), mask.getRaw());
     }
-    
+
 	/**
 	 * Opening operator, boxshaped Applies morphological opening to intensity images using a boxshaped footprint.
 	 * This operator also works with binary images.
@@ -526,7 +526,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Opening operator, sphereshaped Applies morphological opening to intensity images using a sphereshaped footprint.
 	 * This operator also works with binary images.
@@ -544,7 +544,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Opening operator, sphereshaped Applies morphological opening to intensity images using a sphereshaped footprint.
 	 * This operator also works with binary images.
@@ -563,7 +563,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 	/**
 	 * Converts radians to degrees.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -577,7 +577,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.radians_to_degrees(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Takes a label map and reduces all labels to their edges.
 	 * Label IDs stay and background will be zero.
@@ -593,7 +593,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.reduce_labels_to_label_edges(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Determines the Hessian eigenvalues and returns the small eigenvalue image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -607,7 +607,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.small_hessian_eigenvalue(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Return the elementwise square of the input.
 	 * This function is supposed to be similar to its counterpart in numpy [1].
@@ -623,7 +623,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.square(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Determines the squared difference pixel by pixel between two images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -640,7 +640,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.squared_difference(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Computes the local standard deviation of a pixels box neighborhood.
 	 * The box size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -660,7 +660,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.standard_deviation_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Computes the local standard deviation of a pixels sphere neighborhood.
 	 * The box size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -680,7 +680,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.standard_deviation_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Computes the local standard deviation of a pixels sphere neighborhood.
 	 * The box size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -702,7 +702,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.standard_deviation(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 	/**
 	 * Applies Gaussian blur to the input image and subtracts the result from the original.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -720,7 +720,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.subtract_gaussian_background(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), sigma_x, sigma_y, sigma_z), device);
     }
-    
+
 	/**
 	 * Subtracts one image X from another image Y pixel wise.
 	 * <pre>f(x, y) = x y</pre>.
@@ -738,7 +738,7 @@ public class Tier2 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.subtract_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Determines the sum of all pixels in a given image.
 	 * It will be stored in a new row of ImageJs Results table in the column 'Sum'.
@@ -753,7 +753,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return net.clesperanto._internals.kernelj.Tier2.sum_of_all_pixels(device.getRaw(), input == null ? null : input.getRaw());
     }
-    
+
 	/**
 	 * Applies a tophat filter for background subtraction to the input image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -771,7 +771,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.top_hat_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Applies a tophat filter for background subtraction to the input image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -789,7 +789,7 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.top_hat_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-    
+
 	/**
 	 * Applies a tophat filter for background subtraction to the input image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -809,5 +809,5 @@ public class Tier2 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.top_hat(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-    
+
 }

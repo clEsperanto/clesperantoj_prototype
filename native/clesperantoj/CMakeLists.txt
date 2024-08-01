@@ -22,7 +22,7 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON) # Export all symbols for shared library
 option(BUILD_TESTING  OFF)
 option(BUILD_BENCHMARK  OFF)
 option(BUILD_SHARED_LIBS ON)
-set(CLIC_REPO_TAG only-use-vector) # branch name for dev
+set(CLIC_REPO_TAG master) # branch name for dev
 set(CLIC_REPO_URL https://github.com/clEsperanto/CLIc_prototype.git)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/clic)
 

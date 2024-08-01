@@ -99,21 +99,19 @@ class UtilsJ
 public:
     static std::vector<std::string> getKeys(const std::unordered_map<std::string, std::vector<float>> &map)
     {
-        std::vector<std::string> keys(map.size());
-        for (auto const &element : map)
-        {
-            keys.push_back(element.first);
-        }
+        std::vector<std::string> keys;
+        keys.reserve(map.size());
+        std::transform(map.begin(), map.end(), std::back_inserter(keys),
+                       [](const auto &element)
+                       { return element.first; });
         return keys;
     }
 
-    static std::vector<ArrayJ> convertArrayJ(const std::vector<std::shared_ptr<cle::Array>> &arr)
+    static std::vector<ArrayJ> toArrayJVector(const std::vector<std::shared_ptr<cle::Array>> &arr)
     {
         std::vector<ArrayJ> result(arr.size());
         std::transform(arr.begin(), arr.end(), std::back_inserter(result), [](const std::shared_ptr<cle::Array> &value)
-                       {
-                           return ArrayJ{value}; // Construct D from T
-                       });
+                       { return ArrayJ{value}; });
         return result;
     }
 };

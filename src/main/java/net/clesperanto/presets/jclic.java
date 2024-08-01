@@ -37,11 +37,14 @@ public class jclic implements InfoMapper {
 
 		infoMap.put(new Info("std::vector<float>").pointerTypes("FloatVector").define());
 		infoMap.put(new Info("std::vector<ArrayJ>").pointerTypes("ArrayJVector").define());
-
 		infoMap.put(
 				new Info("std::unordered_map<std::string,std::vector<float> >").pointerTypes("FloatVectorMap")
 						.define());
 
-		infoMap.put(new Info("cle::Array", "cle::Device", "cle::BackendManager", "cle::Backend").skip());
+		// InfoMap.put(new Info().pointerTypes("ArrayPointer").define());
+
+		infoMap.put(
+				new Info("cle::Array", "cle::Device", "cle::BackendManager", "cle::Backend", "toArrayJVector",
+						"std::shared_ptr<cle::Array>").skip());
 	}
 }

@@ -97,23 +97,8 @@ public:
 class UtilsJ
 {
 public:
-    static std::vector<std::string> getKeys(const std::unordered_map<std::string, std::vector<float>> &map)
-    {
-        std::vector<std::string> keys;
-        keys.reserve(map.size());
-        std::transform(map.begin(), map.end(), std::back_inserter(keys),
-                       [](const auto &element)
-                       { return element.first; });
-        return keys;
-    }
-
-    static std::vector<ArrayJ> toArrayJVector(const std::vector<std::shared_ptr<cle::Array>> &arr)
-    {
-        std::vector<ArrayJ> result(arr.size());
-        std::transform(arr.begin(), arr.end(), std::back_inserter(result), [](const std::shared_ptr<cle::Array> &value)
-                       { return ArrayJ{value}; });
-        return result;
-    }
+    static std::vector<std::string> getKeys(const std::unordered_map<std::string, std::vector<float>> &map);
+    static std::vector<ArrayJ> toArrayJVector(const std::vector<std::shared_ptr<cle::Array>> &arr);
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

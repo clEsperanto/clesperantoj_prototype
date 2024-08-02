@@ -19,8 +19,8 @@ public class Tier5 {
 	 * If shape of the images or any pixel are different, returns False.
 	 * True otherwise This function is supposed to work similarly like its counterpart in numpy [1].
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input0 ({@link ArrayJ}) - 
-	 * @param input1 ({@link ArrayJ}) - 
+	 * @param input0 ({@link ArrayJ}) -
+	 * @param input1 ({@link ArrayJ}) -
 	 * @return boolean
 	 * @see https://numpy.org/doc/stable/reference/generated/numpy.array_equal.html
 	 * @throws NullPointerException if any of the device or input parameters are null.
@@ -31,7 +31,7 @@ public class Tier5 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return net.clesperanto._internals.kernelj.Tier5.array_equal(device.getRaw(), input0.getRaw(), input1.getRaw());
     }
-    
+
 	/**
 	 * Combines two label images by adding labels of a given label image to another.
 	 * Labels in the second image overwrite labels in the first passed image.
@@ -49,7 +49,7 @@ public class Tier5 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier5.combine_labels(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-    
+
 	/**
 	 * Performs connected components analysis inspecting the box neighborhood of every pixel to a binary image and generates a label map.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -65,5 +65,5 @@ public class Tier5 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier5.connected_components_labeling(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), connectivity), device);
     }
-    
+
 }

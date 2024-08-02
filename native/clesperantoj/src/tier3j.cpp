@@ -81,4 +81,3 @@ std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_labelle
 {
     return cle::tier3::statistics_of_labelled_pixels_func(device->get(), src->get(), intensity == nullptr ? nullptr : intensity->get());
 }
-

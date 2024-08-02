@@ -76,3 +76,9 @@ ArrayJ Tier3::morphological_chan_vese(DeviceJ * device, ArrayJ * src, ArrayJ * d
 {
     return ArrayJ{cle::tier3::morphological_chan_vese_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), num_iter, smoothing, lambda1, lambda2)};
 }
+
+std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_labelled_pixels(DeviceJ * device, ArrayJ * src, ArrayJ * intensity)
+{
+    return cle::tier3::statistics_of_labelled_pixels_func(device->get(), src->get(), intensity == nullptr ? nullptr : intensity->get());
+}
+

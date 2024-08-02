@@ -221,6 +221,7 @@ public:
 	static float mean_of_all_pixels(DeviceJ * device, ArrayJ * src);
 	static std::vector<float> minimum_position(DeviceJ * device, ArrayJ * src);
 	static ArrayJ morphological_chan_vese(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int num_iter, int smoothing, float lambda1, float lambda2);
+	static std::unordered_map<std::string, std::vector<float>> statistics_of_labelled_pixels(DeviceJ * device, ArrayJ * src, ArrayJ * intensity);
 };
 
 

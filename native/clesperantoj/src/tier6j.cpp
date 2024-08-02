@@ -26,3 +26,4 @@ ArrayJ Tier6::voronoi_labeling(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier6::voronoi_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
+

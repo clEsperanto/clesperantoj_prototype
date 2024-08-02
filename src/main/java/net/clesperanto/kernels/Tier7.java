@@ -3,6 +3,7 @@ package net.clesperanto.kernels;
 
 import java.util.Objects;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
@@ -34,7 +35,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.affine_transform(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), Utils.toVector(transform_matrix), interpolate, resize), device);
     }
-
+    
 	/**
 	 * Segments and labels an image using blurring, Otsu-thresholding, binary erosion and  masked Voronoi-labeling.
 	 * After bluring and Otsu-thresholding the image, iterative binary erosion is applied.
@@ -58,7 +59,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.eroded_otsu_labeling(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), number_of_erosions, outline_sigma), device);
     }
-
+    
 	/**
 	 * Translate the image by a given vector and rotate it by given angles.
 	 * Angles are given in degrees.
@@ -85,7 +86,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.rigid_transform(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), translate_x, translate_y, translate_z, angle_x, angle_y, angle_z, centered, interpolate, resize), device);
     }
-
+    
 	/**
 	 * Rotate the image by given angles.
 	 * Angles are given in degrees.
@@ -109,7 +110,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.rotate(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), angle_x, angle_y, angle_z, centered, interpolate, resize), device);
     }
-
+    
 	/**
 	 * Scale the image by given factors.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -129,7 +130,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.scale(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), factor_x, factor_y, factor_z, centered, interpolate, resize), device);
     }
-
+    
 	/**
 	 * Translate the image by a given vector.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -147,7 +148,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.translate(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), translate_x, translate_y, translate_z, interpolate), device);
     }
-
+    
 	/**
 	 * Apply a morphological closing operation to a label image.
 	 * The operation consists of iterative dilation and erosion of the labels.
@@ -165,7 +166,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.closing_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius), device);
     }
-
+    
 	/**
 	 * Erodes labels to a smaller size.
 	 * Note: Depending on the label image and the radius,  labels may disappear and labels may split into multiple islands.
@@ -182,7 +183,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.erode_connected_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius), device);
     }
-
+    
 	/**
 	 * Apply a morphological opening operation to a label image.
 	 * The operation consists of iterative erosion and dilation of the labels.
@@ -200,7 +201,7 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.opening_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius), device);
     }
-
+    
 	/**
 	 * Labels objects directly from greyvalue images.
 	 * The two sigma parameters allow tuning the segmentation result.
@@ -223,5 +224,5 @@ public class Tier7 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier7.voronoi_otsu_labeling(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), spot_sigma, outline_sigma), device);
     }
-
+    
 }

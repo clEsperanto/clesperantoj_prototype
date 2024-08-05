@@ -88,7 +88,7 @@ public class ImageJConverters {
 	    		    }
 	    	    }
 		    }
-	    }
+	    }	
 
 	    return dataType.makeAndWriteArrayJ(flatArr, device, dims, memoryType);
 	}
@@ -134,16 +134,10 @@ public class ImageJConverters {
 		sizeMap.put("c", imp.getNChannels());
 		sizeMap.put("z", imp.getNSlices());
 		sizeMap.put("t", imp.getNFrames());
+
 		sizeMap = sizeMap.entrySet().stream()
-				.filter(ee -> ee.getValue() == 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
-		while (sizeMap.entrySet().size() > 3) {
-			if (sizeMap.get("t") != null)
-				sizeMap.remove("t");
-			else if (sizeMap.get("c") != null)
-				sizeMap.remove("c");
-			else if (sizeMap.get("z") != null)
-				sizeMap.remove("z");
-		}
+				.filter(ee -> ee.getValue() != 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
+
 		int tot = 1;
 		for (Integer vv : sizeMap.values()) {
 			tot *= vv;

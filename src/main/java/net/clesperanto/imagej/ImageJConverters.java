@@ -94,7 +94,7 @@ public class ImageJConverters {
 	}
 
 	private static ImagePlus fromBuffer(ByteBuffer byteBuffer, ImageJDataType type, long[] dimensions) {
-	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.createType());
+	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.getBitDepth());
 
 	    switch (type) {
 	        case FLOAT32:

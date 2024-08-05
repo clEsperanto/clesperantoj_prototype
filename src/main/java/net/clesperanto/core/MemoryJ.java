@@ -903,13 +903,15 @@ public class MemoryJ {
 	}
 
 	private static long[] transformDims(long[] dims) {
-		if (dims.length > 3)
-			throw new IllegalArgumentException();
-		else if (dims.length == 0)
-			throw new IllegalArgumentException();
-		else if (dims.length == 1)
-			return new long[] {dims[0], 1, 1};
-		else
-			return new long[] {dims[0], dims[1], 1};
+		switch (dims.length) {
+			case 3:
+				return new long[] {dims[0], dims[1], dims[2]};	
+			case 2:
+				return new long[] {dims[0], dims[1], 1};
+			case 1:
+				return new long[] {dims[0], 1, 1};	
+			default:
+				throw new IllegalArgumentException();
+		}
 	}
 }

@@ -36,7 +36,7 @@ public class ImagePlusClesperantoJExample {
         ArrayJ input = ImageJConverters.copyImgLib2ToArrayJ(input_imp, currentDevice, "buffer");
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
         ImagePlus output_imp = ImageJConverters.copyArrayJToImgLib2(output);
-        
+
         output_imp.show();
     }
 

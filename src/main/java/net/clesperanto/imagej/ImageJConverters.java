@@ -88,7 +88,7 @@ public class ImageJConverters {
 	    		    }
 	    	    }
 		    }
-	    }	
+	    }
 
 	    return dataType.makeAndWriteArrayJ(flatArr, device, dims, memoryType);
 	}

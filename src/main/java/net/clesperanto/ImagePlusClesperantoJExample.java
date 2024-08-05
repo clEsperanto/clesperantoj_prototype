@@ -13,6 +13,9 @@ import net.clesperanto.imagej.ImageJConverters;
 import ij.IJ;
 import ij.ImageJ;
 import ij.ImagePlus;
+import ij.ImageStack;
+import ij.process.FloatProcessor;
+import ij.process.ImageProcessor;
 
 public class ImagePlusClesperantoJExample {
 
@@ -22,39 +25,19 @@ public class ImagePlusClesperantoJExample {
 
         DeviceJ currentDevice = DeviceJ.getDefaultDevice();
 
-        // create a image with 3x3x2 pixels in imglib2
-        float data[] = new float[10 * 10 * 1];
-        float out[] = new float[10 * 10 * 1];
-        Arrays.fill(data, -5);
-        Arrays.fill(out, -1);
-
-        // set middle pixel to 15
-        data[25] = 15;
-
-        ImagePlus input_imp = IJ.createImage("Test", 10, 10, 1, 32);
-        input_imp.getProcessor().setPixels(data);
+        ImagePlus input_imp = IJ.createImage("Test", 10, 10, 2, 32);
+        ImageProcessor ip = input_imp.getStack().getProcessor(1);
+        ip.setf(0, 0, -15.0f);
 
         new ImageJ();
         IJ.run(input_imp, "32-bit", "");
         input_imp.show();
 
         ArrayJ input = ImageJConverters.copyImgLib2ToArrayJ(input_imp, currentDevice, "buffer");
-        // ArrayJ output = ImgLib2Converters.copyImgLib2ToArrayJ(output_img,
-        // currentDevice, "buffer");
-
-        // ArrayJ output = Tier1.absolute(currentDevice, input, null);
-
-        ImagePlus output_imp = ImageJConverters.copyArrayJToImgLib2(input);
+        ArrayJ output = Tier1.absolute(currentDevice, input, null);
+        ImagePlus output_imp = ImageJConverters.copyArrayJToImgLib2(output);
+        
         output_imp.show();
-
-        // print out each pixel value of the output image
-        // float[] output_pixels = (float[]) output_imp.getProcessor().getPixels();
-        // for (int i = 0; i < output_pixels.length; i++) {
-        // System.out.println("out[" + i + "] = " + output_pixels[i]);
-        // }
-
-        // Float sum = Tier2.sumOfAllPixels(currentDevice, output);
-        // System.out.println("Sum of all pixels: " + sum);
     }
 
 }

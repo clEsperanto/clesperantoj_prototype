@@ -98,6 +98,14 @@ public class ArrayJ {
     }
 
     /**
+     *
+     * @return a string representation of the array information
+     */
+    public String toString() {
+        return "cle::Array[(" + this.getWidth() + ","+ this.getHeight() + ","+ this.getDepth() + "), dtype=" + this.getDataType() + ", mtype=" + this.getMemoryType() + "]";
+    }
+
+    /**
      * Fill the array in the GPU with the wanted value.
      * All the positions in the array will be set to the same value
      * @param value

@@ -19,4 +19,3 @@ ArrayJ Tier5::connected_components_labeling(DeviceJ * device, ArrayJ * src, Arra
 {
     return ArrayJ{cle::tier5::connected_components_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), connectivity)};
 }
-

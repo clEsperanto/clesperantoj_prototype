@@ -29,4 +29,3 @@ ArrayJ Tier4::threshold_otsu(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier4::threshold_otsu_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
-

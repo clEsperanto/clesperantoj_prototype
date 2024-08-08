@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import icy.image.IcyBufferedImage;
+import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
 import net.clesperanto.core.ArrayJ;
@@ -24,6 +25,12 @@ import net.clesperanto.core.DeviceJ;
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
 public class IcyConverters {
+	
+	// Icy requires that the preferences are initialized if they have not bee initialized before.
+	// TODO check if htey have been initialized before
+	static {
+        IcyPreferences.init();
+	}
 
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
@@ -173,5 +180,10 @@ public class IcyConverters {
             seq.setImage(0, z, new IcyBufferedImage((int) dims[0], (int) dims[1], 1, type));
         }
         return seq;
+    }
+    
+    public static void main(String[] args) {
+
+    	createSequence(new long[] {5, 5, 5}, icy.type.DataType.FLOAT);
     }
 }

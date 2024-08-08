@@ -37,6 +37,9 @@ public class Imglib2ClesperantoJExample {
 
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
 
+        System.out.println("Input:" + input.toString());
+        System.out.println("Output:" + output.toString());
+
         output_img = ImgLib2Converters.copyArrayJToImgLib2(output);
 
         output_img.cursor().forEachRemaining(t -> System.out.println(t.get()));

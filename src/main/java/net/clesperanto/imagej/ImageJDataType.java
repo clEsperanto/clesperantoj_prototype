@@ -8,20 +8,18 @@ import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
 // TODO add all types ImagePlus.GRAY8, ImagePlus.GRAY16, ImagePlus.GRAY32, ImagePlus.COLOR_256 or ImagePlus.COLOR_RGB)
 public enum ImageJDataType {
-    FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32, float[].class, 32),
-    UINT16(DataType.fromString("ushort"), ImagePlus.GRAY16, short[].class, 16),
-    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8, byte[].class, 8);
+    FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32, float[].class),
+    UINT16(DataType.fromString("ushort"), ImagePlus.GRAY16, short[].class),
+    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8, byte[].class);
 
 	private final DataType dt;
     private final int imgDtype;
-    private final int bitDepth;
     private final Class<?> arrayClass;
 
-    ImageJDataType(DataType dt, int imgDtype, Class<?> arrayClass, int bitDepth) {
+    ImageJDataType(DataType dt, int imgDtype, Class<?> arrayClass) {
         this.dt = dt;
         this.imgDtype = imgDtype;
         this.arrayClass = arrayClass;
-        this.bitDepth = bitDepth;
     }
 
     public static ImageJDataType fromString(String dType) {
@@ -54,10 +52,6 @@ public enum ImageJDataType {
     	return dt.getByteSize();
     }
 
-    public int getBitDepth() {
-    	return this.bitDepth;
-    }
-
     public void readToBuffer(ArrayJ arrayj, ByteBuffer buffer) {
     	this.dt.readToBuffer(arrayj, buffer);
     }
@@ -75,7 +69,7 @@ public enum ImageJDataType {
     }
 
     public int createType() {
-        return this.imgDtype;
+        return this.getByteSize() * 8;
     }
 
     public void putValInArray(Object arr, int pos, Number value) {

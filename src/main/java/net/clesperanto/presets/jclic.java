@@ -18,18 +18,9 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 // }, target = "net.clesperanto.wrapper.clesperantoj")
 
 @Properties(inherit = javacpp.class, value = {
-	    @Platform(
-	        value = "windows",
-	        include = "clesperantoj.hpp",
-	        link = {"JCLIc", "Shell32"}
-	    ),
-	    @Platform(
-	        value = {"linux", "macosx"},
-	        include = "clesperantoj.hpp",
-	        link = "JCLIc"
-	    )},
-	    target = "net.clesperanto._internals.jclic"
-	)
+		@Platform(value = "windows", include = "clesperantoj.hpp", link = { "JCLIc", "Shell32" }),
+		@Platform(value = { "linux",
+				"macosx" }, include = "clesperantoj.hpp", link = "JCLIc") }, target = "net.clesperanto._internals.jclic")
 
 public class jclic implements InfoMapper {
 	static {
@@ -44,6 +35,16 @@ public class jclic implements InfoMapper {
 				.pointerTypes("@Cast({\"char*\", \"std::string*\"}) BytePointer"))
 				.put(new Info("std::vector<std::string>").pointerTypes("StringVector").define());
 
-		infoMap.put(new Info("cle::Array", "cle::Device", "cle::BackendManager", "cle::Backend").skip());
+		infoMap.put(new Info("std::vector<float>").pointerTypes("FloatVector").define());
+		infoMap.put(new Info("std::vector<ArrayJ>").pointerTypes("ArrayJVector").define());
+		infoMap.put(
+				new Info("std::unordered_map<std::string,std::vector<float> >").pointerTypes("FloatVectorMap")
+						.define());
+
+		// InfoMap.put(new Info().pointerTypes("ArrayPointer").define());
+
+		infoMap.put(
+				new Info("cle::Array", "cle::Device", "cle::BackendManager", "cle::Backend", "toArrayJVector",
+						"std::shared_ptr<cle::Array>").skip());
 	}
 }

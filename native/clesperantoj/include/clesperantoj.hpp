@@ -44,8 +44,8 @@ private:
 
 protected:
     static ArrayJ create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device);
-    void writeFrom(void *data, std::array<size_t,3>& region, std::array<size_t,3>& origin) const;
-    void readTo(void *data, std::array<size_t,3>& region, std::array<size_t,3>& origin) const;
+    void writeFrom(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const;
+    void readTo(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const;
 
 public:
     ArrayJ() = default;
@@ -92,7 +92,13 @@ public:
     static void readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size);
     static void readIntBuffer(const ArrayJ &array, int *data, const size_t &size);
     static void readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size);
+};
 
+class UtilsJ
+{
+public:
+    static std::vector<std::string> getKeys(const std::unordered_map<std::string, std::vector<float>> &map);
+    static std::vector<ArrayJ> toArrayJVector(const std::vector<std::shared_ptr<cle::Array>> &arr);
 };
 
 #endif // __INCLUDE_CLESPERANTOJ_HPP

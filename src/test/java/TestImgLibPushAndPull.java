@@ -29,9 +29,9 @@ public class TestImgLibPushAndPull {
     	Cursor<IntType> outCursor = outputImg.cursor();
     	
     	while (inCursor.hasNext()) {
-    		assertEquals(inCursor.get().get(), outCursor.get().get());
     		inCursor.next();
     		outCursor.next();
+    		assertEquals(inCursor.get().get(), outCursor.get().get());
     	}
     }
 }

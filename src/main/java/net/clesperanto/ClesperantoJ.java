@@ -3,13 +3,14 @@ package net.clesperanto;
 import net.clesperanto._internals.jclic.StringVector;
 
 import java.util.Arrays;
+import java.util.List;
 
-import net.clesperanto._internals.jclic.DeviceJ;
-import net.clesperanto._internals.jclic.MemoryJ;
-import net.clesperanto._internals.jclic.BackendJ;
-import net.clesperanto._internals.jclic.ArrayJ;
+import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryJ;
+import net.clesperanto.core.BackendJ;
+import net.clesperanto.core.ArrayJ;
 
-import net.clesperanto._internals.kernelj.Tier1;
+import net.clesperanto.kernels.Tier1;
 
 public class ClesperantoJ {
 
@@ -21,20 +22,13 @@ public class ClesperantoJ {
         BackendJ.setBackend("opencl");
         // BackendJ.setBackend("cuda");
 
-        StringVector deviceList = DeviceJ.getAvailableDevices();
+        List<String> deviceList = DeviceJ.getAvailableDevices();
         for (int i = 0; i < deviceList.size(); i++) {
             System.out.println(deviceList.get(i) + " is available");
         }
 
-        try (DeviceJ currentDevice = new DeviceJ()) {
-            System.out.println("Device created");
-            currentDevice.setDevice("TX", "all");
-            System.out.println("device currently used is : " + currentDevice.getName());
-            System.out.println(currentDevice.getInfo());
-        }
-
-        DeviceJ currentDevice = new DeviceJ();
-        currentDevice.setDevice("TX", "all");
+        DeviceJ currentDevice = DeviceJ.getDefaultDevice();
+        System.out.println(currentDevice.getInfo());
 
         ArrayJ input = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
         // ArrayJ output = MemoryJ.makeFloatBuffer(currentDevice, 3, 3, 2, 3, "buffer");
@@ -48,6 +42,8 @@ public class ClesperantoJ {
         // MemoryJ.writeFloatBuffer(output, out, (long) out.length);
 
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
+        // ArrayJ output = Tier1.addImagesWeighted(currentDevice, input, input, null, 1,
+        // 1);
 
         MemoryJ.readFloatBuffer(output, out, (long) out.length);
 

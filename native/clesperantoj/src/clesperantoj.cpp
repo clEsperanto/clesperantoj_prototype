@@ -56,12 +56,12 @@ ArrayJ ArrayJ::create(size_t width, size_t height, size_t depth, size_t dimensio
     return ArrayJ{data};
 }
 
-void ArrayJ::readTo(void *data, std::array<size_t,3>& region, std::array<size_t,3>& origin) const
+void ArrayJ::readTo(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const
 {
     this->array_->readTo(data, region, origin);
 }
 
-void ArrayJ::writeFrom(void *data, std::array<size_t,3>& region, std::array<size_t,3>& origin) const
+void ArrayJ::writeFrom(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const
 {
     this->array_->writeFrom(data, region, origin);
 }
@@ -157,98 +157,116 @@ ArrayJ MemoryJ::makeUIntBuffer(const DeviceJ &device, const size_t &width, const
 
 void MemoryJ::writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::writeByteBuffer(const ArrayJ &array, char *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::writeUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::writeShortBuffer(const ArrayJ &array, short *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::writeUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::writeIntBuffer(const ArrayJ &array, int *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::writeUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.writeFrom(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readByteBuffer(const ArrayJ &array, char *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readShortBuffer(const ArrayJ &array, short *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readIntBuffer(const ArrayJ &array, int *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
 }
 
 void MemoryJ::readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size)
 {
-    std::array<size_t,3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t,3> origin = {0, 0, 0};
+    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
+    std::array<size_t, 3> origin = {0, 0, 0};
     array.readTo(static_cast<void *>(data), region, origin);
+}
+
+std::vector<std::string> UtilsJ::getKeys(const std::unordered_map<std::string, std::vector<float>> &map)
+{
+    std::vector<std::string> keys;
+    keys.reserve(map.size());
+    std::transform(map.begin(), map.end(), std::back_inserter(keys),
+                   [](const auto &element)
+                   { return element.first; });
+    return keys;
+}
+
+std::vector<ArrayJ> UtilsJ::toArrayJVector(const std::vector<std::shared_ptr<cle::Array>> &arr)
+{
+    std::vector<ArrayJ> result(arr.size());
+    std::transform(arr.begin(), arr.end(), std::back_inserter(result), [](const std::shared_ptr<cle::Array> &value)
+                   { return ArrayJ{value}; });
+    return result;
 }

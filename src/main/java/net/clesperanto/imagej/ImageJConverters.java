@@ -14,6 +14,8 @@ import ij.ImagePlus;
 import ij.process.ImageProcessor;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
+import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.img.array.ArrayImg;
 
 /**
  * TODO
@@ -63,7 +65,7 @@ public class ImageJConverters {
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
 	public static ArrayJ copyImgLib2ToArrayJ(ImagePlus rai, DeviceJ device, String memoryType) {
-		Map<String, Integer> sizeMap = checkSize(rai);
+		Map<String, Integer> sizeMap = checkSize(rai, rai.getBytesPerPixel());
 		ImageJDataType dataType = ImageJDataType.fromImgPlusDataType(rai.getType());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);
 
@@ -94,7 +96,7 @@ public class ImageJConverters {
 	}
 
 	private static ImagePlus fromBuffer(ByteBuffer byteBuffer, ImageJDataType type, long[] dimensions) {
-	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.getBitDepth());
+	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.createType());
 
 	    switch (type) {
 	        case FLOAT32:
@@ -127,22 +129,18 @@ public class ImageJConverters {
 	    }
 	}
 
-	private static Map<String, Integer> checkSize(ImagePlus imp) {
+	private static Map<String, Integer> checkSize(ImagePlus imp, int bytesSize) {
 		Map<String, Integer> sizeMap = new LinkedHashMap<String, Integer>();
 		sizeMap.put("x", imp.getWidth());
 		sizeMap.put("y", imp.getHeight());
-		sizeMap.put("c", imp.getNChannels());
+		// sizeMap.put("c", imp.getNChannels());
 		sizeMap.put("z", imp.getNSlices());
-		sizeMap.put("t", imp.getNFrames());
+		// sizeMap.put("t", imp.getNFrames());
 
-		sizeMap = sizeMap.entrySet().stream()
-				.filter(ee -> ee.getValue() != 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
-
-		int tot = 1;
 		for (Integer vv : sizeMap.values()) {
-			tot *= vv;
+			bytesSize *= vv;
 		}
-		if (tot > Integer.MAX_VALUE)
+		if (bytesSize > Integer.MAX_VALUE)
 			throw new IllegalArgumentException();
 		return sizeMap;
 	}

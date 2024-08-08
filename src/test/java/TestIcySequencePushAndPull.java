@@ -17,16 +17,16 @@ public class TestIcySequencePushAndPull {
     	for (int i = 0; i < flatVals.length; i ++)
     		flatVals[i] = i;
     	Sequence inputSeq = createSequence(new long[] {3, 3, 2}, flatVals);
-    	
-    	
+
+
     	DeviceJ device = DeviceJ.getDefaultDevice();
     	ArrayJ in = IcyConverters.copySequenceToArrayJ(inputSeq, device, "buffer");
-    	
+
     	Sequence outputSeq = IcyConverters.copyArrayJToSequence(in);
 
     	SequenceCursor inCursor = new SequenceCursor(inputSeq);
     	SequenceCursor outCursor = new SequenceCursor(outputSeq);
-    	
+
         for (int y = 0; y < 3; y ++) {
             for (int x = 0; x < 3; x ++) {
                 for (int z = 0; z < 2; z ++) {
@@ -35,7 +35,7 @@ public class TestIcySequencePushAndPull {
             }
 	    }
     }
-    
+
     private static Sequence createSequence(long[] dims, int[] data)
     {
     	while (dims.length < 3) {
@@ -50,7 +50,7 @@ public class TestIcySequencePushAndPull {
         {
             seq.setImage(0, z, new IcyBufferedImage((int) dims[0], (int) dims[1], 1, icy.type.DataType.INT));
         }
-        
+
         SequenceCursor cursor = new SequenceCursor(seq);
         int c = 0;
         for (int x = 0; x < dims[0]; x ++) {

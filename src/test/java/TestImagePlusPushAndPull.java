@@ -29,11 +29,11 @@ public class TestImagePlusPushAndPull {
         	}
     	}
 
-    	
+
     	DeviceJ device = DeviceJ.getDefaultDevice();
     	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
-    	
+
 
     	for (int z = 0; z < 2; z ++) {
     		inputImp.setPositionWithoutUpdate(1, 1 + z, 1);

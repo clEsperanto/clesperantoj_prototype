@@ -19,15 +19,15 @@ public class TestImgLibPushAndPull {
     	for (int i = 0; i < flatVals.length; i ++)
     		flatVals[i] = i;
     	RandomAccessibleInterval<IntType> inputImg = ArrayImgs.ints(flatVals, new long[] {3, 3, 2});
-    	
-    	
+
+
     	DeviceJ device = DeviceJ.getDefaultDevice();
     	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
     	RandomAccessibleInterval<IntType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
-    	
+
     	Cursor<IntType> inCursor = inputImg.cursor();
     	Cursor<IntType> outCursor = outputImg.cursor();
-    	
+
     	while (inCursor.hasNext()) {
     		inCursor.next();
     		outCursor.next();

@@ -51,4 +51,3 @@ ArrayJ Tier7::voronoi_otsu_labeling(DeviceJ * device, ArrayJ * src, ArrayJ * dst
 {
     return ArrayJ{cle::tier7::voronoi_otsu_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), spot_sigma, outline_sigma)};
 }
-

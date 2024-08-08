@@ -6,6 +6,7 @@ import ij.ImagePlus;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
+
 // TODO add all types ImagePlus.GRAY8, ImagePlus.GRAY16, ImagePlus.GRAY32, ImagePlus.COLOR_256 or ImagePlus.COLOR_RGB)
 public enum ImageJDataType {
     FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32, float[].class, 32),
@@ -75,7 +76,7 @@ public enum ImageJDataType {
     }
 
     public int createType() {
-        return this.imgDtype;
+        return this.getByteSize() * 8;
     }
 
     public void putValInArray(Object arr, int pos, Number value) {

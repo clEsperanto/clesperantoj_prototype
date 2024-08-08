@@ -25,7 +25,7 @@ import net.clesperanto.core.DeviceJ;
  * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
  */
 public class IcyConverters {
-	
+
 	// Icy requires that the preferences are initialized if they have not bee initialized before.
 	// TODO check if htey have been initialized before
 	static {
@@ -181,7 +181,7 @@ public class IcyConverters {
         }
         return seq;
     }
-    
+
     public static void main(String[] args) {
 
     	createSequence(new long[] {5, 5, 5}, icy.type.DataType.FLOAT);

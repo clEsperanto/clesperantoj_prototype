@@ -706,3 +706,4 @@ ArrayJ Tier1::z_position_of_minimum_z_projection(DeviceJ * device, ArrayJ * src,
 {
     return ArrayJ{cle::tier1::z_position_of_minimum_z_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
+

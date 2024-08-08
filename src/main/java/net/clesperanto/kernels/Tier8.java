@@ -30,7 +30,7 @@ public class Tier8 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier8.smooth_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius), device);
     }
-
+    
 	/**
 	 * Apply a morphological erosion and dilation of the label image with respect to     the connectivity of the labels.
 	 * Note: It is recommended to process isotropic label images.
@@ -46,5 +46,5 @@ public class Tier8 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier8.smooth_connected_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius), device);
     }
-
+    
 }

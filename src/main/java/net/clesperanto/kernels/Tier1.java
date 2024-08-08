@@ -29,7 +29,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.absolute(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
 	 * <pre>f(x, y, a, b) = x * a + y * b</pre>.
@@ -49,7 +49,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.add_images_weighted(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw(), factor0, factor1), device);
     }
-
+    
 	/**
 	 * Adds a scalar value s to all pixels x of a given image X.
 	 * <pre>f(x, s) = x + s</pre>.
@@ -66,7 +66,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.add_image_and_scalar(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary AND operator &.
 	 * All pixel values except 0 in the input images are interpreted as 1.
@@ -85,7 +85,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_and(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines pixels/voxels which are on the surface of binary objects and sets only them to 1 in the destination image.
 	 * All other pixels are set to 0.
@@ -101,7 +101,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_edge_detection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image (containing pixel values 0 and 1) from an image X by negating its pixel values x using the binary NOT operator ! All pixel values except 0 in the input image are interpreted as 1.
 	 * <pre>f(x) = !x</pre>.
@@ -117,7 +117,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_not(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary OR operator |.
 	 * All pixel values except 0 in the input images are interpreted as 1.
@@ -136,7 +136,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_or(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Subtracts one binary image from another.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -153,7 +153,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_subtract(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary operators AND &, OR | and NOT ! implementing the XOR operator.
 	 * All pixel values except 0 in the input images are interpreted as 1.
@@ -172,7 +172,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_xor(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Compute the maximum of the erosion with plannar structuring elements.
 	 * Warning: This operation is only supported BINARY data type images.
@@ -187,7 +187,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_supinf(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Compute the minimum of the dilation with plannar structuring elements.
 	 * Warning: This operation is only supported BINARY data type images.
@@ -202,7 +202,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.binary_infsup(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Enumerates pixels with value 1 in a onedimensional image For example handing over the image [0, 1, 1, 0, 1, 0, 1, 1] would be processed to an image [0, 1, 2, 0, 3, 0, 4, 5] This functionality is important in connected component neccessary (see also sum_reduction_x).
 	 * In the above example, with blocksize 4, that would be the sum array: [2, 3] labeling.
@@ -222,7 +222,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.block_enumerate(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw(), blocksize), device);
     }
-
+    
 	/**
 	 * Convolve the image with a given kernel image.
 	 * It is recommended that the kernel image has an odd size in X, Y and Z.
@@ -240,7 +240,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.convolve(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Copies an image.
 	 * <pre>f(x) = x</pre>.
@@ -256,7 +256,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.copy(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * This method has two purposes: It copies a 2D image to a given slice z position in a 3D image stack or It copies a given slice at position z in an image stack to a 2D image.
 	 * The first case is only available via ImageJ macro.
@@ -275,7 +275,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.copy_slice(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), slice), device);
     }
-
+    
 	/**
 	 * This method has two purposes: It copies a 2D image to a given slice y position in a 3D image stack or It copies a given slice at position y in an image stack to a 2D image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -291,7 +291,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.copy_horizontal_slice(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), slice), device);
     }
-
+    
 	/**
 	 * This method has two purposes: It copies a 2D image to a given slice x position in a 3D image stack or It copies a given slice at position x in an image stack to a 2D image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -307,7 +307,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.copy_vertical_slice(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), slice), device);
     }
-
+    
 	/**
 	 * Crops a given substack out of a given image stack.
 	 * Note: If the destination image preexists already, it will be overwritten and keep it's dimensions.
@@ -329,7 +329,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.crop(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), start_x, start_y, start_z, width, height, depth), device);
     }
-
+    
 	/**
 	 * Computes the cubic root of each pixel.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -343,7 +343,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.cubic_root(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Takes a labelmap and returns an image where all pixels on label edges are set to 1 and all other pixels to 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -358,7 +358,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.detect_label_edges(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
 	 * The dilation takes the Mooreneighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
@@ -372,12 +372,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_dilateBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ dilateBox(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.dilate_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
 	 * The dilation takes the vonNeumannneighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
@@ -389,12 +390,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_dilateSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ dilateSphere(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.dilate_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image with pixel values 0 and 1 containing the binary dilation of a given input image.
 	 * The dilation apply the Mooreneighborhood (8 pixels in 2D and 26 pixels in 3d) for the "box" connectivity and the vonNeumannneighborhood (4 pixels in 2D and 6 pixels in 3d) for a "sphere" connectivity.
@@ -413,7 +415,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.dilate(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), connectivity), device);
     }
-
+    
 	/**
 	 * Divides two images X and Y by each other pixel wise.
 	 * <pre>f(x, y) = x / y</pre>.
@@ -431,7 +433,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.divide_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Divides a scalar by an image pixel by pixel.
 	 * <pre>f(x, s) = s / x</pre>.
@@ -447,7 +449,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.divide_scalar_by_image(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B equal pixel wise.
 	 * <pre>f(a, b) = 1 if a == b; 0 otherwise.
@@ -466,7 +468,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.equal(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if an image A and a constant b are equal.
 	 * <pre>f(a, b) = 1 if a == b; 0 otherwise.
@@ -484,7 +486,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.equal_constant(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
 	 * The erosion takes the Mooreneighborhood (8 pixels in 2D and 26 pixels in 3d) into account.
@@ -498,12 +500,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_erodeBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ erodeBox(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.erode_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
 	 * The erosion takes the vonNeumannneighborhood (4 pixels in 2D and 6 pixels in 3d) into account.
@@ -515,12 +518,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_erodeSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ erodeSphere(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.erode_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a binary image with pixel values 0 and 1 containing the binary erosion of a given input image.
 	 * The erosion apply the Mooreneighborhood (8 pixels in 2D and 26 pixels in 3d) for the "box" connectivity and the vonNeumannneighborhood (4 pixels in 2D and 6 pixels in 3d) for a "sphere" connectivity.
@@ -539,7 +543,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.erode(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), connectivity), device);
     }
-
+    
 	/**
 	 * Computes base exponential of all pixels values.
 	 * f(x) = exp(x) Author(s): Peter Haub, Robert Haase.
@@ -555,7 +559,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.exponential(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Flips an image in X, Y and/or Z direction depending on boolean flags.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -573,7 +577,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.flip(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), flip_x, flip_y, flip_z), device);
     }
-
+    
 	/**
 	 * Computes the Gaussian blurred image of an image given sigma values in X, Y and Z.
 	 * Thus, the filter kernel can have nonisotropic shape.
@@ -594,7 +598,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.gaussian_blur(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), sigma_x, sigma_y, sigma_z), device);
     }
-
+    
 	/**
 	 * Computes the distance between all point coordinates given in two point lists.
 	 * Takes two images containing pointlists (dimensionality n * d, n: number of points and d: dimensionality) and builds up a matrix containing the distances between these points.
@@ -617,7 +621,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.generate_distance_matrix(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the gradient of gray values along X.
 	 * Assuming a, b and c are three adjacent pixels in X direction.
@@ -634,7 +638,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.gradient_x(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the gradient of gray values along Y.
 	 * Assuming a, b and c are three adjacent pixels in Y direction.
@@ -651,7 +655,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.gradient_y(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the gradient of gray values along Z.
 	 * Assuming a, b and c are three adjacent pixels in Z direction.
@@ -668,7 +672,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.gradient_z(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B greater pixel wise.
 	 * f(a, b) = 1 if a > b; 0 otherwise.
@@ -686,7 +690,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.greater(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B greater pixel wise.
 	 * f(a, b) = 1 if a > b; 0 otherwise.
@@ -703,7 +707,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.greater_constant(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B greater or equal pixel wise.
 	 * f(a, b) = 1 if a >= b; 0 otherwise.
@@ -721,7 +725,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.greater_or_equal(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B greater or equal pixel wise.
 	 * f(a, b) = 1 if a >= b; 0 otherwise.
@@ -738,7 +742,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.greater_or_equal_constant(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Computes the eigenvalues of the hessian matrix of a 2d or 3d image.
 	 * Hessian matrix or 2D images: [Ixx, Ixy] [Ixy, Iyy] Hessian matrix for 3D images: [Ixx, Ixy, Ixz] [Ixy, Iyy, Iyz] [Ixz, Iyz, Izz] Ixx denotes the second derivative in x.
@@ -763,7 +767,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return Utils.toArrayList(net.clesperanto._internals.kernelj.Tier1.hessian_eigenvalues(device.getRaw(), input.getRaw(), small_eigenvalue == null ? null : small_eigenvalue.getRaw(), middle_eigenvalue == null ? null : middle_eigenvalue.getRaw(), large_eigenvalue == null ? null : large_eigenvalue.getRaw()));
     }
-
+    
 	/**
 	 * Applies the Laplace operator (Box neighborhood) to an image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -773,12 +777,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_laplaceBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ laplaceBox(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.laplace_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Applies the Laplace operator (Diamond neighborhood) to an image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -788,12 +793,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_laplaceDiamond
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ laplaceDiamond(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.laplace_diamond(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Applies the Laplace operator with a "box" or a "sphere" neighborhood to an image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -809,7 +815,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.laplace(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), connectivity), device);
     }
-
+    
 	/**
 	 * Compute the cross correlation of an image to a given kernel.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -825,7 +831,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.local_cross_correlation(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes base e logarithm of all pixels values.
 	 * f(x) = log(x) Author(s): Peter Haub, Robert Haase.
@@ -841,7 +847,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.logarithm(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a masked image by applying a binary mask to an image.
 	 * All pixel values x of image X will be copied to the destination image in case pixel value m at the same position in the mask image is not equal to zero.
@@ -860,7 +866,7 @@ public class Tier1 {
 		Objects.requireNonNull(mask, "mask cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mask(device.getRaw(), input.getRaw(), mask.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes a masked image by applying a label mask to an image.
 	 * All pixel values x of image X will be copied to the destination image in case pixel value m at the same position in the label_map image has the right index value i.
@@ -880,7 +886,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mask_label(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw(), label), device);
     }
-
+    
 	/**
 	 * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
 	 * <pre>f(x, s) = max(x, s)</pre>.
@@ -897,7 +903,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_image_and_scalar(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Computes the maximum of a pair of pixel values x, y from two given images X and Y.
 	 * <pre>f(x, y) = max(x, y)</pre>.
@@ -915,7 +921,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the local maximum of a pixels cube neighborhood.
 	 * The cubes size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -929,12 +935,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_maximum3DBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ maximumBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local maximum of a pixels neighborhood (box or sphere).
 	 * The neighborhood size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -955,7 +962,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-
+    
 	/**
 	 * Determines the maximum intensity projection of an image along X.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -970,7 +977,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_x_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the maximum intensity projection of an image along X.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -985,7 +992,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_y_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the maximum intensity projection of an image along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1000,7 +1007,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the local mean average of a pixels boxshaped neighborhood.
 	 * The cubes size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1014,12 +1021,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_mean3DBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ meanBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local mean average of a pixels spherical neighborhood.
 	 * The spheres size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1033,12 +1041,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_mean3DSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ meanSphere(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local mean average of a pixels neighborhood defined as a boxshaped or a sphereshaped.
 	 * The shape size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1058,7 +1067,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-
+    
 	/**
 	 * Determines the mean average intensity projection of an image along X.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1073,7 +1082,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_x_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the mean average intensity projection of an image along Y.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1088,7 +1097,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_y_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the mean average intensity projection of an image along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1103,7 +1112,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the local median of a pixels box shaped neighborhood.
 	 * The box is specified by its halfwidth and halfheight (radius).
@@ -1118,12 +1127,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_median3DBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ medianBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.median_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local median of a pixels sphere shaped neighborhood.
 	 * The sphere is specified by its halfwidth and halfheight (radius).
@@ -1138,12 +1148,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_median3DSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ medianSphere(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.median_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local median of a pixels neighborhood.
 	 * The neighborhood is defined as a box or a sphere shape.
@@ -1165,7 +1176,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.median(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-
+    
 	/**
 	 * Computes the local minimum of a pixels cube neighborhood.
 	 * The cubes size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1179,12 +1190,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_minimum3DBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ minimumBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local minimum of a pixels cube neighborhood.
 	 * The cubes size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1205,7 +1217,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-
+    
 	/**
 	 * Computes the minimum of a constant scalar s and each pixel value x in a given image X.
 	 * <pre>f(x, s) = min(x, s)</pre>.
@@ -1222,7 +1234,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_image_and_scalar(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Computes the minimum of a pair of pixel values x, y from two given images X and Y.
 	 * <pre>f(x, y) = min(x, y)</pre>.
@@ -1240,7 +1252,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the minimum intensity projection of an image along Y.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1255,7 +1267,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_x_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the minimum intensity projection of an image along Y.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1270,7 +1282,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_y_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the minimum intensity projection of an image along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1285,7 +1297,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the local mode of a pixels box shaped neighborhood.
 	 * This can be used to postprocess and locally correct semantic segmentation results.
@@ -1301,12 +1313,13 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ modeBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mode_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local mode of a pixels sphere shaped neighborhood.
 	 * This can be used to postprocess and locally correct semantic segmentation results.
@@ -1322,12 +1335,13 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ modeSphere(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mode_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local mode of a pixels neighborhood.
 	 * This neighborhood can be shaped as a box or a sphere.
@@ -1350,7 +1364,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mode(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-
+    
 	/**
 	 * Computes the remainder of a division of pairwise pixel values in two images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1366,7 +1380,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.modulo_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Multiplies all pixel intensities with the x, y or z coordinate, depending on specified dimension.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1382,7 +1396,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.multiply_image_and_position(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), dimension), device);
     }
-
+    
 	/**
 	 * Multiplies all pixels value x in a given image X with a constant scalar s.
 	 * <pre>f(x, s) = x * s</pre>.
@@ -1399,7 +1413,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.multiply_image_and_scalar(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Multiplies all pairs of pixel values x and y from two image X and Y.
 	 * <pre>f(x, y) = x * y</pre>.
@@ -1417,7 +1431,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.multiply_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Copies all pixels instead those which are not a number (NaN), or positive/negative infinity which are replaced by a defined new value, default 0.
 	 * This function aims to work similarly as its counterpart in numpy [1].
@@ -1438,7 +1452,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nan_to_num(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), nan, posinf, neginf), device);
     }
-
+    
 	/**
 	 * Apply a maximum filter (box shape) to the input image.
 	 * The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -1452,12 +1466,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_nonzeroMaximumBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ nonzeroMaximumBox(DeviceJ device, ArrayJ input, ArrayJ output0, ArrayJ output1) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nonzero_maximum_box(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw()), device);
     }
-
+    
 	/**
 	 * Apply a maximum filter (diamond shape) to the input image.
 	 * The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -1471,12 +1486,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_nonzeroMaximumDiamond
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ nonzeroMaximumDiamond(DeviceJ device, ArrayJ input, ArrayJ output0, ArrayJ output1) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nonzero_maximum_diamond(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw()), device);
     }
-
+    
 	/**
 	 * Apply a maximum filter of a neighborhood to the input image.
 	 * The neighborhood shape can be a box or a sphere.
@@ -1498,7 +1514,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nonzero_maximum(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw(), connectivity), device);
     }
-
+    
 	/**
 	 * Apply a minimum filter (box shape) to the input image.
 	 * The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -1512,12 +1528,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_nonzeroMinimumBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ nonzeroMinimumBox(DeviceJ device, ArrayJ input, ArrayJ output0, ArrayJ output1) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nonzero_minimum_box(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw()), device);
     }
-
+    
 	/**
 	 * Apply a minimum filter (diamond shape) to the input image.
 	 * The radius is fixed to 1 and pixels with value 0 are ignored.
@@ -1531,12 +1548,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_nonzeroMinimumDiamond
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ nonzeroMinimumDiamond(DeviceJ device, ArrayJ input, ArrayJ output0, ArrayJ output1) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nonzero_minimum_diamond(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw()), device);
     }
-
+    
 	/**
 	 * Apply a minimum filter of a neighborhood to the input image.
 	 * The neighborhood shape can be a box or a sphere.
@@ -1558,7 +1576,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.nonzero_minimum(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw(), connectivity), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B equal pixel wise.
 	 * f(a, b) = 1 if a != b; 0 otherwise.
@@ -1576,7 +1594,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.not_equal(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B equal pixel wise.
 	 * f(a, b) = 1 if a != b; 0 otherwise.
@@ -1593,7 +1611,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.not_equal_constant(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Pastes an image into another image at a given position.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1611,7 +1629,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.paste(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), index_x, index_y, index_z), device);
     }
-
+    
 	/**
 	 * Apply a local maximum filter to an image which only overwrites pixels with value 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1622,12 +1640,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_onlyzeroOverwriteMaximumBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ onlyzeroOverwriteMaximumBox(DeviceJ device, ArrayJ input, ArrayJ output0, ArrayJ output1) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.onlyzero_overwrite_maximum_box(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw()), device);
     }
-
+    
 	/**
 	 * Apply a local maximum filter to an image which only overwrites pixels with value 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1638,12 +1657,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_onlyzeroOverwriteMaximumDiamond
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ onlyzeroOverwriteMaximumDiamond(DeviceJ device, ArrayJ input, ArrayJ output0, ArrayJ output1) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.onlyzero_overwrite_maximum_diamond(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw()), device);
     }
-
+    
 	/**
 	 * Apply a local maximum filter to an image which only overwrites pixels with value 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1661,7 +1681,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.onlyzero_overwrite_maximum(device.getRaw(), input.getRaw(), output0.getRaw(), output1 == null ? null : output1.getRaw(), connectivity), device);
     }
-
+    
 	/**
 	 * Computes all pixels value x to the power of a given exponent a.
 	 * <pre>f(x, a) = x ^ a</pre>.
@@ -1678,7 +1698,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.power(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Calculates x to the power of y pixel wise of two images X and Y.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1695,7 +1715,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.power_images(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Crops an image according to a defined range and step size.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1718,7 +1738,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.range(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), start_x, stop_x, step_x, start_y, stop_y, step_y, start_z, stop_z, step_z), device);
     }
-
+    
 	/**
 	 * Go to positions in a given image specified by a pointlist and read intensities of those pixels.
 	 * The intensities are stored in a new vector.
@@ -1736,7 +1756,7 @@ public class Tier1 {
 		Objects.requireNonNull(list, "list cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.read_values_from_positions(device.getRaw(), input.getRaw(), list.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Replaces integer intensities specified in a vector image.
 	 * The values are passed as a vector of values.
@@ -1756,7 +1776,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.replace_values(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Replaces a specific intensity in an image with a given new value.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1773,7 +1793,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.replace_value(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar0, scalar1), device);
     }
-
+    
 	/**
 	 * Computes the local maximum of a pixels spherical neighborhood.
 	 * The spheres size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1787,12 +1807,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_maximum3DSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ maximumSphere(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local minimum of a pixels spherical neighborhood.
 	 * The spheres size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -1806,12 +1827,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_minimum3DSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ minimumSphere(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Multiplies two matrices with each other.
 	 * Shape of matrix1 should be equal to shape of matrix2 transposed.
@@ -1829,7 +1851,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.multiply_matrix(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes 1/x for every pixel value This function is supposed to work similarly to its counter part in numpy [1].
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1844,7 +1866,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.reciprocal(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Sets all pixel values x of a given image X to a constant value v.
 	 * <pre>f(x) = v</pre>.
@@ -1860,7 +1882,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set(device.getRaw(), input.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Sets all pixel values x of a given column in X to a constant value v.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1876,7 +1898,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_column(device.getRaw(), input.getRaw(), column, value), device);
     }
-
+    
 	/**
 	 * Sets all pixel values at the image border to a given value.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1891,7 +1913,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_image_borders(device.getRaw(), input.getRaw(), value), device);
     }
-
+    
 	/**
 	 * Sets all pixel values x of a given plane in X to a constant value v.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1907,7 +1929,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_plane(device.getRaw(), input.getRaw(), plane, value), device);
     }
-
+    
 	/**
 	 * Sets all pixel values to their X coordinate.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1921,7 +1943,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_ramp_x(device.getRaw(), input.getRaw()), device);
     }
-
+    
 	/**
 	 * Sets all pixel values to their Y coordinate.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1935,7 +1957,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_ramp_y(device.getRaw(), input.getRaw()), device);
     }
-
+    
 	/**
 	 * Sets all pixel values to their Z coordinate.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1949,7 +1971,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_ramp_z(device.getRaw(), input.getRaw()), device);
     }
-
+    
 	/**
 	 * Sets all pixel values x of a given row in X to a constant value v.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1965,7 +1987,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_row(device.getRaw(), input.getRaw(), row, value), device);
     }
-
+    
 	/**
 	 * Replaces all 0 value pixels in an image with the index of a pixel.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1980,7 +2002,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_nonzero_pixels_to_pixelindex(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), offset), device);
     }
-
+    
 	/**
 	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x == y.
 	 * Otherwise the pixel is not overwritten.
@@ -1997,7 +2019,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_where_x_equals_y(device.getRaw(), input.getRaw(), value), device);
     }
-
+    
 	/**
 	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x > y.
 	 * Otherwise the pixel is not overwritten.
@@ -2014,7 +2036,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_where_x_greater_than_y(device.getRaw(), input.getRaw(), value), device);
     }
-
+    
 	/**
 	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x < y.
 	 * Otherwise the pixel is not overwritten.
@@ -2031,7 +2053,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.set_where_x_smaller_than_y(device.getRaw(), input.getRaw(), value), device);
     }
-
+    
 	/**
 	 * Extracts the sign of pixels.
 	 * If a pixel value < 0, resulting pixel value will be 1.
@@ -2049,7 +2071,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.sign(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B smaller pixel wise.
 	 * f(a, b) = 1 if a < b; 0 otherwise.
@@ -2067,7 +2089,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.smaller(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B smaller pixel wise.
 	 * f(a, b) = 1 if a < b; 0 otherwise.
@@ -2084,7 +2106,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.smaller_constant(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B smaller or equal pixel wise.
 	 * f(a, b) = 1 if a <= b; 0 otherwise.
@@ -2102,7 +2124,7 @@ public class Tier1 {
 		Objects.requireNonNull(input1, "input1 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.smaller_or_equal(device.getRaw(), input0.getRaw(), input1.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines if two images A and B smaller or equal pixel wise.
 	 * f(a, b) = 1 if a <= b; 0 otherwise.
@@ -2119,7 +2141,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.smaller_or_equal_constant(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Convolve the image with the Sobel kernel.
 	 * Author(s): Ruth WhelanJeans, Robert Haase.
@@ -2135,7 +2157,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.sobel(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the square root of each pixel.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2149,7 +2171,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.square_root(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the standard deviation intensity projection of an image stack along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2164,7 +2186,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.std_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Subtracts one image X from a scalar s pixel wise.
 	 * <pre>f(x, s) = s x</pre>.
@@ -2181,7 +2203,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.subtract_image_from_scalar(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), scalar), device);
     }
-
+    
 	/**
 	 * Takes an image and reduces it in width by factor blocksize.
 	 * The new pixels contain the sum of the reduced pixels.
@@ -2198,7 +2220,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.sum_reduction_x(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), blocksize), device);
     }
-
+    
 	/**
 	 * Determines the sum intensity projection of an image along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2213,7 +2235,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.sum_x_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the sum intensity projection of an image along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2228,7 +2250,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.sum_y_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines the sum intensity projection of an image along Z.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2243,7 +2265,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.sum_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Transpose X and Y axes of an image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2258,7 +2280,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.transpose_xy(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Transpose X and Z axes of an image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2273,7 +2295,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.transpose_xz(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Transpose Y and Z axes of an image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2288,7 +2310,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.transpose_yz(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Copies all pixels instead those which are not a number (NaN) or infinity (inf), which are replaced by 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2303,7 +2325,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.undefined_to_zero(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Computes the local variance of a pixels box neighborhood.
 	 * The box size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -2318,12 +2340,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_varianceBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ varianceBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.variance_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local variance of a pixels sphere neighborhood.
 	 * The sphere size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -2338,12 +2361,13 @@ public class Tier1 {
 	 * @see https://clij.github.io/clij2-docs/reference_varianceSphere
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
+	@Deprecated
     public static ArrayJ varianceSphere(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.variance_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z), device);
     }
-
+    
 	/**
 	 * Computes the local variance of a pixels neighborhood (box or sphere).
 	 * The neighborhood size is specified by its halfwidth, halfheight and halfdepth (radius).
@@ -2365,7 +2389,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.variance(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity), device);
     }
-
+    
 	/**
 	 * Takes an image with three/four rows (2D: height = 3; 3D: height = 4): x, y [, z] and v and target image.
 	 * The value v will be written at position x/y[/z] in the target image.
@@ -2381,7 +2405,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.write_values_to_positions(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines an Xposition of the maximum intensity along X and writes it into the resulting image.
 	 * If there are multiple xslices with the same value, the smallest X will be chosen.
@@ -2396,7 +2420,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.x_position_of_maximum_x_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines an Xposition of the minimum intensity along X and writes it into the resulting image.
 	 * If there are multiple xslices with the same value, the smallest X will be chosen.
@@ -2411,7 +2435,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.x_position_of_minimum_x_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines an Yposition of the maximum intensity along Y and writes it into the resulting image.
 	 * If there are multiple yslices with the same value, the smallest Y will be chosen.
@@ -2426,7 +2450,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.y_position_of_maximum_y_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines an Yposition of the minimum intensity along Y and writes it into the resulting image.
 	 * If there are multiple yslices with the same value, the smallest Y will be chosen.
@@ -2441,7 +2465,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.y_position_of_minimum_y_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines a Zposition of the maximum intensity along Z and writes it into the resulting image.
 	 * If there are multiple zslices with the same value, the smallest Z will be chosen.
@@ -2456,7 +2480,7 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.z_position_of_maximum_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Determines a Zposition of the minimum intensity along Z and writes it into the resulting image.
 	 * If there are multiple zslices with the same value, the smallest Z will be chosen.
@@ -2471,5 +2495,5 @@ public class Tier1 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.z_position_of_minimum_z_projection(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 }

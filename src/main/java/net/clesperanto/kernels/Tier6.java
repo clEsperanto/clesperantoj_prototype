@@ -30,7 +30,7 @@ public class Tier6 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier6.dilate_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius), device);
     }
-
+    
 	/**
 	 * Erodes labels to a smaller size.
 	 * Note: Depending on the label image and the radius, labels may disappear and labels may split into multiple islands.
@@ -49,7 +49,7 @@ public class Tier6 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier6.erode_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius, relabel), device);
     }
-
+    
 	/**
 	 * Labels objects directly from grey-value images.
 	 * The outline_sigma parameter allows tuning the segmentation result.
@@ -69,14 +69,14 @@ public class Tier6 {
 		Objects.requireNonNull(input0, "input0 cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier6.gauss_otsu_labeling(device.getRaw(), input0.getRaw(), output == null ? null : output.getRaw(), outline_sigma), device);
     }
-
+    
 	/**
 	 * Takes a binary image, labels connected components and dilates the regions using a octagon shape until they touch.
 	 * The region growing is limited to a masked area.
 	 * The resulting label map is written to the output.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) -
-	 * @param mask ({@link ArrayJ}) -
+	 * @param input ({@link ArrayJ}) - 
+	 * @param mask ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
 	 * @see https://clij.github.io/clij2-docs/reference_maskedVoronoiLabeling
@@ -88,12 +88,12 @@ public class Tier6 {
 		Objects.requireNonNull(mask, "mask cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier6.masked_voronoi_labeling(device.getRaw(), input.getRaw(), mask.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 	/**
 	 * Takes a binary image, labels connected components and dilates the regions using a octagon shape until they touch.
 	 * The resulting label map is written to the output.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) -
+	 * @param input ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
 	 * @see https://clij.github.io/clij2-docs/reference_voronoiLabeling
@@ -104,5 +104,5 @@ public class Tier6 {
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier6.voronoi_labeling(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()), device);
     }
-
+    
 }

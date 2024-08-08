@@ -7,7 +7,6 @@ import java.nio.ShortBuffer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 import ij.IJ;
 import ij.ImagePlus;
@@ -65,7 +64,7 @@ public class ImageJConverters {
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
 	public static ArrayJ copyImagePlus2ToArrayJ(ImagePlus rai, DeviceJ device, String memoryType) {
-		Map<String, Integer> sizeMap = checkSize(rai);
+		Map<String, Integer> sizeMap = checkSize(rai, rai.getBytesPerPixel());
 
 		ImageJDataType dataType = ImageJDataType.fromImgPlusDataType(rai.getType());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);

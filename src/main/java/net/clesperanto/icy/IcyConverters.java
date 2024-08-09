@@ -10,6 +10,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import icy.image.IcyBufferedImage;
+import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
 import net.clesperanto.core.ArrayJ;
@@ -25,6 +26,12 @@ import net.clesperanto.core.DeviceJ;
  */
 public class IcyConverters {
 
+	// Icy requires that the preferences are initialized if they have not bee initialized before.
+	// TODO check if htey have been initialized before
+	static {
+        IcyPreferences.init();
+	}
+
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
 	 * Creates a copy of the ArrayJ in the GPU into an ArrayImg in the CPU
@@ -33,7 +40,7 @@ public class IcyConverters {
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static Sequence copyArrayJToImgLib2( ArrayJ arrayj )
+	public static Sequence copyArrayJToSequence( ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
 		IcyDataType dataType = IcyDataType.fromString(arrayj.getDataType());
@@ -62,7 +69,7 @@ public class IcyConverters {
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static ArrayJ copyImgLib2ToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
+	public static ArrayJ copySequenceToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
 		Map<String, Integer> sizeMap = checkSize(rai);
 		IcyDataType dataType = IcyDataType.fromIcyDataType(rai.getDataType_());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);
@@ -173,5 +180,10 @@ public class IcyConverters {
             seq.setImage(0, z, new IcyBufferedImage((int) dims[0], (int) dims[1], 1, type));
         }
         return seq;
+    }
+
+    public static void main(String[] args) {
+
+    	createSequence(new long[] {5, 5, 5}, icy.type.DataType.FLOAT);
     }
 }

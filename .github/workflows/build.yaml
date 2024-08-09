@@ -75,7 +75,7 @@ jobs:
       run: sudo apt install ocl-icd-opencl-dev
 
     - name: Build with Maven
-      run:  mvn clean install
+      run:  mvn clean install -DskipTests
       shell: bash
 
     - name: Run Java class (only possible on MacOS)

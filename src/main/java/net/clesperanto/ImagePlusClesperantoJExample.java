@@ -33,9 +33,9 @@ public class ImagePlusClesperantoJExample {
         IJ.run(input_imp, "32-bit", "");
         input_imp.show();
 
-        ArrayJ input = ImageJConverters.copyImgLib2ToArrayJ(input_imp, currentDevice, "buffer");
+        ArrayJ input = ImageJConverters.copyImagePlus2ToArrayJ(input_imp, currentDevice, "buffer");
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
-        ImagePlus output_imp = ImageJConverters.copyArrayJToImgLib2(output);
+        ImagePlus output_imp = ImageJConverters.copyArrayJToImagePlus(output);
 
         output_imp.show();
     }

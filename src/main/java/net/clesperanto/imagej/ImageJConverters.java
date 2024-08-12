@@ -3,6 +3,7 @@ package net.clesperanto.imagej;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -106,9 +107,24 @@ public class ImageJConverters {
 	        case UINT8:
 	            fillImage(im, dimensions, byteBuffer::get);
 	            break;
+	        case INT8:
+	            fillImage(im, dimensions, byteBuffer::get);
+	            break;
 	        case UINT16:
+	            ShortBuffer uShortBuff = byteBuffer.asShortBuffer();
+	            fillImage(im, dimensions, uShortBuff::get);
+	            break;
+	        case INT16:
 	            ShortBuffer shortBuff = byteBuffer.asShortBuffer();
 	            fillImage(im, dimensions, shortBuff::get);
+	            break;
+	        case UINT32:
+	        	IntBuffer uIntBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, uIntBuff::get);
+	            break;
+	        case INT32:
+	            IntBuffer intBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, intBuff::get);
 	            break;
 	        default:
 	            throw new IllegalArgumentException("Data type not supported.");

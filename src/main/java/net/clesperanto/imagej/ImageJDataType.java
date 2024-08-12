@@ -7,11 +7,14 @@ import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
 
-// TODO add all types ImagePlus.GRAY8, ImagePlus.GRAY16, ImagePlus.GRAY32, ImagePlus.COLOR_256 or ImagePlus.COLOR_RGB)
 public enum ImageJDataType {
     FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32, float[].class, 32),
+    INT32(DataType.fromString("int"), ImagePlus.GRAY32, int[].class, 32),
+    UINT32(DataType.fromString("uint"), ImagePlus.GRAY32, int[].class, 32),
     UINT16(DataType.fromString("ushort"), ImagePlus.GRAY16, short[].class, 16),
-    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8, byte[].class, 8);
+    INT16(DataType.fromString("short"), ImagePlus.GRAY16, short[].class, 16),
+    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8, byte[].class, 8),
+    INT8(DataType.fromString("char"), ImagePlus.GRAY8, byte[].class, 8);
 
 	private final DataType dt;
     private final int imgDtype;
@@ -23,6 +26,10 @@ public enum ImageJDataType {
         this.imgDtype = imgDtype;
         this.arrayClass = arrayClass;
         this.bitDepth = bitDepth;
+    }
+
+    public static ImageJDataType fromImagePlus(ImagePlus imp) {
+        return fromImgPlusDataType(imp.getType());
     }
 
     public static ImageJDataType fromString(String dType) {

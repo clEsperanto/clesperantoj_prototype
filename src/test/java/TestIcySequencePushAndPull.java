@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 
 import icy.image.IcyBufferedImage;
+import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
 import net.clesperanto.icy.IcyConverters;
@@ -38,6 +39,7 @@ public class TestIcySequencePushAndPull {
 
     private static Sequence createSequence(long[] dims, int[] data)
     {
+    	IcyPreferences.init();
     	while (dims.length < 3) {
     		long[] newArray = new long[dims.length + 1];
     	    System.arraycopy(dims, 0, newArray, 0, dims.length);
@@ -54,7 +56,7 @@ public class TestIcySequencePushAndPull {
         SequenceCursor cursor = new SequenceCursor(seq);
         int c = 0;
         for (int x = 0; x < dims[0]; x ++) {
-        	for (int y = 0; x < dims[1]; y ++) {
+        	for (int y = 0; y < dims[1]; y ++) {
             	cursor.set(x, y, 0, 0, 0, data[c ++]);
             }
         }

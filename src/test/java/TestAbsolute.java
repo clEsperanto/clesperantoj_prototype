@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
 import icy.image.IcyBufferedImage;
-import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
 import ij.IJ;
@@ -25,6 +24,7 @@ import java.util.Arrays;
 
 public class TestAbsolute {
 
+	
     @Test
     public void testAbsolute() {
     	DeviceJ device = DeviceJ.getDefaultDevice();
@@ -241,7 +241,7 @@ public class TestAbsolute {
 
     private static Sequence createSequence(long[] dims, int[] data)
     {
-    	IcyPreferences.init();
+    	IcyConverters.initIcyPreferences();
     	while (dims.length < 3) {
     		long[] newArray = new long[dims.length + 1];
     	    System.arraycopy(dims, 0, newArray, 0, dims.length);

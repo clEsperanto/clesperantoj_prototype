@@ -11,6 +11,8 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import icy.image.IcyBufferedImage;
+import icy.preferences.ApplicationPreferences;
+import icy.preferences.GeneralPreferences;
 import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
@@ -30,7 +32,7 @@ public class IcyConverters {
 	// Icy requires that the preferences are initialized if they have not bee initialized before.
 	// TODO check if htey have been initialized before
 	static {
-        IcyPreferences.init();
+		initIcyPreferences();
 	}
 
 	/** TODO extend to RandomAccessibleInterval
@@ -181,6 +183,17 @@ public class IcyConverters {
             seq.setImage(0, z, new IcyBufferedImage((int) dims[0], (int) dims[1], 1, type));
         }
         return seq;
+    }
+    
+    /**
+     * Initialize the Icy meta data that is required to use Icy Sequences.
+     * Only initializes it if it has not been done before.
+     */
+    public static void initIcyPreferences() {
+    	if (ApplicationPreferences.getPreferences() == null
+    			|| GeneralPreferences.getPreferences() == null) {
+            IcyPreferences.init();
+    	}
     }
 
     public static void main(String[] args) {

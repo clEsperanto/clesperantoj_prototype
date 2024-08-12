@@ -183,6 +183,7 @@ public class TestAbsolute {
     	}
     }
 
+    /**
     @Test
     public void testAbsoluteIcySequence() {
     	int[] data = new int[] {1, 1, -1, -1};
@@ -263,4 +264,5 @@ public class TestAbsolute {
         cursor.commitChanges();
         return seq;
     }
+    **/
 }

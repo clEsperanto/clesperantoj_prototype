@@ -297,7 +297,6 @@
                 <version>2.22.2</version>
 			    <configuration>
 			        <redirectTestOutputToFile>true</redirectTestOutputToFile>
-        			<forkCount>0</forkCount>
 			    </configuration>
             </plugin>
 

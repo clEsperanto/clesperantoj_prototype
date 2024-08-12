@@ -4,12 +4,24 @@ import icy.image.IcyBufferedImage;
 import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
+import ij.IJ;
+import ij.ImagePlus;
+import ij.process.ImageProcessor;
 import net.clesperanto.icy.IcyConverters;
+import net.clesperanto.imagej.ImageJConverters;
+import net.clesperanto.imglib2.ImgLib2Converters;
 import net.clesperanto.kernels.Tier1;
+import net.imglib2.RandomAccessibleInterval;
+import net.imglib2.img.array.ArrayImgs;
+import net.imglib2.type.numeric.integer.IntType;
+import net.clesperanto.core.MemoryJ;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.nio.IntBuffer;
+import java.util.Arrays;
 
 public class TestAbsolute {
 

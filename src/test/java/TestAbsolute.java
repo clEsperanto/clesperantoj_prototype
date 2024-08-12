@@ -1,26 +1,15 @@
 import org.junit.jupiter.api.Test;
 
 import icy.image.IcyBufferedImage;
+import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
-import ij.IJ;
-import ij.ImagePlus;
-import ij.process.ImageProcessor;
-import net.clesperanto.core.MemoryJ;
 import net.clesperanto.icy.IcyConverters;
-import net.clesperanto.imagej.ImageJConverters;
-import net.clesperanto.imglib2.ImgLib2Converters;
 import net.clesperanto.kernels.Tier1;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.array.ArrayImgs;
-import net.imglib2.type.numeric.integer.IntType;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.nio.IntBuffer;
-import java.util.Arrays;
 
 public class TestAbsolute {
 
@@ -183,7 +172,6 @@ public class TestAbsolute {
     	}
     }
 
-    /**
     @Test
     public void testAbsoluteIcySequence() {
     	int[] data = new int[] {1, 1, -1, -1};
@@ -241,6 +229,7 @@ public class TestAbsolute {
 
     private static Sequence createSequence(long[] dims, int[] data)
     {
+    	IcyPreferences.init();
     	while (dims.length < 3) {
     		long[] newArray = new long[dims.length + 1];
     	    System.arraycopy(dims, 0, newArray, 0, dims.length);
@@ -257,12 +246,11 @@ public class TestAbsolute {
         SequenceCursor cursor = new SequenceCursor(seq);
         int c = 0;
         for (int x = 0; x < dims[0]; x ++) {
-        	for (int y = 0; x < dims[1]; y ++) {
+        	for (int y = 0; y < dims[1]; y ++) {
             	cursor.set(x, y, 0, 0, 0, data[c ++]);
             }
         }
         cursor.commitChanges();
         return seq;
     }
-    **/
 }

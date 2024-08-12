@@ -24,7 +24,7 @@ import java.util.Arrays;
 
 public class TestAbsolute {
 
-	
+
     @Test
     public void testAbsolute() {
     	DeviceJ device = DeviceJ.getDefaultDevice();

@@ -184,7 +184,7 @@ public class IcyConverters {
         }
         return seq;
     }
-    
+
     /**
      * Initialize the Icy meta data that is required to use Icy Sequences.
      * Only initializes it if it has not been done before.

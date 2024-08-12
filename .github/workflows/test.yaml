@@ -17,4 +17,4 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'zulu'
       - name: Execute the tests
-        run: mvn clean test
+        run: mvn clean test -X

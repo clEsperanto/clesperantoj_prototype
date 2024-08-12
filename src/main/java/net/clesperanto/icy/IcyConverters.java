@@ -3,6 +3,7 @@ package net.clesperanto.icy;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -70,8 +71,8 @@ public class IcyConverters {
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
 	public static ArrayJ copySequenceToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
-		Map<String, Integer> sizeMap = checkSize(rai);
 		IcyDataType dataType = IcyDataType.fromIcyDataType(rai.getDataType_());
+		Map<String, Integer> sizeMap = checkSize(rai, dataType.getByteSize());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);
 
 		long[] dims = sizeMap.values().stream().mapToLong(i -> (long) i).toArray();
@@ -105,12 +106,23 @@ public class IcyConverters {
 	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();
 	            fillImage(im, dimensions, floatBuff::get);
 	            break;
+	        case INT8:
+	            fillImage(im, dimensions, byteBuffer::get);
+	            break;
 	        case UINT8:
 	            fillImage(im, dimensions, byteBuffer::get);
 	            break;
 	        case UINT16:
+	            ShortBuffer uShortBuff = byteBuffer.asShortBuffer();
+	            fillImage(im, dimensions, uShortBuff::get);
+	            break;
+	        case INT16:
 	            ShortBuffer shortBuff = byteBuffer.asShortBuffer();
 	            fillImage(im, dimensions, shortBuff::get);
+	            break;
+	        case INT32:
+	            IntBuffer intBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, intBuff::get);
 	            break;
 	        default:
 	            throw new IllegalArgumentException("Data type not supported.");
@@ -131,28 +143,17 @@ public class IcyConverters {
 	    cursor.commitChanges();
 	}
 
-	private static Map<String, Integer> checkSize(Sequence imp) {
+	private static Map<String, Integer> checkSize(Sequence imp, long byteSize) {
 		Map<String, Integer> sizeMap = new LinkedHashMap<String, Integer>();
 		sizeMap.put("x", imp.getWidth());
 		sizeMap.put("y", imp.getHeight());
-		sizeMap.put("c", imp.getSizeC());
 		sizeMap.put("z", imp.getSizeZ());
-		sizeMap.put("t", imp.getSizeT());
 		sizeMap = sizeMap.entrySet().stream()
-				.filter(ee -> ee.getValue() == 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
-		while (sizeMap.entrySet().size() > 3) {
-			if (sizeMap.get("t") != null)
-				sizeMap.remove("t");
-			else if (sizeMap.get("c") != null)
-				sizeMap.remove("c");
-			else if (sizeMap.get("z") != null)
-				sizeMap.remove("z");
-		}
-		int tot = 1;
+				.filter(ee -> ee.getValue() != 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
 		for (Integer vv : sizeMap.values()) {
-			tot *= vv;
+			byteSize *= (long) vv;
 		}
-		if (tot > Integer.MAX_VALUE)
+		if (byteSize > Integer.MAX_VALUE)
 			throw new IllegalArgumentException();
 		return sizeMap;
 	}
@@ -165,7 +166,7 @@ public class IcyConverters {
      * 	type of the sequence
      * @return empty Icy sequence of the wanted type and dimensions
      */
-    private static Sequence createSequence(long[] dims, icy.type.DataType type)
+    public static Sequence createSequence(long[] dims, icy.type.DataType type)
     {
     	while (dims.length < 3) {
     		long[] newArray = new long[dims.length + 1];

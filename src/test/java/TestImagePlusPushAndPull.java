@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TestImagePlusPushAndPull {
-	
+
 	public final static int MAX_UINT16 = 65536;
-	
+
 	public final static int MAX_INT16 = 65536 /  2 - 1;
-	
+
 	public final static int MAX_UINT8 = 256;
-	
+
 	public final static int MAX_INT8 = 256 / 2 - 1;
 
     @Test
@@ -88,11 +88,11 @@ public class TestImagePlusPushAndPull {
     @Test
     public void testImagePlusPushAndPullInt() {
     	ImagePlus inputImp = IJ.createImage("input", 3, 3, 2, 32);
-    	
+
     	int[] flatVals = new int[18];
         for (int i = 0; i < flatVals.length; i++)
         	flatVals[i] = ThreadLocalRandom.current().nextInt(100);
-        
+
     	int c = 0;
     	for (int z = 0; z < 2; z ++) {
     		inputImp.setPositionWithoutUpdate(1, 1 + z, 1);

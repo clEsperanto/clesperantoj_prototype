@@ -103,8 +103,8 @@ public class ImageJConverters {
 	    	byte bb = byteBuffer.get();
         	return bb < 0 ? 256 + bb : bb;
         };
-	    
-	    
+
+
 	    switch (type) {
 	        case FLOAT32:
 	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();

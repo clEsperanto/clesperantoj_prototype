@@ -108,16 +108,16 @@ public class TestPushAndPullIcySequence {
 
     @Test
     public void testIcySequencePushAndPullUint() {
-    	int[] flatVals = new int[1];
+    	int[] flatVals = new int[18];
         for (int i = 0; i < flatVals.length; i++)
         	flatVals[i] =  Integer.MAX_VALUE + ThreadLocalRandom.current().nextInt(0, 100);
-    	Sequence inputSeq = createSequence(new long[] {1, 1, 1}, DataType.UINT);
+    	Sequence inputSeq = createSequence(new long[] {3, 3, 2}, DataType.UINT);
 
         SequenceCursor cursor = new SequenceCursor(inputSeq);
         int c = 0;
-    	for (int z = 0; z < 1; z ++) {
-        	for (int y = 0; y < 1; y ++) {
-        		for (int x = 0; x < 1; x ++) {
+    	for (int z = 0; z < 2; z ++) {
+        	for (int y = 0; y < 3; y ++) {
+        		for (int x = 0; x < 3; x ++) {
         			cursor.set(x, y, z, 0, 0, flatVals[c ++]);
         		}
             }
@@ -134,13 +134,10 @@ public class TestPushAndPullIcySequence {
     	SequenceCursor outCursor = new SequenceCursor(outputSeq);
 
     	c = 0;
-        for (int z = 0; z < 1; z ++) {
-	        for (int y = 0; y < 1; y ++) {
-	            for (int x = 0; x < 1; x ++) {
+        for (int z = 0; z < 2; z ++) {
+	        for (int y = 0; y < 3; y ++) {
+	            for (int x = 0; x < 3; x ++) {
 	            	long val = flatVals[c ++];
-	            	System.out.println("in " + inCursor.get(x, y, z, 0, 0));
-	            	System.out.println("out " + outCursor.get(x, y, z, 0, 0));
-	            	System.out.println("val " + (val + MAX_UINT32));
                 	assertEquals(inCursor.get(x, y, z, 0, 0), outCursor.get(x, y, z, 0, 0));
                 	assertEquals(val < 0 ? val + MAX_UINT32 : val, outCursor.get(x, y, z, 0, 0));
                 }

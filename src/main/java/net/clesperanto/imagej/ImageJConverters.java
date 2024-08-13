@@ -99,24 +99,36 @@ public class ImageJConverters {
 	private static ImagePlus fromBuffer(ByteBuffer byteBuffer, ImageJDataType type, long[] dimensions) {
 	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.getBitDepth());
 
+	    Supplier<Number>  byteSupplier = () -> {
+	    	byte bb = byteBuffer.get();
+        	return bb < 0 ? 256 + bb : bb;
+        };
+	    
+	    
 	    switch (type) {
 	        case FLOAT32:
 	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();
 	            fillImage(im, dimensions, floatBuff::get);
 	            break;
 	        case UINT8:
-	            fillImage(im, dimensions, byteBuffer::get);
+	            fillImage(im, dimensions, byteSupplier);
 	            break;
 	        case INT8:
-	            fillImage(im, dimensions, byteBuffer::get);
+	            fillImage(im, dimensions, byteSupplier);
 	            break;
 	        case UINT16:
 	            ShortBuffer uShortBuff = byteBuffer.asShortBuffer();
-	            fillImage(im, dimensions, uShortBuff::get);
+	            fillImage(im, dimensions, () -> {
+	    	    	short bb = uShortBuff.get();
+	            	return bb < 0 ? 65536 + bb : bb;
+	            });
 	            break;
 	        case INT16:
 	            ShortBuffer shortBuff = byteBuffer.asShortBuffer();
-	            fillImage(im, dimensions, shortBuff::get);
+	            fillImage(im, dimensions, () -> {
+	    	    	short bb = shortBuff.get();
+	            	return bb < 0 ? 65536 + bb : bb;
+	            });
 	            break;
 	        case UINT32:
 	        	IntBuffer uIntBuff = byteBuffer.asIntBuffer();

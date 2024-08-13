@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 
 public class TestPullIcySequence {
-	
+
 	static {
     	IcyConverters.initIcyPreferences();
 	}

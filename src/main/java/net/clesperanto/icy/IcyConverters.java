@@ -126,6 +126,10 @@ public class IcyConverters {
 	            IntBuffer intBuff = byteBuffer.asIntBuffer();
 	            fillImage(im, dimensions, intBuff::get);
 	            break;
+	        case UINT32:
+	            IntBuffer uIntBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, uIntBuff::get);
+	            break;
 	        default:
 	            throw new IllegalArgumentException("Data type not supported.");
 	    }

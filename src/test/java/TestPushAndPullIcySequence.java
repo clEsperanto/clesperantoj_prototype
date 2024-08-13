@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TestPushAndPullIcySequence {
-	
+
 	static {
     	IcyConverters.initIcyPreferences();
 	}

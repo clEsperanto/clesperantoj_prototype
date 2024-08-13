@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 
-public class TestImgPullImgLib2 {
+public class TestPullImgLib2 {
 
 	public final static long MAX_UINT32 = (long) Math.pow(2, 32);
 

@@ -6,7 +6,6 @@ import ij.process.ImageProcessor;
 import net.clesperanto.imagej.ImageJConverters;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
-import net.clesperanto.core.MemoryJ;
 
 import static org.junit.jupiter.api.Assertions.*;
 

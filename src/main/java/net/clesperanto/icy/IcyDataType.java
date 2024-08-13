@@ -84,6 +84,7 @@ public enum IcyDataType {
             case FLOAT32:
                 ((float[]) arr)[pos] = value.floatValue();
                 break;
+            case UINT32:
             case INT32:
                 ((int[]) arr)[pos] = value.intValue();
                 break;

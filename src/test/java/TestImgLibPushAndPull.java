@@ -10,7 +10,7 @@ import net.clesperanto.imglib2.ImgLib2Converters;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+@Deprecated
 public class TestImgLibPushAndPull {
 
     @Test

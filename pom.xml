@@ -127,6 +127,18 @@
 			<groupId>net.imagej</groupId>
 			<artifactId>ij</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
@@ -294,14 +306,16 @@
 			</plugin>
 
 			<!-- Test plugin -->
-	        <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.4.1</version>
-				<configuration>
-					<argLine>-Xmx2G</argLine>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+			    <configuration>
+			        <redirectTestOutputToFile>true</redirectTestOutputToFile>
+	                <forkCount>1</forkCount>
+	                <reuseForks>false</reuseForks>
+			    </configuration>
+            </plugin>
 
 		</plugins>
 	</build>

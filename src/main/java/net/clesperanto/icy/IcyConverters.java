@@ -3,6 +3,7 @@ package net.clesperanto.icy;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -10,6 +11,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import icy.image.IcyBufferedImage;
+import icy.preferences.ApplicationPreferences;
+import icy.preferences.GeneralPreferences;
+import icy.preferences.IcyPreferences;
 import icy.sequence.Sequence;
 import icy.sequence.SequenceCursor;
 import net.clesperanto.core.ArrayJ;
@@ -25,6 +29,12 @@ import net.clesperanto.core.DeviceJ;
  */
 public class IcyConverters {
 
+	// Icy requires that the preferences are initialized if they have not bee initialized before.
+	// TODO check if htey have been initialized before
+	static {
+		initIcyPreferences();
+	}
+
 	/** TODO extend to RandomAccessibleInterval
 	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
 	 * Creates a copy of the ArrayJ in the GPU into an ArrayImg in the CPU
@@ -33,7 +43,7 @@ public class IcyConverters {
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static Sequence copyArrayJToImgLib2( ArrayJ arrayj )
+	public static Sequence copyArrayJToSequence( ArrayJ arrayj )
 	{
 		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
 		IcyDataType dataType = IcyDataType.fromString(arrayj.getDataType());
@@ -62,9 +72,9 @@ public class IcyConverters {
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static ArrayJ copyImgLib2ToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
-		Map<String, Integer> sizeMap = checkSize(rai);
+	public static ArrayJ copySequenceToArrayJ(Sequence rai, DeviceJ device, String memoryType) {
 		IcyDataType dataType = IcyDataType.fromIcyDataType(rai.getDataType_());
+		Map<String, Integer> sizeMap = checkSize(rai, dataType.getByteSize());
 		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);
 
 		long[] dims = sizeMap.values().stream().mapToLong(i -> (long) i).toArray();
@@ -98,12 +108,27 @@ public class IcyConverters {
 	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();
 	            fillImage(im, dimensions, floatBuff::get);
 	            break;
+	        case INT8:
+	            fillImage(im, dimensions, byteBuffer::get);
+	            break;
 	        case UINT8:
 	            fillImage(im, dimensions, byteBuffer::get);
 	            break;
 	        case UINT16:
+	            ShortBuffer uShortBuff = byteBuffer.asShortBuffer();
+	            fillImage(im, dimensions, uShortBuff::get);
+	            break;
+	        case INT16:
 	            ShortBuffer shortBuff = byteBuffer.asShortBuffer();
 	            fillImage(im, dimensions, shortBuff::get);
+	            break;
+	        case INT32:
+	            IntBuffer intBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, intBuff::get);
+	            break;
+	        case UINT32:
+	            IntBuffer uIntBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, uIntBuff::get);
 	            break;
 	        default:
 	            throw new IllegalArgumentException("Data type not supported.");
@@ -124,28 +149,15 @@ public class IcyConverters {
 	    cursor.commitChanges();
 	}
 
-	private static Map<String, Integer> checkSize(Sequence imp) {
+	private static Map<String, Integer> checkSize(Sequence imp, long byteSize) {
 		Map<String, Integer> sizeMap = new LinkedHashMap<String, Integer>();
-		sizeMap.put("x", imp.getWidth());
-		sizeMap.put("y", imp.getHeight());
-		sizeMap.put("c", imp.getSizeC());
-		sizeMap.put("z", imp.getSizeZ());
-		sizeMap.put("t", imp.getSizeT());
-		sizeMap = sizeMap.entrySet().stream()
-				.filter(ee -> ee.getValue() == 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
-		while (sizeMap.entrySet().size() > 3) {
-			if (sizeMap.get("t") != null)
-				sizeMap.remove("t");
-			else if (sizeMap.get("c") != null)
-				sizeMap.remove("c");
-			else if (sizeMap.get("z") != null)
-				sizeMap.remove("z");
-		}
-		int tot = 1;
+		sizeMap.put("x", imp.getWidth() == 0 ? 1 : imp.getWidth());
+		sizeMap.put("y", imp.getHeight() == 0 ? 1 : imp.getHeight());
+		sizeMap.put("z", imp.getSizeZ() == 0 ? 1 : imp.getSizeZ());
 		for (Integer vv : sizeMap.values()) {
-			tot *= vv;
+			byteSize *= (long) vv;
 		}
-		if (tot > Integer.MAX_VALUE)
+		if (byteSize > Integer.MAX_VALUE)
 			throw new IllegalArgumentException();
 		return sizeMap;
 	}
@@ -158,7 +170,7 @@ public class IcyConverters {
      * 	type of the sequence
      * @return empty Icy sequence of the wanted type and dimensions
      */
-    private static Sequence createSequence(long[] dims, icy.type.DataType type)
+    public static Sequence createSequence(long[] dims, icy.type.DataType type)
     {
     	while (dims.length < 3) {
     		long[] newArray = new long[dims.length + 1];
@@ -173,5 +185,21 @@ public class IcyConverters {
             seq.setImage(0, z, new IcyBufferedImage((int) dims[0], (int) dims[1], 1, type));
         }
         return seq;
+    }
+
+    /**
+     * Initialize the Icy meta data that is required to use Icy Sequences.
+     * Only initializes it if it has not been done before.
+     */
+    public static void initIcyPreferences() {
+    	if (ApplicationPreferences.getPreferences() == null
+    			|| GeneralPreferences.getPreferences() == null) {
+            IcyPreferences.init();
+    	}
+    }
+
+    public static void main(String[] args) {
+
+    	createSequence(new long[] {5, 5, 5}, icy.type.DataType.FLOAT);
     }
 }

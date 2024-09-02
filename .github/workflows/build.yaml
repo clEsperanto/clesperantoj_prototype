@@ -96,13 +96,9 @@ jobs:
           -Dexec.args='${project.name}' \
           --non-recursive \
           exec:exec)
-        artifact_name="${{ matrix.name }}-artifact-${MVN_VERSION}"
         echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
       id: mvn_info
-
-    - name: test
-      run: echo ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
 
     - name: Upload native library
       uses: actions/upload-artifact@v2
@@ -134,22 +130,21 @@ jobs:
           -Dexec.args='${project.name}' \
           --non-recursive \
           exec:exec)
-        artifact_name="${{ matrix.name }}-artifact-${MVN_VERSION}"
         echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
       id: mvn_info
     # There is no specific reason to select the JAR file containing the macos dynamic libraries as the final one, we could have selected any other
     - name: Select one of the JARs as the JAR to be the final
       run: |
-        mv macos/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
+        mv macos/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
     - name: Add Linux and Windows dynamic libraries
       run: |
-        jar xf linux/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar net/clesperanto/presets/linux-x86_64
-        jar xf windows/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar net/clesperanto/presets/windows-x86_64
-        jar uf ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar -C . net/clesperanto/presets
+        jar xf linux/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/presets/linux-x86_64
+        jar xf windows/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/presets/windows-x86_64
+        jar uf ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar -C . net/clesperanto/presets
 
     - name: Upload final JAR
       uses: actions/upload-artifact@v2
       with:
         name: final-jar
-        path: ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
+        path: ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar

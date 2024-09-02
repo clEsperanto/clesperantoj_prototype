@@ -59,6 +59,23 @@
 			</roles>
 		</developer>
 	</developers>
+	<contributors>
+		<contributor>
+			<name>Robert Haase</name>
+			<url>http://haesleinhuepf.net</url>
+			<properties><id>haesleinhuepf</id></properties>
+		</contributor>
+		<contributor>
+			<name>Stephane Rigaud</name>
+			<url>https://github.com/StRigaud</url>
+			<properties><id>StRigaud</id></properties>
+		</contributor>
+		<contributor>
+			<name>Carlos Javier Garcia Lopez de Haro</name>
+			<url>https://github.com/carlosuc3m</url>
+			<properties><id>carlosuc3m</id></properties>
+		</contributor>
+	</contributors>
 
   	<mailingLists>
 		<mailingList>

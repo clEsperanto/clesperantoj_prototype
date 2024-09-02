@@ -102,13 +102,13 @@ jobs:
       id: mvn_info
 
     - name: test
-      run: echo ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
+      run: echo ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
 
     - name: Upload native library
       uses: actions/upload-artifact@v2
       with:
         name: ${{ matrix.name }}-artifact
-        path: target/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
+        path: target/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
 
   create-jar:
     needs: build

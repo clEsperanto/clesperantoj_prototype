@@ -101,6 +101,9 @@ jobs:
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
       id: mvn_info
 
+    - name: test
+      run: echo ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
+
     - name: Upload native library
       uses: actions/upload-artifact@v2
       with:

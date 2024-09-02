@@ -141,7 +141,7 @@ jobs:
         mv macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
     - name: Add Linux and Windows dynamic libraries
       run: |
-        jar xf linux-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/presets/linux-x86_64
+        jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/presets/linux-x86_64
         jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/presets/windows-x86_64
         jar uf ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar -C . net/clesperanto/presets
 

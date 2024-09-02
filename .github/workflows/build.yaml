@@ -3,6 +3,7 @@ name: build
 on:
   push:
     branches: [ main ]
+    branches: [ deploy-to-scijava ]
   pull_request:
     branches: [ main ]
 
@@ -98,17 +99,13 @@ jobs:
         artifact_name="${{ matrix.name }}-artifact-${MVN_VERSION}"
         echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
-      id: upload_info
+      id: mvn_info
 
-    - uses: actions/upload-artifact@v2
+    - name: Upload native library
+      uses: actions/upload-artifact@v2
       with:
-        name: ${{ steps.upload_info.outputs.name }}
-        path: ${{ steps.upload_info.outputs.path }}
-        - name: Upload native library
-          uses: actions/upload-artifact@v2
-          with:
-            name: ${{ matrix.name }}-artifact
-            path: target/${steps.upload_info.outputs.name}-${steps.upload_info.outputs.version}.jar
+        name: ${{ matrix.name }}-artifact
+        path: target/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
 
   create-jar:
     needs: build
@@ -120,22 +117,36 @@ jobs:
       with:
         java-version: '11'
         distribution: 'adopt'
-    - name: Download all native libraries
+    - name: Download all platform-specific JAR files
       uses: actions/download-artifact@v2
-    - name: Prepare library directory
+    - name: Get Maven Version and Upload Artifact
       run: |
-        mkdir -p lib
-        mv native-lib-ubuntu-latest/* lib/
-        mv native-lib-windows-latest/* lib/
-        mv native-lib-macos-latest/* lib/
-    - name: Compile Java code
-      run: javac -d target/classes src/main/java/*.java
-    - name: Create JAR with native libraries
+        MVN_VERSION=$(mvn -q \
+          -Dexec.executable=echo \
+          -Dexec.args='${project.version}' \
+          --non-recursive \
+          exec:exec)
+        MVN_NAME=$(mvn -q \
+          -Dexec.executable=echo \
+          -Dexec.args='${project.name}' \
+          --non-recursive \
+          exec:exec)
+        artifact_name="${{ matrix.name }}-artifact-${MVN_VERSION}"
+        echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
+        echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
+      id: mvn_info
+    # There is no specific reason to select the JAR file containing the macos dynamic libraries as the final one, we could have selected any other
+    - name: Select one of the JARs as the JAR to be the final
       run: |
-        jar cfm myapp.jar src/main/resources/META-INF/MANIFEST.MF -C target/classes .
-        jar uf myapp.jar -C lib .
+        mv macos/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar
+    - name: Add Linux and Windows dynamic libraries
+      run: |
+        jar xf linux/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar net/clesperanto/presets/linux-x86_64
+        jar xf windows/${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar net/clesperanto/presets/windows-x86_64
+        jar uf ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar -C . net/clesperanto/presets
+
     - name: Upload final JAR
       uses: actions/upload-artifact@v2
       with:
-        name: myapp-with-natives
-        path: myapp.jar
+        name: final-jar
+        path: ${steps.mvn_info.outputs.name}-${steps.mvn_info.outputs.version}.jar

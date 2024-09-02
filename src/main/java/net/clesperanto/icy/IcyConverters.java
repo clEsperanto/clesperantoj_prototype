@@ -126,6 +126,10 @@ public class IcyConverters {
 	            IntBuffer intBuff = byteBuffer.asIntBuffer();
 	            fillImage(im, dimensions, intBuff::get);
 	            break;
+	        case UINT32:
+	            IntBuffer uIntBuff = byteBuffer.asIntBuffer();
+	            fillImage(im, dimensions, uIntBuff::get);
+	            break;
 	        default:
 	            throw new IllegalArgumentException("Data type not supported.");
 	    }
@@ -147,11 +151,9 @@ public class IcyConverters {
 
 	private static Map<String, Integer> checkSize(Sequence imp, long byteSize) {
 		Map<String, Integer> sizeMap = new LinkedHashMap<String, Integer>();
-		sizeMap.put("x", imp.getWidth());
-		sizeMap.put("y", imp.getHeight());
-		sizeMap.put("z", imp.getSizeZ());
-		sizeMap = sizeMap.entrySet().stream()
-				.filter(ee -> ee.getValue() != 1).collect(Collectors.toMap(ee -> ee.getKey(), ee -> ee.getValue()));
+		sizeMap.put("x", imp.getWidth() == 0 ? 1 : imp.getWidth());
+		sizeMap.put("y", imp.getHeight() == 0 ? 1 : imp.getHeight());
+		sizeMap.put("z", imp.getSizeZ() == 0 ? 1 : imp.getSizeZ());
 		for (Integer vv : sizeMap.values()) {
 			byteSize *= (long) vv;
 		}

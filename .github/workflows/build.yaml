@@ -2,8 +2,7 @@ name: build
 
 on:
   push:
-    branches: [ main ]
-    branches: [ deploy-to-scijava ]
+    branches: [ main, deploy-to-scijava ]
   pull_request:
     branches: [ main ]
 

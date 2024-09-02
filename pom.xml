@@ -37,7 +37,6 @@
 			<organization>PoL TUD</organization>
 			<roles>
 				<role>developer</role>
-				<role>owner</role>
 			</roles>
 		</developer>
 		<developer>
@@ -47,7 +46,6 @@
 			<organization>Institut Pasteur</organization>
 			<roles>
 				<role>developer</role>
-				<role>owner</role>
 			</roles>
 		</developer>
 		<developer>

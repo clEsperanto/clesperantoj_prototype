@@ -361,28 +361,6 @@
 	                <reuseForks>false</reuseForks>
 			    </configuration>
             </plugin>
-            <plugin>
-		        <artifactId>maven-resources-plugin</artifactId>
-		        <executions>
-		          <execution>
-		            <id>copy</id>
-		            <!-- here the phase you need -->
-		            <phase>validate</phase>
-		            <goals>
-		              <goal>copy-resources</goal>
-		            </goals>
-		            <configuration>
-		              <outputDirectory>${project.basedir}/target/classes/net/clesperanto</outputDirectory>
-		              <resources>          
-		                <resource>
-		                  <directory>${project.basedir}/libs</directory>
-		                  <filtering>false</filtering>
-		                </resource>
-		              </resources>              
-		            </configuration>            
-		          </execution>
-		        </executions>
-      		</plugin>
 		</plugins>
 	</build>
 

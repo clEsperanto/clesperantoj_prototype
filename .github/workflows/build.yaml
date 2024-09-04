@@ -31,7 +31,7 @@ jobs:
             cmake-build-type: "Release"
             cmake-build-flag: "-A x64"
           - name: macos
-            os: macos-13
+            os: macos-latest
             c-compiler: "clang"
             cxx-compiler: "clang++"
             cmake-build-type: "Release"
@@ -108,7 +108,7 @@ jobs:
 
   create-jar:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 11
@@ -120,7 +120,7 @@ jobs:
       uses: actions/download-artifact@v4
     - name: understand what is downlaoded
       run: ls
-    - name: Get Maven Version and Upload Artifact
+    - name: Get Maven Version
       run: |
         MVN_VERSION=$(mvn -q \
           -Dexec.executable=echo \
@@ -135,18 +135,17 @@ jobs:
         echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
       id: mvn_info
-    # There is no specific reason to select the JAR file containing the macos dynamic libraries as the final one, we could have selected any other
-    - name: Select one of the JARs as the JAR to be the final
+    - name: Extract compiled native libraries to target fodler libs
       run: |
-        mv macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
-    - name: Add Linux and Windows dynamic libraries
-      run: |
-        jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/linux-x86_64
-        jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
-        jar uf ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar -C . net/clesperanto
+        mkdir -p libs
+        jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/linux-x86_64
+        jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/windows-x86_64
+        jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/macos-arm64
 
+    - name: Build the JAR file for macos-x86_64 and adding all the native libraries to it
+      run: mvn clean install
     - name: Upload final JAR
       uses: actions/upload-artifact@v4
       with:
         name: final-jar
-        path: ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
+        path: target/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar

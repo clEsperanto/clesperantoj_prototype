@@ -31,7 +31,7 @@ jobs:
             cmake-build-type: "Release"
             cmake-build-flag: "-A x64"
           - name: macos
-            os: macos-13
+            os: macos-latest
             c-compiler: "clang"
             cxx-compiler: "clang++"
             cmake-build-type: "Release"

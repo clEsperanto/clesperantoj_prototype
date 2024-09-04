@@ -60,7 +60,7 @@ C:\Program Files\CMake\bin
 
 ### Build clesperantoJ
 
-In a commmand prompt, start by git clone the repository and move inside the repo
+In a commmand prompt (on Windows "x64 Native Tools Command Prompt"), start by git clone the repository and move inside the repo
 ```
 git clone https://github.com/clEsperanto/clesperantoj_prototype.git
 cd clesperantoj_prototype

@@ -15,8 +15,8 @@ clesperantoJ is a Java bidings of the C++ library [CLIc]() relying of [OpenCL]()
 A certain diversity of ressources will be required to build clesperantoJ from source:
 - a C++ compiler (`gcc`, `clang`, `cl`, etc.)
 - the Java Development Kit (JDK)
-- CMake (a C++ project manager)
-- Maven (a Java project manager)
+- [CMake](https://cmake.org/) (a C++ project manager)
+- [Maven](https://maven.apache.org/download.cgi) (a Java project manager)
 - Bash (a shell program and command language)
 - OpenCL (your GPU driver properly install with their Development Kit if possible)
 
@@ -47,7 +47,7 @@ You can get Bash by simply installing [git-scm](https://git-scm.com/downloads) a
 ### Install OpenCL
 
 You mainly need to install your GPU driver provided by your GPU vendor, e.g. NVIDIA, AMD, Intel, etc. Please refer to their official website.
-For NVIDIA, we advise to install the CUDAToolKit.
+For NVIDIA, we advise to install the [CUDAToolKit](https://developer.nvidia.com/cuda-toolkit).
 
 ### Build clesperantoJ
 

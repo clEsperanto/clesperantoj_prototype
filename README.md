@@ -22,7 +22,7 @@ A certain diversity of ressources will be required to build clesperantoJ from so
 
 #### Install a C++ compiler and CMake
 
-For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with Windows C++ development selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).
+For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with "Desktop development with C++" selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).
 For __MacOS__, you will need to install the command-line tools from xcode by running this command in a prompt: `xcode-select --install`.
 For __Unix__, similarly to OSX, you will need to install the `build-essential` package by running this command in a prompt: `sudo apt install build-essential`.
 

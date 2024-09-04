@@ -49,6 +49,15 @@ You can get Bash by simply installing [git-scm](https://git-scm.com/downloads) a
 You mainly need to install your GPU driver provided by your GPU vendor, e.g. NVIDIA, AMD, Intel, etc. Please refer to their official website.
 For NVIDIA, we advise to install the [CUDAToolKit](https://developer.nvidia.com/cuda-toolkit).
 
+## PATH
+
+To make the above installed programs work, you need to add them to your path, e.g. on Windows like this:
+```
+C:\programs\apache-maven-3.9.9\bin
+C:\Program Files\Git\bin
+C:\Program Files\CMake\bin
+```
+
 ### Build clesperantoJ
 
 In a commmand prompt, start by git clone the repository and move inside the repo

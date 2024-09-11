@@ -36,6 +36,12 @@ jobs:
             cxx-compiler: "clang++"
             cmake-build-type: "Release"
             cmake-build-flag: ""
+          - name: macos-intel
+            os: macos-13
+            c-compiler: "clang"
+            cxx-compiler: "clang++"
+            cmake-build-type: "Release"
+            cmake-build-flag: ""
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -78,11 +84,13 @@ jobs:
       run:  mvn clean install -DskipTests
       shell: bash
 
-    - name: Run Java class (only possible on MacOS)
+    - name: Run Java class (only possible on MacOS intel)
       if: contains(matrix.os, 'macos')
       run: |
-        mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
-        java -cp target/classes:$(cat classpath.txt) net.clesperanto.ClesperantoJ
+        if [[ $(uname -m) == 'x86_64' ]]; then
+          mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
+          java -cp target/classes:$(cat classpath.txt) net.clesperanto.ClesperantoJ
+        fi
     - name: Get Maven Version and Upload Artifact
       shell: bash
       run: |

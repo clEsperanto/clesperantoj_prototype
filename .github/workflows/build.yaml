@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [ubuntu] #[ubuntu, windows, macos]
+        name: [ubuntu, windows, macos]
         include:
           - name: ubuntu
             os: ubuntu-latest
@@ -24,18 +24,18 @@ jobs:
             cxx-compiler: "g++"
             cmake-build-type: "Release"
             cmake-build-flag: ""
-          #- name: windows
-          #  os: windows-latest
-          #  c-compiler: "cl.exe"
-          #  cxx-compiler: "cl.exe"
-          #  cmake-build-type: "Release"
-          #  cmake-build-flag: "-A x64"
-          #- name: macos
-          #  os: macos-latest
-          #  c-compiler: "clang"
-          #  cxx-compiler: "clang++"
-          #  cmake-build-type: "Release"
-          #  cmake-build-flag: ""
+          - name: windows
+            os: windows-latest
+            c-compiler: "cl.exe"
+            cxx-compiler: "cl.exe"
+            cmake-build-type: "Release"
+            cmake-build-flag: "-A x64"
+          - name: macos
+            os: macos-latest
+            c-compiler: "clang"
+            cxx-compiler: "clang++"
+            cmake-build-type: "Release"
+            cmake-build-flag: ""
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -119,8 +119,6 @@ jobs:
         distribution: 'adopt'
     - name: Download all platform-specific JAR files
       uses: actions/download-artifact@v4
-    - name: understand what is downlaoded
-      run: ls
     - name: Get Maven Version
       run: |
         MVN_VERSION=$(mvn -q \
@@ -136,28 +134,13 @@ jobs:
         echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
       id: mvn_info
-    - name: understand what to decompress
-      run: |
-        ls ubuntu-artifact
-    - name: understand what to decompress
-      run: |
-        echo ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
     - name: Extract compiled native libraries to target fodler libs
       run: |
         jar xvf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/linux-x86_64
-        #jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
-        # jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macos-arm64
+        jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
+        jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macos-arm64
         mkdir -p libs
-        mv net libs/net/
-    - name: understand what is decompressed
-      run: |
-        ls libs
-    - name: understand what is decompressed
-      run: |
-        ls libs/net
-    - name: understand what is decompressed
-      run: |
-        ls libs/net/clesperanto
+        mv net/clesperanto/* libs/
     - name: Build the JAR file for macos-x86_64 and adding all the native libraries to it
       run: mvn clean install
     - name: Upload final JAR

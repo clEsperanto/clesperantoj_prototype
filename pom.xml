@@ -349,7 +349,7 @@
 			    <configuration>
 			        <redirectTestOutputToFile>true</redirectTestOutputToFile>
 	                <forkCount>1</forkCount>
-	                <reuseForks>false</reuseForks>
+	                <reuseForks>true</reuseForks>
 			    </configuration>
             </plugin>
             <plugin>

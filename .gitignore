@@ -1,6 +1,7 @@
 
 
 lib/
+libs/
 native/cppbuild
 
 # from CLIJ2

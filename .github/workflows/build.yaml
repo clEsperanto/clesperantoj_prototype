@@ -144,8 +144,9 @@ jobs:
         # jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/macos-arm64
     - name: understand what is decompressed
       run: |
-        ls
         ls libs
+    - name: understand what is decompressed
+      run: |
         ls libs/net/clesperanto
     - name: Build the JAR file for macos-x86_64 and adding all the native libraries to it
       run: mvn clean install

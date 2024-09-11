@@ -142,6 +142,11 @@ jobs:
         jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/linux-x86_64
         jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/windows-x86_64
         jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/macos-arm64
+    - name: understand what is decompressed
+      run: |
+        ls
+        ls libs
+        ls libs/net/clesperanto
     - name: Build the JAR file for macos-x86_64 and adding all the native libraries to it
       run: mvn clean install
     - name: Upload final JAR

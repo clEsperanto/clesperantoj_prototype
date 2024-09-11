@@ -30,6 +30,18 @@ jobs:
             cxx-compiler: "cl.exe"
             cmake-build-type: "Release"
             cmake-build-flag: "-A x64"
+          - name: macos
+            os: macos-latest
+            c-compiler: "clang"
+            cxx-compiler: "clang++"
+            cmake-build-type: "Release"
+            cmake-build-flag: ""
+          - name: macos-intel
+            os: macos-13
+            c-compiler: "clang"
+            cxx-compiler: "clang++"
+            cmake-build-type: "Release"
+            cmake-build-flag: ""
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -63,7 +75,6 @@ jobs:
         sudo mkswap /swapfile
         sudo swapon /swapfile
         sudo swapon --show
-
     - name: Install openCL on Ubuntu
       if: runner.os == 'Linux'
       run: sudo apt install ocl-icd-opencl-dev
@@ -137,7 +148,6 @@ jobs:
         jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/linux-x86_64
         jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/windows-x86_64
         jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/macos-arm64
-
     - name: Build the JAR file for macos-x86_64 and adding all the native libraries to it
       run: mvn clean install
     - name: Upload final JAR

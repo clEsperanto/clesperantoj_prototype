@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        name: [ubuntu, windows] #[ubuntu, windows, macos]
+        name: [ubuntu] #[ubuntu, windows, macos]
         include:
           - name: ubuntu
             os: ubuntu-latest
@@ -24,12 +24,12 @@ jobs:
             cxx-compiler: "g++"
             cmake-build-type: "Release"
             cmake-build-flag: ""
-          - name: windows
-            os: windows-latest
-            c-compiler: "cl.exe"
-            cxx-compiler: "cl.exe"
-            cmake-build-type: "Release"
-            cmake-build-flag: "-A x64"
+          #- name: windows
+          #  os: windows-latest
+          #  c-compiler: "cl.exe"
+          #  cxx-compiler: "cl.exe"
+          #  cmake-build-type: "Release"
+          #  cmake-build-flag: "-A x64"
           #- name: macos
           #  os: macos-latest
           #  c-compiler: "clang"
@@ -136,11 +136,17 @@ jobs:
         echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
         echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
       id: mvn_info
+    - name: understand what to decompress
+      run: |
+        ls ubuntu-artifact
+    - name: understand what to decompress
+      run: |
+        echo ${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
     - name: Extract compiled native libraries to target fodler libs
       run: |
         mkdir -p libs
         jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/linux-x86_64
-        jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/windows-x86_64
+        #jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/windows-x86_64
         # jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar libs/net/clesperanto/macos-arm64
     - name: understand what is decompressed
       run: |

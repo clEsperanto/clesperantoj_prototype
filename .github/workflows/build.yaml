@@ -148,10 +148,13 @@ jobs:
         #jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
         # jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macos-arm64
         mkdir -p libs
-        mv net/clesperanto libs/net/
+        mv net libs/net/
     - name: understand what is decompressed
       run: |
         ls libs
+    - name: understand what is decompressed
+      run: |
+        ls libs/net
     - name: understand what is decompressed
       run: |
         ls libs/net/clesperanto

@@ -220,4 +220,12 @@ public class DeviceJ {
     public net.clesperanto._internals.jclic.DeviceJ getRaw() {
     	return this.jcppDeviceJ;
     }
+    
+    @Override
+    public String toString() {
+        return DeviceJ.class + "["
+        		+ "deviceName=" + this.jcppDeviceJ.getName() + ", "
+        		+ "deviceInfo=" + this.jcppDeviceJ.getInfo() + ", "
+				+ "backend=" + this.getBackend() + "]";
+    }
 }

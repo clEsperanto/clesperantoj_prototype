@@ -133,8 +133,12 @@ public class ArrayJ {
      *
      * @return a string representation of the array information
      */
+    @Override
     public String toString() {
-        return "cle::Array[(" + this.getWidth() + ","+ this.getHeight() + ","+ this.getDepth() + "), dtype=" + this.getDataType() + ", mtype=" + this.getMemoryType() + "]";
+        return ArrayJ.class + "[(" + this.getWidth() + ","+ this.getHeight() + ","+ this.getDepth() + "), "
+        		+ "dtype=" + this.getDataType() + ", "
+				+ "mtype=" + this.getMemoryType() + ", "
+        		+ "device=" + this.getDevice().toString() + "]";
     }
 
     /**

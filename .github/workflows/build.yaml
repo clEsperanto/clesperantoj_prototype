@@ -31,7 +31,7 @@ jobs:
             cmake-build-type: "Release"
             cmake-build-flag: "-A x64"
           - name: macos
-            os: macos-latest
+            os: macos-14
             c-compiler: "clang"
             cxx-compiler: "clang++"
             cmake-build-type: "Release"
@@ -138,7 +138,7 @@ jobs:
       run: |
         jar xvf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/linux-x86_64
         jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
-        jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macos-arm64
+        jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macosx-arm64
         mkdir -p libs
         mv net/clesperanto/* libs/
     - name: Build the JAR file for macos-x86_64 and adding all the native libraries to it

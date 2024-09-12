@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-		http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>net.haesleinhuepf</groupId>
-		<artifactId>clij-parent-pom</artifactId>
-		<version>2.2.0.14</version>
+		<groupId>org.scijava</groupId>
+		<artifactId>pom-scijava</artifactId>
+		<version>38.0.1</version>
 		<relativePath />
 	</parent>
 
 	<groupId>net.clesperanto</groupId>
-	<artifactId>clesperantoj_</artifactId>
-	<version>0.0.0.1</version>
+	<artifactId>clesperantoj</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
-	<name>clesperantoj_</name>
-	<description>clesperantoj</description>
+	<name>clesperantoj</name>
+	<description>Java wrapper for Clesperanto</description>
 	<url>http://haesleinhuepf.net</url>
 	<inceptionYear>2022</inceptionYear>
 	<organization>
@@ -26,7 +23,8 @@
 	</organization>
 	<licenses>
 		<license>
-			<name>Simplified BSD License</name>
+			<name>BSD 3-Clause License</name>
+			<url>https://opensource.org/license/bsd-3-clause</url>
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
@@ -34,14 +32,48 @@
 	<developers>
 		<developer>
 			<id>haesleinhuepf</id>
-			<name>Robert Haase`</name>
+			<name>Robert Haase</name>
 			<url>http://haesleinhuepf.net</url>
 			<organization>PoL TUD</organization>
 			<roles>
 				<role>developer</role>
 			</roles>
 		</developer>
+		<developer>
+			<id>StRigaud</id>
+			<name>Stephane Rigaud</name>
+			<url>https://github.com/StRigaud</url>
+			<organization>Institut Pasteur</organization>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>carlosuc3m</id>
+			<name>Carlos Javier Garcia Lopez de Haro</name>
+			<url>https://github.com/carlosuc3m</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
 	</developers>
+	<contributors>
+		<contributor>
+			<name>Robert Haase</name>
+			<url>http://haesleinhuepf.net</url>
+			<properties><id>haesleinhuepf</id></properties>
+		</contributor>
+		<contributor>
+			<name>Stephane Rigaud</name>
+			<url>https://github.com/StRigaud</url>
+			<properties><id>StRigaud</id></properties>
+		</contributor>
+		<contributor>
+			<name>Carlos Javier Garcia Lopez de Haro</name>
+			<url>https://github.com/carlosuc3m</url>
+			<properties><id>carlosuc3m</id></properties>
+		</contributor>
+	</contributors>
 
   	<mailingLists>
 		<mailingList>
@@ -50,15 +82,29 @@
 		</mailingList>
 	</mailingLists>
 
+	<scm>
+		<connection>scm:git:https://github.com/clEsperanto/clesperantoj_prototype</connection>
+		<developerConnection>scm:git:git@github.com:clEsperanto/clesperantoj_prototype</developerConnection>
+		<tag>HEAD</tag>
+		<url>https://github.com/clEsperanto/clesperantoj_prototype</url>
+	</scm>
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/clEsperanto/clesperantoj_prototype/issues</url>
+	</issueManagement>
+	<ciManagement>
+		<system>GitHub Actions</system>
+		<url>https://github.com/clEsperanto/clesperantoj_prototype/actions</url>
+	</ciManagement>
+
 	<properties>
-		<package-name>net.haesleinhuepf</package-name>
+		<package-name>net.clesperanto</package-name>
 		<license.licenseName>bsd_3</license.licenseName>
-		<license.copyrightOwners>Robert Haase, MPI CBG</license.copyrightOwners>
-		<!-- <scijava.app.directory>/PATH/TO/YOUR/FIJI/Fiji.app/</scijava.app.directory> -->
-		<scijava.app.directory>/home/stephane/Libraries/Fiji.app/</scijava.app.directory>
-		<!-- specify your cuda version (for windows users) -->
-    	<cuda.version>11.2</cuda.version>
+		<license.copyrightOwners>Robert Haase, MPI CBG and Stephane Rigaud, Institut Pasteur</license.copyrightOwners>
+		<!-- NB: Deploy releases to the SciJava Maven repository. -->
+		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
 	</properties>
+	
     <profiles>
         <profile>
             <id>win</id>
@@ -102,11 +148,6 @@
 
 
     <dependencies>
-        <dependency>
-			<groupId>org.bioimageanalysis.icy</groupId>
-			<artifactId>icy-kernel</artifactId>
-			<version>2.5.1</version>
-		</dependency>
 		<dependency>
 			<groupId>net.imglib2</groupId>
 			<artifactId>imglib2</artifactId>
@@ -121,6 +162,7 @@
         <dependency>
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacpp</artifactId>
+        	<!-- TODO check if we can work with the scijava pom version -->
 			<version>1.5.10</version>
 		</dependency>
 		<dependency>
@@ -130,13 +172,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -146,10 +186,6 @@
 			<id>scijava.public</id>
 			<url>https://maven.scijava.org/content/groups/public</url>
 		</repository>
-        <repository>
-		    <id>icy</id>
-		    <url>https://icy-nexus.pasteur.fr/repository/Icy/</url>
-        </repository>
 	</repositories>
 
     <build>
@@ -177,7 +213,7 @@
 	        <!-- Execute cppbuild.sh to build cleperantoj a wrapper to clesperato.hpp -->
 			<plugin>
 				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.6.0</version>
+				<!-- TODO remove <version>1.6.0</version> -->
 				<groupId>org.codehaus.mojo</groupId>
 				<executions>
 					<execution>
@@ -197,7 +233,7 @@
 	        <plugin>
 	       		<groupId>org.codehaus.mojo</groupId>
 	       		<artifactId>build-helper-maven-plugin</artifactId>
-	       		<version>3.3.0</version>
+	       		<!-- TODO remove <version>3.3.0</version> -->
 	       		<executions>
 	                <execution>
 	           			<id>add-source</id>
@@ -215,7 +251,7 @@
 	        </plugin>
 			<plugin>
 		    	<artifactId>maven-compiler-plugin</artifactId>
-		    	<version>3.12.1</version>
+	       		<!-- TODO remove <version>3.12.1</version> -->
 		    	<configuration>
 		      		<source>1.8</source>
 		      		<target>1.8</target>
@@ -309,14 +345,34 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.22.2</version>
+	       		<!-- TODO remove <version>2.22.2</version> -->
 			    <configuration>
-			        <redirectTestOutputToFile>true</redirectTestOutputToFile>
 	                <forkCount>1</forkCount>
 	                <reuseForks>false</reuseForks>
+    				<argLine>-Xmx1024m</argLine>
 			    </configuration>
             </plugin>
-
+            <plugin>
+		        <artifactId>maven-resources-plugin</artifactId>
+		        <executions>
+		          <execution>
+		            <id>copy</id>
+		            <phase>validate</phase>
+		            <goals>
+		              <goal>copy-resources</goal>
+		            </goals>
+		            <configuration>
+		              <outputDirectory>${project.basedir}/target/classes/net/clesperanto</outputDirectory>
+		              <resources>          
+		                <resource>
+		                  <directory>${project.basedir}/libs</directory>
+		                  <filtering>false</filtering>
+		                </resource>
+		              </resources>              
+		            </configuration>            
+		          </execution>
+		        </executions>
+      		</plugin>
 		</plugins>
 	</build>
 

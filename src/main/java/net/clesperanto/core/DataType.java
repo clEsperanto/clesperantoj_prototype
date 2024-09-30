@@ -88,10 +88,6 @@ public enum DataType {
     	this.readFunction.read(arrayj, bufferConverter.apply(buffer), 0);
     }
 
-    public void writeToBuffer(ArrayJ arrayj, ByteBuffer buffer) {
-    	this.writeFunction.write(arrayj, bufferConverter.apply(buffer), 0);
-    }
-
     public ArrayJ makeEmptyArrayJ(DeviceJ device, long[] dims, String memoryType) {
     	 return this.makeFunction.make(device, dims, memoryType);
     }

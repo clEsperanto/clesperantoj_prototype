@@ -70,10 +70,6 @@ public enum ImageJDataType {
     	this.dt.readToBuffer(arrayj, buffer);
     }
 
-    public void writeToBuffer(ArrayJ arrayj, ByteBuffer buffer) {
-    	dt.writeToBuffer(arrayj, buffer);
-    }
-
     public ArrayJ makeEmptyArrayJ(DeviceJ device, long[] dims, String memoryType) {
     	return dt.makeEmptyArrayJ(device, dims, memoryType);
     }

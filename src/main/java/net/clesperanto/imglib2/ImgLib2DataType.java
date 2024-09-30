@@ -26,10 +26,12 @@ public enum ImgLib2DataType {
 
     private final DataType dt;
     private final Supplier<NativeType<?>> typeSupplier;
+    private final NativeType<?> type;
 
     ImgLib2DataType(DataType dt, Supplier<NativeType<?>> typeSupplier) {
     	this.dt = dt;
         this.typeSupplier = typeSupplier;
+        this.type = typeSupplier.get();
     }
 
     public static ImgLib2DataType fromString(String dType) {
@@ -47,7 +49,7 @@ public enum ImgLib2DataType {
 
     public static < T extends NativeType< T > > ImgLib2DataType fromImgLib2DataType(T dType) {
         for (ImgLib2DataType type : values()) {
-            if (type.typeSupplier.get().getClass().isInstance(dType)) {
+            if (type.type.getClass().isInstance(dType)) {
                 return type;
             }
         }

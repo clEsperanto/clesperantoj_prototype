@@ -16,13 +16,13 @@ import net.imglib2.type.numeric.integer.UnsignedShortType;
 import net.imglib2.type.numeric.real.FloatType;
 
 public enum ImgLib2DataType {
-    FLOAT32(DataType.fromString("float"), FloatType::new),
-    INT32(DataType.fromString("int"), IntType::new),
-    UINT32(DataType.fromString("uint"), UnsignedIntType::new),
-    INT16(DataType.fromString("short"), ShortType::new),
-    UINT16(DataType.fromString("ushort"), UnsignedShortType::new),
-    INT8(DataType.fromString("char"), ByteType::new),
-    UINT8(DataType.fromString("uchar"), UnsignedByteType::new);
+    FLOAT32(DataType.FLOAT32, FloatType::new),
+    INT32(DataType.INT32, IntType::new),
+    UINT32(DataType.UINT32, UnsignedIntType::new),
+    INT16(DataType.INT16, ShortType::new),
+    UINT16(DataType.UINT16, UnsignedShortType::new),
+    INT8(DataType.INT8, ByteType::new),
+    UINT8(DataType.UINT8, UnsignedByteType::new);
 
     private final DataType dt;
     private final Supplier<NativeType<?>> typeSupplier;

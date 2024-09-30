@@ -8,13 +8,13 @@ import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
 
 public enum ImageJDataType {
-    FLOAT32(DataType.fromString("float"), ImagePlus.GRAY32, float[].class, 32),
-    INT32(DataType.fromString("int"), ImagePlus.GRAY32, int[].class, 32),
-    UINT32(DataType.fromString("uint"), ImagePlus.GRAY32, int[].class, 32),
-    UINT16(DataType.fromString("ushort"), ImagePlus.GRAY16, short[].class, 16),
-    INT16(DataType.fromString("short"), ImagePlus.GRAY16, short[].class, 16),
-    UINT8(DataType.fromString("uchar"), ImagePlus.GRAY8, byte[].class, 8),
-    INT8(DataType.fromString("char"), ImagePlus.GRAY8, byte[].class, 8);
+    FLOAT32(DataType.FLOAT32, ImagePlus.GRAY32, float[].class, 32),
+    INT32(DataType.INT32, ImagePlus.GRAY32, int[].class, 32),
+    UINT32(DataType.UINT32, ImagePlus.GRAY32, int[].class, 32),
+    UINT16(DataType.UINT16, ImagePlus.GRAY16, short[].class, 16),
+    INT16(DataType.INT16, ImagePlus.GRAY16, short[].class, 16),
+    UINT8(DataType.UINT8, ImagePlus.GRAY8, byte[].class, 8),
+    INT8(DataType.INT8, ImagePlus.GRAY8, byte[].class, 8);
 
 	private final DataType dt;
     private final int imgDtype;

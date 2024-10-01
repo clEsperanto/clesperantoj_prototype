@@ -44,21 +44,35 @@ public class jclic implements InfoMapper {
                         .pointerTypes("@Cast({\"char*\", \"std::string*\"}) BytePointer"));
         infoMap.put(
                 new Info("std::vector<std::string>")
-                        .pointerTypes("StringVector")
+                        .pointerTypes("_StringVector")
                         .define());
         infoMap.put(
                 new Info("std::vector<float>")
-                        .pointerTypes("FloatVector")
-                        .define());
-        infoMap.put(
-                new Info("std::vector<ArrayJ>")
-                        .pointerTypes("ArrayJVector")
+                        .pointerTypes("_FloatVector")
                         .define());
         infoMap.put(
                 new Info("std::unordered_map<std::string,std::vector<float> >")
-                        .pointerTypes("FloatVectorMap")
+                        .pointerTypes("_FloatVectorMap")
                         .define());
-
+        infoMap.put(
+                new Info("std::vector<ArrayJ>")
+                        .pointerTypes("_ArrayJVector")
+                        .define());
+        infoMap.put(
+                new Info("ArrayJ")
+                        .javaNames("_ArrayJ"));
+        infoMap.put(
+                new Info("BackendJ")
+                        .javaNames("_BackendJ"));
+        infoMap.put(
+                new Info("DeviceJ")
+                        .javaNames("_DeviceJ"));
+        infoMap.put(
+                new Info("MemoryJ")
+                        .javaNames("_MemoryJ"));
+        infoMap.put(
+                new Info("UtilsJ")
+                        .javaNames("_UtilsJ"));
         infoMap.put(
                 new Info(
                         "cle::Array",

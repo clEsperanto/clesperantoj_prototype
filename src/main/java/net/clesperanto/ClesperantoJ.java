@@ -1,7 +1,5 @@
 package net.clesperanto;
 
-import net.clesperanto._internals.jclic.StringVector;
-
 import java.util.Arrays;
 import java.util.List;
 

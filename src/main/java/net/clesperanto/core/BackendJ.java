@@ -1,6 +1,8 @@
 package net.clesperanto.core;
 
 
+import net.clesperanto._internals.jclic._BackendJ;
+
 /**
  * Class that contains the methods to interact and change the type of backend used for Clesperanto.
  */
@@ -13,6 +15,6 @@ public class BackendJ {
 	 * 	if it is anything else it will be set to "opencl"
 	 */
     public static void setBackend(String backend) {
-    	net.clesperanto._internals.jclic.BackendJ.setBackend(backend);
+    	_BackendJ.setBackend(backend);
     }
 }

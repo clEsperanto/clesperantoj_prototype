@@ -1,9 +1,6 @@
 package net.clesperanto.core;
 
-/**
- * Class to interact with the arrays allocated on the GPU by ClesperantoJ
- */
-/**
+/*
  * TODO think about possible new methods
  *
  * - method to modify the data inside the array from this class
@@ -11,12 +8,18 @@ package net.clesperanto.core;
  * - Do we check here if the size of the destination array is compatible for the method {@link #copyDataTo(ArrayJ)}
  *
  */
+
+import net.clesperanto._internals.jclic._ArrayJ;
+
+/**
+ * Class to interact with the arrays allocated on the GPU by ClesperantoJ
+ */
 public class ArrayJ {
 
-	protected final net.clesperanto._internals.jclic.ArrayJ arrayj;
+	protected final _ArrayJ arrayj;
 	protected final DeviceJ devicej;
 
-    public ArrayJ(net.clesperanto._internals.jclic.ArrayJ arrayj, DeviceJ devicej) {
+    public ArrayJ(_ArrayJ arrayj, DeviceJ devicej) {
     	if (!arrayj.getDevice().equals(devicej.getName()))
     		throw new IllegalArgumentException("Device name does not coincide with ArrayJ associated name: "
     				+ devicej.getName() + " vs " + arrayj.getDevice());
@@ -129,7 +132,7 @@ public class ArrayJ {
      *
      * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
      */
-    public net.clesperanto._internals.jclic.ArrayJ getRaw() {
+    public _ArrayJ getRaw() {
     	return this.arrayj;
     }
 }

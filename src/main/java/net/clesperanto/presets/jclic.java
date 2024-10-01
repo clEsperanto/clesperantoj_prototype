@@ -17,34 +17,70 @@ import org.bytedeco.javacpp.tools.InfoMapper;
 // 								"/usr/local/cuda-12.3/targets/x86_64-linux/lib" }, link = { "JCLIc", "OpenCL" })
 // }, target = "net.clesperanto.wrapper.clesperantoj")
 
-@Properties(inherit = javacpp.class, value = {
-		@Platform(value = "windows", include = "clesperantoj.hpp", link = { "JCLIc", "Shell32" }),
-		@Platform(value = { "linux",
-				"macosx" }, include = "clesperantoj.hpp", link = "JCLIc") }, target = "net.clesperanto._internals.jclic")
-
+@Properties(
+        inherit = javacpp.class,
+        value = {
+                @Platform(value = "windows",
+                        include = "clesperantoj.hpp", link = {"JCLIc", "Shell32"}),
+                @Platform(value = {"linux", "macosx"},
+                        include = "clesperantoj.hpp", link = "JCLIc")},
+        target = "net.clesperanto._internals.jclic")
 public class jclic implements InfoMapper {
-	static {
-		Loader.load();
-	}
+    static {
+        Loader.load();
+    }
 
-	public void map(InfoMap infoMap) {
+    public void map(InfoMap infoMap) {
 
-		infoMap.put(new Info("std::size_t").cast().valueTypes("long").pointerTypes("SizeTPointer"));
-
-		infoMap.put(new Info("std::string").annotations("@StdString").valueTypes("String", "BytePointer")
-				.pointerTypes("@Cast({\"char*\", \"std::string*\"}) BytePointer"))
-				.put(new Info("std::vector<std::string>").pointerTypes("StringVector").define());
-
-		infoMap.put(new Info("std::vector<float>").pointerTypes("FloatVector").define());
-		infoMap.put(new Info("std::vector<ArrayJ>").pointerTypes("ArrayJVector").define());
-		infoMap.put(
-				new Info("std::unordered_map<std::string,std::vector<float> >").pointerTypes("FloatVectorMap")
-						.define());
-
-		// InfoMap.put(new Info().pointerTypes("ArrayPointer").define());
-
-		infoMap.put(
-				new Info("cle::Array", "cle::Device", "cle::BackendManager", "cle::Backend", "toArrayJVector",
-						"std::shared_ptr<cle::Array>").skip());
-	}
+        infoMap.put(
+                new Info("std::size_t")
+                        .cast()
+                        .valueTypes("long")
+                        .pointerTypes("SizeTPointer"));
+        infoMap.put(
+                new Info("std::string")
+                        .annotations("@StdString")
+                        .valueTypes("String", "BytePointer")
+                        .pointerTypes("@Cast({\"char*\", \"std::string*\"}) BytePointer"));
+        infoMap.put(
+                new Info("std::vector<std::string>")
+                        .pointerTypes("_StringVector")
+                        .define());
+        infoMap.put(
+                new Info("std::vector<float>")
+                        .pointerTypes("_FloatVector")
+                        .define());
+        infoMap.put(
+                new Info("std::unordered_map<std::string,std::vector<float> >")
+                        .pointerTypes("_FloatVectorMap")
+                        .define());
+        infoMap.put(
+                new Info("std::vector<ArrayJ>")
+                        .pointerTypes("_ArrayJVector")
+                        .define());
+        infoMap.put(
+                new Info("ArrayJ")
+                        .javaNames("_ArrayJ"));
+        infoMap.put(
+                new Info("BackendJ")
+                        .javaNames("_BackendJ"));
+        infoMap.put(
+                new Info("DeviceJ")
+                        .javaNames("_DeviceJ"));
+        infoMap.put(
+                new Info("MemoryJ")
+                        .javaNames("_MemoryJ"));
+        infoMap.put(
+                new Info("UtilsJ")
+                        .javaNames("_UtilsJ"));
+        infoMap.put(
+                new Info(
+                        "cle::Array",
+                        "cle::Device",
+                        "cle::BackendManager",
+                        "cle::Backend",
+                        "toArrayJVector",
+                        "std::shared_ptr<cle::Array>")
+                        .skip());
+    }
 }

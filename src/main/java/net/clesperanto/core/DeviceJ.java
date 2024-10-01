@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import net.clesperanto._internals.jclic.StringVector;
+import net.clesperanto._internals.jclic._DeviceJ;
+import net.clesperanto._internals.jclic._StringVector;
 
 /**
  * Class to interact with the divide that is going to be used to do the operations
  */
 public class DeviceJ {
 
-	protected net.clesperanto._internals.jclic.DeviceJ jcppDeviceJ;
+	protected _DeviceJ jcppDeviceJ;
 
 	/**
 	 * Constructor that initializes the default device
@@ -20,7 +21,7 @@ public class DeviceJ {
 	 *
 	 */
 	protected DeviceJ() {
-		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
+		jcppDeviceJ = new _DeviceJ();
 	}
 
 	/**
@@ -37,7 +38,7 @@ public class DeviceJ {
 	protected DeviceJ(String deviceName, String deviceType) {
 		Objects.requireNonNull(deviceName, "The device name cannot be null");
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\"");
-		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
+		jcppDeviceJ = new _DeviceJ();
 		jcppDeviceJ.setDevice(deviceName, deviceType);
 	}
 
@@ -139,7 +140,7 @@ public class DeviceJ {
 	 * @return a list of the available devices in the computer of the specific type
 	 */
 	public static List<String> getAvailableDevices(){
-		StringVector devices = net.clesperanto._internals.jclic.DeviceJ.getAvailableDevices();
+		_StringVector devices = _DeviceJ.getAvailableDevices();
 		List<String> devicesList = new ArrayList<String>();
 		for (int i = 0; i < devices.size(); i++) {
 			devicesList.add(devices.get(i));
@@ -158,7 +159,7 @@ public class DeviceJ {
 	public static List<String> getAvailableDevices(String deviceType){
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\" or"
 				+ " use the method \"DeviceJ.getAvailableDevices()\"");
-		StringVector devices = net.clesperanto._internals.jclic.DeviceJ.getAvailableDevices(deviceType);
+		_StringVector devices = _DeviceJ.getAvailableDevices(deviceType);
 		List<String> devicesList = new ArrayList<String>();
 		for (int i = 0; i < devices.size(); i++) {
 			devicesList.add(devices.get(i));
@@ -185,7 +186,7 @@ public class DeviceJ {
      *
      * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
      */
-    public net.clesperanto._internals.jclic.DeviceJ getRaw() {
+    public _DeviceJ getRaw() {
     	return this.jcppDeviceJ;
     }
 }

@@ -1,21 +1,19 @@
 package net.clesperanto.imagej;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
-import ij.IJ;
 import ij.ImagePlus;
+import ij.ImageStack;
+import ij.process.ByteProcessor;
+import ij.process.FloatProcessor;
 import ij.process.ImageProcessor;
+import ij.process.ShortProcessor;
 import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
 import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.array.ArrayImg;
+import net.imglib2.util.Intervals;
+
+import static net.imglib2.util.Util.safeInt;
 
 /**
  * TODO
@@ -23,30 +21,100 @@ import net.imglib2.img.array.ArrayImg;
  * - using array img and blocks copy limits to images whose array size is smaller than the integer max
  */
 /**
- * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
+ * Class to copy {@link ImagePlus} into {@link ArrayJ} and vice-versa
  */
 public class ImageJConverters {
 
-	/** TODO extend to RandomAccessibleInterval
-	 * Conert an {@link ArrayJ} into an ImgLib2 {@link ArrayImg} of the same dimensions and data type.
-	 * Creates a copy of the ArrayJ in the GPU into an ArrayImg in the CPU
+	/**
+	 * Convert an {@link ArrayJ} into an IJ {@link ImagePlus} of the same dimensions and data type.
+	 * Creates a copy of the ArrayJ in the GPU into an ImagePlus in the CPU
 	 *
-	 * @param arrayj
+	 * @param arrayJ
 	 * 	array that is located in the GPU for clesperanto to do some operations
-	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
+	 * @return an IJ {@link ImagePlus} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static ImagePlus copyArrayJToImagePlus( ArrayJ arrayj )
-	{
-		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
-		ImageJDataType dataType = ImageJDataType.fromString(arrayj.getDataType());
-		if (flatDims * dataType.getByteSize() > Integer.MAX_VALUE)
-			throw new IllegalArgumentException("The ArrayJ provided is too big to be converted into an ImgLib2 ArrayImg.");
+	public static ImagePlus copyArrayJToImagePlus(ArrayJ arrayJ) {
 
-		ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * dataType.getByteSize())
-                .order(ByteOrder.LITTLE_ENDIAN);
-		dataType.readToBuffer(arrayj, byteBuffer);
+		final int width = safeInt(arrayJ.width());
+		final int height = safeInt(arrayJ.height());
+		final int depth = safeInt(arrayJ.depth());
 
-		return fromBuffer(byteBuffer, dataType, arrayj.getDimensions());
+		final ImageStack stack = new ImageStack(width, height);
+		final DataType dataType = arrayJ.dataType();
+
+		final CreateImageProcessor creator;
+		switch (dataType) {
+			case INT8:
+			case UINT8:
+				creator = ByteProcessor::new;
+				break;
+			case INT16:
+			case UINT16:
+				creator = ShortProcessor::new;
+				break;
+			default:
+				creator = FloatProcessor::new;
+		}
+
+		final ReadSlice reader;
+		switch (dataType) {
+			case INT32: {
+				final int[] temp = new int[width * height];
+				reader = (dest, z) -> {
+					dataType.memory().readToArray(arrayJ, temp, 0, 0, z, width, height, 1);
+					convertI32ToF32(temp, (float[]) dest.getPixels());
+					return dest;
+				};
+				break;
+			}
+			case UINT32: {
+				final int[] temp = new int[width * height];
+				reader = (dest, z) -> {
+					dataType.memory().readToArray(arrayJ, temp, 0, 0, z, width, height, 1);
+					convertU32ToF32(temp, (float[]) dest.getPixels());
+					return dest;
+				};
+				break;
+			}
+			default: {
+				reader = (dest, z) -> {
+					dataType.memory().readToArray(arrayJ, dest.getPixels(), 0, 0, z, width, height, 1);
+					return dest;
+				};
+			}
+		}
+
+		for (int z = 0; z < depth; ++z) {
+			stack.addSlice("", reader.read(creator.create(width, height), z));
+		}
+
+		ImagePlus imp = new ImagePlus("image", stack);
+		imp.setDimensions(1, depth, 1);
+		if (depth > 1)
+			imp.setOpenAsHyperStack(true);
+		return imp;
+	}
+
+	@FunctionalInterface
+	private interface CreateImageProcessor {
+		ImageProcessor create(int width, int height);
+	}
+
+	@FunctionalInterface
+	private interface ReadSlice {
+		ImageProcessor read(ImageProcessor dest, int z);
+	}
+
+	private static void convertI32ToF32(int[] ints, float[] floats) {
+		for (int i = 0; i < ints.length; ++i) {
+			floats[i] = ints[i];
+		}
+	}
+
+	private static void convertU32ToF32(int[] ints, float[] floats) {
+		for (int i = 0; i < ints.length; ++i) {
+			floats[i] = (float) (ints[i] & 0xffffffffL);
+		}
 	}
 
 	/**
@@ -54,122 +122,57 @@ public class ImageJConverters {
 	 * The {@link RandomAccessibleInterval} should have at most 3 dimensions, and the order of the dimensions
 	 * should be [width, height, depth]
 	 *
-	 *
-	 * @param rai
+	 * @param imp
 	 *  the {@link RandomAccessibleInterval} that is going to be copied into the GPU
 	 * @param device
-	 * 	the device into which the rai is going to be copied. If null, the default system device is used.
+	 * 	the device into which the imp is going to be copied. If null, the default system device is used.
 	 * @param memoryType
 	 * 	the type of memory array that we are working with. The options are image or buffer. For image use the
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static ArrayJ copyImagePlus2ToArrayJ(ImagePlus rai, DeviceJ device, String memoryType) {
-		Map<String, Integer> sizeMap = checkSize(rai, rai.getBytesPerPixel());
+	public static ArrayJ copyImagePlus2ToArrayJ(ImagePlus imp, DeviceJ device, MemoryType memoryType) {
 
-		ImageJDataType dataType = ImageJDataType.fromImgPlusDataType(rai.getType());
-		long totalSize = sizeMap.values().stream().reduce((int) 1L, (a, b) -> a * b);
+		// TODO: How to handle channels and time? Looks like we're ignoring it for now?
+		final int width = imp.getWidth();
+		final int height = imp.getHeight();
+		final int channels = 1; // imp.getNChannels();
+		final int depth = imp.getNSlices();
+		final int frames = 1; // imp.getNFrames();
 
-		long[] dims = sizeMap.values().stream().mapToLong(i -> (long) i).toArray();
-	    Object flatArr = dataType.createArray((int) totalSize);
-
-	    int sizeT = sizeMap.get("t") != null ? sizeMap.get("t"): 1;
-	    int sizeZ = sizeMap.get("z") != null ? sizeMap.get("z"): 1;
-	    int sizeC = sizeMap.get("c") != null ? sizeMap.get("c"): 1;
-	    int sizeY = sizeMap.get("y") != null ? sizeMap.get("y"): 1;
-	    int sizeX = sizeMap.get("x") != null ? sizeMap.get("x"): 1;
-	    int pos = 0;
-	    for (int t = 0; t <  sizeT; t ++) {
-	    	for (int z = 0; z <  sizeZ; z ++) {
-	    		for (int c = 0; c <  sizeC; c ++) {
-	    			rai.setPositionWithoutUpdate(c + 1, z + 1, t + 1);
-	    			ImageProcessor ip = rai.getProcessor();
-	    			for (int y = 0; y <  sizeY; y ++) {
-	    				for (int x = 0; x <  sizeX; x ++) {
-	    					dataType.putValInArray(flatArr, pos ++,  ip.getValue(x, y));
-	    			    }
-	    		    }
-	    	    }
-		    }
-	    }
-
-	    return dataType.makeAndWriteArrayJ(flatArr, device, dims, memoryType);
-	}
-
-	private static ImagePlus fromBuffer(ByteBuffer byteBuffer, ImageJDataType type, long[] dimensions) {
-	    ImagePlus im = IJ.createImage("image", (int) dimensions[0], (int) dimensions[1], (int) dimensions[2], type.getBitDepth());
-
-	    Supplier<Number>  byteSupplier = () -> {
-	    	byte bb = byteBuffer.get();
-        	return bb < 0 ? 256 + bb : bb;
-        };
-
-
-	    switch (type) {
-	        case FLOAT32:
-	            FloatBuffer floatBuff = byteBuffer.asFloatBuffer();
-	            fillImage(im, dimensions, floatBuff::get);
-	            break;
-	        case UINT8:
-	            fillImage(im, dimensions, byteSupplier);
-	            break;
-	        case INT8:
-	            fillImage(im, dimensions, byteSupplier);
-	            break;
-	        case UINT16:
-	            ShortBuffer uShortBuff = byteBuffer.asShortBuffer();
-	            fillImage(im, dimensions, () -> {
-	    	    	short bb = uShortBuff.get();
-	            	return bb < 0 ? 65536 + bb : bb;
-	            });
-	            break;
-	        case INT16:
-	            ShortBuffer shortBuff = byteBuffer.asShortBuffer();
-	            fillImage(im, dimensions, () -> {
-	    	    	short bb = shortBuff.get();
-	            	return bb < 0 ? 65536 + bb : bb;
-	            });
-	            break;
-	        case UINT32:
-	        	IntBuffer uIntBuff = byteBuffer.asIntBuffer();
-	            fillImage(im, dimensions, uIntBuff::get);
-	            break;
-	        case INT32:
-	            IntBuffer intBuff = byteBuffer.asIntBuffer();
-	            fillImage(im, dimensions, intBuff::get);
-	            break;
-	        default:
-	            throw new IllegalArgumentException("Data type not supported.");
-	    }
-
-	    return im;
-	}
-
-	private static void fillImage(ImagePlus im, long[] dimensions, Supplier<Number> getValue) {
-	    for (int z = 0; z < dimensions[2]; z++) {
-	        im.setPositionWithoutUpdate(1, 1 + z, 1);
-	        ImageProcessor ip = im.getProcessor();
-	        for (int y = 0; y < dimensions[1]; y++) {
-	            for (int x = 0; x < dimensions[0]; x++) {
-	                ip.putPixelValue(x, y, getValue.get().doubleValue());
-	            }
-	        }
-	    }
-	}
-
-	private static Map<String, Integer> checkSize(ImagePlus imp, int bytesSize) {
-		Map<String, Integer> sizeMap = new LinkedHashMap<String, Integer>();
-		sizeMap.put("x", imp.getWidth());
-		sizeMap.put("y", imp.getHeight());
-		// sizeMap.put("c", imp.getNChannels());
-		sizeMap.put("z", imp.getNSlices());
-		// sizeMap.put("t", imp.getNFrames());
-
-		for (Integer vv : sizeMap.values()) {
-			bytesSize *= vv;
-		}
-		if (bytesSize > Integer.MAX_VALUE)
+		if (Intervals.numElements(width, height, channels, depth, frames) > Integer.MAX_VALUE)
 			throw new IllegalArgumentException();
-		return sizeMap;
+
+		final DataType dataType = dataType(imp);
+		final ArrayJ arrayJ = device.createArray(dataType, memoryType, width, height, depth);
+
+		for (int t = 0; t < frames; ++t) {
+			for (int z = 0; z < depth; ++z) {
+				for (int c = 0; c < channels; ++c) {
+					final int stackIndex = imp.getStackIndex(c + 1, z + 1, t + 1);
+					final Object data = imp.getStack().getProcessor(stackIndex).getPixels();
+					dataType.memory().writeFromArray(arrayJ, data, 0, 0, z, width, height, 1);
+				}
+			}
+		}
+
+		return arrayJ;
+	}
+
+	private static DataType dataType(final ImagePlus imp) {
+		switch (imp.getType()) {
+			case ImagePlus.GRAY8:
+				return DataType.UINT8;
+			case ImagePlus.GRAY16:
+				return DataType.UINT16;
+			case ImagePlus.GRAY32:
+				return DataType.FLOAT32;
+			case ImagePlus.COLOR_256:
+				throw new IllegalArgumentException("Unsupported image type: ImagePlus.COLOR_256");
+			case ImagePlus.COLOR_RGB:
+				throw new IllegalArgumentException("Unsupported image type: ImagePlus.COLOR_RGB");
+			default:
+				throw new IllegalArgumentException("Unknown image type: " + imp.getType());
+		}
 	}
 }

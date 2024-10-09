@@ -25,6 +25,7 @@ private:
 
 public:
     DeviceJ();
+    DeviceJ(const std::shared_ptr<cle::Device> &device);
 
     static std::vector<std::string> getAvailableDevices(const std::string &deviceType = "all");
 
@@ -33,7 +34,33 @@ public:
     std::string getInfo() const;
 
     std::shared_ptr<cle::Device> get() const;
+
+    bool operator==(const DeviceJ& other) const;
 };
+
+enum class DTypeJ
+{
+    INT8,
+    UINT8,
+    INT16,
+    UINT16,
+    INT32,
+    UINT32,
+    FLOAT,
+    UNKNOWN,
+
+    INT = INT32,
+    INDEX = UINT32,
+    LABEL = UINT32,
+    BINARY = UINT8,
+};
+
+enum class MTypeJ
+{
+    BUFFER,
+    IMAGE
+};
+
 class ArrayJ
 {
 
@@ -43,9 +70,8 @@ private:
     friend class MemoryJ;
 
 protected:
-    static ArrayJ create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device);
-    void writeFrom(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const;
-    void readTo(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const;
+    void writeFrom( void *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth) const;
+    void readTo( void *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth) const;
 
 public:
     ArrayJ() = default;
@@ -56,42 +82,29 @@ public:
     size_t getDepth() const;
     unsigned int getDimension() const;
 
-    std::string getDataType() const;
-    std::string getMemoryType() const;
-    std::string getDevice() const;
-
     void fillMemory(float value);
     void copyDataTo(ArrayJ &dst);
 
     std::shared_ptr<cle::Array> get() const;
+
+    static ArrayJ create( const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const DTypeJ &data_type, const MTypeJ &memory_type, const DeviceJ &device);
+    DTypeJ dtype() const;
+    MTypeJ mtype() const;
+    DeviceJ device() const;
 };
 
 class MemoryJ
 {
 public:
-    static ArrayJ makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
-    static ArrayJ makeByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
-    static ArrayJ makeUByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
-    static ArrayJ makeShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
-    static ArrayJ makeUShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
-    static ArrayJ makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
-    static ArrayJ makeUIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type);
+    static void writeFromFloat(const ArrayJ &array, float *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
+    static void writeFromByte(const ArrayJ &array, char *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
+    static void writeFromShort(const ArrayJ &array, short *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
+    static void writeFromInt(const ArrayJ &array, int *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
 
-    static void writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
-    static void writeByteBuffer(const ArrayJ &array, char *data, const size_t &size);
-    static void writeUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size);
-    static void writeShortBuffer(const ArrayJ &array, short *data, const size_t &size);
-    static void writeUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size);
-    static void writeIntBuffer(const ArrayJ &array, int *data, const size_t &size);
-    static void writeUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size);
-
-    static void readFloatBuffer(const ArrayJ &array, float *data, const size_t &size);
-    static void readByteBuffer(const ArrayJ &array, char *data, const size_t &size);
-    static void readUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size);
-    static void readShortBuffer(const ArrayJ &array, short *data, const size_t &size);
-    static void readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size);
-    static void readIntBuffer(const ArrayJ &array, int *data, const size_t &size);
-    static void readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size);
+    static void readToFloat(const ArrayJ &array, float *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
+    static void readToByte(const ArrayJ &array, char *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
+    static void readToShort(const ArrayJ &array, short *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
+    static void readToInt(const ArrayJ &array, int *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth);
 };
 
 class UtilsJ

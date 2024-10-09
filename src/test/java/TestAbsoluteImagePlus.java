@@ -1,14 +1,14 @@
-import org.junit.jupiter.api.Test;
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
-import net.clesperanto.imagej.ImageJConverters;
-import net.clesperanto.kernels.Tier1;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imagej.ImageJConverters;
+import net.clesperanto.kernels.Tier1;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAbsoluteImagePlus {
 
@@ -30,8 +30,8 @@ public class TestAbsoluteImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
-    	ArrayJ out = ImageJConverters.copyImagePlus2ToArrayJ(outputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
+        ArrayJ out = ImageJConverters.copyImagePlus2ToArrayJ(outputImp, device, MemoryType.BUFFER);
 
     	Tier1.absolute(device, in, out);
 
@@ -73,7 +73,7 @@ public class TestAbsoluteImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
 
     	ArrayJ out = Tier1.absolute(device, in, null);
 

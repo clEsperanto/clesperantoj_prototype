@@ -74,6 +74,12 @@ public class jclic implements InfoMapper {
                 new Info("UtilsJ")
                         .javaNames("_UtilsJ"));
         infoMap.put(
+                new Info("DTypeJ")
+                        .enumerate());
+        infoMap.put(
+                new Info("MTypeJ")
+                        .enumerate());
+        infoMap.put(
                 new Info(
                         "cle::Array",
                         "cle::Device",

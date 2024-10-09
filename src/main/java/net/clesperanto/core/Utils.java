@@ -30,8 +30,7 @@ public class Utils {
 	public static ArrayList<ArrayJ> toArrayList(_ArrayJVector vector) {
 		ArrayList<ArrayJ> arr = new ArrayList<ArrayJ>((int) vector.size());
 		for (int i = 0; i < vector.size(); i++) {
-			DeviceJ device = DeviceJ.getDeviceWithDefaultBackend(vector.get(i).getDevice(), "all");
-			arr.add(new ArrayJ(vector.get(i), device));
+			arr.add(new ArrayJ(vector.get(i)));
 		}
 		return arr;
 	}

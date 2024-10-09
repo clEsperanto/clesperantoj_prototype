@@ -1,22 +1,17 @@
-import org.junit.jupiter.api.Test;
-
+import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imglib2.ImgLib2Converters;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgs;
-import net.imglib2.type.numeric.integer.ByteType;
-import net.imglib2.type.numeric.integer.IntType;
-import net.imglib2.type.numeric.integer.ShortType;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.type.numeric.integer.UnsignedIntType;
-import net.imglib2.type.numeric.integer.UnsignedShortType;
+import net.imglib2.type.numeric.integer.*;
 import net.imglib2.type.numeric.real.FloatType;
-import net.clesperanto.core.ArrayJ;
-import net.clesperanto.core.DeviceJ;
-import net.clesperanto.imglib2.ImgLib2Converters;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class TestPushAndPullImgLib2 {
@@ -42,7 +37,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<FloatType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<FloatType> inCursor = inputImg.cursor();
@@ -66,7 +61,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<IntType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<IntType> inCursor = inputImg.cursor();
@@ -90,7 +85,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<UnsignedIntType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<UnsignedIntType> inCursor = inputImg.cursor();
@@ -116,7 +111,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<ShortType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<ShortType> inCursor = inputImg.cursor();
@@ -142,7 +137,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<UnsignedShortType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<UnsignedShortType> inCursor = inputImg.cursor();
@@ -168,7 +163,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<ByteType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<ByteType> inCursor = inputImg.cursor();
@@ -193,7 +188,7 @@ public class TestPushAndPullImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
     	RandomAccessibleInterval<UnsignedByteType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
 
     	Cursor<UnsignedByteType> inCursor = inputImg.cursor();

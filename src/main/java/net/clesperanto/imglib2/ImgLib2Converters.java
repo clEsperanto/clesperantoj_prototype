@@ -1,20 +1,23 @@
 package net.clesperanto.imglib2;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.util.Arrays;
-
 import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
+import net.imglib2.Dimensions;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.blocks.PrimitiveBlocks;
+import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImg;
-import net.imglib2.img.basictypeaccess.nio.BufferAccess;
-import net.imglib2.img.basictypeaccess.nio.BufferDataAccessFactory;
+import net.imglib2.img.array.ArrayImgFactory;
+import net.imglib2.img.basictypeaccess.array.ArrayDataAccess;
 import net.imglib2.type.NativeType;
-import net.imglib2.type.NativeTypeFactory;
-import net.imglib2.util.Fraction;
+import net.imglib2.type.numeric.integer.*;
+import net.imglib2.type.numeric.real.FloatType;
+import net.imglib2.util.Intervals;
 import net.imglib2.util.Util;
+
+import java.util.Arrays;
 
 /**
  * TODO
@@ -38,21 +41,18 @@ public class ImgLib2Converters {
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU
 	 */
-	public static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A > copyArrayJToImgLib2(
-			ArrayJ arrayj )
+	public static < T extends NativeType< T > > Img< T > copyArrayJToImgLib2(ArrayJ arrayj )
 	{
-		long flatDims = arrayj.getHeight() * arrayj.getDepth() * arrayj.getWidth();
-		ImgLib2DataType dataType = ImgLib2DataType.fromString(arrayj.getDataType());
-		if (flatDims * dataType.getByteSize() > Integer.MAX_VALUE)
-			throw new IllegalArgumentException("The ArrayJ provided is too big to be converted into an ImgLib2 ArrayImg.");
+		final long[] dims = new long[arrayj.numDimensions()];
+		dims[0] = arrayj.width();
+		if (dims.length > 1) dims[1] = arrayj.height();
+		if (dims.length > 2) dims[2] = arrayj.depth();
 
-		ByteBuffer byteBuffer = ByteBuffer.allocateDirect((int) flatDims * dataType.getByteSize())
-                .order(ByteOrder.LITTLE_ENDIAN);
-		dataType.readToBuffer(arrayj, byteBuffer);
-
-		T type = dataType.createType();
-
-		return fromBuffer(byteBuffer, type, arrayj.getDimensions());
+		final T type = nativeType(arrayj.dataType());
+		final ArrayImg<T, ?> img = new ArrayImgFactory<>(type).create(dims);
+		final Object data = ((ArrayDataAccess<?>) img.update(null)).getCurrentStorageArray();
+		arrayj.readToArray(data);
+		return img;
 	}
 
 	/**
@@ -72,42 +72,71 @@ public class ImgLib2Converters {
 	 * 	String "image", for buffer use "buffer"
 	 * @return an {@link ArrayJ} copied from the {@link RandomAccessibleInterval} of the CPU
 	 */
-	public static < T extends NativeType< T > >
-		ArrayJ copyImgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, String memoryType) {
-		checkSize(rai);
-		T type = Util.getTypeFromInterval(rai);
-		ImgLib2DataType dataType = ImgLib2DataType.fromImgLib2DataType(type);
-		PrimitiveBlocks< T > blocks = PrimitiveBlocks.of( rai );
-		long totalSize = Arrays.stream(rai.dimensionsAsLongArray()).reduce(1L, (a, b) -> a * b);
-		if (totalSize * dataType.getByteSize() > Integer.MAX_VALUE)
-			throw new IllegalArgumentException();
+	public static <T extends NativeType<T>>
+	ArrayJ copyImgLib2ToArrayJ(RandomAccessibleInterval<T> rai, DeviceJ device, MemoryType memoryType) {
 
-		int[] integerDims = Arrays.stream(rai.dimensionsAsLongArray()).mapToInt(x -> (int) x).toArray();
-	    Object flatArr = dataType.createArray((int) totalSize);
-	    blocks.copy(new int[rai.dimensionsAsLongArray().length], flatArr, integerDims);
+		final int n = rai.numDimensions();
+		final int[] size = checkSize(rai);
+		final DataType dataType = dataType(rai.getType());
 
-	    return dataType.makeAndWriteArrayJ(flatArr, device, rai.dimensionsAsLongArray(), memoryType);
+        final Object data = dataType.memory().createArray((int) Intervals.numElements(size));
+		PrimitiveBlocks.of(rai).copy(new int[n], data, size);
+
+		final ArrayJ arrayJ = device.createArray(dataType, memoryType, size);
+		arrayJ.writeFromArray(data);
+		return arrayJ;
 	}
 
-	private static < T extends NativeType< T >, A extends BufferAccess< A > > ArrayImg< T, A >
-		fromBuffer(ByteBuffer byteBuffer, T type, long[] dimensions) {
-
-		final Fraction entitiesPerPixel = type.getEntitiesPerPixel();
-		@SuppressWarnings( { "unchecked", "rawtypes" } )
-		final NativeTypeFactory< T, ? super A > typeFactory = ( NativeTypeFactory ) type.getNativeTypeFactory();
-		final A access = BufferDataAccessFactory.get( typeFactory );
-		final A data = access.newInstance( byteBuffer, true );
-		final ArrayImg< T, A > img = new ArrayImg<>( data, dimensions, entitiesPerPixel );
-		img.setLinkedType( typeFactory.createLinkedType( img ) );
-		return img;
+	private static int[] checkSize(Dimensions dimensions) {
+		final int n = dimensions.numDimensions();
+		if (n > 3)
+			throw new IllegalArgumentException("No more than 3 dimensions supported.");
+		if (Intervals.numElements(dimensions) > Integer.MAX_VALUE)
+			throw new IllegalArgumentException("Too many elements.");
+		final int[] dims = new int[n];
+		Arrays.setAll(dims, d -> Util.safeInt(dimensions.dimension(d)));
+		return dims;
 	}
 
-	private static < T extends NativeType< T > > void checkSize(RandomAccessibleInterval<T> rai) {
-		long[] dims = rai.dimensionsAsLongArray();
-		for (long l : dims) {
-			if (l > Integer.MAX_VALUE)
+	static <T extends NativeType<T>> DataType dataType(final T type) {
+		if (type instanceof FloatType)
+			return DataType.FLOAT32;
+		else if (type instanceof IntType)
+			return DataType.INT32;
+		else if (type instanceof UnsignedIntType)
+			return DataType.UINT32;
+		else if (type instanceof ShortType)
+			return DataType.INT16;
+		else if (type instanceof UnsignedShortType)
+			return DataType.UINT16;
+		else if (type instanceof ByteType)
+			return DataType.INT8;
+		else if (type instanceof UnsignedByteType)
+			return DataType.UINT8;
+		else
+			throw new IllegalArgumentException("Type not supported: " + type.getClass().getName());
+	}
+
+	@SuppressWarnings("unchecked")
+	static <T extends NativeType<T>> T nativeType(final DataType dataType) {
+
+		switch (dataType) {
+			case INT8:
+				return (T) new ByteType();
+			case UINT8:
+				return (T) new UnsignedByteType();
+			case INT16:
+				return (T) new ShortType();
+			case UINT16:
+				return (T) new UnsignedShortType();
+			case INT32:
+				return (T) new IntType();
+			case UINT32:
+				return (T) new UnsignedIntType();
+			case FLOAT32:
+				return (T) new FloatType();
+			default:
 				throw new IllegalArgumentException();
 		}
 	}
-
 }

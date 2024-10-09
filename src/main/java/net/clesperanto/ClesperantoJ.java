@@ -34,7 +34,7 @@ public class ClesperantoJ {
         input.writeFromArray(data);
 
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
-        output.readToArray(output);
+        output.readToArray(out);
 
         for (int i = 0; i < out.length; i++) {
             System.out.println("out[" + i + "] = " + out[i]);

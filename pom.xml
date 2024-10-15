@@ -13,6 +13,15 @@
 	<artifactId>clesperantoj</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
+	<properties>
+		<package-name>net.clesperanto</package-name>
+		<license.licenseName>bsd_3</license.licenseName>
+		<license.copyrightOwners>Robert Haase, MPI CBG and Stephane Rigaud, Institut Pasteur</license.copyrightOwners>
+		<!-- NB: Deploy releases to the SciJava Maven repository. -->
+		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
+        <clic.version>0.12.1</clic.version>
+	</properties>
+
 	<name>clesperantoj</name>
 	<description>Java wrapper for Clesperanto</description>
 	<url>http://haesleinhuepf.net</url>
@@ -97,13 +106,7 @@
 		<url>https://github.com/clEsperanto/clesperantoj_prototype/actions</url>
 	</ciManagement>
 
-	<properties>
-		<package-name>net.clesperanto</package-name>
-		<license.licenseName>bsd_3</license.licenseName>
-		<license.copyrightOwners>Robert Haase, MPI CBG and Stephane Rigaud, Institut Pasteur</license.copyrightOwners>
-		<!-- NB: Deploy releases to the SciJava Maven repository. -->
-		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
-	</properties>
+
 	
     <profiles>
         <profile>

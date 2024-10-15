@@ -210,6 +210,16 @@ ArrayJ Tier2::subtract_images(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, Ar
     return ArrayJ{cle::tier2::subtract_images_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
+ArrayJ Tier2::sub_stack(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int start_z, int end_z)
+{
+    return ArrayJ{cle::tier2::sub_stack_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), start_z, end_z)};
+}
+
+ArrayJ Tier2::reduce_stack(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int reduction_factor, int offset)
+{
+    return ArrayJ{cle::tier2::reduce_stack_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), reduction_factor, offset)};
+}
+
 float Tier2::sum_of_all_pixels(DeviceJ * device, ArrayJ * src)
 {
     return cle::tier2::sum_of_all_pixels_func(device->get(), src == nullptr ? nullptr : src->get());
@@ -229,3 +239,4 @@ ArrayJ Tier2::top_hat(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius
 {
     return ArrayJ{cle::tier2::top_hat_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
+

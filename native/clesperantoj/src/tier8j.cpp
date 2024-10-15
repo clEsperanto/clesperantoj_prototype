@@ -14,3 +14,4 @@ ArrayJ Tier8::smooth_connected_labels(DeviceJ * device, ArrayJ * src, ArrayJ * d
 {
     return ArrayJ{cle::tier8::smooth_connected_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius)};
 }
+

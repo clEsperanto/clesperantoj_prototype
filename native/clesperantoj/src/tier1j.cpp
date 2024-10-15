@@ -495,6 +495,16 @@ ArrayJ Tier1::replace_value(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float 
     return ArrayJ{cle::tier1::replace_value_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), scalar0, scalar1)};
 }
 
+ArrayJ Tier1::replace_intensity(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float scalar0, float scalar1)
+{
+    return ArrayJ{cle::tier1::replace_intensity_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), scalar0, scalar1)};
+}
+
+ArrayJ Tier1::replace_intensities(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::replace_intensities_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
 ArrayJ Tier1::maximum_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier1::maximum_sphere_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
@@ -709,3 +719,4 @@ ArrayJ Tier1::z_position_of_minimum_z_projection(DeviceJ * device, ArrayJ * src,
 {
     return ArrayJ{cle::tier1::z_position_of_minimum_z_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
+

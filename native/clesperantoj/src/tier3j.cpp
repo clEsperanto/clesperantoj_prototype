@@ -15,9 +15,19 @@ std::vector<float> Tier3::center_of_mass(DeviceJ * device, ArrayJ * src)
     return cle::tier3::center_of_mass_func(device->get(), src->get());
 }
 
+ArrayJ Tier3::remove_labels(DeviceJ * device, ArrayJ * src, ArrayJ * list, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier3::remove_labels_func(device->get(), src->get(), list->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
 ArrayJ Tier3::exclude_labels(DeviceJ * device, ArrayJ * src, ArrayJ * list, ArrayJ * dst)
 {
     return ArrayJ{cle::tier3::exclude_labels_func(device->get(), src->get(), list->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier3::remove_labels_on_edges(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool exclude_x, bool exclude_y, bool exclude_z)
+{
+    return ArrayJ{cle::tier3::remove_labels_on_edges_func(device == nullptr ? nullptr : device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), exclude_x, exclude_y, exclude_z)};
 }
 
 ArrayJ Tier3::exclude_labels_on_edges(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool exclude_x, bool exclude_y, bool exclude_z)
@@ -80,7 +90,13 @@ ArrayJ Tier3::morphological_chan_vese(DeviceJ * device, ArrayJ * src, ArrayJ * d
     return ArrayJ{cle::tier3::morphological_chan_vese_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), num_iter, smoothing, lambda1, lambda2)};
 }
 
-std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_labelled_pixels(DeviceJ * device, ArrayJ * src, ArrayJ * intensity)
+std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_labelled_pixels(DeviceJ * device, ArrayJ * label, ArrayJ * intensity)
 {
-    return cle::tier3::statistics_of_labelled_pixels_func(device->get(), src->get(), intensity == nullptr ? nullptr : intensity->get());
+    return cle::tier3::statistics_of_labelled_pixels_func(device->get(), label->get(), intensity == nullptr ? nullptr : intensity->get());
 }
+
+std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_background_and_labelled_pixels(DeviceJ * device, ArrayJ * label, ArrayJ * intensity)
+{
+    return cle::tier3::statistics_of_background_and_labelled_pixels_func(device->get(), label->get(), intensity == nullptr ? nullptr : intensity->get());
+}
+

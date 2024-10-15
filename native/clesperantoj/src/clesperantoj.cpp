@@ -7,12 +7,10 @@ void BackendJ::setBackend(const std::string &backendName)
     if (backendName.find("cuda") != std::string::npos)
     {
         cle::BackendManager::getInstance().setBackend("cuda");
-        std::cout << "Using CUDA backend" << std::endl;
     }
     else
     {
         cle::BackendManager::getInstance().setBackend("opencl");
-        std::cout << "Using OpenCL backend" << std::endl;
     }
 }
 

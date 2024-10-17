@@ -30,6 +30,10 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
+import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imglib2.ImgLib2Converters;
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgs;

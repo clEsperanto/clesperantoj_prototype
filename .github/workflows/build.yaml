@@ -126,13 +126,7 @@ jobs:
         id: mvn_info
       - name: Extract compiled native libraries to target fodler libs
         run: |
-          jar xvf
-          ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
-          net/clesperanto/linux-x86_64
-
-          jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
-
-          jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macosx-arm64
+          jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/linux-x86_64
 
           mkdir -p libs
 

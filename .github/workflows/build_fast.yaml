@@ -31,7 +31,7 @@ jobs:
           if [ -z "$MAVEN_PASS" ]; then echo "MAVEN_PASS is not set"; fi
           if [ -z "$OSSRH_PASS" ]; then echo "OSSRH_PASS is not set"; fi
           if [ -z "$SIGNING_ASC" ]; then echo "SIGNING_ASC is not set"; fi
-            - name: Set up CI environment
+      - name: Set up CI environment
         run: .github/setup.sh
       - name: Execute the build
         run: .github/build.sh

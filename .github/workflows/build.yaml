@@ -52,7 +52,7 @@ jobs:
           distribution: adopt
       - name: Install ocl-icd-loader - windows
         if: runner.os == 'Windows'
-        run: >
+        run: |
           cd ..
 
           git clone --branch ${{ env.opencl-icd-loader-git-tag }} https://github.com/KhronosGroup/OpenCL-ICD-Loader
@@ -139,7 +139,7 @@ jobs:
           echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
         id: mvn_info
       - name: Extract compiled native libraries to target fodler libs
-        run: >
+        run: |
           jar xvf
           ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
           net/clesperanto/linux-x86_64

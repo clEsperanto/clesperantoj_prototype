@@ -32,16 +32,15 @@
 
 package net.clesperanto;
 
-import net.clesperanto.core.DeviceJ;
-import net.clesperanto.core.ArrayJ;
-
-import net.clesperanto.kernels.Tier1;
-import net.clesperanto.imagej.ImageJConverters;
-
 import ij.IJ;
 import ij.ImageJ;
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
+import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imagej.ImageJConverters;
+import net.clesperanto.kernels.Tier1;
 
 public class ImagePlusClesperantoJExample {
 
@@ -59,7 +58,7 @@ public class ImagePlusClesperantoJExample {
         IJ.run(input_imp, "32-bit", "");
         input_imp.show();
 
-        ArrayJ input = ImageJConverters.copyImagePlus2ToArrayJ(input_imp, currentDevice, "buffer");
+        ArrayJ input = ImageJConverters.copyImagePlus2ToArrayJ(input_imp, currentDevice, MemoryType.BUFFER);
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
         ImagePlus output_imp = ImageJConverters.copyArrayJToImagePlus(output);
 

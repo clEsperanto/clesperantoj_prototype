@@ -29,3 +29,24 @@ ArrayJ Tier6::voronoi_labeling(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier6::voronoi_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
+
+ArrayJ Tier6::remove_small_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size)
+{
+    return ArrayJ{cle::tier6::remove_small_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size)};
+}
+
+ArrayJ Tier6::exclude_small_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float maximum_size)
+{
+    return ArrayJ{cle::tier6::exclude_small_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), maximum_size)};
+}
+
+ArrayJ Tier6::remove_large_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float maximum_size)
+{
+    return ArrayJ{cle::tier6::remove_large_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), maximum_size)};
+}
+
+ArrayJ Tier6::exclude_large_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size)
+{
+    return ArrayJ{cle::tier6::exclude_large_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size)};
+}
+

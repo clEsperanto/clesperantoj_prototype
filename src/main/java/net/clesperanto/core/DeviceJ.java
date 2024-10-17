@@ -36,14 +36,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import net.clesperanto._internals.jclic.StringVector;
+import net.clesperanto._internals.jclic._DeviceJ;
+import net.clesperanto._internals.jclic._StringVector;
 
 /**
  * Class to interact with the divide that is going to be used to do the operations
  */
 public class DeviceJ {
 
-	protected net.clesperanto._internals.jclic.DeviceJ jcppDeviceJ;
+	private final _DeviceJ _deviceJ;
 
 	/**
 	 * Constructor that initializes the default device
@@ -51,8 +52,8 @@ public class DeviceJ {
 	 *
 	 *
 	 */
-	protected DeviceJ() {
-		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
+	private DeviceJ() {
+		_deviceJ = new _DeviceJ();
 	}
 
 	/**
@@ -66,11 +67,15 @@ public class DeviceJ {
 	 * @param deviceType
 	 * 	the type that wants to be initialized. If any type works, the argument should be "all"
 	 */
-	protected DeviceJ(String deviceName, String deviceType) {
+	private DeviceJ(String deviceName, String deviceType) {
 		Objects.requireNonNull(deviceName, "The device name cannot be null");
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\"");
-		jcppDeviceJ = new net.clesperanto._internals.jclic.DeviceJ();
-		jcppDeviceJ.setDevice(deviceName, deviceType);
+		_deviceJ = new _DeviceJ();
+		_deviceJ.setDevice(deviceName, deviceType);
+	}
+
+	DeviceJ(_DeviceJ _deviceJ) {
+		this._deviceJ = _deviceJ;
 	}
 
 	/**
@@ -137,41 +142,28 @@ public class DeviceJ {
 
 	/**
 	 *
-	 * @return the name of the current device
+	 * @return the name of this device
 	 */
 	public String getName() {
-		return this.jcppDeviceJ.getName();
+		return this._deviceJ.getName();
 	}
 
 	/**
 	 *
-	 * @return the info about the current device
+	 * @return the info about this device
 	 */
 	public String getInfo() {
-		return this.jcppDeviceJ.getInfo();
-	}
-
-	/**
-	 * Change the current device to the wanted one
-	 * @param deviceName
-	 * 	the name of the device that wants to be used
-	 * @param deviceType
-	 * 	the type that wants to be used. If any type works, the argument should be "all"
-	 */
-	public void setDevice(String deviceName, String deviceType) {
-		jcppDeviceJ.setDevice(deviceName, deviceType);
+		return this._deviceJ.getInfo();
 	}
 
 	/**
 	 * TODO confirm if the devices are only GPUs or can be other hardware
 	 * Method that returns the available devices (GPUs) on the computer.
-	 * It is the same as using {@link #getAvailableDevices(String)} with deviceType 'all'
-	 * @param deviceType
-	 * 	the type of devicethe method has to look for
-	 * @return a list of the available devices in the computer of the specific type
+	 *
+	 * @return a list of the available devices in the computer
 	 */
 	public static List<String> getAvailableDevices(){
-		StringVector devices = net.clesperanto._internals.jclic.DeviceJ.getAvailableDevices();
+		_StringVector devices = _DeviceJ.getAvailableDevices();
 		List<String> devicesList = new ArrayList<String>();
 		for (int i = 0; i < devices.size(); i++) {
 			devicesList.add(devices.get(i));
@@ -181,16 +173,16 @@ public class DeviceJ {
 
 	/**
 	 * TODO confirm if the devices are only GPUs or can be other hardware
-	 * Method that returns the available devices (GPUs) on the computer by the type..
-	 * Using the type "all" returns all the devices available, it is the same as using {@link #getAvailableDevices()}
-	 * @param deviceType
-	 * 	the type of devicethe method has to look for
+	 * Method that returns the available devices (GPUs) of the given {@code deviceType} on the computer.
+	 * Using the {@code deviceType} "all" returns all the devices available, it is the same as using {@link #getAvailableDevices()}.
+	 *
+	 * @param deviceType the type of device to look for
 	 * @return a list of the available devices in the computer of the specific type
 	 */
 	public static List<String> getAvailableDevices(String deviceType){
 		Objects.requireNonNull(deviceType, "The device type cannot be null, if any device type works, use \"all\" or"
 				+ " use the method \"DeviceJ.getAvailableDevices()\"");
-		StringVector devices = net.clesperanto._internals.jclic.DeviceJ.getAvailableDevices(deviceType);
+		_StringVector devices = _DeviceJ.getAvailableDevices(deviceType);
 		List<String> devicesList = new ArrayList<String>();
 		for (int i = 0; i < devices.size(); i++) {
 			devicesList.add(devices.get(i));
@@ -213,11 +205,48 @@ public class DeviceJ {
 		return info.substring(1, ind).toLowerCase();
 	}
 
-    /**
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof DeviceJ)) return false;
+		DeviceJ deviceJ = (DeviceJ) o;
+		return _deviceJ.equals(deviceJ._deviceJ);
+		// NB: _DeviceJ.equals method is a native method overloading (not
+		//     overriding) Object.equals() Therefore, Objects.equals(_deviceJ,
+		//     deviceJ._deviceJ) will *not* work here!
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(_deviceJ);
+	}
+
+	@Override
+	public String toString() {
+		return "DeviceJ{\"" + getName() + "\"}";
+	}
+
+	public ArrayJ createArray(final DataType dataType, final MemoryType memoryType, final int... size) {
+		final int n = size.length;
+		final int w = n > 0 ? size[0] : 1;
+		final int h = n > 1 ? size[1] : 1;
+		final int d = n > 2 ? size[2] : 1;
+		return new ArrayJ(w, h, d, n, this, dataType, memoryType);
+	}
+
+	public ArrayJ createArray(final DataType dataType, final MemoryType memoryType, final long... size) {
+		final int n = size.length;
+		final long w = n > 0 ? size[0] : 1;
+		final long h = n > 1 ? size[1] : 1;
+		final long d = n > 2 ? size[2] : 1;
+		return new ArrayJ(w, h, d, n, this, dataType, memoryType);
+	}
+
+	/**
      *
      * @return the raw object that is going to be sent to the native Clesperanto library. Without Java wrappers
      */
-    public net.clesperanto._internals.jclic.DeviceJ getRaw() {
-    	return this.jcppDeviceJ;
+    public _DeviceJ getRaw() {
+    	return this._deviceJ;
     }
 }

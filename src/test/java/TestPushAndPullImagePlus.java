@@ -30,18 +30,18 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.junit.jupiter.api.Test;
-
 import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
-import net.clesperanto.imagej.ImageJConverters;
 import net.clesperanto.core.ArrayJ;
 import net.clesperanto.core.DeviceJ;
-
-import static org.junit.jupiter.api.Assertions.*;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imagej.ImageJConverters;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPushAndPullImagePlus {
 
@@ -74,7 +74,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;
@@ -113,7 +113,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;
@@ -151,7 +151,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;
@@ -190,7 +190,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;
@@ -229,7 +229,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;
@@ -268,7 +268,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;
@@ -306,7 +306,7 @@ public class TestPushAndPullImagePlus {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, "buffer");
+        ArrayJ in = ImageJConverters.copyImagePlus2ToArrayJ(inputImp, device, MemoryType.BUFFER);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	c = 0;

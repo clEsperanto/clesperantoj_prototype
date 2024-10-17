@@ -19,3 +19,24 @@ ArrayJ Tier5::connected_components_labeling(DeviceJ * device, ArrayJ * src, Arra
 {
     return ArrayJ{cle::tier5::connected_components_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), connectivity)};
 }
+
+ArrayJ Tier5::connected_component_labeling(DeviceJ * device, ArrayJ * src, ArrayJ * dst, std::string connectivity)
+{
+    return ArrayJ{cle::tier5::connected_component_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), connectivity)};
+}
+
+ArrayJ Tier5::reduce_labels_to_centroids(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier5::reduce_labels_to_centroids_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier5::filter_label_by_size(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size, float maximum_size)
+{
+    return ArrayJ{cle::tier5::filter_label_by_size_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size, maximum_size)};
+}
+
+ArrayJ Tier5::exclude_labels_outside_size_range(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size, float maximum_size)
+{
+    return ArrayJ{cle::tier5::exclude_labels_outside_size_range_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size, maximum_size)};
+}
+

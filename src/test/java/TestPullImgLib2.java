@@ -30,25 +30,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.junit.jupiter.api.Test;
-
 import net.imglib2.Cursor;
 import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.type.numeric.integer.ByteType;
-import net.imglib2.type.numeric.integer.IntType;
-import net.imglib2.type.numeric.integer.ShortType;
-import net.imglib2.type.numeric.integer.UnsignedByteType;
-import net.imglib2.type.numeric.integer.UnsignedIntType;
-import net.imglib2.type.numeric.integer.UnsignedShortType;
+import net.imglib2.type.numeric.integer.*;
 import net.imglib2.type.numeric.real.FloatType;
-import net.clesperanto.core.ArrayJ;
-import net.clesperanto.core.DeviceJ;
-import net.clesperanto.core.MemoryJ;
-import net.clesperanto.imglib2.ImgLib2Converters;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class TestPullImgLib2 {
@@ -73,8 +63,8 @@ public class TestPullImgLib2 {
         	flatVals[i] = ThreadLocalRandom.current().nextFloat();
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeFloatBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeFloatBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.FLOAT32, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<FloatType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<FloatType> outCursor = outputImg.cursor();
 
@@ -93,8 +83,8 @@ public class TestPullImgLib2 {
         	flatVals[i] = ThreadLocalRandom.current().nextInt();
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeIntBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeIntBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.INT32, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<IntType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<IntType> outCursor = outputImg.cursor();
 
@@ -113,8 +103,8 @@ public class TestPullImgLib2 {
         	flatVals[i] =  Integer.MAX_VALUE + ThreadLocalRandom.current().nextInt(0, 100);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeUIntBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeUIntBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.UINT32, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<UnsignedIntType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<UnsignedIntType> outCursor = outputImg.cursor();
 
@@ -134,8 +124,8 @@ public class TestPullImgLib2 {
         	flatVals[i] = (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, Short.MAX_VALUE + 1);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeShortBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeShortBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.INT16, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<ShortType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<ShortType> outCursor = outputImg.cursor();
 
@@ -155,8 +145,8 @@ public class TestPullImgLib2 {
         	flatVals[i] = (short) ThreadLocalRandom.current().nextInt(0, MAX_UINT16);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeUShortBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeUShortBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.UINT16, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<UnsignedShortType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<UnsignedShortType> outCursor = outputImg.cursor();
 
@@ -176,8 +166,8 @@ public class TestPullImgLib2 {
         	flatVals[i] = (byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE + 1);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeByteBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeByteBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.INT8, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<ByteType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<ByteType> outCursor = outputImg.cursor();
 
@@ -197,8 +187,8 @@ public class TestPullImgLib2 {
         	flatVals[i] = (byte) ThreadLocalRandom.current().nextInt(0, MAX_UINT8);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeUByteBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeUByteBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.UINT8, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	RandomAccessibleInterval<UnsignedByteType> outputImg = ImgLib2Converters.copyArrayJToImgLib2(in);
     	Cursor<UnsignedByteType> outCursor = outputImg.cursor();
 

@@ -15,14 +15,14 @@ clesperantoJ is a Java bidings of the C++ library [CLIc]() relying of [OpenCL]()
 A certain diversity of ressources will be required to build clesperantoJ from source:
 - a C++ compiler (`gcc`, `clang`, `cl`, etc.)
 - the Java Development Kit (JDK)
-- CMake (a C++ project manager)
-- Maven (a Java project manager)
+- [CMake](https://cmake.org/) (a C++ project manager)
+- [Maven](https://maven.apache.org/download.cgi) (a Java project manager)
 - Bash (a shell program and command language)
 - OpenCL (your GPU driver properly install with their Development Kit if possible)
 
 #### Install a C++ compiler and CMake
 
-For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with Windows C++ development selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).
+For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with "Desktop development with C++" selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).
 For __MacOS__, you will need to install the command-line tools from xcode by running this command in a prompt: `xcode-select --install`.
 For __Unix__, similarly to OSX, you will need to install the `build-essential` package by running this command in a prompt: `sudo apt install build-essential`.
 
@@ -47,11 +47,20 @@ You can get Bash by simply installing [git-scm](https://git-scm.com/downloads) a
 ### Install OpenCL
 
 You mainly need to install your GPU driver provided by your GPU vendor, e.g. NVIDIA, AMD, Intel, etc. Please refer to their official website.
-For NVIDIA, we advise to install the CUDAToolKit.
+For NVIDIA, we advise to install the [CUDAToolKit](https://developer.nvidia.com/cuda-toolkit).
+
+## PATH
+
+To make the above installed programs work, you need to add them to your path, e.g. on Windows like this:
+```
+C:\programs\apache-maven-3.9.9\bin
+C:\Program Files\Git\bin
+C:\Program Files\CMake\bin
+```
 
 ### Build clesperantoJ
 
-In a commmand prompt, start by git clone the repository and move inside the repo
+In a commmand prompt (on Windows "x64 Native Tools Command Prompt"), start by git clone the repository and move inside the repo
 ```
 git clone https://github.com/clEsperanto/clesperantoj_prototype.git
 cd clesperantoj_prototype

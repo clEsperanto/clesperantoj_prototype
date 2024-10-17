@@ -30,17 +30,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.junit.jupiter.api.Test;
-
 import net.clesperanto.imglib2.ImgLib2Converters;
 import net.clesperanto.kernels.Tier1;
 import net.imglib2.RandomAccessibleInterval;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.integer.IntType;
-import net.clesperanto.core.ArrayJ;
-import net.clesperanto.core.DeviceJ;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestAbsoluteImgLib2 {
 
@@ -52,8 +49,8 @@ public class TestAbsoluteImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
-    	ArrayJ out = ImgLib2Converters.copyImgLib2ToArrayJ(outputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
+        ArrayJ out = ImgLib2Converters.copyImgLib2ToArrayJ(outputImg, device, MemoryType.BUFFER);
 
     	Tier1.absolute(device, in, out);
 
@@ -85,7 +82,7 @@ public class TestAbsoluteImgLib2 {
 
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, "buffer");
+        ArrayJ in = ImgLib2Converters.copyImgLib2ToArrayJ(inputImg, device, MemoryType.BUFFER);
 
     	ArrayJ out = Tier1.absolute(device, in, null);
 

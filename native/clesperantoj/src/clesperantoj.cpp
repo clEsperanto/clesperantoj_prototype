@@ -7,18 +7,25 @@ void BackendJ::setBackend(const std::string &backendName)
     if (backendName.find("cuda") != std::string::npos)
     {
         cle::BackendManager::getInstance().setBackend("cuda");
-        std::cout << "Using CUDA backend" << std::endl;
     }
     else
     {
         cle::BackendManager::getInstance().setBackend("opencl");
-        std::cout << "Using OpenCL backend" << std::endl;
     }
 }
 
 DeviceJ::DeviceJ()
 {
     this->device_ = cle::BackendManager::getInstance().getBackend().getDevice("", "all");
+}
+
+DeviceJ::DeviceJ(const std::shared_ptr<cle::Device> &device) : device_(device)
+{
+}
+
+bool DeviceJ::operator==(const DeviceJ& other) const
+{
+    return (device_ == other.device_);
 }
 
 std::vector<std::string> DeviceJ::getAvailableDevices(const std::string &deviceType)
@@ -50,22 +57,6 @@ ArrayJ::ArrayJ(const std::shared_ptr<cle::Array> &array) : array_(array)
 {
 }
 
-ArrayJ ArrayJ::create(size_t width, size_t height, size_t depth, size_t dimension, const cle::dType &data_type, const cle::mType &memory_type, const DeviceJ &device)
-{
-    auto data = cle::Array::create(width, height, depth, dimension, data_type, memory_type, device.get());
-    return ArrayJ{data};
-}
-
-void ArrayJ::readTo(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const
-{
-    this->array_->readTo(data, region, origin);
-}
-
-void ArrayJ::writeFrom(void *data, std::array<size_t, 3> &region, std::array<size_t, 3> &origin) const
-{
-    this->array_->writeFrom(data, region, origin);
-}
-
 size_t ArrayJ::getWidth() const
 {
     return this->array_->width();
@@ -86,25 +77,6 @@ unsigned int ArrayJ::getDimension() const
     return this->array_->dimension();
 }
 
-std::string ArrayJ::getDataType() const
-{
-    std::ostringstream oss;
-    oss << this->array_->dtype();
-    return oss.str();
-}
-
-std::string ArrayJ::getMemoryType() const
-{
-    std::ostringstream oss;
-    oss << this->array_->mtype();
-    return oss.str();
-}
-
-std::string ArrayJ::getDevice() const
-{
-    return this->array_->device()->getName();
-}
-
 std::shared_ptr<cle::Array> ArrayJ::get() const
 {
     return this->array_;
@@ -120,138 +92,6 @@ void ArrayJ::copyDataTo(ArrayJ &dst)
     this->array_->copyTo(dst.get());
 }
 
-ArrayJ MemoryJ::makeFloatBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::FLOAT, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-ArrayJ MemoryJ::makeByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::INT8, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-ArrayJ MemoryJ::makeUByteBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT8, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-ArrayJ MemoryJ::makeShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::INT16, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-ArrayJ MemoryJ::makeUShortBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT16, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-ArrayJ MemoryJ::makeIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::INT32, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-ArrayJ MemoryJ::makeUIntBuffer(const DeviceJ &device, const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const std::string &memory_type)
-{
-    return ArrayJ::create(width, height, depth, dimension, cle::dType::UINT32, memory_type == "image" ? cle::mType::IMAGE : cle::mType::BUFFER, device);
-}
-
-void MemoryJ::writeFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::writeByteBuffer(const ArrayJ &array, char *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::writeUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::writeShortBuffer(const ArrayJ &array, short *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::writeUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::writeIntBuffer(const ArrayJ &array, int *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::writeUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.writeFrom(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readFloatBuffer(const ArrayJ &array, float *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readByteBuffer(const ArrayJ &array, char *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readUByteBuffer(const ArrayJ &array, unsigned char *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readShortBuffer(const ArrayJ &array, short *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readUShortBuffer(const ArrayJ &array, unsigned short *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readIntBuffer(const ArrayJ &array, int *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
-
-void MemoryJ::readUIntBuffer(const ArrayJ &array, unsigned int *data, const size_t &size)
-{
-    std::array<size_t, 3> region = {array.getWidth(), array.getHeight(), array.getDepth()};
-    std::array<size_t, 3> origin = {0, 0, 0};
-    array.readTo(static_cast<void *>(data), region, origin);
-}
 
 std::vector<std::string> UtilsJ::getKeys(const std::unordered_map<std::string, std::vector<float>> &map)
 {
@@ -270,3 +110,152 @@ std::vector<ArrayJ> UtilsJ::toArrayJVector(const std::vector<std::shared_ptr<cle
                    { return ArrayJ{value}; });
     return result;
 }
+
+inline cle::dType to_cle_dType(const DTypeJ &dtype)
+{
+    switch (dtype)
+    {
+        case DTypeJ::INT8:    return cle::dType::INT8;
+        case DTypeJ::UINT8:   return cle::dType::UINT8;
+        case DTypeJ::INT16:   return cle::dType::INT16;
+        case DTypeJ::UINT16:  return cle::dType::UINT16;
+        case DTypeJ::INT32:   return cle::dType::INT32;
+        case DTypeJ::UINT32:  return cle::dType::UINT32;
+        case DTypeJ::FLOAT:   return cle::dType::FLOAT;
+        case DTypeJ::UNKNOWN:
+        default:              return cle::dType::UNKNOWN;
+    }
+}
+
+inline DTypeJ from_cle_dType(const cle::dType &dtype)
+{
+    switch (dtype)
+    {
+        case cle::dType::INT8:      return DTypeJ::INT8;
+        case cle::dType::UINT8:     return DTypeJ::UINT8;
+        case cle::dType::INT16:     return DTypeJ::INT16;
+        case cle::dType::UINT16:    return DTypeJ::UINT16;
+        case cle::dType::INT32:     return DTypeJ::INT32;
+        case cle::dType::UINT32:    return DTypeJ::UINT32;
+        case cle::dType::FLOAT:     return DTypeJ::FLOAT;
+//        case cle::dType::UNKNOWN: // TODO: uncomment after https://github.com/clEsperanto/CLIc/pull/353 is merged, released, and we depend on that version
+        default:              return DTypeJ::UNKNOWN;
+    }
+}
+
+inline cle::mType to_cle_mType(const MTypeJ &mtype)
+{
+    switch (mtype)
+    {
+        case MTypeJ::IMAGE:  return cle::mType::IMAGE;
+        case MTypeJ::BUFFER:
+        default:             return cle::mType::BUFFER;
+    }
+}
+
+inline MTypeJ from_cle_mType(const cle::mType &mtype)
+{
+    switch (mtype)
+    {
+        case cle::mType::IMAGE:  return MTypeJ::IMAGE;
+        case cle::mType::BUFFER:
+        default:                 return MTypeJ::BUFFER;
+    }
+}
+
+ArrayJ ArrayJ::create(
+    const size_t &width,
+    const size_t &height,
+    const size_t &depth,
+    const size_t &dimension,
+    const DTypeJ &data_type,
+    const MTypeJ &memory_type,
+    const DeviceJ &device)
+{
+    auto data = cle::Array::create(width, height, depth, dimension, to_cle_dType(data_type), to_cle_mType(memory_type), device.get());
+    return ArrayJ{data};
+}
+
+void ArrayJ::writeFrom(
+    void *data,
+    const size_t &origin_x,
+    const size_t &origin_y,
+    const size_t &origin_z,
+    const size_t &width,
+    const size_t &height,
+    const size_t &depth) const
+{
+    std::array<size_t, 3> origin = {origin_x, origin_y, origin_z};
+    std::array<size_t, 3> region = {width, height, depth};
+    this->array_->writeFrom(data, region, origin);
+}
+
+void ArrayJ::readTo(
+    void *data,
+    const size_t &origin_x,
+    const size_t &origin_y,
+    const size_t &origin_z,
+    const size_t &width,
+    const size_t &height,
+    const size_t &depth) const
+{
+    std::array<size_t, 3> origin = {origin_x, origin_y, origin_z};
+    std::array<size_t, 3> region = {width, height, depth};
+    this->array_->readTo(data, region, origin);
+}
+
+DTypeJ ArrayJ::dtype() const
+{
+    return from_cle_dType(this->array_->dtype());
+}
+
+MTypeJ ArrayJ::mtype() const
+{
+    return from_cle_mType(this->array_->mtype());
+}
+
+DeviceJ ArrayJ::device() const
+{
+    return DeviceJ{this->array_->device()};
+}
+
+void MemoryJ::readToFloat(const ArrayJ &array, float *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.readTo(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::readToByte(const ArrayJ &array, char *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.readTo(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::readToShort(const ArrayJ &array, short *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.readTo(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::readToInt(const ArrayJ &array, int *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.readTo(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::writeFromFloat(const ArrayJ &array, float *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.writeFrom(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::writeFromByte(const ArrayJ &array, char *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.writeFrom(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::writeFromShort(const ArrayJ &array, short *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.writeFrom(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+
+void MemoryJ::writeFromInt(const ArrayJ &array, int *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth)
+{
+    array.writeFrom(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
+}
+

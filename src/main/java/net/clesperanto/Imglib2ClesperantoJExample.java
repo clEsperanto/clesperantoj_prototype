@@ -32,18 +32,17 @@
 
 package net.clesperanto;
 
-import java.util.Arrays;
-
-import net.clesperanto.core.DeviceJ;
 import net.clesperanto.core.ArrayJ;
-
+import net.clesperanto.core.DeviceJ;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imglib2.ImgLib2Converters;
 import net.clesperanto.kernels.Tier1;
 import net.clesperanto.kernels.Tier2;
-import net.clesperanto.imglib2.ImgLib2Converters;
-
 import net.imglib2.img.Img;
 import net.imglib2.img.array.ArrayImgs;
 import net.imglib2.type.numeric.real.FloatType;
+
+import java.util.Arrays;
 
 public class Imglib2ClesperantoJExample {
 
@@ -61,7 +60,7 @@ public class Imglib2ClesperantoJExample {
         Img<FloatType> input_img = ArrayImgs.floats(data, new long[] { 3, 3, 2 });
         Img<FloatType> output_img = ArrayImgs.floats(out, new long[] { 3, 3, 2 });
 
-        ArrayJ input = ImgLib2Converters.copyImgLib2ToArrayJ(input_img, currentDevice, "buffer");
+        ArrayJ input = ImgLib2Converters.copyImgLib2ToArrayJ(input_img, currentDevice, MemoryType.BUFFER);
         // ArrayJ output = ImgLib2Converters.copyImgLib2ToArrayJ(output_img,
         // currentDevice, "buffer");
 

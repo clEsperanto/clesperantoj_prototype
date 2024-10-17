@@ -30,18 +30,18 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-import org.junit.jupiter.api.Test;
-
 import ij.ImagePlus;
 import ij.process.ImageProcessor;
-import net.clesperanto.imagej.ImageJConverters;
 import net.clesperanto.core.ArrayJ;
+import net.clesperanto.core.DataType;
 import net.clesperanto.core.DeviceJ;
-import net.clesperanto.core.MemoryJ;
-
-import static org.junit.jupiter.api.Assertions.*;
+import net.clesperanto.core.MemoryType;
+import net.clesperanto.imagej.ImageJConverters;
+import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.ThreadLocalRandom;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestPullImagePlus {
 
@@ -61,8 +61,8 @@ public class TestPullImagePlus {
         	flatVals[i] = ThreadLocalRandom.current().nextFloat();
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeFloatBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeFloatBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.FLOAT32, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;
@@ -85,8 +85,8 @@ public class TestPullImagePlus {
         	flatVals[i] = ThreadLocalRandom.current().nextInt();
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeIntBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeIntBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.INT32, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;
@@ -106,11 +106,11 @@ public class TestPullImagePlus {
 
     	int[] flatVals = new int[18];
         for (int i = 0; i < flatVals.length; i++)
-        	flatVals[i] =  Integer.MAX_VALUE + ThreadLocalRandom.current().nextInt(0, 100);
+            flatVals[i] = (int) ThreadLocalRandom.current().nextLong(0, 0xffffffffL);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeUIntBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeUIntBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.UINT32, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;
@@ -119,7 +119,8 @@ public class TestPullImagePlus {
         	ImageProcessor outIp = outputImp.getProcessor();
     		for (int y = 0; y < 3; y ++) {
     			for (int x = 0; x < 3; x ++) {
-                	assertEquals(flatVals[c ++], outIp.getPixelValue(x, y));
+					final long flatVal = flatVals[c++] & 0xffffffffL;
+					assertEquals(flatVal, outIp.getPixelValue(x, y));
             	}
         	}
     	}
@@ -133,8 +134,8 @@ public class TestPullImagePlus {
         	flatVals[i] = (short) ThreadLocalRandom.current().nextInt(Short.MIN_VALUE, Short.MAX_VALUE + 1);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeShortBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeShortBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.INT16, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;
@@ -158,8 +159,8 @@ public class TestPullImagePlus {
         	flatVals[i] = (short) ThreadLocalRandom.current().nextInt(0, MAX_UINT16);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeUShortBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeUShortBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.UINT16, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;
@@ -183,8 +184,8 @@ public class TestPullImagePlus {
         	flatVals[i] = (byte) ThreadLocalRandom.current().nextInt(Byte.MIN_VALUE, Byte.MAX_VALUE + 1);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeByteBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeByteBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.INT8, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;
@@ -208,8 +209,8 @@ public class TestPullImagePlus {
         	flatVals[i] = (byte) ThreadLocalRandom.current().nextInt(0, MAX_UINT8);
 
     	DeviceJ device = DeviceJ.getDefaultDevice();
-    	ArrayJ in = MemoryJ.makeUByteBuffer(device, new long[] {3, 3, 2}, "buffer");
-    	MemoryJ.writeUByteBuffer(in, flatVals, 18);
+		ArrayJ in = device.createArray(DataType.UINT8, MemoryType.BUFFER, 3, 3, 2);
+		in.writeFromArray(flatVals);
     	ImagePlus outputImp = ImageJConverters.copyArrayJToImagePlus(in);
 
     	int c = 0;

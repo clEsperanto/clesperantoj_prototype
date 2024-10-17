@@ -14,7 +14,7 @@ env:
   opencl-headers-git-tag: v2023.04.17
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 8

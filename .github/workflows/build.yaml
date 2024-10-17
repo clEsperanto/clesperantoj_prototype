@@ -7,6 +7,8 @@ on:
       - deploy-to-scijava
     tags:
       - "*-[0-9]+.*"
+    paths-ignore:
+      - .github/workflows/build_fast.yml
   pull_request:
     branches:
       - main

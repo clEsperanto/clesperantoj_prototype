@@ -33,4 +33,4 @@ jobs:
           MAVEN_USER: ${{ secrets.MAVEN_USER }}
           MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
           OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
-          SIGNING_ASC: ${{ secrets.OSSRH_USER }}
+          SIGNING_ASC: ${{ secrets.SIGNING_ASC }}

@@ -23,7 +23,7 @@ DeviceJ::DeviceJ(const std::shared_ptr<cle::Device> &device) : device_(device)
 {
 }
 
-bool DeviceJ::operator==(const DeviceJ& other) const
+bool DeviceJ::operator==(const DeviceJ &other) const
 {
     return (device_ == other.device_);
 }
@@ -46,6 +46,11 @@ std::string DeviceJ::getName() const
 std::string DeviceJ::getInfo() const
 {
     return this->device_->getInfo();
+}
+
+void DeviceJ::setWaitForKernelFinish(bool flag)
+{
+    this->device_->setWaitToFinish(flag);
 }
 
 std::shared_ptr<cle::Device> DeviceJ::get() const
@@ -92,7 +97,6 @@ void ArrayJ::copyDataTo(ArrayJ &dst)
     this->array_->copyTo(dst.get());
 }
 
-
 std::vector<std::string> UtilsJ::getKeys(const std::unordered_map<std::string, std::vector<float>> &map)
 {
     std::vector<std::string> keys;
@@ -115,15 +119,23 @@ inline cle::dType to_cle_dType(const DTypeJ &dtype)
 {
     switch (dtype)
     {
-        case DTypeJ::INT8:    return cle::dType::INT8;
-        case DTypeJ::UINT8:   return cle::dType::UINT8;
-        case DTypeJ::INT16:   return cle::dType::INT16;
-        case DTypeJ::UINT16:  return cle::dType::UINT16;
-        case DTypeJ::INT32:   return cle::dType::INT32;
-        case DTypeJ::UINT32:  return cle::dType::UINT32;
-        case DTypeJ::FLOAT:   return cle::dType::FLOAT;
-        case DTypeJ::UNKNOWN:
-        default:              return cle::dType::UNKNOWN;
+    case DTypeJ::INT8:
+        return cle::dType::INT8;
+    case DTypeJ::UINT8:
+        return cle::dType::UINT8;
+    case DTypeJ::INT16:
+        return cle::dType::INT16;
+    case DTypeJ::UINT16:
+        return cle::dType::UINT16;
+    case DTypeJ::INT32:
+        return cle::dType::INT32;
+    case DTypeJ::UINT32:
+        return cle::dType::UINT32;
+    case DTypeJ::FLOAT:
+        return cle::dType::FLOAT;
+    case DTypeJ::UNKNOWN:
+    default:
+        return cle::dType::UNKNOWN;
     }
 }
 
@@ -131,15 +143,23 @@ inline DTypeJ from_cle_dType(const cle::dType &dtype)
 {
     switch (dtype)
     {
-        case cle::dType::INT8:      return DTypeJ::INT8;
-        case cle::dType::UINT8:     return DTypeJ::UINT8;
-        case cle::dType::INT16:     return DTypeJ::INT16;
-        case cle::dType::UINT16:    return DTypeJ::UINT16;
-        case cle::dType::INT32:     return DTypeJ::INT32;
-        case cle::dType::UINT32:    return DTypeJ::UINT32;
-        case cle::dType::FLOAT:     return DTypeJ::FLOAT;
-//        case cle::dType::UNKNOWN: // TODO: uncomment after https://github.com/clEsperanto/CLIc/pull/353 is merged, released, and we depend on that version
-        default:              return DTypeJ::UNKNOWN;
+    case cle::dType::INT8:
+        return DTypeJ::INT8;
+    case cle::dType::UINT8:
+        return DTypeJ::UINT8;
+    case cle::dType::INT16:
+        return DTypeJ::INT16;
+    case cle::dType::UINT16:
+        return DTypeJ::UINT16;
+    case cle::dType::INT32:
+        return DTypeJ::INT32;
+    case cle::dType::UINT32:
+        return DTypeJ::UINT32;
+    case cle::dType::FLOAT:
+        return DTypeJ::FLOAT;
+        //        case cle::dType::UNKNOWN: // TODO: uncomment after https://github.com/clEsperanto/CLIc/pull/353 is merged, released, and we depend on that version
+    default:
+        return DTypeJ::UNKNOWN;
     }
 }
 
@@ -147,9 +167,11 @@ inline cle::mType to_cle_mType(const MTypeJ &mtype)
 {
     switch (mtype)
     {
-        case MTypeJ::IMAGE:  return cle::mType::IMAGE;
-        case MTypeJ::BUFFER:
-        default:             return cle::mType::BUFFER;
+    case MTypeJ::IMAGE:
+        return cle::mType::IMAGE;
+    case MTypeJ::BUFFER:
+    default:
+        return cle::mType::BUFFER;
     }
 }
 
@@ -157,9 +179,11 @@ inline MTypeJ from_cle_mType(const cle::mType &mtype)
 {
     switch (mtype)
     {
-        case cle::mType::IMAGE:  return MTypeJ::IMAGE;
-        case cle::mType::BUFFER:
-        default:                 return MTypeJ::BUFFER;
+    case cle::mType::IMAGE:
+        return MTypeJ::IMAGE;
+    case cle::mType::BUFFER:
+    default:
+        return MTypeJ::BUFFER;
     }
 }
 
@@ -258,4 +282,3 @@ void MemoryJ::writeFromInt(const ArrayJ &array, int *data, const size_t &origin_
 {
     array.writeFrom(static_cast<void *>(data), origin_x, origin_y, origin_z, width, height, depth);
 }
-

@@ -33,9 +33,11 @@ public:
     std::string getName() const;
     std::string getInfo() const;
 
+    void setWaitForKernelFinish(bool flag);
+
     std::shared_ptr<cle::Device> get() const;
 
-    bool operator==(const DeviceJ& other) const;
+    bool operator==(const DeviceJ &other) const;
 };
 
 enum class DTypeJ
@@ -70,8 +72,8 @@ private:
     friend class MemoryJ;
 
 protected:
-    void writeFrom( void *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth) const;
-    void readTo( void *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth) const;
+    void writeFrom(void *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth) const;
+    void readTo(void *data, const size_t &origin_x, const size_t &origin_y, const size_t &origin_z, const size_t &width, const size_t &height, const size_t &depth) const;
 
 public:
     ArrayJ() = default;
@@ -87,7 +89,7 @@ public:
 
     std::shared_ptr<cle::Array> get() const;
 
-    static ArrayJ create( const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const DTypeJ &data_type, const MTypeJ &memory_type, const DeviceJ &device);
+    static ArrayJ create(const size_t &width, const size_t &height, const size_t &depth, const size_t &dimension, const DTypeJ &data_type, const MTypeJ &memory_type, const DeviceJ &device);
     DTypeJ dtype() const;
     MTypeJ mtype() const;
     DeviceJ device() const;

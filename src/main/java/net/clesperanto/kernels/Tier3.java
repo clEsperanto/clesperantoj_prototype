@@ -22,7 +22,7 @@ public class Tier3 {
 	 * The positions are returned in  an array of 6 values as follows: minX, minY, minZ, maxX, maxY, maxZ.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - 
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> boundingBox(DeviceJ device, ArrayJ input) {
@@ -36,7 +36,7 @@ public class Tier3 {
 	 * It writes the result in the results table in the columns MassX, MassY and MassZ.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - 
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> centerOfMass(DeviceJ device, ArrayJ input) {
@@ -169,7 +169,7 @@ public class Tier3 {
     
 	/**
 	 * Takes a labelmap with n labels and generates a (n+1)*(n+1) matrix where all pixels are set to 0 exept those where labels are touching.
-	 * Only half of the matrix is filled (with x < y).
+	 * Only half of the matrix is filled (with x &amp;lt; y).
 	 * For example, if labels 3 and 4 are touching then the pixel (3,4) in the matrix will be set to 1.
 	 * The touch matrix is a representation of a region adjacency graph.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -219,7 +219,7 @@ public class Tier3 {
 	 * Determines the overlap of two binary images using the Jaccard index.
 	 * A value of 0 suggests no overlap, 1 means perfect overlap.
 	 * The resulting Jaccard index is saved to the results table in the 'Jaccard_Index' column.
-	 * Note that the SorensenDice coefficient can be calculated from the Jaccard index j using this formula: <pre>s = f(j) = 2 j / (j + 1)</pre>.
+	 * Note that the SorensenDice coefficient can be calculated from the Jaccard index j using this formula: &amp;lt;pre&amp;gt;s = f(j) = 2 j / (j + 1)&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - 
 	 * @param input1 ({@link ArrayJ}) - 
@@ -253,7 +253,7 @@ public class Tier3 {
 	 * Determines the position of the maximum of all pixels in a given image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The image of which the position of the maximum of all pixels will be determined.
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> maximumPosition(DeviceJ device, ArrayJ input) {
@@ -279,7 +279,7 @@ public class Tier3 {
 	 * Determines the position of the minimum of all pixels in a given image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The image of which the position of the minimum of all pixels will be determined.
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> minimumPosition(DeviceJ device, ArrayJ input) {

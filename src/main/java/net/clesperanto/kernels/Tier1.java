@@ -19,7 +19,7 @@ public class Tier1 {
 
 	/**
 	 * Computes the absolute value of every individual pixel x in a given image.
-	 * <pre>f(x) = |x| </pre>.
+	 * &amp;lt;pre&amp;gt;f(x) = |x| &amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The input image to be processed.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
@@ -34,7 +34,7 @@ public class Tier1 {
     
 	/**
 	 * Calculates the sum of pairs of pixels x and y from images X and Y weighted with factors a and b.
-	 * <pre>f(x, y, a, b) = x * a + y * b</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y, a, b) = x * a + y * b&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first input image to added.
 	 * @param input1 ({@link ArrayJ}) - The second image to be added.
@@ -53,7 +53,7 @@ public class Tier1 {
     
 	/**
 	 * Adds a scalar value s to all pixels x of a given image X.
-	 * <pre>f(x, s) = x + s</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, s) = x + s&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The input image where scalare should be added.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
@@ -68,9 +68,9 @@ public class Tier1 {
     }
     
 	/**
-	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary AND operator &.
+	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary AND operator &amp;.
 	 * All pixel values except 0 in the input images are interpreted as 1.
-	 * <pre>f(x, y) = x & y</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = x &amp; y&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first binary input image to be processed.
 	 * @param input1 ({@link ArrayJ}) - The second binary input image to be processed.
@@ -102,7 +102,7 @@ public class Tier1 {
     
 	/**
 	 * Computes a binary image (containing pixel values 0 and 1) from an image X by negating its pixel values x using the binary NOT operator ! All pixel values except 0 in the input image are interpreted as 1.
-	 * <pre>f(x) = !x</pre>.
+	 * &amp;lt;pre&amp;gt;f(x) = !x&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The binary input image to be inverted.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
@@ -118,7 +118,7 @@ public class Tier1 {
 	/**
 	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary OR operator |.
 	 * All pixel values except 0 in the input images are interpreted as 1.
-	 * <pre>f(x, y) = x | y</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = x | y&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first binary input image to be processed.
 	 * @param input1 ({@link ArrayJ}) - The second binary input image to be processed.
@@ -150,9 +150,9 @@ public class Tier1 {
     }
     
 	/**
-	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary operators AND &, OR | and NOT ! implementing the XOR operator.
+	 * Computes a binary image (containing pixel values 0 and 1) from two images X and Y by connecting pairs of pixels x and y with the binary operators AND &amp;, OR | and NOT ! implementing the XOR operator.
 	 * All pixel values except 0 in the input images are interpreted as 1.
-	 * <pre>f(x, y) = (x & !y) | (!x & y)</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = (x &amp; !y) | (!x &amp; y)&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first binary input image to be processed.
 	 * @param input1 ({@link ArrayJ}) - The second binary input image to be processed.
@@ -236,7 +236,7 @@ public class Tier1 {
     
 	/**
 	 * Copies an image.
-	 * <pre>f(x) = x</pre>.
+	 * &amp;lt;pre&amp;gt;f(x) = x&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to copy.
 	 * @param output ({@link ArrayJ}) - Output copy image. (default: None)
@@ -401,7 +401,7 @@ public class Tier1 {
     
 	/**
 	 * Divides two images X and Y by each other pixel wise.
-	 * <pre>f(x, y) = x / y</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = x / y&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -418,7 +418,7 @@ public class Tier1 {
     
 	/**
 	 * Divides a scalar by an image pixel by pixel.
-	 * <pre>f(x, s) = s / x</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, s) = s / x&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -434,8 +434,8 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B equal pixel wise.
-	 * <pre>f(a, b) = 1 if a == b; 0 otherwise.
-	 * </pre>.
+	 * &amp;lt;pre&amp;gt;f(a, b) = 1 if a == b; 0 otherwise.
+	 * &amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first image to be compared with.
 	 * @param input1 ({@link ArrayJ}) - The second image to be compared with the first.
@@ -452,8 +452,8 @@ public class Tier1 {
     
 	/**
 	 * Determines if an image A and a constant b are equal.
-	 * <pre>f(a, b) = 1 if a == b; 0 otherwise.
-	 * </pre>.
+	 * &amp;lt;pre&amp;gt;f(a, b) = 1 if a == b; 0 otherwise.
+	 * &amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The image where every pixel is compared to the constant.
 	 * @param output ({@link ArrayJ}) - The resulting binary image where pixels will be 1 only if source1 (default: None)
@@ -597,7 +597,7 @@ public class Tier1 {
 	/**
 	 * Computes the gradient of gray values along X.
 	 * Assuming a, b and c are three adjacent pixels in X direction.
-	 * In the target image will be saved as: <pre>b' = c a;</pre>.
+	 * In the target image will be saved as: &amp;lt;pre&amp;gt;b' = c a;&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -613,7 +613,7 @@ public class Tier1 {
 	/**
 	 * Computes the gradient of gray values along Y.
 	 * Assuming a, b and c are three adjacent pixels in Y direction.
-	 * In the target image will be saved as: <pre>b' = c a;</pre>.
+	 * In the target image will be saved as: &amp;lt;pre&amp;gt;b' = c a;&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -629,7 +629,7 @@ public class Tier1 {
 	/**
 	 * Computes the gradient of gray values along Z.
 	 * Assuming a, b and c are three adjacent pixels in Z direction.
-	 * In the target image will be saved as: <pre>b' = c a;</pre>.
+	 * In the target image will be saved as: &amp;lt;pre&amp;gt;b' = c a;&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -644,7 +644,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B greater pixel wise.
-	 * f(a, b) = 1 if a > b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;gt; b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -661,7 +661,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B greater pixel wise.
-	 * f(a, b) = 1 if a > b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;gt; b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -677,7 +677,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B greater or equal pixel wise.
-	 * f(a, b) = 1 if a >= b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;gt;= b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -694,7 +694,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B greater or equal pixel wise.
-	 * f(a, b) = 1 if a >= b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;gt;= b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -724,7 +724,7 @@ public class Tier1 {
 	 * @param small_eigenvalue ({@link ArrayJ}) - Output result image. (default: None)
 	 * @param middle_eigenvalue ({@link ArrayJ}) - Output result image, null if input is 2D. (default: None)
 	 * @param large_eigenvalue ({@link ArrayJ}) - Output result image. (default: None)
-	 * @return ArrayList<{@link ArrayJ}>
+	 * @return ArrayList&amp;lt;{@link ArrayJ}&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<ArrayJ> hessianEigenvalues(DeviceJ device, ArrayJ input, ArrayJ small_eigenvalue, ArrayJ middle_eigenvalue, ArrayJ large_eigenvalue) {
@@ -812,7 +812,7 @@ public class Tier1 {
 	/**
 	 * Computes a masked image by applying a binary mask to an image.
 	 * All pixel values x of image X will be copied to the destination image in case pixel value m at the same position in the mask image is not equal to zero.
-	 * <pre>f(x,m) = (x if (m != 0); (0 otherwise))</pre>.
+	 * &amp;lt;pre&amp;gt;f(x,m) = (x if (m != 0); (0 otherwise))&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param mask ({@link ArrayJ}) - Mask image to apply.
@@ -848,7 +848,7 @@ public class Tier1 {
     
 	/**
 	 * Computes the maximum of a constant scalar s and each pixel value x in a given image X.
-	 * <pre>f(x, s) = max(x, s)</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, s) = max(x, s)&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -864,7 +864,7 @@ public class Tier1 {
     
 	/**
 	 * Computes the maximum of a pair of pixel values x, y from two given images X and Y.
-	 * <pre>f(x, y) = max(x, y)</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = max(x, y)&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -1159,7 +1159,7 @@ public class Tier1 {
     
 	/**
 	 * Computes the minimum of a constant scalar s and each pixel value x in a given image X.
-	 * <pre>f(x, s) = min(x, s)</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, s) = min(x, s)&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -1175,7 +1175,7 @@ public class Tier1 {
     
 	/**
 	 * Computes the minimum of a pair of pixel values x, y from two given images X and Y.
-	 * <pre>f(x, y) = min(x, y)</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = min(x, y)&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -1332,7 +1332,7 @@ public class Tier1 {
     
 	/**
 	 * Multiplies all pixels value x in a given image X with a constant scalar s.
-	 * <pre>f(x, s) = x * s</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, s) = x * s&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The input image to be multiplied with a constant.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
@@ -1348,7 +1348,7 @@ public class Tier1 {
     
 	/**
 	 * Multiplies all pairs of pixel values x and y from two image X and Y.
-	 * <pre>f(x, y) = x * y</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = x * y&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first input image to be multiplied.
 	 * @param input1 ({@link ArrayJ}) - The second image to be multiplied.
@@ -1599,7 +1599,7 @@ public class Tier1 {
     
 	/**
 	 * Computes all pixels value x to the power of a given exponent a.
-	 * <pre>f(x, a) = x ^ a</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, a) = x ^ a&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -1813,7 +1813,7 @@ public class Tier1 {
     
 	/**
 	 * Sets all pixel values x of a given image X to a constant value v.
-	 * <pre>f(x) = v</pre>.
+	 * &amp;lt;pre&amp;gt;f(x) = v&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param scalar (float) - Value to set. (default: 0)
@@ -1956,7 +1956,7 @@ public class Tier1 {
     }
     
 	/**
-	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x > y.
+	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x &amp;gt; y.
 	 * Otherwise the pixel is not overwritten.
 	 * If you want to initialize an identity transfrom matrix, set all pixels to 0 first.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1972,7 +1972,7 @@ public class Tier1 {
     }
     
 	/**
-	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x < y.
+	 * Sets all pixel values a of a given image A to a constant value v in case its coordinates x &amp;lt; y.
 	 * Otherwise the pixel is not overwritten.
 	 * If you want to initialize an identity transfrom matrix, set all pixels to 0 first.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -1989,8 +1989,8 @@ public class Tier1 {
     
 	/**
 	 * Extracts the sign of pixels.
-	 * If a pixel value < 0, resulting pixel value will be 1.
-	 * If it was > 0, it will be 1.
+	 * If a pixel value &amp;lt; 0, resulting pixel value will be 1.
+	 * If it was &amp;gt; 0, it will be 1.
 	 * Otherwise it will be 0.
 	 * This function aims to work similarly as its counterpart in numpy [1].
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
@@ -2007,7 +2007,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B smaller pixel wise.
-	 * f(a, b) = 1 if a < b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;lt; b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -2024,7 +2024,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B smaller pixel wise.
-	 * f(a, b) = 1 if a < b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;lt; b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -2040,7 +2040,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B smaller or equal pixel wise.
-	 * f(a, b) = 1 if a <= b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;lt;= b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image to process.
 	 * @param input1 ({@link ArrayJ}) - Second input image to process.
@@ -2057,7 +2057,7 @@ public class Tier1 {
     
 	/**
 	 * Determines if two images A and B smaller or equal pixel wise.
-	 * f(a, b) = 1 if a <= b; 0 otherwise.
+	 * f(a, b) = 1 if a &amp;lt;= b; 0 otherwise.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -2116,7 +2116,7 @@ public class Tier1 {
     
 	/**
 	 * Subtracts one image X from a scalar s pixel wise.
-	 * <pre>f(x, s) = s x</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, s) = s x&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)

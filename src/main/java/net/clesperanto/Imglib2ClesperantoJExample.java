@@ -61,16 +61,12 @@ public class Imglib2ClesperantoJExample {
         Img<FloatType> output_img = ArrayImgs.floats(out, new long[] { 3, 3, 2 });
 
         ArrayJ input = ImgLib2Converters.copyImgLib2ToArrayJ(input_img, currentDevice, MemoryType.BUFFER);
-        // ArrayJ output = ImgLib2Converters.copyImgLib2ToArrayJ(output_img,
-        // currentDevice, "buffer");
-
         ArrayJ output = Tier1.absolute(currentDevice, input, null);
 
         System.out.println("Input:" + input.toString());
         System.out.println("Output:" + output.toString());
 
         output_img = ImgLib2Converters.copyArrayJToImgLib2(output);
-
         output_img.cursor().forEachRemaining(t -> System.out.println(t.get()));
 
         Float sum = Tier2.sumOfAllPixels(currentDevice, output);

@@ -77,10 +77,10 @@ public class ArrayJ {
         numDimensions = _arrayj.getDimension();
     }
 
-    // TODO: remove after adapting Tier methods
-    public ArrayJ(final _ArrayJ _arrayj, Object IGNORED_just_so_that_Tier_methods_work_unmodified_REMOVE_LATER) {
-        this(_arrayj);
-    }
+    // // TODO: remove after adapting Tier methods
+    // public ArrayJ(final _ArrayJ _arrayj, Object IGNORED_just_so_that_Tier_methods_work_unmodified_REMOVE_LATER) {
+    //     this(_arrayj);
+    // }
 
     // TODO: make package-private?
     public ArrayJ(final long width, final long height, final long depth, final int numDimensions,

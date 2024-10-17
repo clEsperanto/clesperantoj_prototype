@@ -1,3 +1,5 @@
+[![Build Status](https://github.com/clEsperanto/clesperantoj_prototype/actions/workflows/build.yml/badge.svg)](https://github.com/clEsperanto/clesperantoj_prototype/actions/workflows/build.yml)
+
 
 
 # clEsperantoJ

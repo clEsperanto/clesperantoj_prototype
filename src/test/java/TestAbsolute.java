@@ -46,7 +46,9 @@ public class TestAbsolute {
 
     @Test
     public void testAbsolute() {
-    	DeviceJ device = DeviceJ.getDefaultDevice();
+        DeviceJ device = DeviceJ.getDefaultDevice();
+        device.setWaitForKernelFinish(true);
+
         ArrayJ in = device.createArray(DataType.INT32, MemoryType.BUFFER, 2, 2);
         in.fillMemory(-1);
         ArrayJ out = device.createArray(DataType.INT32, MemoryType.BUFFER, 2, 2);
@@ -64,9 +66,10 @@ public class TestAbsolute {
 
     @Test
     public void testAbsolute1() {
-    	DeviceJ device = DeviceJ.getDefaultDevice();
+        DeviceJ device = DeviceJ.getDefaultDevice();
+        device.setWaitForKernelFinish(true);
         ArrayJ in = device.createArray(DataType.INT32, MemoryType.BUFFER, 2, 2);
-    	in.fillMemory(-1);
+        in.fillMemory(-1);
         ArrayJ out = Tier1.absolute(device, in, null);
 
         int[] result = new int[4];
@@ -74,8 +77,8 @@ public class TestAbsolute {
         out.readToBuffer(resultBuff);
 
         for (int val : result)
-        	assertEquals(1, val);
-		in = null;
-		out = null;
+            assertEquals(1, val);
+        in = null;
+        out = null;
     }
 }

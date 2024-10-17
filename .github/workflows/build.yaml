@@ -1,17 +1,11 @@
----
-name: build
+
 on:
   push:
     branches:
       - main
-      - deploy-to-scijava
     tags:
       - "*-[0-9]+.*"
-    paths-ignore:
-      - .github/workflows/build_fast.yaml
-  pull_request:
-    branches:
-      - main
+
 env:
   opencl-icd-loader-git-tag: v2023.04.17
   opencl-headers-git-tag: v2023.04.17
@@ -22,8 +16,6 @@ jobs:
       matrix:
         name:
           - ubuntu
-          - windows
-          - macos
         include:
           - name: ubuntu
             os: ubuntu-latest
@@ -31,19 +23,6 @@ jobs:
             cxx-compiler: g++
             cmake-build-type: Release
             cmake-build-flag: ""
-          - name: windows
-            os: windows-latest
-            c-compiler: cl.exe
-            cxx-compiler: cl.exe
-            cmake-build-type: Release
-            cmake-build-flag: -A x64
-          - name: macos
-            os: macos-14
-            c-compiler: clang
-            cxx-compiler: clang++
-            cmake-build-type: Release
-            cmake-build-flag: ""
-    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1
@@ -143,10 +122,6 @@ jobs:
       - name: Extract compiled native libraries to target fodler libs
         run: |
           jar xf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/linux-x86_64
-
-          jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
-
-          jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macosx-arm64
 
           mkdir -p libs
 

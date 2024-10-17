@@ -31,6 +31,13 @@ jobs:
           if [ -z "$MAVEN_PASS" ]; then echo "MAVEN_PASS is not set"; fi
           if [ -z "$OSSRH_PASS" ]; then echo "OSSRH_PASS is not set"; fi
           if [ -z "$SIGNING_ASC" ]; then echo "SIGNING_ASC is not set"; fi
+        env:
+          GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          MAVEN_USER: ${{ secrets.MAVEN_USER }}
+          MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
+          OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
+          SIGNING_ASC: ${{ secrets.TOKEN_SR }}
       - name: Set up CI environment
         run: .github/setup.sh
       - name: Execute the build
@@ -41,4 +48,4 @@ jobs:
           MAVEN_USER: ${{ secrets.MAVEN_USER }}
           MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
           OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
-          SIGNING_ASC: ${{ secrets.SIGNING_ASC }}
+          SIGNING_ASC: ${{ secrets.TOKEN_SR }}

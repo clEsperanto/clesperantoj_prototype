@@ -1,4 +1,4 @@
-
+name: build
 on:
   push:
     branches:
@@ -23,6 +23,7 @@ jobs:
             cxx-compiler: g++
             cmake-build-type: Release
             cmake-build-flag: ""
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
       - uses: ilammy/msvc-dev-cmd@v1

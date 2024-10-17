@@ -23,21 +23,6 @@ jobs:
           java-version: "8"
           distribution: zulu
           cache: maven
-      - name: Check secrets are set
-        run: |
-          if [ -z "$GPG_KEY_NAME" ]; then echo "GPG_KEY_NAME is not set"; fi
-          if [ -z "$GPG_PASSPHRASE" ]; then echo "GPG_PASSPHRASE is not set"; fi
-          if [ -z "$MAVEN_USER" ]; then echo "MAVEN_USER is not set"; fi
-          if [ -z "$MAVEN_PASS" ]; then echo "MAVEN_PASS is not set"; fi
-          if [ -z "$OSSRH_PASS" ]; then echo "OSSRH_PASS is not set"; fi
-          if [ -z "$SIGNING_ASC" ]; then echo "SIGNING_ASC is not set"; fi
-        env:
-          GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-          MAVEN_USER: ${{ secrets.MAVEN_USER }}
-          MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
-          OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
-          SIGNING_ASC: ${{ secrets.TOKEN_SR }}
       - name: Set up CI environment
         run: .github/setup.sh
       - name: Execute the build
@@ -48,4 +33,4 @@ jobs:
           MAVEN_USER: ${{ secrets.MAVEN_USER }}
           MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
           OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
-          SIGNING_ASC: ${{ secrets.TOKEN_SR }}
+          SIGNING_ASC: ${{ secrets.OSSRH_USER }}

@@ -1,4 +1,3 @@
----
 name: build fast
 on:
   push:
@@ -24,7 +23,15 @@ jobs:
           java-version: "8"
           distribution: zulu
           cache: maven
-      - name: Set up CI environment
+      - name: Check secrets are set
+        run: |
+          if [ -z "$GPG_KEY_NAME" ]; then echo "GPG_KEY_NAME is not set"; fi
+          if [ -z "$GPG_PASSPHRASE" ]; then echo "GPG_PASSPHRASE is not set"; fi
+          if [ -z "$MAVEN_USER" ]; then echo "MAVEN_USER is not set"; fi
+          if [ -z "$MAVEN_PASS" ]; then echo "MAVEN_PASS is not set"; fi
+          if [ -z "$OSSRH_PASS" ]; then echo "OSSRH_PASS is not set"; fi
+          if [ -z "$SIGNING_ASC" ]; then echo "SIGNING_ASC is not set"; fi
+            - name: Set up CI environment
         run: .github/setup.sh
       - name: Execute the build
         run: .github/build.sh

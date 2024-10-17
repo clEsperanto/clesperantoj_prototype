@@ -19,7 +19,7 @@ public class Tier2 {
 
 	/**
 	 * Determines the absolute difference pixel by pixel between two images.
-	 * <pre>f(x, y) = |x y| </pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = |x y| &amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The input image to be subtracted from.
 	 * @param input1 ({@link ArrayJ}) - The input image which is subtracted.
@@ -36,7 +36,7 @@ public class Tier2 {
     
 	/**
 	 * Calculates the sum of pairs of pixels x and y of two images X and Y.
-	 * <pre>f(x, y) = x + y</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = x + y&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - The first input image to added.
 	 * @param input1 ({@link ArrayJ}) - The second image to be added.
@@ -407,7 +407,7 @@ public class Tier2 {
 	/**
 	 * Computes the negative value of all pixels in a given image.
 	 * It is recommended to convert images to 32bit float before applying this operation.
-	 * <pre>f(x) = x</pre> For binary images, use binaryNot.
+	 * &amp;lt;pre&amp;gt;f(x) = x&amp;lt;/pre&amp;gt; For binary images, use binaryNot.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
@@ -704,7 +704,7 @@ public class Tier2 {
     
 	/**
 	 * Subtracts one image X from another image Y pixel wise.
-	 * <pre>f(x, y) = x y</pre>.
+	 * &amp;lt;pre&amp;gt;f(x, y) = x y&amp;lt;/pre&amp;gt;.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input0 ({@link ArrayJ}) - First input image.
 	 * @param input1 ({@link ArrayJ}) - Second input image.

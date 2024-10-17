@@ -57,7 +57,7 @@ import java.util.Arrays;
  * - using array img and blocks copy limits to images whose array size is smaller than the integer max
  */
 /**
- * Class to copy {@link RandomAccessibleInteral}s into {@link ArrayJ}s and vice-versa
+ * Class to copy {@link RandomAccessibleInterval}s into {@link ArrayJ}s and vice-versa
  */
 public class ImgLib2Converters {
 
@@ -67,8 +67,6 @@ public class ImgLib2Converters {
 	 *
 	 * @param <T>
 	 * 	data type of the ImgLib2 ArrayImg
-	 * @param <A>
-	 * 	ImgLib2 data type of the BufferAccess
 	 * @param arrayj
 	 * 	array that is located in the GPU for clesperanto to do some operations
 	 * @return and ImgLib2 {@link ArrayImg} on the CPU copied from the {@link ArrayJ} on the GPU

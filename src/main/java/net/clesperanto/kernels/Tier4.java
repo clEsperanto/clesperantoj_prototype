@@ -23,7 +23,7 @@ public class Tier4 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - 
 	 * @param label_id (int) - 
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> labelBoundingBox(DeviceJ device, ArrayJ input, int label_id) {

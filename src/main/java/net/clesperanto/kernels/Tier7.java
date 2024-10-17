@@ -53,8 +53,6 @@ public class Tier7 {
 	 * @param number_of_erosions (int) - Number of iteration of erosion. (default: 5)
 	 * @param outline_sigma (float) - Gaussian blur sigma applied before Otsu thresholding. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see https://github.com/biovoxxel/bv3dbox (BV_LabelSplitter.java#L83)
-	 * @see https://zenodo.org/badge/latestdoi/434949702
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ erodedOtsuLabeling(DeviceJ device, ArrayJ input, ArrayJ output, int number_of_erosions, float outline_sigma) {
@@ -217,9 +215,6 @@ public class Tier7 {
 	 * @param spot_sigma (float) - Controls how close detected cells can be. (default: 2)
 	 * @param outline_sigma (float) - Controls how precise segmented objects are outlined. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_voronoiOtsuLabeling
-	 * @see https://ieeexplore.ieee.org/document/4310076
-	 * @see https://en.wikipedia.org/wiki/Voronoi_diagram
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ voronoiOtsuLabeling(DeviceJ device, ArrayJ input, ArrayJ output, float spot_sigma, float outline_sigma) {

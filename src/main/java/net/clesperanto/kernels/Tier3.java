@@ -23,7 +23,6 @@ public class Tier3 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - 
 	 * @return ArrayList<Float>
-	 * @see https://clij.github.io/clij2-docs/reference_boundingBox
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> boundingBox(DeviceJ device, ArrayJ input) {
@@ -38,7 +37,6 @@ public class Tier3 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - 
 	 * @return ArrayList<Float>
-	 * @see https://clij.github.io/clij2-docs/reference_centerOfMass
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> centerOfMass(DeviceJ device, ArrayJ input) {
@@ -57,7 +55,6 @@ public class Tier3 {
 	 * @param list ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_excludeLabels
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ removeLabels(DeviceJ device, ArrayJ input, ArrayJ list, ArrayJ output) {
@@ -77,7 +74,6 @@ public class Tier3 {
 	 * @param list ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_excludeLabels
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ excludeLabels(DeviceJ device, ArrayJ input, ArrayJ list, ArrayJ output) {
@@ -97,7 +93,6 @@ public class Tier3 {
 	 * @param exclude_y (boolean) - Exclude labels along min and max y (default: True)
 	 * @param exclude_z (boolean) - Exclude labels along min and max z (default: True)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_excludeLabelsOnEdges
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ removeLabelsOnEdges(DeviceJ device, ArrayJ input, ArrayJ output, boolean exclude_x, boolean exclude_y, boolean exclude_z) {
@@ -116,7 +111,6 @@ public class Tier3 {
 	 * @param exclude_y (boolean) - Exclude labels along min and max y (default: True)
 	 * @param exclude_z (boolean) - Exclude labels along min and max z (default: True)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_excludeLabelsOnEdges
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ excludeLabelsOnEdges(DeviceJ device, ArrayJ input, ArrayJ output, boolean exclude_x, boolean exclude_y, boolean exclude_z) {
@@ -148,7 +142,6 @@ public class Tier3 {
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @param gamma (float) -  (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_gammaCorrection
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ gammaCorrection(DeviceJ device, ArrayJ input, ArrayJ output, float gamma) {
@@ -165,7 +158,6 @@ public class Tier3 {
 	 * @param input1 ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_generateBinaryOverlapMatrix
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ generateBinaryOverlapMatrix(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -184,7 +176,6 @@ public class Tier3 {
 	 * @param input ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_generateTouchMatrix
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ generateTouchMatrix(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -216,7 +207,6 @@ public class Tier3 {
 	 * @param min (float) -  (default: None)
 	 * @param max (float) -  (default: None)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_histogram
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ histogram(DeviceJ device, ArrayJ input, ArrayJ output, int nbins, float min, float max) {
@@ -234,7 +224,6 @@ public class Tier3 {
 	 * @param input0 ({@link ArrayJ}) - 
 	 * @param input1 ({@link ArrayJ}) - 
 	 * @return float
-	 * @see https://clij.github.io/clij2-docs/reference_jaccardIndex
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float jaccardIndex(DeviceJ device, ArrayJ input0, ArrayJ input1) {
@@ -252,7 +241,6 @@ public class Tier3 {
 	 * @param input ({@link ArrayJ}) - 
 	 * @param output ({@link ArrayJ}) -  (default: None)
 	 * @return {@link ArrayJ}
-	 * @see https://clij.github.io/clij2-docs/reference_labelledSpotsToPointList
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ labelledSpotsToPointlist(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -279,7 +267,6 @@ public class Tier3 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The image of which the mean average of all pixels will be determined.
 	 * @return float
-	 * @see https://clij.github.io/clij2-docs/reference_meanOfAllPixels
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float meanOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -328,7 +315,6 @@ public class Tier3 {
 	 * @param label ({@link ArrayJ}) - Label image to compute the statistics.
 	 * @param intensity ({@link ArrayJ}) - Intensity image. (default: None)
 	 * @return StatisticsMap
-	 * @see https://clij.github.io/clij2-docs/reference_statisticsOfLabelledPixels
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static HashMap<String, ArrayList<Float>> statisticsOfLabelledPixels(DeviceJ device, ArrayJ label, ArrayJ intensity) {
@@ -344,7 +330,6 @@ public class Tier3 {
 	 * @param label ({@link ArrayJ}) - Label image to compute the statistics.
 	 * @param intensity ({@link ArrayJ}) - Intensity image. (default: None)
 	 * @return StatisticsMap
-	 * @see https://clij.github.io/clij2-docs/reference_statisticsOfBackgroundAndLabelledPixels
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static HashMap<String, ArrayList<Float>> statisticsOfBackgroundAndLabelledPixels(DeviceJ device, ArrayJ label, ArrayJ intensity) {

@@ -172,7 +172,7 @@ public class DeviceJ {
 
 	/**
 	 *
-	 * @return void
+	 * @param wait if true, the device will wait for the kernel to finish
 	 */
 	public void setWaitForKernelFinish(boolean wait) {
 		this._deviceJ.setWaitForKernelFinish(wait);

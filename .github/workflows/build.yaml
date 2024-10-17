@@ -1,164 +1,164 @@
+---
 name: build
-
 on:
   push:
-    branches: [ main, deploy-to-scijava ]
-  pull_request:
-    branches: [ main ]
-
-on:
-  push:
-    branches: [ main, deploy-to-scijava ]
+    branches:
+      - main
+      - deploy-to-scijava
     tags:
       - "*-[0-9]+.*"
   pull_request:
     branches:
       - main
-
 env:
-  opencl-icd-loader-git-tag: "v2023.04.17"
-  opencl-headers-git-tag: "v2023.04.17"
-
+  opencl-icd-loader-git-tag: v2023.04.17
+  opencl-headers-git-tag: v2023.04.17
 jobs:
   build-os:
     strategy:
       fail-fast: false
       matrix:
-        name: [ubuntu, windows, macos]
+        name:
+          - ubuntu
+          - windows
+          - macos
         include:
           - name: ubuntu
             os: ubuntu-latest
-            c-compiler: "gcc"
-            cxx-compiler: "g++"
-            cmake-build-type: "Release"
+            c-compiler: gcc
+            cxx-compiler: g++
+            cmake-build-type: Release
             cmake-build-flag: ""
           - name: windows
             os: windows-latest
-            c-compiler: "cl.exe"
-            cxx-compiler: "cl.exe"
-            cmake-build-type: "Release"
-            cmake-build-flag: "-A x64"
+            c-compiler: cl.exe
+            cxx-compiler: cl.exe
+            cmake-build-type: Release
+            cmake-build-flag: -A x64
           - name: macos
             os: macos-14
-            c-compiler: "clang"
-            cxx-compiler: "clang++"
-            cmake-build-type: "Release"
+            c-compiler: clang
+            cxx-compiler: clang++
+            cmake-build-type: Release
             cmake-build-flag: ""
     runs-on: ${{ matrix.os }}
-
     steps:
-    - uses: actions/checkout@v4
-    - uses: ilammy/msvc-dev-cmd@v1
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: "11"
+          distribution: adopt
+      - name: Install ocl-icd-loader - windows
+        if: runner.os == 'Windows'
+        run: >
+          cd ..
 
-    - name: Set up JDK
-      uses: actions/setup-java@v4
-      with:
-        java-version: '11'
-        distribution: 'adopt'
+          git clone --branch ${{ env.opencl-icd-loader-git-tag }} https://github.com/KhronosGroup/OpenCL-ICD-Loader
 
-    - name: Install ocl-icd-loader - windows
-      if: runner.os == 'Windows'
-      run: |
-        cd ..
-        git clone --branch ${{ env.opencl-icd-loader-git-tag }} https://github.com/KhronosGroup/OpenCL-ICD-Loader
-        git clone --branch ${{ env.opencl-headers-git-tag }} https://github.com/KhronosGroup/OpenCL-Headers
-        cmake -S "./OpenCL-Headers" -B "./OpenCL-Headers/build"
-        cmake --build "./OpenCL-Headers/build" --parallel 6 --target install
-        cmake -D CMAKE_PREFIX_PATH="./OpenCL-Headers" -D OPENCL_ICD_LOADER_HEADERS_DIR="./OpenCL-Headers/" -S "./OpenCL-ICD-Loader" -B "./OpenCL-ICD-Loader/build" -A x64
-        cmake --build "./OpenCL-ICD-Loader/build" --parallel 6 --target install --config Release
-      shell: bash -l {0}
+          git clone --branch ${{ env.opencl-headers-git-tag }} https://github.com/KhronosGroup/OpenCL-Headers
 
-    - name: Increase swapfile on Ubuntu
-      if: runner.os == 'Linux'
-      run: |
-        sudo swapoff -a
-        sudo fallocate -l 15G /swapfile
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
-        sudo swapon --show
-    - name: Install openCL on Ubuntu
-      if: runner.os == 'Linux'
-      run: sudo apt install ocl-icd-opencl-dev
+          cmake -S "./OpenCL-Headers" -B "./OpenCL-Headers/build"
 
-    - name: Build with Maven
-      run:  mvn clean install -DskipTests
-      shell: bash
+          cmake --build "./OpenCL-Headers/build" --parallel 6 --target install
 
-    - name: Run Java class (only possible on MacOS intel)
-      if: contains(matrix.os, 'macos')
-      run: |
-        if [[ $(uname -m) == 'x86_64' ]]; then
-          mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
-          java -cp target/classes:$(cat classpath.txt) net.clesperanto.ClesperantoJ
-        fi
-    - name: Get Maven Version and Upload Artifact
-      shell: bash
-      run: |
-        MVN_VERSION=$(mvn -q \
-          -Dexec.executable=echo \
-          -Dexec.args='${project.version}' \
-          --non-recursive \
-          exec:exec)
-        MVN_NAME=$(mvn -q \
-          -Dexec.executable=echo \
-          -Dexec.args='${project.name}' \
-          --non-recursive \
-          exec:exec)
-        echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
-        echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
-      id: mvn_info
+          cmake -D CMAKE_PREFIX_PATH="./OpenCL-Headers" -D OPENCL_ICD_LOADER_HEADERS_DIR="./OpenCL-Headers/" -S "./OpenCL-ICD-Loader" -B "./OpenCL-ICD-Loader/build" -A x64
 
-    - name: Upload native library
-      uses: actions/upload-artifact@v4
-      with:
-        name: ${{ matrix.name }}-artifact
-        path: target/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
-
+          cmake --build "./OpenCL-ICD-Loader/build" --parallel 6 --target install --config Release
+        shell: bash -l {0}
+      - name: Increase swapfile on Ubuntu
+        if: runner.os == 'Linux'
+        run: |
+          sudo swapoff -a
+          sudo fallocate -l 15G /swapfile
+          sudo chmod 600 /swapfile
+          sudo mkswap /swapfile
+          sudo swapon /swapfile
+          sudo swapon --show
+      - name: Install openCL on Ubuntu
+        if: runner.os == 'Linux'
+        run: sudo apt install ocl-icd-opencl-dev
+      - name: Build with Maven
+        run: mvn clean install -DskipTests
+        shell: bash
+      - name: Run Java class (only possible on MacOS intel)
+        if: contains(matrix.os, 'macos')
+        run: >
+          if [[ $(uname -m) == 'x86_64' ]]; then
+            mvn dependency:build-classpath -Dmdep.outputFile=classpath.txt
+            java -cp target/classes:$(cat classpath.txt) net.clesperanto.ClesperantoJ
+          fi
+      - name: Get Maven Version and Upload Artifact
+        shell: bash
+        run: |
+          MVN_VERSION=$(mvn -q \
+            -Dexec.executable=echo \
+            -Dexec.args='${project.version}' \
+            --non-recursive \
+            exec:exec)
+          MVN_NAME=$(mvn -q \
+            -Dexec.executable=echo \
+            -Dexec.args='${project.name}' \
+            --non-recursive \
+            exec:exec)
+          echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
+          echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
+        id: mvn_info
+      - name: Upload native library
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.name }}-artifact
+          path: target/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
   build:
     needs: build-os
     runs-on: macos-13
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up JDK 8
-      uses: actions/setup-java@v4
-      with:
-          java-version: '8'
-          distribution: 'zulu'
-          cache: 'maven'
-    - name: Download all platform-specific JAR files
-      uses: actions/download-artifact@v4
-    - name: Get Maven Version
-      run: |
-        MVN_VERSION=$(mvn -q \
-          -Dexec.executable=echo \
-          -Dexec.args='${project.version}' \
-          --non-recursive \
-          exec:exec)
-        MVN_NAME=$(mvn -q \
-          -Dexec.executable=echo \
-          -Dexec.args='${project.name}' \
-          --non-recursive \
-          exec:exec)
-        echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
-        echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
-      id: mvn_info
-    - name: Extract compiled native libraries to target fodler libs
-      run: |
-        jar xvf ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/linux-x86_64
-        jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
-        jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macosx-arm64
-        mkdir -p libs
-        mv net/clesperanto/* libs/
-    - name: Set up CI environment
-      run: .github/setup.sh
-    - name: Execute the build
-      run: .github/build.sh
-      env:
-        GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
-        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
-        MAVEN_USER: ${{ secrets.MAVEN_USER }}
-        MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
-        OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
-        SIGNING_ASC: ${{ secrets.SIGNING_ASC }}
-        
+      - uses: actions/checkout@v4
+      - name: Set up JDK 8
+        uses: actions/setup-java@v4
+        with:
+          java-version: "8"
+          distribution: zulu
+          cache: maven
+      - name: Download all platform-specific JAR files
+        uses: actions/download-artifact@v4
+      - name: Get Maven Version
+        run: |
+          MVN_VERSION=$(mvn -q \
+            -Dexec.executable=echo \
+            -Dexec.args='${project.version}' \
+            --non-recursive \
+            exec:exec)
+          MVN_NAME=$(mvn -q \
+            -Dexec.executable=echo \
+            -Dexec.args='${project.name}' \
+            --non-recursive \
+            exec:exec)
+          echo "version=${MVN_VERSION}" >> $GITHUB_OUTPUT
+          echo "name=${MVN_NAME}" >> $GITHUB_OUTPUT
+        id: mvn_info
+      - name: Extract compiled native libraries to target fodler libs
+        run: >
+          jar xvf
+          ubuntu-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar
+          net/clesperanto/linux-x86_64
+
+          jar xf windows-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/windows-x86_64
+
+          jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macosx-arm64
+
+          mkdir -p libs
+
+          mv net/clesperanto/* libs/
+      - name: Set up CI environment
+        run: .github/setup.sh
+      - name: Execute the build
+        run: .github/build.sh
+        env:
+          GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          MAVEN_USER: ${{ secrets.MAVEN_USER }}
+          MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
+          OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
+          SIGNING_ASC: ${{ secrets.SIGNING_ASC }}

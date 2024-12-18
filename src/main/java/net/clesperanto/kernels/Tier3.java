@@ -22,7 +22,7 @@ public class Tier3 {
 	 * The positions are returned in  an array of 6 values as follows: minX, minY, minZ, maxX, maxY, maxZ.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input binary image
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @see <a href="https://clij.github.io/clij2-docs/reference_boundingBox">reference_boundingBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
@@ -37,7 +37,7 @@ public class Tier3 {
 	 * It writes the result in the results table in the columns MassX, MassY and MassZ.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @see <a href="https://clij.github.io/clij2-docs/reference_centerOfMass">reference_centerOfMass</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
@@ -265,7 +265,7 @@ public class Tier3 {
 	 * Determines the position of the maximum of all pixels in a given image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The image of which the position of the maximum of all pixels will be determined.
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> maximumPosition(DeviceJ device, ArrayJ input) {
@@ -292,7 +292,7 @@ public class Tier3 {
 	 * Determines the position of the minimum of all pixels in a given image.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The image of which the position of the minimum of all pixels will be determined.
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> minimumPosition(DeviceJ device, ArrayJ input) {

@@ -27,7 +27,7 @@ public class Tier7 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to be transformed.
 	 * @param output ({@link ArrayJ}) - Output image. (default: None)
-	 * @param transform_matrix (ArrayList<Float>) - Affine transformation matrix (3x3 or 4x4). (default: None)
+	 * @param transform_matrix (ArrayList&amp;lt;Float&amp;gt;) - Affine transformation matrix (3x3 or 4x4). (default: None)
 	 * @param interpolate (boolean) - If true, bi/trilinear interpolation will be applied, if hardware allows. (default: False)
 	 * @param resize (boolean) - Automatically determines the size of the output depending on the rotation angles. (default: False)
 	 * @return {@link ArrayJ}

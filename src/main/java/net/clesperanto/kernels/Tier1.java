@@ -809,7 +809,7 @@ public class Tier1 {
 	 * @param small_eigenvalue ({@link ArrayJ}) - Output result image. (default: None)
 	 * @param middle_eigenvalue ({@link ArrayJ}) - Output result image, null if input is 2D. (default: None)
 	 * @param large_eigenvalue ({@link ArrayJ}) - Output result image. (default: None)
-	 * @return ArrayList<{@link ArrayJ}>
+	 * @return ArrayList&amp;lt;{@link ArrayJ}&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<ArrayJ> hessianEigenvalues(DeviceJ device, ArrayJ input, ArrayJ small_eigenvalue, ArrayJ middle_eigenvalue, ArrayJ large_eigenvalue) {

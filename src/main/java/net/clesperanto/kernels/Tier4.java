@@ -23,7 +23,7 @@ public class Tier4 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Label image
 	 * @param label_id (int) - Identifier of label
-	 * @return ArrayList<Float>
+	 * @return ArrayList&amp;lt;Float&amp;gt;
 	 * @see <a href="https://clij.github.io/clij2-docs/reference_boundingBox">reference_boundingBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */

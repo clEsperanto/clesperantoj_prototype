@@ -63,8 +63,8 @@ public class Tier6 {
 	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param outline_sigma (float) - Gaussian blur sigma along all axes (default: 0)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://ieeexplore.ieee.org/document/4310076"&amp;gt;4310076&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://en.wikipedia.org/wiki/Connected-component_labeling"&amp;gt;Connected-component_labeling&amp;lt;/a&amp;gt;
+	 * @see <a href="https://ieeexplore.ieee.org/document/4310076">4310076</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/Connected-component_labeling">Connected-component_labeling</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ gaussOtsuLabeling(DeviceJ device, ArrayJ input0, ArrayJ output, float outline_sigma) {
@@ -82,7 +82,7 @@ public class Tier6 {
 	 * @param mask ({@link ArrayJ}) - Input
 	 * @param output ({@link ArrayJ}) - Output label image (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_maskedVoronoiLabeling"&amp;gt;reference_maskedVoronoiLabeling&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_maskedVoronoiLabeling">reference_maskedVoronoiLabeling</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ maskedVoronoiLabeling(DeviceJ device, ArrayJ input, ArrayJ mask, ArrayJ output) {
@@ -99,7 +99,7 @@ public class Tier6 {
 	 * @param input_binary ({@link ArrayJ}) - Input binary image
 	 * @param output_labels ({@link ArrayJ}) - Output label image (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_voronoiLabeling"&amp;gt;reference_voronoiLabeling&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_voronoiLabeling">reference_voronoiLabeling</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ voronoiLabeling(DeviceJ device, ArrayJ input_binary, ArrayJ output_labels) {
@@ -115,7 +115,7 @@ public class Tier6 {
 	 * @param output ({@link ArrayJ}) - Output label image filtered. (default: None)
 	 * @param minimum_size (float) - Smallest size object allowed. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange"&amp;gt;reference_excludeLabelsOutsideSizeRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange">reference_excludeLabelsOutsideSizeRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ removeSmallLabels(DeviceJ device, ArrayJ input, ArrayJ output, float minimum_size) {
@@ -131,7 +131,7 @@ public class Tier6 {
 	 * @param output ({@link ArrayJ}) - Output label image filtered. (default: None)
 	 * @param maximum_size (float) - Largest size object to exclude. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange"&amp;gt;reference_excludeLabelsOutsideSizeRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange">reference_excludeLabelsOutsideSizeRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ excludeSmallLabels(DeviceJ device, ArrayJ input, ArrayJ output, float maximum_size) {
@@ -147,7 +147,7 @@ public class Tier6 {
 	 * @param output ({@link ArrayJ}) - Output label image filtered. (default: None)
 	 * @param maximum_size (float) - Biggest size object allowed. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange"&amp;gt;reference_excludeLabelsOutsideSizeRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange">reference_excludeLabelsOutsideSizeRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ removeLargeLabels(DeviceJ device, ArrayJ input, ArrayJ output, float maximum_size) {
@@ -163,7 +163,7 @@ public class Tier6 {
 	 * @param output ({@link ArrayJ}) - Output label image filtered. (default: None)
 	 * @param minimum_size (float) - Smallest size object to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange"&amp;gt;reference_excludeLabelsOutsideSizeRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange">reference_excludeLabelsOutsideSizeRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ excludeLargeLabels(DeviceJ device, ArrayJ input, ArrayJ output, float minimum_size) {

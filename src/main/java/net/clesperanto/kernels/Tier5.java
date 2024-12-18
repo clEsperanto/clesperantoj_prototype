@@ -25,7 +25,7 @@ public class Tier5 {
 	 * @param input0 ({@link ArrayJ}) - First array to compare
 	 * @param input1 ({@link ArrayJ}) - Second array to compare
 	 * @return boolean
-	 * @see &amp;lt;a href="https://numpy.org/doc/stable/reference/generated/numpy.array_equal.html"&amp;gt;numpy.array_equal.html&amp;lt;/a&amp;gt;
+	 * @see <a href="https://numpy.org/doc/stable/reference/generated/numpy.array_equal.html">numpy.array_equal.html</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static boolean arrayEqual(DeviceJ device, ArrayJ input0, ArrayJ input1) {
@@ -60,7 +60,7 @@ public class Tier5 {
 	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param connectivity (String) - Defines pixel neighborhood relationship, "box" or "sphere". (default: 'box')
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox"&amp;gt;reference_connectedComponentsLabelingBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox">reference_connectedComponentsLabelingBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -77,7 +77,7 @@ public class Tier5 {
 	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param connectivity (String) - Defines pixel neighborhood relationship, "box" or "sphere". (default: 'box')
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox"&amp;gt;reference_connectedComponentsLabelingBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_connectedComponentsLabelingBox">reference_connectedComponentsLabelingBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ connectedComponentLabeling(DeviceJ device, ArrayJ input, ArrayJ output, String connectivity) {
@@ -92,7 +92,7 @@ public class Tier5 {
 	 * @param input ({@link ArrayJ}) - Label image to reduce.
 	 * @param output ({@link ArrayJ}) - Output label image with centroids. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_reduceLabelsToCentroids"&amp;gt;reference_reduceLabelsToCentroids&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_reduceLabelsToCentroids">reference_reduceLabelsToCentroids</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ reduceLabelsToCentroids(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -109,7 +109,7 @@ public class Tier5 {
 	 * @param minimum_size (float) - Minimum size of labels to keep. (default: 0)
 	 * @param maximum_size (float) - Maximum size of labels to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange"&amp;gt;reference_excludeLabelsOutsideSizeRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange">reference_excludeLabelsOutsideSizeRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ filterLabelBySize(DeviceJ device, ArrayJ input, ArrayJ output, float minimum_size, float maximum_size) {
@@ -126,7 +126,7 @@ public class Tier5 {
 	 * @param minimum_size (float) - Minimum size of labels to keep. (default: 0)
 	 * @param maximum_size (float) - Maximum size of labels to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange"&amp;gt;reference_excludeLabelsOutsideSizeRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsOutsideSizeRange">reference_excludeLabelsOutsideSizeRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ excludeLabelsOutsideSizeRange(DeviceJ device, ArrayJ input, ArrayJ output, float minimum_size, float maximum_size) {

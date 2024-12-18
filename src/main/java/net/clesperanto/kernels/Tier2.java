@@ -25,7 +25,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - The input image which is subtracted.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_absoluteDifference"&amp;gt;reference_absoluteDifference&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_absoluteDifference">reference_absoluteDifference</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ absoluteDifference(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -43,7 +43,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - The second image to be added.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_addImages"&amp;gt;reference_addImages&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_addImages">reference_addImages</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ addImages(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -62,7 +62,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatBox"&amp;gt;reference_bottomHatBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_bottomHatBox">reference_bottomHatBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -81,7 +81,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatSphere"&amp;gt;reference_bottomHatSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_bottomHatSphere">reference_bottomHatSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -101,8 +101,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatBox"&amp;gt;reference_bottomHatBox&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatSphere"&amp;gt;reference_bottomHatSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_bottomHatBox">reference_bottomHatBox</a>
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_bottomHatSphere">reference_bottomHatSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ bottomHat(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
@@ -120,7 +120,7 @@ public class Tier2 {
 	 * @param min_intensity (float) - new, lower limit of the intensity range (default: None)
 	 * @param max_intensity (float) - new, upper limit of the intensity range (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://numpy.org/doc/stable/reference/generated/numpy.clip.html"&amp;gt;numpy.clip.html&amp;lt;/a&amp;gt;
+	 * @see <a href="https://numpy.org/doc/stable/reference/generated/numpy.clip.html">numpy.clip.html</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ clip(DeviceJ device, ArrayJ input, ArrayJ output, float min_intensity, float max_intensity) {
@@ -229,7 +229,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_combineHorizontally"&amp;gt;reference_combineHorizontally&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_combineHorizontally">reference_combineHorizontally</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ concatenateAlongX(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -246,7 +246,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_combineVertically"&amp;gt;reference_combineVertically&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_combineVertically">reference_combineVertically</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ concatenateAlongY(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -263,7 +263,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_concatenateStacks"&amp;gt;reference_concatenateStacks&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_concatenateStacks">reference_concatenateStacks</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ concatenateAlongZ(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -283,7 +283,7 @@ public class Tier2 {
 	 * @param touching_neighbors_count_destination ({@link ArrayJ}) - Output vector of touch count. (default: None)
 	 * @param ignore_background (boolean) -  (default: True)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_countTouchingNeighbors"&amp;gt;reference_countTouchingNeighbors&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_countTouchingNeighbors">reference_countTouchingNeighbors</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ countTouchingNeighbors(DeviceJ device, ArrayJ touch_matrix, ArrayJ touching_neighbors_count_destination, boolean ignore_background) {
@@ -317,7 +317,7 @@ public class Tier2 {
 	 * @param sigma_y (float) - Gaussian sigma value along y. (default: 2)
 	 * @param sigma_z (float) - Gaussian sigma value along z. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_divideByGaussianBackground"&amp;gt;reference_divideByGaussianBackground&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_divideByGaussianBackground">reference_divideByGaussianBackground</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ divideByGaussianBackground(DeviceJ device, ArrayJ input, ArrayJ output, float sigma_x, float sigma_y, float sigma_z) {
@@ -350,7 +350,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius along the y axis. (default: 0)
 	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMaximaBox"&amp;gt;reference_detectMaximaBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_detectMaximaBox">reference_detectMaximaBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -371,8 +371,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMaximaBox"&amp;gt;reference_detectMaximaBox&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMaximaSphere"&amp;gt;reference_detectMaximaSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_detectMaximaBox">reference_detectMaximaBox</a>
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_detectMaximaSphere">reference_detectMaximaSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ detectMaxima(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
@@ -391,7 +391,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius along the y axis. (default: 0)
 	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMinimaBox"&amp;gt;reference_detectMinimaBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_detectMinimaBox">reference_detectMinimaBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -412,8 +412,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMinimaBox"&amp;gt;reference_detectMinimaBox&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMinimaSphere"&amp;gt;reference_detectMinimaSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_detectMinimaBox">reference_detectMinimaBox</a>
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_detectMinimaSphere">reference_detectMinimaSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ detectMinima(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
@@ -435,7 +435,7 @@ public class Tier2 {
 	 * @param sigma2_y (float) - Sigma of the second Gaussian filter in y (default: 2)
 	 * @param sigma2_z (float) - Sigma of the second Gaussian filter in z (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_differenceOfGaussian3D"&amp;gt;reference_differenceOfGaussian3D&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_differenceOfGaussian3D">reference_differenceOfGaussian3D</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ differenceOfGaussian(DeviceJ device, ArrayJ input, ArrayJ output, float sigma1_x, float sigma1_y, float sigma1_z, float sigma2_x, float sigma2_y, float sigma2_z) {
@@ -451,7 +451,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_extendLabelingViaVoronoi"&amp;gt;reference_extendLabelingViaVoronoi&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_extendLabelingViaVoronoi">reference_extendLabelingViaVoronoi</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ extendLabelingViaVoronoi(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -468,7 +468,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_invert"&amp;gt;reference_invert&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_invert">reference_invert</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ invert(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -485,7 +485,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_labelSpots"&amp;gt;reference_labelSpots&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_labelSpots">reference_labelSpots</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ labelSpots(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -514,7 +514,7 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @return float
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_maximumOfAllPixels"&amp;gt;reference_maximumOfAllPixels&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_maximumOfAllPixels">reference_maximumOfAllPixels</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float maximumOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -529,7 +529,7 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @return float
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_minimumOfAllPixels"&amp;gt;reference_minimumOfAllPixels&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_minimumOfAllPixels">reference_minimumOfAllPixels</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float minimumOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -545,7 +545,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param mask ({@link ArrayJ}) - Input
 	 * @return float
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_minimumOfMaskedPixels"&amp;gt;reference_minimumOfMaskedPixels&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_minimumOfMaskedPixels">reference_minimumOfMaskedPixels</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float minimumOfMaskedPixels(DeviceJ device, ArrayJ input, ArrayJ mask) {
@@ -669,7 +669,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_reduceLabelsToLabelEdges"&amp;gt;reference_reduceLabelsToLabelEdges&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_reduceLabelsToLabelEdges">reference_reduceLabelsToLabelEdges</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ reduceLabelsToLabelEdges(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -699,7 +699,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://numpy.org/doc/stable/reference/generated/numpy.square.html"&amp;gt;numpy.square.html&amp;lt;/a&amp;gt;
+	 * @see <a href="https://numpy.org/doc/stable/reference/generated/numpy.square.html">numpy.square.html</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ square(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -715,7 +715,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_squaredDifference"&amp;gt;reference_squaredDifference&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_squaredDifference">reference_squaredDifference</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ squaredDifference(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -736,7 +736,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius along the y axis. (default: 1)
 	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationBox"&amp;gt;reference_standardDeviationBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_standardDeviationBox">reference_standardDeviationBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -757,7 +757,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius along the y axis. (default: 1)
 	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationSphere"&amp;gt;reference_standardDeviationSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_standardDeviationSphere">reference_standardDeviationSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -779,8 +779,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @param connectivity (String) - Neigborhood shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationBox"&amp;gt;reference_standardDeviationBox&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationSphere"&amp;gt;reference_standardDeviationSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_standardDeviationBox">reference_standardDeviationBox</a>
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_standardDeviationSphere">reference_standardDeviationSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ standardDeviation(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
@@ -798,7 +798,7 @@ public class Tier2 {
 	 * @param sigma_y (float) - Radius along the y axis. (default: 2)
 	 * @param sigma_z (float) - Radius along the z axis. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_subtractGaussianBackground"&amp;gt;reference_subtractGaussianBackground&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_subtractGaussianBackground">reference_subtractGaussianBackground</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ subtractGaussianBackground(DeviceJ device, ArrayJ input, ArrayJ output, float sigma_x, float sigma_y, float sigma_z) {
@@ -815,7 +815,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_subtractImages"&amp;gt;reference_subtractImages&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_subtractImages">reference_subtractImages</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ subtractImages(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -833,7 +833,7 @@ public class Tier2 {
 	 * @param start_z (int) - Start z coordinate of the crop. (default: 0)
 	 * @param end_z (int) - End z coordinate of the crop. (default: 0)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_subStack"&amp;gt;reference_subStack&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_subStack">reference_subStack</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ subStack(DeviceJ device, ArrayJ input, ArrayJ output, int start_z, int end_z) {
@@ -854,7 +854,7 @@ public class Tier2 {
 	 * @param reduction_factor (int) - Reduction factor. (default: 2)
 	 * @param offset (int) - Offset. (default: 0)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_reduceStack"&amp;gt;reference_reduceStack&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_reduceStack">reference_reduceStack</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ reduceStack(DeviceJ device, ArrayJ input, ArrayJ output, int reduction_factor, int offset) {
@@ -869,7 +869,7 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process. (default: None)
 	 * @return float
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_sumOfAllPixels"&amp;gt;reference_sumOfAllPixels&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_sumOfAllPixels">reference_sumOfAllPixels</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float sumOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -887,7 +887,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatBox"&amp;gt;reference_topHatBox&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_topHatBox">reference_topHatBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -906,7 +906,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatSphere"&amp;gt;reference_topHatSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_topHatSphere">reference_topHatSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -926,8 +926,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatBox"&amp;gt;reference_topHatBox&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatSphere"&amp;gt;reference_topHatSphere&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_topHatBox">reference_topHatBox</a>
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_topHatSphere">reference_topHatSphere</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ topHat(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {

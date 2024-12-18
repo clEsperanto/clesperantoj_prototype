@@ -23,8 +23,8 @@ public class Tier4 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Label image
 	 * @param label_id (int) - Identifier of label
-	 * @return ArrayList&amp;lt;Float&amp;gt;
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_boundingBox"&amp;gt;reference_boundingBox&amp;lt;/a&amp;gt;
+	 * @return ArrayList<Float>
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_boundingBox">reference_boundingBox</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayList<Float> labelBoundingBox(DeviceJ device, ArrayJ input, int label_id) {
@@ -40,7 +40,7 @@ public class Tier4 {
 	 * @param input0 ({@link ArrayJ}) - First image to compare
 	 * @param input1 ({@link ArrayJ}) - Second image to compare
 	 * @return float
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_meanSquaredError"&amp;gt;reference_meanSquaredError&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_meanSquaredError">reference_meanSquaredError</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float meanSquaredError(DeviceJ device, ArrayJ input0, ArrayJ input1) {
@@ -56,7 +56,7 @@ public class Tier4 {
 	 * @param input ({@link ArrayJ}) - Input binary image of spots
 	 * @param output ({@link ArrayJ}) - Output coordinate list of spots (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_spotsToPointList"&amp;gt;reference_spotsToPointList&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_spotsToPointList">reference_spotsToPointList</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ spotsToPointlist(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -76,7 +76,7 @@ public class Tier4 {
 	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param blocksize (int) - Renumbering is done in blocks for performance reasons. (default: 4096)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_closeIndexGapsInLabelMap"&amp;gt;reference_closeIndexGapsInLabelMap&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_closeIndexGapsInLabelMap">reference_closeIndexGapsInLabelMap</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ relabelSequential(DeviceJ device, ArrayJ input, ArrayJ output, int blocksize) {
@@ -91,9 +91,9 @@ public class Tier4 {
 	 * @param input ({@link ArrayJ}) - Input image to threshold.
 	 * @param output ({@link ArrayJ}) - Output binary image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_thresholdOtsu"&amp;gt;reference_thresholdOtsu&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.threshold_otsu"&amp;gt;skimage.filters.html#skimage.filters.threshold_otsu&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://ieeexplore.ieee.org/document/4310076"&amp;gt;4310076&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_thresholdOtsu">reference_thresholdOtsu</a>
+	 * @see <a href="https://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.threshold_otsu">skimage.filters.html#skimage.filters.threshold_otsu</a>
+	 * @see <a href="https://ieeexplore.ieee.org/document/4310076">4310076</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ thresholdOtsu(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -110,7 +110,7 @@ public class Tier4 {
 	 * @param labels ({@link ArrayJ}) - label image
 	 * @param output ({@link ArrayJ}) - Parametric image computed (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_meanIntensityMap"&amp;gt;reference_meanIntensityMap&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_meanIntensityMap">reference_meanIntensityMap</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ meanIntensityMap(DeviceJ device, ArrayJ input, ArrayJ labels, ArrayJ output) {
@@ -127,7 +127,7 @@ public class Tier4 {
 	 * @param input ({@link ArrayJ}) - Label image to measure
 	 * @param output ({@link ArrayJ}) - Parametric image computed (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_pixelCountMap"&amp;gt;reference_pixelCountMap&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_pixelCountMap">reference_pixelCountMap</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ pixelCountMap(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -143,7 +143,7 @@ public class Tier4 {
 	 * @param input ({@link ArrayJ}) - Label image to measure
 	 * @param output ({@link ArrayJ}) - Parametric image computed (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_pixelCountMap"&amp;gt;reference_pixelCountMap&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_pixelCountMap">reference_pixelCountMap</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -161,7 +161,7 @@ public class Tier4 {
 	 * @param centroids_coordinates ({@link ArrayJ}) - Output list of coordinates where the centroids will be written to.
 	 * @param include_background (boolean) - Determines if the background label should be included. (default: False)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_centroidsOfLabels"&amp;gt;reference_centroidsOfLabels&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_centroidsOfLabels">reference_centroidsOfLabels</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ centroidsOfLabels(DeviceJ device, ArrayJ label_image, ArrayJ centroids_coordinates, boolean include_background) {
@@ -179,7 +179,7 @@ public class Tier4 {
 	 * @param min_value (float) - Minimum value to keep. (default: 0)
 	 * @param max_value (float) - Maximum value to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesOutOfRange"&amp;gt;reference_excludeLabelsWithValuesOutOfRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesOutOfRange">reference_excludeLabelsWithValuesOutOfRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ removeLabelsWithMapValuesOutOfRange(DeviceJ device, ArrayJ input, ArrayJ values, ArrayJ output, float min_value, float max_value) {
@@ -198,7 +198,7 @@ public class Tier4 {
 	 * @param min_value (float) - Minimum value to keep. (default: 0)
 	 * @param max_value (float) - Maximum value to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesWithinRange"&amp;gt;reference_excludeLabelsWithValuesWithinRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesWithinRange">reference_excludeLabelsWithValuesWithinRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ removeLabelsWithMapValuesWithinRange(DeviceJ device, ArrayJ input, ArrayJ values, ArrayJ output, float min_value, float max_value) {
@@ -217,7 +217,7 @@ public class Tier4 {
 	 * @param minimum_value_range (float) - Minimum value to keep. (default: 0)
 	 * @param maximum_value_range (float) - Maximum value to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesOutOfRange"&amp;gt;reference_excludeLabelsWithValuesOutOfRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesOutOfRange">reference_excludeLabelsWithValuesOutOfRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -237,7 +237,7 @@ public class Tier4 {
 	 * @param minimum_value_range (float) - Minimum value to keep. (default: 0)
 	 * @param maximum_value_range (float) - Maximum value to keep. (default: 100)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesWithinRange"&amp;gt;reference_excludeLabelsWithValuesWithinRange&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_excludeLabelsWithValuesWithinRange">reference_excludeLabelsWithValuesWithinRange</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -255,7 +255,7 @@ public class Tier4 {
 	 * @param input ({@link ArrayJ}) - Input label image.
 	 * @param output ({@link ArrayJ}) - Output parametric image. (default: None)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_extensionRatioMap"&amp;gt;reference_extensionRatioMap&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_extensionRatioMap">reference_extensionRatioMap</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ extensionRatioMap(DeviceJ device, ArrayJ input, ArrayJ output) {

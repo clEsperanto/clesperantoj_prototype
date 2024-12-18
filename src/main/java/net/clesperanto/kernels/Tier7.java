@@ -27,7 +27,7 @@ public class Tier7 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to be transformed.
 	 * @param output ({@link ArrayJ}) - Output image. (default: None)
-	 * @param transform_matrix (ArrayList&amp;lt;Float&amp;gt;) - Affine transformation matrix (3x3 or 4x4). (default: None)
+	 * @param transform_matrix (ArrayList<Float>) - Affine transformation matrix (3x3 or 4x4). (default: None)
 	 * @param interpolate (boolean) - If true, bi/trilinear interpolation will be applied, if hardware allows. (default: False)
 	 * @param resize (boolean) - Automatically determines the size of the output depending on the rotation angles. (default: False)
 	 * @return {@link ArrayJ}
@@ -53,8 +53,8 @@ public class Tier7 {
 	 * @param number_of_erosions (int) - Number of iteration of erosion. (default: 5)
 	 * @param outline_sigma (float) - Gaussian blur sigma applied before Otsu thresholding. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://github.com/biovoxxel/bv3dbox (BV_LabelSplitter.java#L83)"&amp;gt;bv3dbox (BV_LabelSplitter.java#L83)&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://zenodo.org/badge/latestdoi/434949702"&amp;gt;434949702&amp;lt;/a&amp;gt;
+	 * @see <a href="https://github.com/biovoxxel/bv3dbox (BV_LabelSplitter.java#L83)">bv3dbox (BV_LabelSplitter.java#L83)</a>
+	 * @see <a href="https://zenodo.org/badge/latestdoi/434949702">434949702</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ erodedOtsuLabeling(DeviceJ device, ArrayJ input, ArrayJ output, int number_of_erosions, float outline_sigma) {
@@ -217,9 +217,9 @@ public class Tier7 {
 	 * @param spot_sigma (float) - Controls how close detected cells can be. (default: 2)
 	 * @param outline_sigma (float) - Controls how precise segmented objects are outlined. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_voronoiOtsuLabeling"&amp;gt;reference_voronoiOtsuLabeling&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://ieeexplore.ieee.org/document/4310076"&amp;gt;4310076&amp;lt;/a&amp;gt;
-	 * @see &amp;lt;a href="https://en.wikipedia.org/wiki/Voronoi_diagram"&amp;gt;Voronoi_diagram&amp;lt;/a&amp;gt;
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_voronoiOtsuLabeling">reference_voronoiOtsuLabeling</a>
+	 * @see <a href="https://ieeexplore.ieee.org/document/4310076">4310076</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi_diagram</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ voronoiOtsuLabeling(DeviceJ device, ArrayJ input, ArrayJ output, float spot_sigma, float outline_sigma) {

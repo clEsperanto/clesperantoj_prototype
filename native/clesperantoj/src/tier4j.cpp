@@ -30,6 +30,11 @@ ArrayJ Tier4::threshold_otsu(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
     return ArrayJ{cle::tier4::threshold_otsu_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
+ArrayJ Tier4::mean_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::mean_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
 ArrayJ Tier4::pixel_count_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier4::pixel_count_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
@@ -40,9 +45,9 @@ ArrayJ Tier4::label_pixel_count_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst
     return ArrayJ{cle::tier4::label_pixel_count_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier4::centroids_of_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool withBG)
+ArrayJ Tier4::centroids_of_labels(DeviceJ * device, ArrayJ * label_image, ArrayJ * centroids_coordinates, bool include_background)
 {
-    return ArrayJ{cle::tier4::centroids_of_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), withBG)};
+    return ArrayJ{cle::tier4::centroids_of_labels_func(device->get(), label_image->get(), centroids_coordinates->get(), include_background)};
 }
 
 ArrayJ Tier4::remove_labels_with_map_values_out_of_range(DeviceJ * device, ArrayJ * src, ArrayJ * values, ArrayJ * dst, float min_value, float max_value)
@@ -55,14 +60,14 @@ ArrayJ Tier4::remove_labels_with_map_values_within_range(DeviceJ * device, Array
     return ArrayJ{cle::tier4::remove_labels_with_map_values_within_range_func(device->get(), src->get(), values->get(), dst == nullptr ? nullptr : dst->get(), min_value, max_value)};
 }
 
-ArrayJ Tier4::exclude_labels_with_map_values_out_of_range(DeviceJ * device, ArrayJ * src, ArrayJ * values, ArrayJ * dst, float min_value_range, float max_value_range)
+ArrayJ Tier4::exclude_labels_with_map_values_out_of_range(DeviceJ * device, ArrayJ * values_map, ArrayJ * label_map_input, ArrayJ * dst, float minimum_value_range, float maximum_value_range)
 {
-    return ArrayJ{cle::tier4::exclude_labels_with_map_values_out_of_range_func(device->get(), src->get(), values->get(), dst == nullptr ? nullptr : dst->get(), min_value_range, max_value_range)};
+    return ArrayJ{cle::tier4::exclude_labels_with_map_values_out_of_range_func(device->get(), values_map->get(), label_map_input->get(), dst == nullptr ? nullptr : dst->get(), minimum_value_range, maximum_value_range)};
 }
 
-ArrayJ Tier4::exclude_labels_with_map_values_within_range(DeviceJ * device, ArrayJ * src, ArrayJ * values, ArrayJ * dst, float min_value_range, float max_value_range)
+ArrayJ Tier4::exclude_labels_with_map_values_within_range(DeviceJ * device, ArrayJ * values_map, ArrayJ * label_map_input, ArrayJ * dst, float minimum_value_range, float maximum_value_range)
 {
-    return ArrayJ{cle::tier4::exclude_labels_with_map_values_within_range_func(device->get(), src->get(), values->get(), dst == nullptr ? nullptr : dst->get(), min_value_range, max_value_range)};
+    return ArrayJ{cle::tier4::exclude_labels_with_map_values_within_range_func(device->get(), values_map->get(), label_map_input->get(), dst == nullptr ? nullptr : dst->get(), minimum_value_range, maximum_value_range)};
 }
 
 ArrayJ Tier4::extension_ratio_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)

@@ -25,6 +25,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - The input image which is subtracted.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_absoluteDifference"&amp;gt;reference_absoluteDifference&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ absoluteDifference(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -42,6 +43,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - The second image to be added.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_addImages"&amp;gt;reference_addImages&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ addImages(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -56,14 +58,15 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The input image where the background is subtracted from.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
-	 * @param radius_x (int) - Radius of the background determination region in X. (default: 1)
-	 * @param radius_y (int) - Radius of the background determination region in Y. (default: 1)
-	 * @param radius_z (int) - Radius of the background determination region in Z. (default: 1)
+	 * @param radius_x (float) - Radius of the background determination region in X. (default: 1)
+	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
+	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatBox"&amp;gt;reference_bottomHatBox&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ bottomHatBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ bottomHatBox(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.bottom_hat_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
@@ -78,6 +81,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatSphere"&amp;gt;reference_bottomHatSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -97,6 +101,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatBox"&amp;gt;reference_bottomHatBox&amp;lt;/a&amp;gt;
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_bottomHatSphere"&amp;gt;reference_bottomHatSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ bottomHat(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
@@ -114,6 +120,7 @@ public class Tier2 {
 	 * @param min_intensity (float) - new, lower limit of the intensity range (default: None)
 	 * @param max_intensity (float) - new, upper limit of the intensity range (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://numpy.org/doc/stable/reference/generated/numpy.clip.html"&amp;gt;numpy.clip.html&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ clip(DeviceJ device, ArrayJ input, ArrayJ output, float min_intensity, float max_intensity) {
@@ -123,14 +130,14 @@ public class Tier2 {
     }
     
 	/**
-	 * Closing operator, boxshaped Applies morphological closing to intensity images using a boxshaped footprint.
+	 * Closing operator, applies grayscale morphological closing to intensity images using a box shaped footprint.
 	 * This operator also works with binary images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 0)
-	 * @param radius_y (int) - Radius along the y axis. (default: 0)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (int) - Radius along the x axis. (default: 1)
+	 * @param radius_y (int) - Radius along the y axis. (default: 1)
+	 * @param radius_z (int) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
@@ -142,41 +149,77 @@ public class Tier2 {
     }
     
 	/**
-	 * Closing operator, sphereshaped Applies morphological closing to intensity images using a sphereshaped footprint.
+	 * Closing operator, applies grayscale morphological closing to intensity images using a sphere shaped footprint.
 	 * This operator also works with binary images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 1)
-	 * @param radius_y (int) - Radius along the y axis. (default: 1)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (float) - Radius along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ closingSphere(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ closingSphere(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.closing_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
     }
     
 	/**
-	 * Closing operator, sphereshaped Applies morphological closing to intensity images using a sphereshaped footprint.
+	 * Closing operator, applies grayscale morphological closing to intensity images using a sphere or box shaped footprint.
 	 * This operator also works with binary images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 1)
-	 * @param radius_y (int) - Radius along the y axis. (default: 1)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (float) - Radius along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ closing(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public static ArrayJ grayscaleClosing(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.closing(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.grayscale_closing(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
+    }
+    
+	/**
+	 * Closing operator, applies morphological closing to intensity images using a custom structuring element provided as input.
+	 * This operator also works with binary images.
+	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
+	 * @param input ({@link ArrayJ}) - Input image to process.
+	 * @param footprint ({@link ArrayJ}) - Structuring element for the operation.
+	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
+	 * @return {@link ArrayJ}
+	 * @throws NullPointerException if any of the device or input parameters are null.
+	 */
+    public static ArrayJ closing(DeviceJ device, ArrayJ input, ArrayJ footprint, ArrayJ output) {
+        Objects.requireNonNull(device, "device cannot be null");
+		Objects.requireNonNull(input, "input cannot be null");
+		Objects.requireNonNull(footprint, "footprint cannot be null");
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.closing(device.getRaw(), input.getRaw(), footprint.getRaw(), output == null ? null : output.getRaw()));
+    }
+    
+	/**
+	 * Closing operator, applies binary morphological closing to intensity images using a sphere or box shaped footprint.
+	 * This operator also works with binary images.
+	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
+	 * @param input ({@link ArrayJ}) - Input image to process.
+	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
+	 * @param radius_x (float) - Radius of the sphere or box element along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius of the sphere or box element along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius of the sphere or box element along the z axis. (default: 1)
+	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
+	 * @return {@link ArrayJ}
+	 * @throws NullPointerException if any of the device or input parameters are null.
+	 */
+    public static ArrayJ binaryClosing(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        Objects.requireNonNull(device, "device cannot be null");
+		Objects.requireNonNull(input, "input cannot be null");
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.binary_closing(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
     }
     
 	/**
@@ -186,6 +229,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_combineHorizontally"&amp;gt;reference_combineHorizontally&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ concatenateAlongX(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -202,6 +246,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_combineVertically"&amp;gt;reference_combineVertically&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ concatenateAlongY(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -218,6 +263,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_concatenateStacks"&amp;gt;reference_concatenateStacks&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ concatenateAlongZ(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -233,16 +279,17 @@ public class Tier2 {
 	 * To ignore touches with background, hand over a touch matrix where the first column (index = 0) has been set to 0.
 	 * Use set_column for that.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input image to process.
-	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
+	 * @param touch_matrix ({@link ArrayJ}) - Input touch matrix to process.
+	 * @param touching_neighbors_count_destination ({@link ArrayJ}) - Output vector of touch count. (default: None)
 	 * @param ignore_background (boolean) -  (default: True)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_countTouchingNeighbors"&amp;gt;reference_countTouchingNeighbors&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ countTouchingNeighbors(DeviceJ device, ArrayJ input, ArrayJ output, boolean ignore_background) {
+    public static ArrayJ countTouchingNeighbors(DeviceJ device, ArrayJ touch_matrix, ArrayJ touching_neighbors_count_destination, boolean ignore_background) {
         Objects.requireNonNull(device, "device cannot be null");
-		Objects.requireNonNull(input, "input cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.count_touching_neighbors(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), ignore_background));
+		Objects.requireNonNull(touch_matrix, "touch_matrix cannot be null");
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.count_touching_neighbors(device.getRaw(), touch_matrix.getRaw(), touching_neighbors_count_destination == null ? null : touching_neighbors_count_destination.getRaw(), ignore_background));
     }
     
 	/**
@@ -270,6 +317,7 @@ public class Tier2 {
 	 * @param sigma_y (float) - Gaussian sigma value along y. (default: 2)
 	 * @param sigma_z (float) - Gaussian sigma value along z. (default: 2)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_divideByGaussianBackground"&amp;gt;reference_divideByGaussianBackground&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ divideByGaussianBackground(DeviceJ device, ArrayJ input, ArrayJ output, float sigma_x, float sigma_y, float sigma_z) {
@@ -298,14 +346,15 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 0)
-	 * @param radius_y (int) - Radius along the y axis. (default: 0)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (float) - Radius along the x axis. (default: 0)
+	 * @param radius_y (float) - Radius along the y axis. (default: 0)
+	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMaximaBox"&amp;gt;reference_detectMaximaBox&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ detectMaximaBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ detectMaximaBox(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_maxima_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
@@ -317,14 +366,16 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 0)
-	 * @param radius_y (int) - Radius along the y axis. (default: 0)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (float) - Radius along the x axis. (default: 0)
+	 * @param radius_y (float) - Radius along the y axis. (default: 0)
+	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMaximaBox"&amp;gt;reference_detectMaximaBox&amp;lt;/a&amp;gt;
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMaximaSphere"&amp;gt;reference_detectMaximaSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ detectMaxima(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public static ArrayJ detectMaxima(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_maxima(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
@@ -336,14 +387,15 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 0)
-	 * @param radius_y (int) - Radius along the y axis. (default: 0)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (float) - Radius along the x axis. (default: 0)
+	 * @param radius_y (float) - Radius along the y axis. (default: 0)
+	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMinimaBox"&amp;gt;reference_detectMinimaBox&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ detectMinimaBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ detectMinimaBox(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_minima_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
@@ -355,14 +407,16 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 0)
-	 * @param radius_y (int) - Radius along the y axis. (default: 0)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
+	 * @param radius_x (float) - Radius along the x axis. (default: 0)
+	 * @param radius_y (float) - Radius along the y axis. (default: 0)
+	 * @param radius_z (float) - Radius along the z axis. (default: 0)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMinimaBox"&amp;gt;reference_detectMinimaBox&amp;lt;/a&amp;gt;
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_detectMinimaSphere"&amp;gt;reference_detectMinimaSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ detectMinima(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public static ArrayJ detectMinima(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.detect_minima(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
@@ -381,6 +435,7 @@ public class Tier2 {
 	 * @param sigma2_y (float) - Sigma of the second Gaussian filter in y (default: 2)
 	 * @param sigma2_z (float) - Sigma of the second Gaussian filter in z (default: 2)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_differenceOfGaussian3D"&amp;gt;reference_differenceOfGaussian3D&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ differenceOfGaussian(DeviceJ device, ArrayJ input, ArrayJ output, float sigma1_x, float sigma1_y, float sigma1_z, float sigma2_x, float sigma2_y, float sigma2_z) {
@@ -396,6 +451,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_extendLabelingViaVoronoi"&amp;gt;reference_extendLabelingViaVoronoi&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ extendLabelingViaVoronoi(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -412,6 +468,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_invert"&amp;gt;reference_invert&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ invert(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -428,6 +485,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_labelSpots"&amp;gt;reference_labelSpots&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ labelSpots(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -456,6 +514,7 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @return float
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_maximumOfAllPixels"&amp;gt;reference_maximumOfAllPixels&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float maximumOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -470,6 +529,7 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @return float
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_minimumOfAllPixels"&amp;gt;reference_minimumOfAllPixels&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float minimumOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -485,6 +545,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param mask ({@link ArrayJ}) - Input
 	 * @return float
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_minimumOfMaskedPixels"&amp;gt;reference_minimumOfMaskedPixels&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float minimumOfMaskedPixels(DeviceJ device, ArrayJ input, ArrayJ mask) {
@@ -495,33 +556,33 @@ public class Tier2 {
     }
     
 	/**
-	 * Opening operator, boxshaped Applies morphological opening to intensity images using a boxshaped footprint.
-	 * This operator also works with binary images.
-	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input image to process.
-	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 0)
-	 * @param radius_y (int) - Radius along the y axis. (default: 0)
-	 * @param radius_z (int) - Radius along the z axis. (default: 0)
-	 * @return {@link ArrayJ}
-	 * @throws NullPointerException if any of the device or input parameters are null.
-	 */
-	@Deprecated
-    public static ArrayJ openingBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
-        Objects.requireNonNull(device, "device cannot be null");
-		Objects.requireNonNull(input, "input cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
-    }
-    
-	/**
-	 * Opening operator, sphereshaped Applies morphological opening to intensity images using a sphereshaped footprint.
+	 * Opening operator, applies morphological opening to intensity images using a boxshaped footprint.
 	 * This operator also works with binary images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @param radius_x (float) - Radius along the x axis. (default: 1)
 	 * @param radius_y (float) - Radius along the y axis. (default: 1)
-	 * @param radius_z (float) - Radius along the z axis. (default: 0)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
+	 * @return {@link ArrayJ}
+	 * @throws NullPointerException if any of the device or input parameters are null.
+	 */
+	@Deprecated
+    public static ArrayJ openingBox(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
+        Objects.requireNonNull(device, "device cannot be null");
+		Objects.requireNonNull(input, "input cannot be null");
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
+    }
+    
+	/**
+	 * Opening operator, applies morphological opening to intensity images using a sphereshaped footprint.
+	 * This operator also works with binary images.
+	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
+	 * @param input ({@link ArrayJ}) - Input image to process.
+	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
+	 * @param radius_x (float) - Radius along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
@@ -533,22 +594,58 @@ public class Tier2 {
     }
     
 	/**
-	 * Opening operator, sphereshaped Applies morphological opening to intensity images using a sphereshaped footprint.
+	 * Opening operator, Applies morphological opening to intensity images using a sphereshaped or boxshepd footprint.
 	 * This operator also works with binary images.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @param radius_x (float) - Radius along the x axis. (default: 1)
 	 * @param radius_y (float) - Radius along the y axis. (default: 1)
-	 * @param radius_z (float) - Radius along the z axis. (default: 0)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ opening(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
+    public static ArrayJ grayscaleOpening(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.grayscale_opening(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
+    }
+    
+	/**
+	 * Opening operator, applies morphological opening to intensity images using a custom structuring element provided as input.
+	 * This operator also works with binary images.
+	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
+	 * @param input ({@link ArrayJ}) - Input image to process.
+	 * @param footprint ({@link ArrayJ}) - Structuring element for the operation.
+	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
+	 * @return {@link ArrayJ}
+	 * @throws NullPointerException if any of the device or input parameters are null.
+	 */
+    public static ArrayJ opening(DeviceJ device, ArrayJ input, ArrayJ footprint, ArrayJ output) {
+        Objects.requireNonNull(device, "device cannot be null");
+		Objects.requireNonNull(input, "input cannot be null");
+		Objects.requireNonNull(footprint, "footprint cannot be null");
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.opening(device.getRaw(), input.getRaw(), footprint.getRaw(), output == null ? null : output.getRaw()));
+    }
+    
+	/**
+	 * Closing operator, applies binary morphological opening to intensity images using a sphere or box shaped footprint.
+	 * This operator also works with binary images.
+	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
+	 * @param input ({@link ArrayJ}) - Input image to process.
+	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
+	 * @param radius_x (float) - Radius of the sphere or box element along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius of the sphere or box element along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius of the sphere or box element along the z axis. (default: 1)
+	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
+	 * @return {@link ArrayJ}
+	 * @throws NullPointerException if any of the device or input parameters are null.
+	 */
+    public static ArrayJ binaryOpening(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
+        Objects.requireNonNull(device, "device cannot be null");
+		Objects.requireNonNull(input, "input cannot be null");
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.binary_opening(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
     }
     
 	/**
@@ -572,6 +669,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_reduceLabelsToLabelEdges"&amp;gt;reference_reduceLabelsToLabelEdges&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ reduceLabelsToLabelEdges(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -601,6 +699,7 @@ public class Tier2 {
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://numpy.org/doc/stable/reference/generated/numpy.square.html"&amp;gt;numpy.square.html&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ square(DeviceJ device, ArrayJ input, ArrayJ output) {
@@ -616,6 +715,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_squaredDifference"&amp;gt;reference_squaredDifference&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ squaredDifference(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -632,14 +732,15 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 1)
-	 * @param radius_y (int) - Radius along the y axis. (default: 1)
-	 * @param radius_z (int) - Radius along the z axis. (default: 1)
+	 * @param radius_x (float) - Radius along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationBox"&amp;gt;reference_standardDeviationBox&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ standardDeviationBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ standardDeviationBox(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.standard_deviation_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
@@ -652,14 +753,15 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 1)
-	 * @param radius_y (int) - Radius along the y axis. (default: 1)
-	 * @param radius_z (int) - Radius along the z axis. (default: 1)
+	 * @param radius_x (float) - Radius along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationSphere"&amp;gt;reference_standardDeviationSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ standardDeviationSphere(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ standardDeviationSphere(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.standard_deviation_sphere(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
@@ -672,14 +774,16 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
-	 * @param radius_x (int) - Radius along the x axis. (default: 1)
-	 * @param radius_y (int) - Radius along the y axis. (default: 1)
-	 * @param radius_z (int) - Radius along the z axis. (default: 1)
+	 * @param radius_x (float) - Radius along the x axis. (default: 1)
+	 * @param radius_y (float) - Radius along the y axis. (default: 1)
+	 * @param radius_z (float) - Radius along the z axis. (default: 1)
 	 * @param connectivity (String) - Neigborhood shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationBox"&amp;gt;reference_standardDeviationBox&amp;lt;/a&amp;gt;
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_standardDeviationSphere"&amp;gt;reference_standardDeviationSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ standardDeviation(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z, String connectivity) {
+    public static ArrayJ standardDeviation(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.standard_deviation(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z, connectivity));
@@ -694,6 +798,7 @@ public class Tier2 {
 	 * @param sigma_y (float) - Radius along the y axis. (default: 2)
 	 * @param sigma_z (float) - Radius along the z axis. (default: 2)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_subtractGaussianBackground"&amp;gt;reference_subtractGaussianBackground&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ subtractGaussianBackground(DeviceJ device, ArrayJ input, ArrayJ output, float sigma_x, float sigma_y, float sigma_z) {
@@ -710,6 +815,7 @@ public class Tier2 {
 	 * @param input1 ({@link ArrayJ}) - Second input image.
 	 * @param output ({@link ArrayJ}) - Output result image. (default: None)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_subtractImages"&amp;gt;reference_subtractImages&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ subtractImages(DeviceJ device, ArrayJ input0, ArrayJ input1, ArrayJ output) {
@@ -727,6 +833,7 @@ public class Tier2 {
 	 * @param start_z (int) - Start z coordinate of the crop. (default: 0)
 	 * @param end_z (int) - End z coordinate of the crop. (default: 0)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_subStack"&amp;gt;reference_subStack&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ subStack(DeviceJ device, ArrayJ input, ArrayJ output, int start_z, int end_z) {
@@ -747,6 +854,7 @@ public class Tier2 {
 	 * @param reduction_factor (int) - Reduction factor. (default: 2)
 	 * @param offset (int) - Offset. (default: 0)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_reduceStack"&amp;gt;reference_reduceStack&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ reduceStack(DeviceJ device, ArrayJ input, ArrayJ output, int reduction_factor, int offset) {
@@ -761,6 +869,7 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Input image to process. (default: None)
 	 * @return float
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_sumOfAllPixels"&amp;gt;reference_sumOfAllPixels&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static float sumOfAllPixels(DeviceJ device, ArrayJ input) {
@@ -774,14 +883,15 @@ public class Tier2 {
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - The input image where the background is subtracted from.
 	 * @param output ({@link ArrayJ}) - The output image where results are written into. (default: None)
-	 * @param radius_x (int) - Radius of the background determination region in X. (default: 1)
-	 * @param radius_y (int) - Radius of the background determination region in Y. (default: 1)
-	 * @param radius_z (int) - Radius of the background determination region in Z. (default: 1)
+	 * @param radius_x (float) - Radius of the background determination region in X. (default: 1)
+	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
+	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatBox"&amp;gt;reference_topHatBox&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
-    public static ArrayJ topHatBox(DeviceJ device, ArrayJ input, ArrayJ output, int radius_x, int radius_y, int radius_z) {
+    public static ArrayJ topHatBox(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
         return new ArrayJ(net.clesperanto._internals.kernelj.Tier2.top_hat_box(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw(), radius_x, radius_y, radius_z));
@@ -796,6 +906,7 @@ public class Tier2 {
 	 * @param radius_y (float) - Radius of the background determination region in Y. (default: 1)
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatSphere"&amp;gt;reference_topHatSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
 	@Deprecated
@@ -815,6 +926,8 @@ public class Tier2 {
 	 * @param radius_z (float) - Radius of the background determination region in Z. (default: 1)
 	 * @param connectivity (String) - Element shape, "box" or "sphere" (default: "box")
 	 * @return {@link ArrayJ}
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatBox"&amp;gt;reference_topHatBox&amp;lt;/a&amp;gt;
+	 * @see &amp;lt;a href="https://clij.github.io/clij2-docs/reference_topHatSphere"&amp;gt;reference_topHatSphere&amp;lt;/a&amp;gt;
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ topHat(DeviceJ device, ArrayJ input, ArrayJ output, float radius_x, float radius_y, float radius_z, String connectivity) {

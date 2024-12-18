@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>org.scijava</groupId>
 		<artifactId>pom-scijava</artifactId>
-		<version>38.0.1</version>
+		<version>40.0.0</version>
 		<relativePath />
 	</parent>
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clesperantoj</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.16.0-SNAPSHOT</version>
 
 	<properties>
 		<package-name>net.clesperanto</package-name>
@@ -19,7 +19,7 @@
 		<license.copyrightOwners>Robert Haase, MPI CBG and Stephane Rigaud, Institut Pasteur</license.copyrightOwners>
 		<!-- NB: Deploy releases to the SciJava Maven repository. -->
 		<releaseProfiles>sign,deploy-to-scijava</releaseProfiles>
-        <clic.version>0.13.4</clic.version>
+        <clic.version>0.16.0</clic.version>
 	</properties>
 
 	<name>clesperantoj</name>
@@ -153,19 +153,17 @@
 		<dependency>
 			<groupId>net.imglib2</groupId>
 			<artifactId>imglib2</artifactId>
-			<version>7.0.2</version>
+			<!-- <version>7.1.4</version> --> <!-- rely on mother pom.scijava version -->
 		</dependency>
         <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <!-- JavaCPP dependencies -->
         <dependency>
 			<groupId>org.bytedeco</groupId>
 			<artifactId>javacpp</artifactId>
-        	<!-- TODO check if we can work with the scijava pom version -->
-			<version>1.5.10</version>
+			<!-- <version>1.5.10</version> --> <!-- rely on mother pom.scijava version -->
 		</dependency>
 		<dependency>
 			<groupId>net.imagej</groupId>
@@ -280,7 +278,8 @@
 		    <plugin>
 				<groupId>org.bytedeco</groupId>
 				<artifactId>javacpp</artifactId>
-				<version>1.5.10</version>
+				<!-- <version>1.5.10</version> -->
+    			<version>${javacpp.version}</version>
 				<configuration>
 					<compilerOptions>
 						<compilerOption>${compiler.option}</compilerOption>

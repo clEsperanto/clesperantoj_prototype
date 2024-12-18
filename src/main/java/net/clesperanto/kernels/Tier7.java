@@ -53,7 +53,7 @@ public class Tier7 {
 	 * @param number_of_erosions (int) - Number of iteration of erosion. (default: 5)
 	 * @param outline_sigma (float) - Gaussian blur sigma applied before Otsu thresholding. (default: 2)
 	 * @return {@link ArrayJ}
-	 * @see <a href="https://github.com/biovoxxel/bv3dbox (BV_LabelSplitter.java#L83)">bv3dbox (BV_LabelSplitter.java#L83)</a>
+	 * @see <a href="https://github.com/biovoxxel/bv3dbox/blob/9e38ed02cff606e7e8fbe57db0f6af810bf1a83a/BioVoxxel_3D_Box/src/main/java/de/biovoxxel/bv3dbox/plugins/BV_LabelSplitter.java#L83">BV_LabelSplitter.java#L83)</a>
 	 * @see <a href="https://zenodo.org/badge/latestdoi/434949702">434949702</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */

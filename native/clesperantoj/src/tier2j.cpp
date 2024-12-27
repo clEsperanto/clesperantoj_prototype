@@ -15,7 +15,7 @@ ArrayJ Tier2::add_images(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ 
     return ArrayJ{cle::tier2::add_images_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier2::bottom_hat_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::bottom_hat_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::bottom_hat_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
@@ -40,14 +40,24 @@ ArrayJ Tier2::closing_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radi
     return ArrayJ{cle::tier2::closing_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::closing_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::closing_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::closing_sphere_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::closing(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z, std::string connectivity)
+ArrayJ Tier2::grayscale_closing(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
 {
-    return ArrayJ{cle::tier2::closing_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
+    return ArrayJ{cle::tier2::grayscale_closing_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
+}
+
+ArrayJ Tier2::closing(DeviceJ * device, ArrayJ * src, ArrayJ * footprint, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier2::closing_func(device->get(), src->get(), footprint->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier2::binary_closing(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
+{
+    return ArrayJ{cle::tier2::binary_closing_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
 
 ArrayJ Tier2::concatenate_along_x(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ * dst)
@@ -65,9 +75,9 @@ ArrayJ Tier2::concatenate_along_z(DeviceJ * device, ArrayJ * src0, ArrayJ * src1
     return ArrayJ{cle::tier2::concatenate_along_z_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier2::count_touching_neighbors(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool ignore_background)
+ArrayJ Tier2::count_touching_neighbors(DeviceJ * device, ArrayJ * touch_matrix, ArrayJ * touching_neighbors_count_destination, bool ignore_background)
 {
-    return ArrayJ{cle::tier2::count_touching_neighbors_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), ignore_background)};
+    return ArrayJ{cle::tier2::count_touching_neighbors_func(device->get(), touch_matrix->get(), touching_neighbors_count_destination == nullptr ? nullptr : touching_neighbors_count_destination->get(), ignore_background)};
 }
 
 ArrayJ Tier2::crop_border(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int border_size)
@@ -85,22 +95,22 @@ ArrayJ Tier2::degrees_to_radians(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
     return ArrayJ{cle::tier2::degrees_to_radians_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier2::detect_maxima_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::detect_maxima_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::detect_maxima_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::detect_maxima(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z, std::string connectivity)
+ArrayJ Tier2::detect_maxima(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
 {
     return ArrayJ{cle::tier2::detect_maxima_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
 
-ArrayJ Tier2::detect_minima_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::detect_minima_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::detect_minima_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::detect_minima(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z, std::string connectivity)
+ArrayJ Tier2::detect_minima(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
 {
     return ArrayJ{cle::tier2::detect_minima_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
@@ -145,7 +155,7 @@ float Tier2::minimum_of_masked_pixels(DeviceJ * device, ArrayJ * src, ArrayJ * m
     return cle::tier2::minimum_of_masked_pixels_func(device->get(), src->get(), mask->get());
 }
 
-ArrayJ Tier2::opening_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::opening_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::opening_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
@@ -155,9 +165,19 @@ ArrayJ Tier2::opening_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float
     return ArrayJ{cle::tier2::opening_sphere_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::opening(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
+ArrayJ Tier2::grayscale_opening(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
 {
-    return ArrayJ{cle::tier2::opening_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
+    return ArrayJ{cle::tier2::grayscale_opening_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
+}
+
+ArrayJ Tier2::opening(DeviceJ * device, ArrayJ * src, ArrayJ * footprint, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier2::opening_func(device->get(), src->get(), footprint->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier2::binary_opening(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
+{
+    return ArrayJ{cle::tier2::binary_opening_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
 
 ArrayJ Tier2::radians_to_degrees(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
@@ -185,17 +205,17 @@ ArrayJ Tier2::squared_difference(DeviceJ * device, ArrayJ * src0, ArrayJ * src1,
     return ArrayJ{cle::tier2::squared_difference_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier2::standard_deviation_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::standard_deviation_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::standard_deviation_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::standard_deviation_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::standard_deviation_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::standard_deviation_sphere_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
 
-ArrayJ Tier2::standard_deviation(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z, std::string connectivity)
+ArrayJ Tier2::standard_deviation(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
 {
     return ArrayJ{cle::tier2::standard_deviation_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
@@ -225,7 +245,7 @@ float Tier2::sum_of_all_pixels(DeviceJ * device, ArrayJ * src)
     return cle::tier2::sum_of_all_pixels_func(device->get(), src == nullptr ? nullptr : src->get());
 }
 
-ArrayJ Tier2::top_hat_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::top_hat_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::top_hat_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }

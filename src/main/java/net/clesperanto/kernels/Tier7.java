@@ -25,8 +25,8 @@ public class Tier7 {
 	 * the first 3 elements are the first row of the matrix.
 	 * If no matrix is given, the identity matrix will be used.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input Array to be transformed.
-	 * @param output ({@link ArrayJ}) - Output Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to be transformed.
+	 * @param output ({@link ArrayJ}) - Output image. (default: None)
 	 * @param transform_matrix (ArrayList&amp;lt;Float&amp;gt;) - Affine transformation matrix (3x3 or 4x4). (default: None)
 	 * @param interpolate (boolean) - If true, bi/trilinear interpolation will be applied, if hardware allows. (default: False)
 	 * @param resize (boolean) - Automatically determines the size of the output depending on the rotation angles. (default: False)
@@ -48,11 +48,13 @@ public class Tier7 {
 	 * Like when using  Voronoi-Otsu-labeling, small objects may disappear when applying this operation.
 	 * This function is inspired by a similar implementation in Java by Jan Brocher (Biovoxxel) [0] [1].
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input Array to be transformed.
-	 * @param output ({@link ArrayJ}) - Output Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to be transformed.
+	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param number_of_erosions (int) - Number of iteration of erosion. (default: 5)
 	 * @param outline_sigma (float) - Gaussian blur sigma applied before Otsu thresholding. (default: 2)
 	 * @return {@link ArrayJ}
+	 * @see <a href="https://github.com/biovoxxel/bv3dbox/blob/9e38ed02cff606e7e8fbe57db0f6af810bf1a83a/BioVoxxel_3D_Box/src/main/java/de/biovoxxel/bv3dbox/plugins/BV_LabelSplitter.java#L83">BV_LabelSplitter.java#L83)</a>
+	 * @see <a href="https://zenodo.org/badge/latestdoi/434949702">434949702</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ erodedOtsuLabeling(DeviceJ device, ArrayJ input, ArrayJ output, int number_of_erosions, float outline_sigma) {
@@ -68,8 +70,8 @@ public class Tier7 {
 	 * pi * 180.
 	 * 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input Array to be transformed.
-	 * @param output ({@link ArrayJ}) - Output Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to be transformed.
+	 * @param output ({@link ArrayJ}) - Output image. (default: None)
 	 * @param translate_x (float) - Translation along x axis in pixels. (default: 0)
 	 * @param translate_y (float) - Translation along y axis in pixels. (default: 0)
 	 * @param translate_z (float) - Translation along z axis in pixels. (default: 0)
@@ -95,8 +97,8 @@ public class Tier7 {
 	 * pi * 180.
 	 * 0.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input Array to be rotated.
-	 * @param output ({@link ArrayJ}) - Output Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to be rotated.
+	 * @param output ({@link ArrayJ}) - Output image. (default: None)
 	 * @param angle_x (float) - Rotation around x axis in degrees. (default: 0)
 	 * @param angle_y (float) - Rotation around y axis in degrees. (default: 0)
 	 * @param angle_z (float) - Rotation around z axis in degrees. (default: 0)
@@ -115,8 +117,8 @@ public class Tier7 {
 	/**
 	 * Scale the image by given factors.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input Array to be scaleded.
-	 * @param output ({@link ArrayJ}) - Output Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to be scaled.
+	 * @param output ({@link ArrayJ}) - Output image. (default: None)
 	 * @param factor_x (float) - Scaling along x axis. (default: 1)
 	 * @param factor_y (float) - Scaling along y axis. (default: 1)
 	 * @param factor_z (float) - Scaling along z axis. (default: 1)
@@ -135,8 +137,8 @@ public class Tier7 {
 	/**
 	 * Translate the image by a given vector.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input Array to be translated.
-	 * @param output ({@link ArrayJ}) - Output Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to be translated.
+	 * @param output ({@link ArrayJ}) - Output image. (default: None)
 	 * @param translate_x (float) - Translation along x axis in pixels. (default: 0)
 	 * @param translate_y (float) - Translation along y axis in pixels. (default: 0)
 	 * @param translate_z (float) - Translation along z axis in pixels. (default: 0)
@@ -156,8 +158,8 @@ public class Tier7 {
 	 * With every iteration, box and diamond/sphere structuring elements are used and thus, the operation has an octagon as structuring element.
 	 * Notes * This operation assumes input images are isotropic.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input label Array.
-	 * @param output ({@link ArrayJ}) - Output label Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input label image.
+	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param radius (int) - Radius size for the closing. (default: 0)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
@@ -173,8 +175,8 @@ public class Tier7 {
 	 * Note: Depending on the label image and the radius,  labels may disappear and labels may split into multiple islands.
 	 * Thus, overlapping labels of input and output may  not have the same identifier.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - result
-	 * @param output ({@link ArrayJ}) -  (default: None)
+	 * @param input ({@link ArrayJ}) - Input image to process
+	 * @param output ({@link ArrayJ}) - Output label image (default: None)
 	 * @param radius (int) -  (default: 1)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
@@ -191,8 +193,8 @@ public class Tier7 {
 	 * With every iteration, box and diamond/sphere structuring elements are used and thus, the operation has an octagon as structuring element.
 	 * Notes * This operation assumes input images are isotropic.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input label Array.
-	 * @param output ({@link ArrayJ}) - Output label Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input label image.
+	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param radius (int) - Radius size for the opening. (default: 0)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
@@ -210,11 +212,14 @@ public class Tier7 {
 	 * The thresholded binary image is flooded using the Voronoi tesselation approach starting from the found local maxima.
 	 * Notes * This operation assumes input images are isotropic.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
-	 * @param input ({@link ArrayJ}) - Input intensity Array.
-	 * @param output ({@link ArrayJ}) - Output label Array. (default: None)
+	 * @param input ({@link ArrayJ}) - Input intensity image.
+	 * @param output ({@link ArrayJ}) - Output label image. (default: None)
 	 * @param spot_sigma (float) - Controls how close detected cells can be. (default: 2)
 	 * @param outline_sigma (float) - Controls how precise segmented objects are outlined. (default: 2)
 	 * @return {@link ArrayJ}
+	 * @see <a href="https://clij.github.io/clij2-docs/reference_voronoiOtsuLabeling">reference_voronoiOtsuLabeling</a>
+	 * @see <a href="https://ieeexplore.ieee.org/document/4310076">4310076</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi_diagram</a>
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ voronoiOtsuLabeling(DeviceJ device, ArrayJ input, ArrayJ output, float spot_sigma, float outline_sigma) {

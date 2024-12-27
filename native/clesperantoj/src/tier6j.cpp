@@ -25,9 +25,9 @@ ArrayJ Tier6::masked_voronoi_labeling(DeviceJ * device, ArrayJ * src, ArrayJ * m
     return ArrayJ{cle::tier6::masked_voronoi_labeling_func(device->get(), src->get(), mask->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier6::voronoi_labeling(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+ArrayJ Tier6::voronoi_labeling(DeviceJ * device, ArrayJ * input_binary, ArrayJ * output_labels)
 {
-    return ArrayJ{cle::tier6::voronoi_labeling_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier6::voronoi_labeling_func(device->get(), input_binary->get(), output_labels == nullptr ? nullptr : output_labels->get())};
 }
 
 ArrayJ Tier6::remove_small_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size)

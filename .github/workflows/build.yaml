@@ -164,15 +164,8 @@ jobs:
           jar xf macos-artifact/${{steps.mvn_info.outputs.name}}-${{steps.mvn_info.outputs.version}}.jar net/clesperanto/macosx-arm64
 
           mkdir -p libs
-          mkdir -p target/checkout/libs
-          cp -r net/clesperanto/* libs/
-          cp -r net/clesperanto/* target/checkout/libs/          
-        shell: bash -l {0}
-
-      - name: List files in libs folder
-        run: |
-          pwd
-          ls -la libs/
+          mv net/clesperanto/* libs/  
+          echo "CLIC_LIBS_PATH=$(pwd)/libs" >> $GITHUB_ENV 
         shell: bash -l {0}
 
       - name: Set up CI environment
@@ -187,3 +180,4 @@ jobs:
           MAVEN_PASS: ${{ secrets.MAVEN_PASS }}
           OSSRH_PASS: ${{ secrets.OSSRH_PASS }}
           SIGNING_ASC: ${{ secrets.SIGNING_ASC }}
+          CLIC_LIBS_PATH: ${{ env.CLIC_LIBS_PATH }}

@@ -11,7 +11,7 @@
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clesperantoj</artifactId>
-	<version>0.16.8-SNAPSHOT</version>
+	<version>0.16.7-SNAPSHOT</version>
 
 	<properties>
 		<package-name>net.clesperanto</package-name>
@@ -366,7 +366,7 @@
 		              <outputDirectory>${project.basedir}/target/classes/net/clesperanto</outputDirectory>
 		              <resources>          
 		                <resource>
-		                  <directory>${project.rootDirectory}/libs</directory>
+						  <directory>${env.CLIC_LIBS_PATH}</directory>
 		                  <filtering>false</filtering>
 		                </resource>
 		              </resources>              

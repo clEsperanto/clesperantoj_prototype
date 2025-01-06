@@ -11,7 +11,7 @@
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clesperantoj</artifactId>
-	<version>0.16.4-SNAPSHOT</version>
+	<version>0.16.4</version>
 
 	<properties>
 		<package-name>net.clesperanto</package-name>
@@ -94,7 +94,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/clEsperanto/clesperantoj_prototype</connection>
 		<developerConnection>scm:git:git@github.com:clEsperanto/clesperantoj_prototype</developerConnection>
-		<tag>HEAD</tag>
+		<tag>clesperantoj-0.16.4</tag>
 		<url>https://github.com/clEsperanto/clesperantoj_prototype</url>
 	</scm>
 	<issueManagement>

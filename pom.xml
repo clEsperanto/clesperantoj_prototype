@@ -366,7 +366,7 @@
 		              <outputDirectory>${project.basedir}/target/classes/net/clesperanto</outputDirectory>
 		              <resources>          
 		                <resource>
-		                  <directory>${project.basedir}/libs</directory>
+		                  <directory>${project.rootDirectory}/libs</directory>
 		                  <filtering>false</filtering>
 		                </resource>
 		              </resources>              

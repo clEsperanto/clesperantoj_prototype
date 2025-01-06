@@ -165,8 +165,8 @@ jobs:
 
           mkdir -p libs
           mkdir -p target/checkout/libs
-          cp net/clesperanto/* libs/
-          cp net/clesperanto/* target/checkout/libs/          
+          cp -r net/clesperanto/* libs/
+          cp -r net/clesperanto/* target/checkout/libs/          
         shell: bash -l {0}
 
       - name: List files in libs folder

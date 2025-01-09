@@ -23,13 +23,13 @@ jobs:
           - macos
         include:
           - name: ubuntu
-            os: ubuntu-latest
+            os: ubuntu-20.04
             c-compiler: gcc
             cxx-compiler: g++
             cmake-build-type: Release
             cmake-build-flag: ""
           - name: windows
-            os: windows-latest
+            os: windows-2019
             c-compiler: cl.exe
             cxx-compiler: cl.exe
             cmake-build-type: Release

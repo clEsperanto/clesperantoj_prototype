@@ -1,81 +1,28 @@
 [![Build Status](https://github.com/clEsperanto/clesperantoj_prototype/actions/workflows/build.yaml/badge.svg)](https://github.com/clEsperanto/clesperantoj_prototype/actions/workflows/build.yaml)
+[![Image.sc Forum](https://img.shields.io/badge/dynamic/json.svg?label=forum&amp;url=https%3A%2F%2Fforum.image.sc%2Ftags%2Fclesperanto.json&amp;query=%24.topic_list.tags.0.topic_count&amp;colorB=green&amp;&amp;suffix=%20topics&amp;logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAABPklEQVR42m3SyyqFURTA8Y2BER0TDyExZ+aSPIKUlPIITFzKeQWXwhBlQrmFgUzMMFLKZeguBu5y+//17dP3nc5vuPdee6299gohUYYaDGOyyACq4JmQVoFujOMR77hNfOAGM+hBOQqB9TjHD36xhAa04RCuuXeKOvwHVWIKL9jCK2bRiV284QgL8MwEjAneeo9VNOEaBhzALGtoRy02cIcWhE34jj5YxgW+E5Z4iTPkMYpPLCNY3hdOYEfNbKYdmNngZ1jyEzw7h7AIb3fRTQ95OAZ6yQpGYHMMtOTgouktYwxuXsHgWLLl+4x++Kx1FJrjLTagA77bTPvYgw1rRqY56e+w7GNYsqX6JfPwi7aR+Y5SA+BXtKIRfkfJAYgj14tpOF6+I46c4/cAM3UhM3JxyKsxiOIhH0IO6SH/A1Kb1WBeUjbkAAAAAElFTkSuQmCC)](https://forum.image.sc/tag/clesperanto)
 [![GitHub stars](https://img.shields.io/github/stars/clEsperanto/clesperantoj_prototype?style=social)](https://github.com/clEsperanto/clesperantoj_prototype)
 [![GitHub forks](https://img.shields.io/github/forks/clEsperanto/clesperantoj_prototype?style=social)](https://github.com/clEsperanto/clesperantoj_prototype)
-[![Image.sc Forum](https://img.shields.io/badge/dynamic/json.svg?label=forum&amp;url=https%3A%2F%2Fforum.image.sc%2Ftags%2Fclesperanto.json&amp;query=%24.topic_list.tags.0.topic_count&amp;colorB=green&amp;&amp;suffix=%20topics&amp;logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAABPklEQVR42m3SyyqFURTA8Y2BER0TDyExZ+aSPIKUlPIITFzKeQWXwhBlQrmFgUzMMFLKZeguBu5y+//17dP3nc5vuPdee6299gohUYYaDGOyyACq4JmQVoFujOMR77hNfOAGM+hBOQqB9TjHD36xhAa04RCuuXeKOvwHVWIKL9jCK2bRiV284QgL8MwEjAneeo9VNOEaBhzALGtoRy02cIcWhE34jj5YxgW+E5Z4iTPkMYpPLCNY3hdOYEfNbKYdmNngZ1jyEzw7h7AIb3fRTQ95OAZ6yQpGYHMMtOTgouktYwxuXsHgWLLl+4x++Kx1FJrjLTagA77bTPvYgw1rRqY56e+w7GNYsqX6JfPwi7aR+Y5SA+BXtKIRfkfJAYgj14tpOF6+I46c4/cAM3UhM3JxyKsxiOIhH0IO6SH/A1Kb1WBeUjbkAAAAAElFTkSuQmCC)](https://forum.image.sc/tag/clesperanto)
 
 # clEsperantoJ
 
 clEsperantoJ is the Java library of [clEsperanto] - a multi-language framework for GPU-accelerated image processing.
-It relies on a familly of [OpenCL kernels] originated from [CLIJ], and rely on the C++ [CLIc] library as a processing backend.
+It relies on a familly of [OpenCL kernels] originated from [CLIJ], and rely on the C++ [CLIc] library as a processing backend.  
+  
+Please note this project is in alpha stages.
 
-## How to Build from source
+## Install
 
-Please note this project is in early stages.
-It is expected that this repository, its build instruction, as well as the global design code may change over time.
+### Pre-build jar
 
-#### pre-requisites
+A pre-build jar compatible for Windows, MacOS, and Ubuntu, is deployed on the `maven.scijava` [repository manager](https://maven.scijava.org/#nexus-search;quick~clesperantoj). It can be downloaded directly from the website or integrated to your project as a dependency using `maven`.
 
-clesperantoJ is a Java bidings of the C++ library [CLIc]() relying of [OpenCL]() for computation.
-A certain diversity of ressources will be required to build clesperantoJ from source:
-- a C++ compiler (`gcc`, `clang`, `cl`, etc.)
-- the Java Development Kit (JDK)
-- [CMake](https://cmake.org/) (a C++ project manager)
-- [Maven](https://maven.apache.org/download.cgi) (a Java project manager)
-- Bash (a shell program and command language)
-- OpenCL (your GPU driver properly install with their Development Kit if possible)
+### Build from source
 
-#### Install a C++ compiler and CMake
+This is necessary for contribution. Please refere to the [instructions](./BUILD.md) page.
 
-For __windows__, you can install [Microsoft Build tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (or [Visual Studio Community edition](https://visualstudio.microsoft.com/vs/community/) with "Desktop development with C++" selected). A more detail tutorial can be found [here](https://biapol.github.io/blog/robert_haase/ms_build_tools/readme.html).
-For __MacOS__, you will need to install the command-line tools from xcode by running this command in a prompt: `xcode-select --install`.
-For __Unix__, similarly to OSX, you will need to install the `build-essential` package by running this command in a prompt: `sudo apt install build-essential`.
+## Contribution
 
-CMake can be install by downloading it from its official website or using package managed like brew or apt for MacOS and Ubuntu.
-You will need to install cmake with its CLI (Command Line Interface).
-You can test if installed by calling the command `cmake --version` in a command prompt.
-
-#### Java Development Kit and Maven
-
-You can download and install a Java-Development-Kit (JDK), preferably version 11, from [azul](https://www.azul.com/downloads/?package=jdk#download-openjdk).
-Follow the installation instruction for you OS, and define the `JAVA_HOME` system variable to your Java JDK install folder, as well as add the JDK folder to your system `PATH` variable.
-
-Similar procedure for Maven, you can download [apache-maven](https://maven.apache.org/download.cgi) and install it where you see fit. Add Maven to your system `PATH`, similarly to the JAVA JDK.
-
-You can test both installation by calling respectivaly `java --version` and `mvn --version` in your command prompt.
-
-### Bash
-
-Already provided in MacOS and Unix, this section only concern Windows user.
-You can get Bash by simply installing [git-scm](https://git-scm.com/downloads) and add it to you `PATH`.
-
-### Install OpenCL
-
-You mainly need to install your GPU driver provided by your GPU vendor, e.g. NVIDIA, AMD, Intel, etc. Please refer to their official website.
-For NVIDIA, we advise to install the [CUDAToolKit](https://developer.nvidia.com/cuda-toolkit).
-
-## PATH
-
-To make the above installed programs work, you need to add them to your path, e.g. on Windows like this:
-```
-C:\programs\apache-maven-3.9.9\bin
-C:\Program Files\Git\bin
-C:\Program Files\CMake\bin
-```
-
-### Build clesperantoJ
-
-In a commmand prompt (on Windows "x64 Native Tools Command Prompt"), start by git clone the repository and move inside the repo
-```
-git clone https://github.com/clEsperanto/clesperantoj_prototype.git
-cd clesperantoj_prototype
-```
-You can then use Maven to build the project
-```
-mvn
-```
-This should start the build of the source and generate the various `jar` and classes in the `target` folder.
-
-WARNING: for windows users, you may need to rely on the x64 Native Tools Command Prompt for VS 2019 (64 bit!) to run the build.
+This is an open-source project, contribution and feedback are very welcome. Do not hesitate to contact us for more information.
 
 ## Acknowledgements
 This project was supported by the Deutsche Forschungsgemeinschaft under Germany’s Excellence Strategy – EXC2068 - Cluster of Excellence "Physics of Life" of TU Dresden.

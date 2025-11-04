@@ -11,7 +11,7 @@
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clesperantoj</artifactId>
-	<version>0.16.10-SNAPSHOT</version>
+	<version>0.19.1-SNAPSHOT</version>
 
 	<properties>
 		<package-name>net.clesperanto</package-name>
@@ -92,18 +92,18 @@
 	</mailingLists>
 
 	<scm>
-		<connection>scm:git:https://github.com/clEsperanto/clesperantoj_prototype</connection>
-		<developerConnection>scm:git:git@github.com:clEsperanto/clesperantoj_prototype</developerConnection>
+		<connection>scm:git:https://github.com/clEsperanto/clesperantoj</connection>
+		<developerConnection>scm:git:git@github.com:clEsperanto/clesperantoj</developerConnection>
 		<tag>HEAD</tag>
-		<url>https://github.com/clEsperanto/clesperantoj_prototype</url>
+		<url>https://github.com/clEsperanto/clesperantoj</url>
 	</scm>
 	<issueManagement>
 		<system>GitHub Issues</system>
-		<url>https://github.com/clEsperanto/clesperantoj_prototype/issues</url>
+		<url>https://github.com/clEsperanto/clesperantoj/issues</url>
 	</issueManagement>
 	<ciManagement>
 		<system>GitHub Actions</system>
-		<url>https://github.com/clEsperanto/clesperantoj_prototype/actions</url>
+		<url>https://github.com/clEsperanto/clesperantoj/actions</url>
 	</ciManagement>
 
 	
@@ -293,6 +293,10 @@
 						<includePath>${basedir}/native/clesperantoj/include</includePath>
 						<includePath>${basedir}/lib/${folder.name}/include/CLIc</includePath>
 						<includePath>${basedir}/lib/${folder.name}/include</includePath>
+						<!-- Required to find clic headers in future scijava pom versions -->
+						<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic-src/clic/include</includePath>
+						<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic-build/clic/include</includePath>
+
 					</includePaths>
 					<linkPaths>
 						<linkPath>${basedir}/lib/${folder.name}/</linkPath>

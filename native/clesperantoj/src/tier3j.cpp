@@ -42,7 +42,7 @@ ArrayJ Tier3::exclude_labels_on_edges(DeviceJ * device, ArrayJ * src, ArrayJ * d
 
 ArrayJ Tier3::flag_existing_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier3::flag_existing_labels_func(device->get(), src->get(), dst->get())};
+    return ArrayJ{cle::tier3::flag_existing_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
 ArrayJ Tier3::gamma_correction(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float gamma)

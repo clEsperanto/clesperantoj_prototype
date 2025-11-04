@@ -148,14 +148,14 @@ public class Tier3 {
 	 * For example, a label image such as: ```0 1 3 5``` will produce a flag_vector like: ```1 1 0 1 0 1```.
 	 * @param device ({@link DeviceJ}) - Device to perform the operation on.
 	 * @param input ({@link ArrayJ}) - Label image.
-	 * @param output ({@link ArrayJ}) - Binary vector; if provided, it should have size 1×n with n = maximum label + 1.
+	 * @param output ({@link ArrayJ}) - Binary vector; if provided, it should have size 1×n with n = maximum label + 1. (default: None)
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
     public static ArrayJ flagExistingLabels(DeviceJ device, ArrayJ input, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(input, "input cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier3.flag_existing_labels(device.getRaw(), input.getRaw(), output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier3.flag_existing_labels(device.getRaw(), input.getRaw(), output == null ? null : output.getRaw()));
     }
     
 	/**

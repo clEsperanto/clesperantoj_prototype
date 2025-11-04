@@ -40,3 +40,8 @@ ArrayJ Tier5::exclude_labels_outside_size_range(DeviceJ * device, ArrayJ * src, 
     return ArrayJ{cle::tier5::exclude_labels_outside_size_range_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size, maximum_size)};
 }
 
+ArrayJ Tier5::merge_touching_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier5::merge_touching_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+

@@ -260,3 +260,18 @@ ArrayJ Tier2::top_hat(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius
     return ArrayJ{cle::tier2::top_hat_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
 }
 
+ArrayJ Tier2::extended_depth_of_focus_variance_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float sigma)
+{
+    return ArrayJ{cle::tier2::extended_depth_of_focus_variance_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, sigma)};
+}
+
+ArrayJ Tier2::extended_depth_of_focus_sobel_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma)
+{
+    return ArrayJ{cle::tier2::extended_depth_of_focus_sobel_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), sigma)};
+}
+
+std::vector<ArrayJ> Tier2::hessian_gaussian_eigenvalues(DeviceJ * device, ArrayJ * src, ArrayJ * small_eigenvalue, ArrayJ * middle_eigenvalue, ArrayJ * large_eigenvalue, float sigma)
+{
+    return UtilsJ::toArrayJVector(cle::tier2::hessian_gaussian_eigenvalues_func(device->get(), src->get(), small_eigenvalue == nullptr ? nullptr : small_eigenvalue->get(), middle_eigenvalue == nullptr ? nullptr : middle_eigenvalue->get(), large_eigenvalue == nullptr ? nullptr : large_eigenvalue->get(), sigma));
+}
+

@@ -75,3 +75,33 @@ ArrayJ Tier4::extension_ratio_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
     return ArrayJ{cle::tier4::extension_ratio_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
+ArrayJ Tier4::mean_extension_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::mean_extension_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::maximum_extension_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::maximum_extension_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::minimum_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::minimum_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::maximum_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::maximum_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::standard_deviation_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::standard_deviation_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+float Tier4::percentile(DeviceJ * device, ArrayJ * src, float percentile)
+{
+    return cle::tier4::percentile_func(device->get(), src->get(), percentile);
+}
+

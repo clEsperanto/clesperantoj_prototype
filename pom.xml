@@ -145,6 +145,35 @@
                 <folder.name>linux64</folder.name>
             </properties>
         </profile>
+		
+		<!-- Generate Doxygen docs only when explicitly requested with -Pdocs -->
+		<profile>
+			<id>docs</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>doxygen-xml</id>
+								<!-- Use the site lifecycle to avoid triggering heavy default lifecycle builds -->
+								<phase>site</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<configuration>
+									<executable>doxygen</executable>
+									<commandlineArgs>${project.basedir}/Doxyfile</commandlineArgs>
+									<workingDirectory>${project.basedir}</workingDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
     </profiles>
 
 
@@ -207,6 +236,10 @@
                         <fileset>
                             <directory>native/clesperantoj/cppbuild</directory>
                         </fileset>
+						<!-- Clean generated documentation as well -->
+						<fileset>
+							<directory>docs</directory>
+						</fileset>
                     </filesets>
                 </configuration>
             </plugin>

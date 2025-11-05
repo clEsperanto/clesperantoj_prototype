@@ -146,11 +146,25 @@
             </properties>
         </profile>
 		
-		<!-- Generate Doxygen docs only when explicitly requested with -Pdocs -->
+		<!-- Generate Doxygen docs only when explicitly requested with -Pdoxygen -->
 		<profile>
-			<id>docs</id>
+			<id>doxygen</id>
+			<properties>
+				<!-- Prevent Javadoc report (which runs during `site`) from breaking the build on newer Maven/JDKs -->
+				<maven.javadoc.skip>true</maven.javadoc.skip>
+				<!-- We only need the `site` phase as a hook to run doxygen; skip the site plugin's own report aggregation. -->
+				<maven.site.skip>true</maven.site.skip>
+			</properties>
 			<build>
 				<plugins>
+					<!-- Ensure the site plugin doesn't execute its own goals (e.g. report generation incl. javadoc) -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-site-plugin</artifactId>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</plugin>
 					<plugin>
 						<groupId>org.codehaus.mojo</groupId>
 						<artifactId>exec-maven-plugin</artifactId>

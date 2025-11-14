@@ -29,7 +29,7 @@ jobs:
             cmake-build-type: Release
             cmake-build-flag: ""
           - name: windows
-            os: windows-2019
+            os: windows-2022
             c-compiler: cl.exe
             cxx-compiler: cl.exe
             cmake-build-type: Release

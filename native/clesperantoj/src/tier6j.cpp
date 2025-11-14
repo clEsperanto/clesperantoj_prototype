@@ -50,3 +50,8 @@ ArrayJ Tier6::exclude_large_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst,
     return ArrayJ{cle::tier6::exclude_large_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size)};
 }
 
+ArrayJ Tier6::proximal_neighbor_count_map(DeviceJ * device, ArrayJ * labels, ArrayJ * dst, float min_distance, float max_distance)
+{
+    return ArrayJ{cle::tier6::proximal_neighbor_count_map_func(device->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), min_distance, max_distance)};
+}
+

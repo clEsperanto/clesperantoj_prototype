@@ -35,6 +35,16 @@ ArrayJ Tier7::translate(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float tran
     return ArrayJ{cle::tier7::translate_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), translate_x, translate_y, translate_z, interpolate)};
 }
 
+ArrayJ Tier7::deskew_x(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float angle, float voxel_size_x, float voxel_size_y, float voxel_size_z, float scale_factor)
+{
+    return ArrayJ{cle::tier7::deskew_x_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), angle, voxel_size_x, voxel_size_y, voxel_size_z, scale_factor)};
+}
+
+ArrayJ Tier7::deskew_y(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float angle, float voxel_size_x, float voxel_size_y, float voxel_size_z, float scale_factor)
+{
+    return ArrayJ{cle::tier7::deskew_y_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), angle, voxel_size_x, voxel_size_y, voxel_size_z, scale_factor)};
+}
+
 ArrayJ Tier7::closing_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius)
 {
     return ArrayJ{cle::tier7::closing_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius)};

@@ -35,7 +35,7 @@ ArrayJ Tier2::clip(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float min_inten
     return ArrayJ{cle::tier2::clip_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), min_intensity, max_intensity)};
 }
 
-ArrayJ Tier2::closing_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z)
+ArrayJ Tier2::closing_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z)
 {
     return ArrayJ{cle::tier2::closing_box_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z)};
 }
@@ -133,6 +133,11 @@ ArrayJ Tier2::invert(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 ArrayJ Tier2::label_spots(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier2::label_spots_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier2::pointlist_to_labelled_spots(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier2::pointlist_to_labelled_spots_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
 ArrayJ Tier2::large_hessian_eigenvalue(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
@@ -258,5 +263,25 @@ ArrayJ Tier2::top_hat_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float
 ArrayJ Tier2::top_hat(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity)
 {
     return ArrayJ{cle::tier2::top_hat_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, radius_z, connectivity)};
+}
+
+ArrayJ Tier2::extended_depth_of_focus_variance_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float sigma)
+{
+    return ArrayJ{cle::tier2::extended_depth_of_focus_variance_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), radius_x, radius_y, sigma)};
+}
+
+ArrayJ Tier2::extended_depth_of_focus_sobel_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma)
+{
+    return ArrayJ{cle::tier2::extended_depth_of_focus_sobel_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), sigma)};
+}
+
+std::vector<ArrayJ> Tier2::hessian_gaussian_eigenvalues(DeviceJ * device, ArrayJ * src, ArrayJ * small_eigenvalue, ArrayJ * middle_eigenvalue, ArrayJ * large_eigenvalue, float sigma)
+{
+    return UtilsJ::toArrayJVector(cle::tier2::hessian_gaussian_eigenvalues_func(device->get(), src->get(), small_eigenvalue == nullptr ? nullptr : small_eigenvalue->get(), middle_eigenvalue == nullptr ? nullptr : middle_eigenvalue->get(), large_eigenvalue == nullptr ? nullptr : large_eigenvalue->get(), sigma));
+}
+
+ArrayJ Tier2::generate_proximal_neighbors_matrix(DeviceJ * device, ArrayJ * src_matrix, ArrayJ * dst_matrix, float min_distance, float max_distance)
+{
+    return ArrayJ{cle::tier2::generate_proximal_neighbors_matrix_func(device->get(), src_matrix->get(), dst_matrix == nullptr ? nullptr : dst_matrix->get(), min_distance, max_distance)};
 }
 

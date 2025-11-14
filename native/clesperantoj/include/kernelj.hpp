@@ -23,6 +23,7 @@ public:
 	static ArrayJ binary_supinf(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ binary_infsup(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ block_enumerate(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ * dst, int blocksize);
+	static ArrayJ circular_shift(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int shift_x, int shift_y, int shift_z);
 	static ArrayJ convolve(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ * dst);
 	static ArrayJ copy(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ copy_slice(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int slice_index);
@@ -46,6 +47,7 @@ public:
 	static ArrayJ exponential(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ flip(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool flip_x, bool flip_y, bool flip_z);
 	static ArrayJ gaussian_blur(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma_x, float sigma_y, float sigma_z);
+	static ArrayJ gaussian_derivative(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma_x, float sigma_y, float sigma_z, int order_x, int order_y, int order_z);
 	static ArrayJ generate_distance_matrix(DeviceJ * device, ArrayJ * coordinate_list1, ArrayJ * coordinate_list2, ArrayJ * distance_matrix_destination);
 	static ArrayJ gradient_x(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ gradient_y(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
@@ -118,6 +120,8 @@ public:
 	static ArrayJ maximum_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ minimum_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ multiply_matrix(DeviceJ * device, ArrayJ * matrix1, ArrayJ * matrix2, ArrayJ * matrix_destination);
+	static ArrayJ pad(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int size_x, int size_y, int size_z, float value, bool center);
+	static ArrayJ unpad(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int size_x, int size_y, int size_z, bool center);
 	static ArrayJ reciprocal(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ set(DeviceJ * device, ArrayJ * src, float scalar);
 	static ArrayJ set_column(DeviceJ * device, ArrayJ * src, int column_index, float value);
@@ -158,6 +162,13 @@ public:
 	static ArrayJ y_position_of_minimum_y_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ z_position_of_maximum_z_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ z_position_of_minimum_z_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ z_position_projection(DeviceJ * device, ArrayJ * src, ArrayJ * position, ArrayJ * dst);
+	static ArrayJ mean_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ median_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ minimum_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ maximum_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ standard_deviation_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ mode_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
 };
 
 
@@ -170,7 +181,7 @@ public:
 	static ArrayJ bottom_hat_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ bottom_hat(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity);
 	static ArrayJ clip(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float min_intensity, float max_intensity);
-	static ArrayJ closing_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius_x, int radius_y, int radius_z);
+	static ArrayJ closing_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ closing_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ grayscale_closing(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity);
 	static ArrayJ closing(DeviceJ * device, ArrayJ * src, ArrayJ * footprint, ArrayJ * dst);
@@ -190,6 +201,7 @@ public:
 	static ArrayJ extend_labeling_via_voronoi(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ invert(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ label_spots(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ pointlist_to_labelled_spots(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ large_hessian_eigenvalue(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static float maximum_of_all_pixels(DeviceJ * device, ArrayJ * src);
 	static float minimum_of_all_pixels(DeviceJ * device, ArrayJ * src);
@@ -215,6 +227,10 @@ public:
 	static ArrayJ top_hat_box(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ top_hat_sphere(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z);
 	static ArrayJ top_hat(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float radius_z, std::string connectivity);
+	static ArrayJ extended_depth_of_focus_variance_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float radius_x, float radius_y, float sigma);
+	static ArrayJ extended_depth_of_focus_sobel_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma);
+	static std::vector<ArrayJ> hessian_gaussian_eigenvalues(DeviceJ * device, ArrayJ * src, ArrayJ * small_eigenvalue, ArrayJ * middle_eigenvalue, ArrayJ * large_eigenvalue, float sigma);
+	static ArrayJ generate_proximal_neighbors_matrix(DeviceJ * device, ArrayJ * src_matrix, ArrayJ * dst_matrix, float min_distance, float max_distance);
 };
 
 
@@ -223,6 +239,7 @@ class Tier3
 public:
     static std::vector<float> bounding_box(DeviceJ * device, ArrayJ * src);
 	static std::vector<float> center_of_mass(DeviceJ * device, ArrayJ * src);
+	static ArrayJ clahe(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int tile_size, float clip_limit, float minimum_intensity, float maximum_intensity);
 	static ArrayJ remove_labels(DeviceJ * device, ArrayJ * src, ArrayJ * list, ArrayJ * dst);
 	static ArrayJ exclude_labels(DeviceJ * device, ArrayJ * src, ArrayJ * list, ArrayJ * dst);
 	static ArrayJ remove_labels_on_edges(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool exclude_x, bool exclude_y, bool exclude_z);
@@ -230,16 +247,20 @@ public:
 	static ArrayJ flag_existing_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ gamma_correction(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float gamma);
 	static ArrayJ generate_binary_overlap_matrix(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ * dst);
-	static ArrayJ generate_touch_matrix(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ generate_touch_matrix(DeviceJ * device, ArrayJ * src, ArrayJ * dst_matrix);
 	static ArrayJ histogram(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int num_bins, float minimum_intensity, float maximum_intensity);
 	static float jaccard_index(DeviceJ * device, ArrayJ * src0, ArrayJ * src1);
-	static ArrayJ labelled_spots_to_pointlist(DeviceJ * device, ArrayJ * label, ArrayJ * pointlist);
+	static ArrayJ labelled_spots_to_pointlist(DeviceJ * device, ArrayJ * label, ArrayJ * dspointlistt);
 	static std::vector<float> maximum_position(DeviceJ * device, ArrayJ * src);
 	static float mean_of_all_pixels(DeviceJ * device, ArrayJ * src);
 	static std::vector<float> minimum_position(DeviceJ * device, ArrayJ * src);
 	static ArrayJ morphological_chan_vese(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int num_iter, int smoothing, float lambda1, float lambda2);
 	static std::unordered_map<std::string, std::vector<float>> statistics_of_labelled_pixels(DeviceJ * device, ArrayJ * intensity, ArrayJ * label);
 	static std::unordered_map<std::string, std::vector<float>> statistics_of_background_and_labelled_pixels(DeviceJ * device, ArrayJ * intensity, ArrayJ * label);
+	static ArrayJ sato_filter(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma_minimum, float sigma_maximum, float sigma_step);
+	static ArrayJ tubeness(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma);
+	static ArrayJ artificial_tissue(DeviceJ * device, int width, int height, int depth, float delta_x, float delta_y, float delta_z, float sigma_x, float sigma_y, float sigma_z);
+	static ArrayJ read_intensities_from_map(DeviceJ * device, ArrayJ * label, ArrayJ * map, ArrayJ * dst);
 };
 
 
@@ -252,6 +273,7 @@ public:
 	static ArrayJ relabel_sequential(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int blocksize);
 	static ArrayJ threshold_otsu(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ mean_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst);
+	static ArrayJ label_mean_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst);
 	static ArrayJ pixel_count_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ label_pixel_count_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ centroids_of_labels(DeviceJ * device, ArrayJ * label_image, ArrayJ * centroids_coordinates, bool include_background);
@@ -260,6 +282,19 @@ public:
 	static ArrayJ exclude_labels_with_map_values_out_of_range(DeviceJ * device, ArrayJ * values_map, ArrayJ * label_map_input, ArrayJ * dst, float minimum_value_range, float maximum_value_range);
 	static ArrayJ exclude_labels_with_map_values_within_range(DeviceJ * device, ArrayJ * values_map, ArrayJ * label_map_input, ArrayJ * dst, float minimum_value_range, float maximum_value_range);
 	static ArrayJ extension_ratio_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ mean_extension_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ maximum_extension_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ minimum_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst);
+	static ArrayJ maximum_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst);
+	static ArrayJ standard_deviation_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst);
+	static ArrayJ touching_neighbor_count_map(DeviceJ * device, ArrayJ * labels, ArrayJ * dst);
+	static float percentile(DeviceJ * device, ArrayJ * src, float percentile);
+	static ArrayJ mean_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background);
+	static ArrayJ median_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background);
+	static ArrayJ minimum_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background);
+	static ArrayJ maximum_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background);
+	static ArrayJ standard_deviation_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background);
+	static ArrayJ mode_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background);
 };
 
 
@@ -273,6 +308,9 @@ public:
 	static ArrayJ reduce_labels_to_centroids(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ filter_label_by_size(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size, float maximum_size);
 	static ArrayJ exclude_labels_outside_size_range(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size, float maximum_size);
+	static ArrayJ merge_touching_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ proximal_neighbor_count(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float min_distance, float max_distance);
+	static ArrayJ normalize(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float low_percentile, float high_percentile);
 };
 
 
@@ -288,6 +326,7 @@ public:
 	static ArrayJ exclude_small_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float maximum_size);
 	static ArrayJ remove_large_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float maximum_size);
 	static ArrayJ exclude_large_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float minimum_size);
+	static ArrayJ proximal_neighbor_count_map(DeviceJ * device, ArrayJ * labels, ArrayJ * dst, float min_distance, float max_distance);
 };
 
 
@@ -300,6 +339,8 @@ public:
 	static ArrayJ rotate(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float angle_x, float angle_y, float angle_z, bool centered, bool interpolate, bool resize);
 	static ArrayJ scale(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float factor_x, float factor_y, float factor_z, bool centered, bool interpolate, bool resize);
 	static ArrayJ translate(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float translate_x, float translate_y, float translate_z, bool interpolate);
+	static ArrayJ deskew_x(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float angle, float voxel_size_x, float voxel_size_y, float voxel_size_z, float scale_factor);
+	static ArrayJ deskew_y(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float angle, float voxel_size_x, float voxel_size_y, float voxel_size_z, float scale_factor);
 	static ArrayJ closing_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius);
 	static ArrayJ erode_connected_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius);
 	static ArrayJ opening_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius);
@@ -312,6 +353,10 @@ class Tier8
 public:
     static ArrayJ smooth_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius);
 	static ArrayJ smooth_connected_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int radius);
+	static ArrayJ fft(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ ifft(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
+	static ArrayJ convolve_fft(DeviceJ * device, ArrayJ * src, ArrayJ * kernel, ArrayJ * dst, bool correlate);
+	static ArrayJ deconvolve_fft(DeviceJ * device, ArrayJ * src, ArrayJ * psf, ArrayJ * normalization, ArrayJ * dst, int iteration, float regularization);
 };
 
 

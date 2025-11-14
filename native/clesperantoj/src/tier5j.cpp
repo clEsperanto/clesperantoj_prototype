@@ -40,3 +40,18 @@ ArrayJ Tier5::exclude_labels_outside_size_range(DeviceJ * device, ArrayJ * src, 
     return ArrayJ{cle::tier5::exclude_labels_outside_size_range_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), minimum_size, maximum_size)};
 }
 
+ArrayJ Tier5::merge_touching_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier5::merge_touching_labels_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier5::proximal_neighbor_count(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float min_distance, float max_distance)
+{
+    return ArrayJ{cle::tier5::proximal_neighbor_count_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), min_distance, max_distance)};
+}
+
+ArrayJ Tier5::normalize(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float low_percentile, float high_percentile)
+{
+    return ArrayJ{cle::tier5::normalize_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), low_percentile, high_percentile)};
+}
+

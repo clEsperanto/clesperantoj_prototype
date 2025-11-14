@@ -2728,11 +2728,11 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ meanOfTouchingNeighborsFunc(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
+    public static ArrayJ meanOfTouchingNeighbors(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(vector, "vector cannot be null");
 		Objects.requireNonNull(matrix, "matrix cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_of_touching_neighbors_func(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mean_of_touching_neighbors(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
     }
     
 	/**
@@ -2744,11 +2744,11 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ medianOfTouchingNeighborsFunc(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
+    public static ArrayJ medianOfTouchingNeighbors(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(vector, "vector cannot be null");
 		Objects.requireNonNull(matrix, "matrix cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.median_of_touching_neighbors_func(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.median_of_touching_neighbors(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
     }
     
 	/**
@@ -2760,11 +2760,11 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ minimumOfTouchingNeighborsFunc(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
+    public static ArrayJ minimumOfTouchingNeighbors(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(vector, "vector cannot be null");
 		Objects.requireNonNull(matrix, "matrix cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_of_touching_neighbors_func(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.minimum_of_touching_neighbors(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
     }
     
 	/**
@@ -2776,11 +2776,11 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ maximumOfTouchingNeighborsFunc(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
+    public static ArrayJ maximumOfTouchingNeighbors(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(vector, "vector cannot be null");
 		Objects.requireNonNull(matrix, "matrix cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_of_touching_neighbors_func(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.maximum_of_touching_neighbors(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
     }
     
 	/**
@@ -2792,11 +2792,11 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ standardDeviationOfTouchingNeighborsFunc(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
+    public static ArrayJ standardDeviationOfTouchingNeighbors(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(vector, "vector cannot be null");
 		Objects.requireNonNull(matrix, "matrix cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.standard_deviation_of_touching_neighbors_func(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.standard_deviation_of_touching_neighbors(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
     }
     
 	/**
@@ -2808,11 +2808,11 @@ public class Tier1 {
 	 * @return {@link ArrayJ}
 	 * @throws NullPointerException if any of the device or input parameters are null.
 	 */
-    public static ArrayJ modeOfTouchingNeighborsFunc(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
+    public static ArrayJ modeOfTouchingNeighbors(DeviceJ device, ArrayJ vector, ArrayJ matrix, ArrayJ output) {
         Objects.requireNonNull(device, "device cannot be null");
 		Objects.requireNonNull(vector, "vector cannot be null");
 		Objects.requireNonNull(matrix, "matrix cannot be null");
-        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mode_of_touching_neighbors_func(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
+        return new ArrayJ(net.clesperanto._internals.kernelj.Tier1.mode_of_touching_neighbors(device.getRaw(), vector.getRaw(), matrix.getRaw(), output == null ? null : output.getRaw()));
     }
     
 }

@@ -163,12 +163,12 @@ public:
 	static ArrayJ z_position_of_maximum_z_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ z_position_of_minimum_z_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst);
 	static ArrayJ z_position_projection(DeviceJ * device, ArrayJ * src, ArrayJ * position, ArrayJ * dst);
-	static ArrayJ mean_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
-	static ArrayJ median_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
-	static ArrayJ minimum_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
-	static ArrayJ maximum_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
-	static ArrayJ standard_deviation_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
-	static ArrayJ mode_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ mean_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ median_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ minimum_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ maximum_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ standard_deviation_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
+	static ArrayJ mode_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst);
 };
 
 

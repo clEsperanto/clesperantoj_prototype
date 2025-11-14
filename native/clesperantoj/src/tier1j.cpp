@@ -765,33 +765,33 @@ ArrayJ Tier1::z_position_projection(DeviceJ * device, ArrayJ * src, ArrayJ * pos
     return ArrayJ{cle::tier1::z_position_projection_func(device->get(), src->get(), position->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier1::mean_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+ArrayJ Tier1::mean_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier1::mean_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier1::mean_of_touching_neighbors_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier1::median_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+ArrayJ Tier1::median_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier1::median_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier1::median_of_touching_neighbors_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier1::minimum_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+ArrayJ Tier1::minimum_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier1::minimum_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier1::minimum_of_touching_neighbors_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier1::maximum_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+ArrayJ Tier1::maximum_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier1::maximum_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier1::maximum_of_touching_neighbors_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier1::standard_deviation_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+ArrayJ Tier1::standard_deviation_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier1::standard_deviation_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier1::standard_deviation_of_touching_neighbors_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier1::mode_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+ArrayJ Tier1::mode_of_touching_neighbors(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
 {
-    return ArrayJ{cle::tier1::mode_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier1::mode_of_touching_neighbors_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 

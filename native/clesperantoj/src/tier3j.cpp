@@ -15,6 +15,11 @@ std::vector<float> Tier3::center_of_mass(DeviceJ * device, ArrayJ * src)
     return cle::tier3::center_of_mass_func(device->get(), src->get());
 }
 
+ArrayJ Tier3::clahe(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int tile_size, float clip_limit, float minimum_intensity, float maximum_intensity)
+{
+    return ArrayJ{cle::tier3::clahe_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), tile_size, clip_limit, minimum_intensity, maximum_intensity)};
+}
+
 ArrayJ Tier3::remove_labels(DeviceJ * device, ArrayJ * src, ArrayJ * list, ArrayJ * dst)
 {
     return ArrayJ{cle::tier3::remove_labels_func(device->get(), src->get(), list->get(), dst == nullptr ? nullptr : dst->get())};
@@ -27,12 +32,12 @@ ArrayJ Tier3::exclude_labels(DeviceJ * device, ArrayJ * src, ArrayJ * list, Arra
 
 ArrayJ Tier3::remove_labels_on_edges(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool exclude_x, bool exclude_y, bool exclude_z)
 {
-    return ArrayJ{cle::tier3::remove_labels_on_edges_func(device == nullptr ? nullptr : device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), exclude_x, exclude_y, exclude_z)};
+    return ArrayJ{cle::tier3::remove_labels_on_edges_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), exclude_x, exclude_y, exclude_z)};
 }
 
 ArrayJ Tier3::exclude_labels_on_edges(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool exclude_x, bool exclude_y, bool exclude_z)
 {
-    return ArrayJ{cle::tier3::exclude_labels_on_edges_func(device == nullptr ? nullptr : device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), exclude_x, exclude_y, exclude_z)};
+    return ArrayJ{cle::tier3::exclude_labels_on_edges_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), exclude_x, exclude_y, exclude_z)};
 }
 
 ArrayJ Tier3::flag_existing_labels(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
@@ -50,9 +55,9 @@ ArrayJ Tier3::generate_binary_overlap_matrix(DeviceJ * device, ArrayJ * src0, Ar
     return ArrayJ{cle::tier3::generate_binary_overlap_matrix_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
-ArrayJ Tier3::generate_touch_matrix(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+ArrayJ Tier3::generate_touch_matrix(DeviceJ * device, ArrayJ * src, ArrayJ * dst_matrix)
 {
-    return ArrayJ{cle::tier3::generate_touch_matrix_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+    return ArrayJ{cle::tier3::generate_touch_matrix_func(device->get(), src->get(), dst_matrix == nullptr ? nullptr : dst_matrix->get())};
 }
 
 ArrayJ Tier3::histogram(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int num_bins, float minimum_intensity, float maximum_intensity)
@@ -65,9 +70,9 @@ float Tier3::jaccard_index(DeviceJ * device, ArrayJ * src0, ArrayJ * src1)
     return cle::tier3::jaccard_index_func(device->get(), src0->get(), src1->get());
 }
 
-ArrayJ Tier3::labelled_spots_to_pointlist(DeviceJ * device, ArrayJ * label, ArrayJ * pointlist)
+ArrayJ Tier3::labelled_spots_to_pointlist(DeviceJ * device, ArrayJ * label, ArrayJ * dspointlistt)
 {
-    return ArrayJ{cle::tier3::labelled_spots_to_pointlist_func(device->get(), label->get(), pointlist == nullptr ? nullptr : pointlist->get())};
+    return ArrayJ{cle::tier3::labelled_spots_to_pointlist_func(device->get(), label->get(), dspointlistt == nullptr ? nullptr : dspointlistt->get())};
 }
 
 std::vector<float> Tier3::maximum_position(DeviceJ * device, ArrayJ * src)
@@ -98,5 +103,25 @@ std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_labelle
 std::unordered_map<std::string, std::vector<float>> Tier3::statistics_of_background_and_labelled_pixels(DeviceJ * device, ArrayJ * intensity, ArrayJ * label)
 {
     return cle::tier3::statistics_of_background_and_labelled_pixels_func(device->get(), intensity == nullptr ? nullptr : intensity->get(), label == nullptr ? nullptr : label->get());
+}
+
+ArrayJ Tier3::sato_filter(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma_minimum, float sigma_maximum, float sigma_step)
+{
+    return ArrayJ{cle::tier3::sato_filter_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), sigma_minimum, sigma_maximum, sigma_step)};
+}
+
+ArrayJ Tier3::tubeness(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma)
+{
+    return ArrayJ{cle::tier3::tubeness_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), sigma)};
+}
+
+ArrayJ Tier3::artificial_tissue(DeviceJ * device, int width, int height, int depth, float delta_x, float delta_y, float delta_z, float sigma_x, float sigma_y, float sigma_z)
+{
+    return ArrayJ{cle::tier3::artificial_tissue_func(device->get(), width, height, depth, delta_x, delta_y, delta_z, sigma_x, sigma_y, sigma_z)};
+}
+
+ArrayJ Tier3::read_intensities_from_map(DeviceJ * device, ArrayJ * label, ArrayJ * map, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier3::read_intensities_from_map_func(device->get(), label->get(), map->get(), dst == nullptr ? nullptr : dst->get())};
 }
 

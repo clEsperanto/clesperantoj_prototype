@@ -65,6 +65,11 @@ ArrayJ Tier1::block_enumerate(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, Ar
     return ArrayJ{cle::tier1::block_enumerate_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get(), blocksize)};
 }
 
+ArrayJ Tier1::circular_shift(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int shift_x, int shift_y, int shift_z)
+{
+    return ArrayJ{cle::tier1::circular_shift_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), shift_x, shift_y, shift_z)};
+}
+
 ArrayJ Tier1::convolve(DeviceJ * device, ArrayJ * src0, ArrayJ * src1, ArrayJ * dst)
 {
     return ArrayJ{cle::tier1::convolve_func(device->get(), src0->get(), src1->get(), dst == nullptr ? nullptr : dst->get())};
@@ -178,6 +183,11 @@ ArrayJ Tier1::flip(DeviceJ * device, ArrayJ * src, ArrayJ * dst, bool flip_x, bo
 ArrayJ Tier1::gaussian_blur(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma_x, float sigma_y, float sigma_z)
 {
     return ArrayJ{cle::tier1::gaussian_blur_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), sigma_x, sigma_y, sigma_z)};
+}
+
+ArrayJ Tier1::gaussian_derivative(DeviceJ * device, ArrayJ * src, ArrayJ * dst, float sigma_x, float sigma_y, float sigma_z, int order_x, int order_y, int order_z)
+{
+    return ArrayJ{cle::tier1::gaussian_derivative_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), sigma_x, sigma_y, sigma_z, order_x, order_y, order_z)};
 }
 
 ArrayJ Tier1::generate_distance_matrix(DeviceJ * device, ArrayJ * coordinate_list1, ArrayJ * coordinate_list2, ArrayJ * distance_matrix_destination)
@@ -540,6 +550,16 @@ ArrayJ Tier1::multiply_matrix(DeviceJ * device, ArrayJ * matrix1, ArrayJ * matri
     return ArrayJ{cle::tier1::multiply_matrix_func(device->get(), matrix1->get(), matrix2->get(), matrix_destination == nullptr ? nullptr : matrix_destination->get())};
 }
 
+ArrayJ Tier1::pad(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int size_x, int size_y, int size_z, float value, bool center)
+{
+    return ArrayJ{cle::tier1::pad_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), size_x, size_y, size_z, value, center)};
+}
+
+ArrayJ Tier1::unpad(DeviceJ * device, ArrayJ * src, ArrayJ * dst, int size_x, int size_y, int size_z, bool center)
+{
+    return ArrayJ{cle::tier1::unpad_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get(), size_x, size_y, size_z, center)};
+}
+
 ArrayJ Tier1::reciprocal(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier1::reciprocal_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
@@ -738,5 +758,40 @@ ArrayJ Tier1::z_position_of_maximum_z_projection(DeviceJ * device, ArrayJ * src,
 ArrayJ Tier1::z_position_of_minimum_z_projection(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier1::z_position_of_minimum_z_projection_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::z_position_projection(DeviceJ * device, ArrayJ * src, ArrayJ * position, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::z_position_projection_func(device->get(), src->get(), position->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::mean_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::mean_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::median_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::median_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::minimum_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::minimum_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::maximum_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::maximum_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::standard_deviation_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::standard_deviation_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier1::mode_of_touching_neighbors_func(DeviceJ * device, ArrayJ * vector, ArrayJ * matrix, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier1::mode_of_touching_neighbors_func_func(device->get(), vector->get(), matrix->get(), dst == nullptr ? nullptr : dst->get())};
 }
 

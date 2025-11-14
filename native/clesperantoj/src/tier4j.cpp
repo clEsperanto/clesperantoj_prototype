@@ -35,6 +35,11 @@ ArrayJ Tier4::mean_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels
     return ArrayJ{cle::tier4::mean_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
 }
 
+ArrayJ Tier4::label_mean_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::label_mean_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
 ArrayJ Tier4::pixel_count_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier4::pixel_count_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
@@ -73,5 +78,70 @@ ArrayJ Tier4::exclude_labels_with_map_values_within_range(DeviceJ * device, Arra
 ArrayJ Tier4::extension_ratio_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
 {
     return ArrayJ{cle::tier4::extension_ratio_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::mean_extension_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::mean_extension_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::maximum_extension_map(DeviceJ * device, ArrayJ * src, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::maximum_extension_map_func(device->get(), src->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::minimum_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::minimum_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::maximum_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::maximum_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::standard_deviation_intensity_map(DeviceJ * device, ArrayJ * src, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::standard_deviation_intensity_map_func(device->get(), src->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+ArrayJ Tier4::touching_neighbor_count_map(DeviceJ * device, ArrayJ * labels, ArrayJ * dst)
+{
+    return ArrayJ{cle::tier4::touching_neighbor_count_map_func(device->get(), labels->get(), dst == nullptr ? nullptr : dst->get())};
+}
+
+float Tier4::percentile(DeviceJ * device, ArrayJ * src, float percentile)
+{
+    return cle::tier4::percentile_func(device->get(), src->get(), percentile);
+}
+
+ArrayJ Tier4::mean_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background)
+{
+    return ArrayJ{cle::tier4::mean_of_touching_neighbors_map_func(device->get(), map->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), radius, ignore_background)};
+}
+
+ArrayJ Tier4::median_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background)
+{
+    return ArrayJ{cle::tier4::median_of_touching_neighbors_map_func(device->get(), map->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), radius, ignore_background)};
+}
+
+ArrayJ Tier4::minimum_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background)
+{
+    return ArrayJ{cle::tier4::minimum_of_touching_neighbors_map_func(device->get(), map->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), radius, ignore_background)};
+}
+
+ArrayJ Tier4::maximum_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background)
+{
+    return ArrayJ{cle::tier4::maximum_of_touching_neighbors_map_func(device->get(), map->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), radius, ignore_background)};
+}
+
+ArrayJ Tier4::standard_deviation_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background)
+{
+    return ArrayJ{cle::tier4::standard_deviation_of_touching_neighbors_map_func(device->get(), map->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), radius, ignore_background)};
+}
+
+ArrayJ Tier4::mode_of_touching_neighbors_map(DeviceJ * device, ArrayJ * map, ArrayJ * labels, ArrayJ * dst, int radius, bool ignore_background)
+{
+    return ArrayJ{cle::tier4::mode_of_touching_neighbors_map_func(device->get(), map->get(), labels->get(), dst == nullptr ? nullptr : dst->get(), radius, ignore_background)};
 }
 

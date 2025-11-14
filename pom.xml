@@ -11,7 +11,7 @@
 
 	<groupId>net.clesperanto</groupId>
 	<artifactId>clesperantoj</artifactId>
-	<version>0.16.10-SNAPSHOT</version>
+	<version>0.20.0-SNAPSHOT</version>
 
 	<properties>
 		<package-name>net.clesperanto</package-name>
@@ -340,6 +340,9 @@
 						<includePath>${basedir}/native/clesperantoj/include</includePath>
 						<includePath>${basedir}/lib/${folder.name}/include/CLIc</includePath>
 						<includePath>${basedir}/lib/${folder.name}/include</includePath>
+
+						<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic-src/clic/include</includePath>
+						<includePath>${basedir}/native/clesperantoj/cppbuild/_deps/clic-build/clic/include</includePath>
 					</includePaths>
 					<linkPaths>
 						<linkPath>${basedir}/lib/${folder.name}/</linkPath>
